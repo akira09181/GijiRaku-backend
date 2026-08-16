@@ -72,6 +72,15 @@ def post_opinion(assembly_id: str, message_id: str, request: OpinionRequest):
         comment_text=request.comment_text
     )
     return res
+from analytics_service import get_assembly_analytics
+
+@app.get("/api/assemblies/{assembly_id}/analytics")
+def get_analytics(assembly_id: str):
+    """特定議会の政党別注力テーマおよび議員向けEBPM分析を取得"""
+    data = get_assembly_analytics(assembly_id)
+    return {"status": "success", "data": data}
+
+@app.get("/api/opendata/catalog")
 def get_catalog():
     """東京都オープンデータカタログAPIの最新結果を取得"""
     datasets = fetch_tokyo_catalog_datasets()

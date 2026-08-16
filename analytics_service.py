@@ -1,78 +1,91 @@
 from typing import Dict, Any, List
 
 def get_assembly_analytics(assembly_id: str) -> Dict[str, Any]:
-    """議会ごとの政党別テーマ注力度・議員発言スコアリング分析データを生成"""
+    """議会ごとの政党別テーマ注力度・議員発言スコアリング分析・議員向けEBPM民意データを生成"""
     
     # 議会ごとのテーマ構成比
     topic_distribution = [
-        {"name": "👶 子育て・教育", "ratio": 28, "color": "#06C755"},
-        {"name": "💻 デジタル・行政DX", "ratio": 24, "color": "#3B82F6"},
-        {"name": "🏗️ 街づくり・交通", "ratio": 20, "color": "#F59E0B"},
-        {"name": "🛡️ 防災・安全対策", "ratio": 16, "color": "#EF4444"},
-        {"name": "🏥 医療・高齢者福祉", "ratio": 12, "color": "#EC4899"},
+        {"name": "👶 おむつ代補助・給食費無償化", "ratio": 32, "color": "#06C755"},
+        {"name": "💻 スマホ行政手続95%化", "ratio": 24, "color": "#3B82F6"},
+        {"name": "🏗️ 街づくり・多摩モノレール", "ratio": 20, "color": "#F59E0B"},
+        {"name": "🛡️ 防災・避難所Wi-Fi", "ratio": 14, "color": "#EF4444"},
+        {"name": "🏥 医療・病児保育予約", "ratio": 10, "color": "#EC4899"},
     ]
+
+    # 議員・行政向けEBPM民意分析データ (B2Gマネタイズ用)
+    ebpm_citizen_data = {
+        "youth_uninterested_rate": 84.8,  # オープンデータ（町田市意識調査）の数値
+        "total_votes_recorded": 1420,
+        "age_demographics": [
+            {"group": "10代・20代 (若者)", "support_ratio": 91, "top_issue": "おむつ代補助電子クーポン・給食ゼロ"},
+            {"group": "30代 (子育て層)", "support_ratio": 88, "top_issue": "病児保育当日スマホ予約・学童枠拡大"},
+            {"group": "40代・50代 (現役層)", "support_ratio": 82, "top_issue": "多摩モノレール町田延伸・無電柱化"},
+            {"group": "60代以上 (シニア層)", "support_ratio": 79, "top_issue": "対面サポート窓口併設・エアコン補助"}
+        ],
+        "ebpm_ai_recommendations": [
+            {
+                "rank": 1,
+                "title": "若者・子育て世代の89%が賛同: 『紙おむつデジタルクーポン支給』",
+                "action": "次回定例会にてスマホアプリ決済による電子クーポン予算枠の拡大提言を推奨。"
+            },
+            {
+                "rank": 2,
+                "title": "20代〜30代の84%が要望: 『病児保育の即時LINE予約システム統一』",
+                "action": "広域利用協定の早期締結および予約システム共通化を行政側へ要望することを推奨。"
+            }
+        ]
+    }
 
     # 政党ごとの注力テーマ分析
     party_analytics = [
         {
-            "party_name": "都民ファーストの会",
+            "party_name": "町田市民の会 / 都民ファースト",
             "members_count": 31,
-            "top_category": "💻 デジタル・行政DX",
-            "ai_stance_summary": "都庁手続きの100%オンライン化・キャッシュレス決済およびペーパーレス化を最優先で強力推進。",
+            "top_category": "👶 おむつ代補助・給食費無償化",
+            "ai_stance_summary": "0歳〜2歳児へ『年間最大3万円のおむつ電子クーポン』および都内小中学校給食費全額公費負担を最優先で推進。",
             "category_breakdown": [
-                {"category": "デジタルDX", "percent": 45},
-                {"category": "街づくり", "percent": 30},
-                {"category": "子育て", "percent": 25},
+                {"category": "おむつ・子育て", "percent": 50},
+                {"category": "デジタルDX", "percent": 30},
+                {"category": "街づくり", "percent": 20},
             ]
         },
         {
             "party_name": "自由民主党",
             "members_count": 29,
-            "top_category": "🏗️ 街づくり・都市再開発",
-            "ai_stance_summary": "築地跡地スタジアムMICE整備・首都高地下化・道路インファ不燃化など大型インフラ投資を推進。",
+            "top_category": "🏗️ 多摩モノレール延伸・都市整備",
+            "ai_stance_summary": "多摩都市モノレール町田延伸手続き・道路無電柱化・築地スタジアムMICEなど大型インフラ投資を強力推進。",
             "category_breakdown": [
-                {"category": "街づくり", "percent": 50},
-                {"category": "経済・産業", "percent": 30},
+                {"category": "モノレール・街づくり", "percent": 55},
+                {"category": "経済・産業", "percent": 25},
                 {"category": "防災", "percent": 20},
             ]
         },
         {
             "party_name": "公明党",
             "members_count": 23,
-            "top_category": "👶 給食無償化・子育て支援",
-            "ai_stance_summary": "小中学校の給食費全額公費負担・任意予防接種全域助成・授乳室拡充など生活密着支援に集中。",
+            "top_category": "👶 給食費全額無償化・授乳室拡大",
+            "ai_stance_summary": "小中学校の給食費全額無償化・商業施設への授乳室設置支援・任意予防接種全域助成に集中。",
             "category_breakdown": [
-                {"category": "子育て教育", "percent": 55},
+                {"category": "給食無償化・子育て", "percent": 60},
                 {"category": "医療福祉", "percent": 25},
-                {"category": "デジタル", "percent": 20},
-            ]
-        },
-        {
-            "party_name": "日本共産党",
-            "members_count": 19,
-            "top_category": "🏥 医療福祉・エアコン助成",
-            "ai_stance_summary": "猛暑対策の高齢者エアコン購入・設置緊急補助金や、生活困窮者支援・平和文化事業を主張。",
-            "category_breakdown": [
-                {"category": "医療福祉", "percent": 45},
-                {"category": "猛暑対策", "percent": 35},
-                {"category": "教育", "percent": 20},
-            ]
-        },
-        {
-            "party_name": "立憲民主党",
-            "members_count": 15,
-            "top_category": "🛡️ 木密不燃化・避難所Wi-Fi",
-            "ai_stance_summary": "首都直下地震を見据えた避難所通信インフラ（スターリンク）配備と木造密集地域の防災強化を提言。",
-            "category_breakdown": [
-                {"category": "防災安全", "percent": 40},
-                {"category": "子育て", "percent": 35},
-                {"category": "デジタル", "percent": 25},
+                {"category": "デジタル", "percent": 15},
             ]
         }
     ]
 
-    # 議員個別スコアリング＆プロファイル
+    # 議員個別スコアリング
     member_scorecards = [
+        {
+            "id": "mem-mc-1",
+            "name": "高橋 りえ",
+            "title": "市議会議員",
+            "party": "町田市民の会",
+            "avatar_type": "politician_female",
+            "total_statements": 38,
+            "activity_score": 96,
+            "main_focus": "おむつ代補助・乳幼児電子クーポン",
+            "ai_eval": "物価高に悩む子育て世代の切実な声を取り上げ、おむつ代の具体的な電子クーポン（3万円分）支給を市長から引き出す高い答弁引き出し力を発揮。"
+        },
         {
             "id": "mem-1",
             "name": "小池 百合子",
@@ -81,69 +94,15 @@ def get_assembly_analytics(assembly_id: str) -> Dict[str, Any]:
             "avatar_type": "governor_female",
             "total_statements": 48,
             "activity_score": 98,
-            "main_focus": "デジタル都庁・主要手続95%オンライン化",
-            "ai_eval": "「待ち時間ゼロの行政」を掲げ、全庁的なデジタルシフトを強力にリード。具体的な達成数値（95%）を明示して答弁する姿勢が高評価。"
-        },
-        {
-            "id": "mem-2",
-            "name": "佐藤 たかし",
-            "title": "都議会議員",
-            "party": "都民ファーストの会",
-            "avatar_type": "politician_male",
-            "total_statements": 34,
-            "activity_score": 92,
-            "main_focus": "ペーパーレス化・スマホ申請完結",
-            "ai_eval": "行政手続のスマホ完結や電子申請の進捗について定期的に質疑。市民利便性向上にフォーカスした提言が多い。"
-        },
-        {
-            "id": "mem-3",
-            "name": "鈴木 えみ",
-            "title": "都議会議員",
-            "party": "公明党",
-            "avatar_type": "politician_female",
-            "total_statements": 39,
-            "activity_score": 95,
-            "main_focus": "給食費無償化・小児ワクチン全域助成",
-            "ai_eval": "子育て世代の家計負担軽減を最優先とし、給食費無償化および予防接種助成の予算拡充を粘り強く要望。"
-        },
-        {
-            "id": "mem-4",
-            "name": "高橋 けんじ",
-            "title": "都議会議員",
-            "party": "自由民主党",
-            "avatar_type": "politician_male",
-            "total_statements": 31,
-            "activity_score": 88,
-            "main_focus": "築地再開発・5万人スタジアムMICE",
-            "ai_eval": "東京の国際競争力強化と経済活性化に向け、築地跡地再開発のスケジュールとMICE施設収益性を集中的に議論。"
-        },
-        {
-            "id": "mem-5",
-            "name": "渡辺 さゆり",
-            "title": "都議会議員",
-            "party": "日本共産党",
-            "avatar_type": "politician_female",
-            "total_statements": 28,
-            "activity_score": 86,
-            "main_focus": "異常猛暑対策・エアコン即時補助",
-            "ai_eval": "気候変動・猛暑による熱中症予防のため、高齢世帯・困窮世帯へのエアコン設置補助金拡充を強く主張。"
-        },
-        {
-            "id": "mem-6",
-            "name": "山本 だいすけ",
-            "title": "都議会議員",
-            "party": "立憲民主党",
-            "avatar_type": "politician_male",
-            "total_statements": 26,
-            "activity_score": 84,
-            "main_focus": "避難所スターリンク通信・木密特区",
-            "ai_eval": "首都直下地震対策として避難所の通信・電源インフラ整備および木密不燃化の即時実施を質疑。"
+            "main_focus": "スマホ行政手続95%化・デジタル都庁",
+            "ai_eval": "「待ち時間ゼロの行政」を掲げ、全庁的なデジタルシフトを強力にリード。具体数値（95%）を明示して答弁。"
         }
     ]
 
     return {
         "assembly_id": assembly_id,
         "topic_distribution": topic_distribution,
+        "ebpm_citizen_data": ebpm_citizen_data,
         "party_analytics": party_analytics,
         "member_scorecards": member_scorecards
     }

@@ -7,15 +7,50 @@ TOKYO_CATALOG_SEARCH_URL = "https://catalog.data.metro.tokyo.lg.jp/api/3/action/
 
 ASSEMBLIES_MASTER: List[Dict[str, Any]] = [
     {
+        "id": "machida-shi",
+        "name": "町田市議会",
+        "org_name": "町田市",
+        "lat": 35.5467,
+        "lng": 139.4386,
+        "badge": "重点モデル自治体",
+        "hot_topic": "おむつ代補助・多摩モノレール延伸・学童保育",
+        "survey_stat": "若者(10-20代)の84.8%が議会に関心なし(町田市市民意識調査)",
+        "dataset_url": "https://www.opendata.metro.tokyo.lg.jp/machida/132098_machidashi_gikaidayori.csv",
+        "avatar_theme": "teal"
+    },
+    {
+        "id": "shinagawa-ku",
+        "name": "品川区議会",
+        "org_name": "品川区",
+        "lat": 35.6092,
+        "lng": 139.7302,
+        "badge": "重点モデル自治体",
+        "hot_topic": "給食無償化・羽田新ルート・病児保育予約",
+        "survey_stat": "若者の72.9%が関心なし・45.9%が情報入手方法不明(品川区世論調査)",
+        "dataset_url": "https://www.opendata.metro.tokyo.lg.jp/shinagawa/131091_shinagawaku_gikaidayori.csv",
+        "avatar_theme": "rose"
+    },
+    {
         "id": "tokyo-metropolitan",
         "name": "東京都議会",
         "org_name": "東京都",
         "lat": 35.6895,
         "lng": 139.6917,
         "badge": "都庁・本庁",
-        "hot_topic": "デジタルDX・子育て支援・築地再開発",
+        "hot_topic": "スマホ行政手続95%化・築地スタジアムMICE",
         "dataset_url": "https://www.opendata.metro.tokyo.lg.jp/gikai/130001_tokyoto_gikaidayori.csv",
         "avatar_theme": "blue"
+    },
+    {
+        "id": "chuo-ku",
+        "name": "中央区議会",
+        "org_name": "中央区",
+        "lat": 35.6707,
+        "lng": 139.7719,
+        "badge": "中央区役所",
+        "hot_topic": "晴海BRTバス連節車両・給食無償化・タワマン防災",
+        "dataset_url": "https://www.opendata.metro.tokyo.lg.jp/chuo/131024_chuoku_gikaidayori.csv",
+        "avatar_theme": "indigo"
     },
     {
         "id": "chiyoda-ku",
@@ -27,17 +62,6 @@ ASSEMBLIES_MASTER: List[Dict[str, Any]] = [
         "hot_topic": "皇居周辺環境・高齢者福祉・景観保護",
         "dataset_url": "https://www.opendata.metro.tokyo.lg.jp/chiyoda/131016_chiyodaku_gikaidayori.csv",
         "avatar_theme": "emerald"
-    },
-    {
-        "id": "chuo-ku",
-        "name": "中央区議会",
-        "org_name": "中央区",
-        "lat": 35.6707,
-        "lng": 139.7719,
-        "badge": "中央区役所",
-        "hot_topic": "晴海フラッグ交通・給食無償化・臨海地下鉄",
-        "dataset_url": "https://www.opendata.metro.tokyo.lg.jp/chuo/131024_chuoku_gikaidayori.csv",
-        "avatar_theme": "indigo"
     },
     {
         "id": "koto-ku",
@@ -73,17 +97,6 @@ ASSEMBLIES_MASTER: List[Dict[str, Any]] = [
         "avatar_theme": "rose"
     },
     {
-        "id": "machida-shi",
-        "name": "町田市議会",
-        "org_name": "町田市",
-        "lat": 35.5467,
-        "lng": 139.4386,
-        "badge": "町田市役所",
-        "hot_topic": "モノレール構想・公共交通",
-        "dataset_url": "https://www.opendata.metro.tokyo.lg.jp/machida/132098_machidashi_gikaidayori.csv",
-        "avatar_theme": "teal"
-    },
-    {
         "id": "nakano-ku",
         "name": "中野区議会",
         "org_name": "中野区",
@@ -107,14 +120,95 @@ ASSEMBLIES_MASTER: List[Dict[str, Any]] = [
     }
 ]
 
-# 最新定例会（市民投票・賛否データ付き）
+# 最新定例会（具体イシュー名・市民賛否付き）
 CHAT_SAMPLE_DATABASE = {
+    "machida-shi": [
+        {
+            "id": "msg-mc-1",
+            "date": "2026年8月12日 (第2回定例会)",
+            "timestamp": "10:10",
+            "category": "👶 おむつ代補助・子育て支援",
+            "speaker": "高橋りえ 議員",
+            "role": "町田市民の会",
+            "avatar_type": "politician_female",
+            "plain_text": "【赤ちゃんのおむつ代補助】物価高で子育て世帯の家計が苦しい！乳幼児のおむつ定額クーポンや現物支給助成を町田市でも導入できない？",
+            "original_quote": "「乳幼児を養育する世帯への物価高騰対策として、紙おむつ購入費助成券の発行並びに配送事業の早期導入を求める。」",
+            "agree_count": 189,
+            "disagree_count": 8,
+            "comments": [
+                {"user": "町田在住20代ママ", "text": "毎月のおむつ代で1万円近く飛ぶので絶対実現してほしい！"},
+                {"user": "鶴川のパパさん", "text": "紙のクーポンじゃなくてスマホアプリ決済で配付してほしいです！"}
+            ]
+        },
+        {
+            "id": "msg-mc-2",
+            "date": "2026年8月12日 (第2回定例会)",
+            "timestamp": "10:15",
+            "category": "👶 おむつ代補助・子育て支援",
+            "speaker": "町田市長",
+            "role": "答弁者 (町田市長)",
+            "avatar_type": "mayor_male",
+            "plain_text": "【要するに：来年度から0歳〜2歳児へ『年間最大3万円相当のおむつ電子クーポン』を即時スタートします！】\nスマホで受け取れるデジタル決済を導入し、子育て世帯へ直接届く支援を実施します！",
+            "original_quote": "「次年度当初予算におきまして、電子ポイントを活用した紙おむつ等購入費助成事業を計上し、子育て世帯の経済的負担軽減を強力に推進してまいります。」",
+            "agree_count": 210,
+            "disagree_count": 11,
+            "comments": []
+        },
+        {
+            "id": "msg-mc-3",
+            "date": "2026年8月12日 (第2回定例会)",
+            "timestamp": "10:45",
+            "category": "🏗️ 多摩モノレール延伸・交通",
+            "speaker": "小林けんじ 議員",
+            "role": "自由民主党町田市議団",
+            "avatar_type": "politician_male",
+            "plain_text": "【多摩モノレール町田延伸】多摩センターから町田駅までのルート整備・ペデストリアンデッキ着工の具体的スケジュールは？",
+            "original_quote": "「多摩都市モノレール町田方面延伸事業における都市計画決定の手続きおよび沿線まちづくり基本構想の進捗を問う。」",
+            "agree_count": 145,
+            "disagree_count": 22,
+            "comments": [
+                {"user": "町田駅利用の学生", "text": "朝のバス混雑がひどいのでモノレール早くできてほしい！"}
+            ]
+        }
+    ],
+    "shinagawa-ku": [
+        {
+            "id": "msg-sn-1",
+            "date": "2026年8月11日 (第2回定例会)",
+            "timestamp": "13:00",
+            "category": "👶 給食費全額無償化・教育",
+            "speaker": "伊藤まさこ 議員",
+            "role": "品川区議会公明党",
+            "avatar_type": "politician_female",
+            "plain_text": "【小中学校の給食費ゼロ】品川区内の小中学校給食費全額無償化、所得制限なしで完全にゼロに維持できる？",
+            "original_quote": "「品川区立義務教育学校および小中学校における学校給食費全額公費負担化の継続方針並びに財源確保策について伺う。」",
+            "agree_count": 195,
+            "disagree_count": 6,
+            "comments": [
+                {"user": "大井町在住ママ", "text": "給食費タダは本当にありがたい。これからも続けてください！"}
+            ]
+        },
+        {
+            "id": "msg-sn-2",
+            "date": "2026年8月11日 (第2回定例会)",
+            "timestamp": "13:05",
+            "category": "👶 給食費全額無償化・教育",
+            "speaker": "品川区長",
+            "role": "答弁者 (品川区長)",
+            "avatar_type": "governor_female",
+            "plain_text": "【要するに：全児童・生徒の給食費ゼロを恒久的に継続します！】\n東京都の補助金も活用し、子育て世帯の完全無償化を永久にバックアップします！",
+            "original_quote": "「学校給食費の無償化につきましては、区の重点施策として今後も継続的に全額公費負担を実施してまいります。」",
+            "agree_count": 230,
+            "disagree_count": 9,
+            "comments": []
+        }
+    ],
     "tokyo-metropolitan": [
         {
             "id": "msg-1",
             "date": "2026年8月10日 (第2回定例会)",
             "timestamp": "10:15",
-            "category": "💻 デジタル・DX",
+            "category": "💻 スマホ行政手続95%化",
             "speaker": "佐藤たかし 議員",
             "role": "都民ファーストの会",
             "avatar_type": "politician_male",
@@ -123,15 +217,14 @@ CHAT_SAMPLE_DATABASE = {
             "agree_count": 84,
             "disagree_count": 12,
             "comments": [
-                {"user": "都民Aさん", "text": "役所に行かずにスマホで手続きできるのは本当に助かります！高齢者向けのサポート窓口も残してほしい。"},
-                {"user": "子育てママさん", "text": "パスポートや保育園申請の完全オンライン化を早く実現してほしい！"}
+                {"user": "都民Aさん", "text": "役所に行かずにスマホで手続きできるのは本当に助かります！"}
             ]
         },
         {
             "id": "msg-2",
             "date": "2026年8月10日 (第2回定例会)",
             "timestamp": "10:18",
-            "category": "💻 デジタル・DX",
+            "category": "💻 スマホ行政手続95%化",
             "speaker": "小池百合子 知事",
             "role": "答弁者 (東京都知事)",
             "avatar_type": "governor_female",
@@ -139,69 +232,6 @@ CHAT_SAMPLE_DATABASE = {
             "original_quote": "「都民の皆様が役所に来ずとも完結する『デジタル都庁』の実現に向け、本年度末までに主要行政手続の95%以上をキャッシュレスおよびオンライン対応へ移行すべく全力で取り組んでおります。」",
             "agree_count": 142,
             "disagree_count": 18,
-            "comments": [
-                {"user": "IT系会社員", "text": "95%オンライン化は素晴らしい数値目標！期待しています。"}
-            ]
-        },
-        {
-            "id": "msg-3",
-            "date": "2026年8月10日 (第2回定例会)",
-            "timestamp": "10:30",
-            "category": "👶 子育て・教育",
-            "speaker": "鈴木えみ 議員",
-            "role": "公明党",
-            "avatar_type": "politician_female",
-            "plain_text": "【子育て・給食助成】小中学校の給食費完全無償化と、任意ワクチンの助成範囲をもっと広げられないの？",
-            "original_quote": "「子育て世代への経済的支援の抜本的強化として、都内小中学校の学校給食費全額公費負担化および任意予防接種への都独自助成の制度化を強く要望する。」",
-            "agree_count": 185,
-            "disagree_count": 15,
-            "comments": [
-                {"user": "2児の父", "text": "物価高で毎月の給食費負担が重かったので完全無償化は超ありがたい！"}
-            ]
-        },
-        {
-            "id": "msg-4",
-            "date": "2026年8月10日 (第2回定例会)",
-            "timestamp": "10:35",
-            "category": "👶 子育て・教育",
-            "speaker": "福祉保健局長",
-            "role": "答弁者 (局長)",
-            "avatar_type": "bureaucrat_male",
-            "plain_text": "【要するに：区市町村へ半額補助を行い、全域での無償化を全面バックアップします！】\n都として区市町村の給食費助成を支援する予算を計上し、子育て負担の軽減を図っています。",
-            "original_quote": "「学校給食費の無償化につきましては、区市町村への財政支援制度を創設し、都内全域での実施に向け全面的にバックアップしてまいります。」",
-            "agree_count": 160,
-            "disagree_count": 9,
-            "comments": []
-        }
-    ],
-    "chuo-ku": [
-        {
-            "id": "msg-ck-1",
-            "date": "2026年8月9日 (第2回定例会)",
-            "timestamp": "13:05",
-            "category": "👶 子育て・教育",
-            "speaker": "田中広一 議員",
-            "role": "中央区議会公明党",
-            "avatar_type": "politician_male",
-            "plain_text": "【子育て支援】分かりやすい広報や、おむつ替え・授乳コーナーの整備、任意接種ワクチンへの助成をお願いしたい！",
-            "original_quote": "「子育て支援策について分かりやすい広報や、おむつ替え・授乳コーナーの整備、小児用肺炎球菌ワクチン等の任意接種への公費助成を求める。」",
-            "agree_count": 92,
-            "disagree_count": 5,
-            "comments": [
-                {"user": "晴海在住ママ", "text": "勝どき・晴海エリアは授乳室が混むので商業施設への拡大をぜひ実現してください！"}
-            ]
-        },
-        {
-            "id": "msg-ck-2",
-            "date": "2026年8月9日 (第2回定例会)",
-            "timestamp": "13:10",
-            "category": "👶 子育て・教育",
-            "speaker": "山本区長",
-            "role": "答弁者 (中央区長)",
-            "avatar_type": "mayor_male",
-            "plain_text": "【要するに：授乳室は民間に働きかけて増やします！ワクチン助成も流通を見極めて進めます】\n授乳コーナーは区の施設だけでなく商業施設にも拡大します。ワクチン無料化も前向きに対応します！",
-            "agree_count": 115,
-            "disagree_count": 8,
             "comments": []
         }
     ]
@@ -215,7 +245,7 @@ PAST_HISTORICAL_SESSIONS = [
                 "id": "past-2025-1",
                 "date": "2025年12月15日 (令和7年第4回定例会)",
                 "timestamp": "11:00",
-                "category": "👶 子育て・教育",
+                "category": "🛝 病児保育・スマホ即時予約",
                 "speaker": "野口まゆみ 議員",
                 "role": "無所属",
                 "avatar_type": "politician_female",
@@ -264,7 +294,7 @@ def get_assembly_chat_dialogue(assembly_id: str, page: int = 1) -> List[Dict[str
                 "id": f"msg-{assembly_id}-1",
                 "date": "2026年8月8日 (第2回定例会)",
                 "timestamp": "10:00",
-                "category": "👶 子育て・教育",
+                "category": "👶 給食費無償化・子育て",
                 "speaker": "山田たろう 議員",
                 "role": "市民の会",
                 "avatar_type": "politician_male",
@@ -285,7 +315,6 @@ def get_assembly_chat_dialogue(assembly_id: str, page: int = 1) -> List[Dict[str
     return result
 
 def record_user_opinion(assembly_id: str, message_id: str, opinion_type: str, comment_text: str = None) -> Dict[str, Any]:
-    """市民の投票（賛成/懸念）およびコメント意見投稿を記録"""
     messages = CHAT_SAMPLE_DATABASE.get(assembly_id, [])
     target_msg = next((m for m in messages if m["id"] == message_id), None)
     
