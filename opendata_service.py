@@ -14,7 +14,7 @@ ASSEMBLIES_MASTER: List[Dict[str, Any]] = [
         "lng": 139.4386,
         "badge": "重点モデル自治体",
         "hot_topic": "おむつ代補助・多摩モノレール延伸・学童保育",
-        "survey_stat": "若者(10-20代)の84.8%が議会に関心なし(町田市市民意識調査)",
+        "survey_stat": "若年層における議会情報アクセスの簡素化ニーズが高い（自治体世論調査）",
         "dataset_url": "https://www.opendata.metro.tokyo.lg.jp/machida/132098_machidashi_gikaidayori.csv",
         "avatar_theme": "teal"
     },
