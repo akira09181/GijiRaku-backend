@@ -74,6 +74,7 @@ class SpeakerUtterance(BaseModel):
     party_name: Optional[str] = None
     committee_name: Optional[str] = None
     stance_label: str
+    vote_record: Optional[str] = "未採決" # '賛成' | '反対' | '棄権' | '未採決'
     summary_quote: str
     avatar_color: str = "emerald"
     source_excerpt: Optional[str] = None

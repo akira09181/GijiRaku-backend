@@ -372,6 +372,7 @@ def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolita
                 "party_name": "無所属",
                 "committee_name": "本会議・首長答弁",
                 "stance_label": "推進",
+                "vote_record": "賛成",
                 "summary_quote": f"「{query}」の推進に向け、市民の生活利便性向上と負担軽減を最優先に取り組んでまいります。",
                 "avatar_color": "emerald"
             },
@@ -380,7 +381,8 @@ def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolita
                 "speaker_role": "議会委員",
                 "party_name": "都民ファーストの会" if "東京" in assembly_name else "市民の会",
                 "committee_name": "予算特別委員会",
-                "stance_label": "慎重",
+                "stance_label": "条件付き賛成",
+                "vote_record": "賛成",
                 "summary_quote": f"「{query}」事業の継続的な財源確保と運用効率化について、事前に精査を行う必要があります。",
                 "avatar_color": "amber"
             },
@@ -390,6 +392,7 @@ def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolita
                 "party_name": "日本共産党" if "東京" in assembly_name else "無所属会派",
                 "committee_name": "文教・子育て委員会",
                 "stance_label": "拡大提案",
+                "vote_record": "未採決",
                 "summary_quote": f"「{query}」の適用範囲をもっと広げ、より多くの生活者へ届く形へ拡充すべきです。",
                 "avatar_color": "sky"
             }
