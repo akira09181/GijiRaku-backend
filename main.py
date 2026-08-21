@@ -78,6 +78,9 @@ class SpeakerUtterance(BaseModel):
     summary_quote: str
     avatar_color: str = "emerald"
     source_excerpt: Optional[str] = None
+    meeting_name: Optional[str] = None
+    meeting_date: Optional[str] = None
+    question_type: Optional[str] = None
 
 class TopicSource(BaseModel):
     meeting_name: str
@@ -151,7 +154,10 @@ SAMPLE_TOPIC_DATA = TopicDetailResponse(
             committee_name="本会議・首長答弁",
             stance_label="推進",
             summary_quote="子育て世帯の負担を軽くするため、所得制限のない支援を前に進めたい",
-            avatar_color="emerald"
+            avatar_color="emerald",
+            meeting_name="令和8年第1回定例会 本会議",
+            meeting_date="2026-02-20",
+            question_type="区長方針表明"
         ),
         SpeakerUtterance(
             speaker_name="山田 太郎",
@@ -160,7 +166,10 @@ SAMPLE_TOPIC_DATA = TopicDetailResponse(
             committee_name="予算特別委員会",
             stance_label="慎重",
             summary_quote="制度を長く続けるために、毎年の予算・財源をどう確保するか慎重に確認が必要です",
-            avatar_color="amber"
+            avatar_color="amber",
+            meeting_name="予算特別委員会",
+            meeting_date="2026-03-05",
+            question_type="総括質疑"
         ),
         SpeakerUtterance(
             speaker_name="佐藤 花子",
@@ -169,7 +178,10 @@ SAMPLE_TOPIC_DATA = TopicDetailResponse(
             committee_name="文教子育て委員会",
             stance_label="拡大提案",
             summary_quote="第2子以降だけでなく、病児保育の受け入れ枠拡充もあわせて検討すべきです",
-            avatar_color="sky"
+            avatar_color="sky",
+            meeting_name="文教子育て委員会",
+            meeting_date="2026-03-10",
+            question_type="一般質問"
         )
     ],
     source=TopicSource(
@@ -335,6 +347,7 @@ def post_statement_reaction(statement_id: str, req: UtteranceReactionRequest):
     else:
         raise HTTPException(status_code=400, detail="無効なリアクションタイプです")
 
+    total = utt_data["agree_count"] + utt_data["concern_count"] + utt_data["helpful_count"]
     return {
         "status": "success",
         "statement_id": statement_id,
@@ -342,7 +355,10 @@ def post_statement_reaction(statement_id: str, req: UtteranceReactionRequest):
         "agree_count": utt_data["agree_count"],
         "concern_count": utt_data["concern_count"],
         "helpful_count": utt_data["helpful_count"],
-        "total_reactions": utt_data["agree_count"] + utt_data["concern_count"] + utt_data["helpful_count"]
+        "total_reactions": total,
+        "agree_percentage": round((utt_data["agree_count"] / total) * 100) if total > 0 else 0,
+        "concern_percentage": round((utt_data["concern_count"] / total) * 100) if total > 0 else 0,
+        "helpful_percentage": round((utt_data["helpful_count"] / total) * 100) if total > 0 else 0
     }
 
 @app.post("/api/statements/{statement_id}/comment")
