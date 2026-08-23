@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00+09:00",
+  "assemblies": {
+    "tokyo-metropolitan": {
+      "assembly_name": "東京都議会",
+      "source": { "provider": "tokyo", "index_url": "https://www.gikai.metro.tokyo.lg.jp/record/" },
+      "records": [
+        {
+          "discussion_id": "tokyo-ebpm-2026-02-26",
+          "meeting_date": "2026-02-26",
+          "meeting_name": "令和8年第1回定例会 東京都議会会議録第3号",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2026-1/03-01.html",
+          "topic": "データとエビデンスに基づく政策精度の向上",
+          "what_changes": "都の政策目標を区市町村別のデータで検証し、地域ごとの成果や課題を次の事業改善へつなげる取組が進められます。",
+          "target_audience": "東京都の行政サービスを利用する都民と、政策を設計・評価する行政部門",
+          "current_stage": "2026年2月26日の本会議で質問・答弁済み",
+          "budget_info": "政策目標と成果指標を用いたPDCAと事業改善について議論",
+          "original_quote": "「データとエビデンスに基づく政策の精度向上」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tokyo-fukushima-2026-02-26-ebpm",
+              "speaker_name": "福島 りえこ",
+              "speaker_role": "東京都議会議員",
+              "party_name": "都民ファーストの会",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "地域差を捉える指標を整え、データとエビデンスに基づいて政策の精度を高めるよう求めました。",
+              "full_summary": "2050東京戦略の目標を実効性あるものにするため、区市町村別の状況を把握し、政策効果を客観的に検証する仕組みを質問しました。",
+              "source_excerpt": "「データとエビデンスに基づく政策の精度向上」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "tokyo-sato-2026-02-26-ebpm",
+              "speaker_name": "佐藤 章",
+              "speaker_role": "東京都政策企画局長",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・答弁",
+              "stance_label": "推進",
+              "summary_quote": "312の政策目標について、地域ごとの取組状況・成果・課題を客観的に検証し、実効性を高めると答弁しました。",
+              "full_summary": "政策目標の進捗をPDCAで点検し、区市町村ごとの成果や課題を把握して、取組の改善と政策の実効性向上につなげる方針を示しました。",
+              "source_excerpt": "「地域ごとの取組状況や成果、課題等を客観的に検証」",
+              "question_type": "局長答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "tokyo-ebpm-2024-06-05",
+          "meeting_date": "2024-06-05",
+          "meeting_name": "令和6年第2回定例会 東京都議会会議録第9号",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2024-2/03-07.html",
+          "topic": "事業評価へのEBPM導入",
+          "what_changes": "事業の設計段階から評価指標と測定方法を組み込み、成果をデータで検証する考え方が示されました。",
+          "target_audience": "東京都の政策・行政サービスを利用する都民と行政部門",
+          "current_stage": "2024年6月5日の本会議で質問・答弁済み",
+          "budget_info": "成果重視の事業評価と財源確保について議論",
+          "original_quote": "「あらかじめ事業に評価を組み込む必要があります。」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "tokyo-fukushima-2024-06-05-ebpm", "speaker_name": "福島 りえこ", "speaker_role": "東京都議会議員", "party_name": "都民ファーストの会", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "事業の成果を正しく測るため、設計段階から評価指標と測定方法を組み込む必要があると提案しました。", "full_summary": "統計的な分析、事前の指標設計、実施前後のデータ取得を政策評価に組み込むよう求めました。", "source_excerpt": "「あらかじめ事業に評価を組み込む必要があります。」", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "tokyo-koike-2024-06-05-ebpm", "speaker_name": "小池 百合子", "speaker_role": "東京都知事", "party_name": "行政執行部", "committee_name": "本会議・知事答弁", "stance_label": "推進", "summary_quote": "成果重視の評価とデータ分析を活用し、都民サービス向上と財源確保につなげると答弁しました。", "full_summary": "評価制度を見直し、データに基づく事業改善を進める方針を示しました。", "source_excerpt": "「評価制度の不断の見直し」", "question_type": "知事答弁", "avatar_color": "emerald" }
+          ]
+        }
+      ]
+    },
+    "shinjuku-ward": {
+      "assembly_name": "新宿区議会",
+      "source": { "provider": "ssp", "tenant": "shinjuku", "tenant_id": 211, "index_url": "https://ssp.kaigiroku.net/tenant/shinjuku/" },
+      "records": [
+        {
+          "discussion_id": "shinjuku-sick-child-care-2026-06-10",
+          "meeting_date": "2026-06-10",
+          "meeting_name": "令和8年6月定例会（第2回）第5号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2",
+          "topic": "病児保育の利用拒否と予約・空き状況の改善",
+          "what_changes": "病児保育の定員が数字上は足りていても利用できないケースを減らすため、受入体制と予約・空き状況案内の改善が検討されます。",
+          "target_audience": "病気の子どもを預ける必要がある新宿区の子育て世帯",
+          "current_stage": "2026年6月10日の本会議で質問・答弁済み",
+          "budget_info": "人員・医療機関連携・専用スペースとICT予約の運用を含めて検討",
+          "original_quote": "「数字上は足りているのに、実際は使えないことが多い病児保育事業」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-watanabe-2026-06-10-sick-child-care", "speaker_name": "渡辺 やすし", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "定員に余裕がある一方で利用を断られる実態を示し、受入体制の見直しと空き状況・予約のリアルタイム化を求めました。", "full_summary": "2025年度は846人が利用し225人が断られたとして、供給体制、リアルタイムの空き情報、予約方法、制度周知を質問しました。", "source_excerpt": "「数字上は足りているのに、実際は使えないことが多い病児保育事業について」", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-10-sick-child-care", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "推進", "summary_quote": "受入体制を総合的に検討し、空き状況や予約に使えるICTツールの研究を進めると答弁しました。", "full_summary": "感染症や症状により受入れできない実態を課題と認識し、人員・医療・設備を含む体制とICT活用を検討する方針を示しました。", "source_excerpt": "「ＩＣＴツールの活用について研究を進めてまいります。」", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-young-carer-2024-06-12",
+          "meeting_date": "2024-06-12",
+          "meeting_name": "令和6年第2回新宿区議会定例会（第1日）",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3005&schedule_id=2",
+          "topic": "ヤングケアラー支援",
+          "what_changes": "ヤングケアラーを早期に把握し、相談・支援につなぐ体制が議論されました。",
+          "target_audience": "家事や家族の世話を担う子どもとその家庭",
+          "current_stage": "2024年6月12日の本会議で質問・答弁済み",
+          "budget_info": "学校・福祉部門などの連携体制について議論",
+          "original_quote": "「ヤングケアラーの支援について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-yamaguchi-2024-06-12-young-carer", "speaker_name": "山口 かおる", "speaker_role": "新宿区議会議員", "party_name": "立憲民主党・無所属クラブ", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "ヤングケアラーへの理解を広げ、本人が相談・支援につながりやすい体制を整えるよう求めました。", "full_summary": "子どもが孤立しないよう、周知、早期把握、相談支援を一体で進める必要性を質問しました。", "source_excerpt": "「ヤングケアラーの支援について」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2024-06-12-young-carer", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "推進", "summary_quote": "関係機関が連携し、早期に把握して必要な支援へつなげる取組を進めると答弁しました。", "full_summary": "学校や福祉部門が状況を把握し、家庭に応じた支援へつなぐ方針を示しました。", "source_excerpt": "「ヤングケアラーの支援についてのお尋ねです。」", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        }
+      ]
+    },
+    "machida-city": {
+      "assembly_name": "町田市議会",
+      "source": { "provider": "machida", "index_url": "https://www.gikai-machida.jp/g07_Shitsumon_s.asp" },
+      "records": [
+        {
+          "discussion_id": "machida-regional-transport-2026-03-26",
+          "meeting_date": "2026-03-26",
+          "meeting_name": "令和8年3月定例会（第1回）",
+          "source_url": "https://www.gikai-machida.jp/g07_Shitsumon.asp?KAIGI=174&Sflg=2",
+          "topic": "交通不便地域の新しい地域交通モデル",
+          "what_changes": "交通不便地域に対し、地域の実情に合わせた新しい移動手段を構築する必要性が提起されました。",
+          "target_audience": "路線バスなど既存交通を利用しにくい町田市民",
+          "current_stage": "2026年3月26日の本会議で一般質問済み",
+          "budget_info": "新しい地域交通モデルの構築について質問",
+          "original_quote": "「交通不便地域における新しい地域交通モデルの構築について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "machida-babe-2026-03-26-regional-transport", "speaker_name": "馬部 ゆきまさ", "speaker_role": "町田市議会議員", "party_name": "公明党", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "交通不便地域における新しい地域交通モデルをどのように構築するのか質問しました。", "full_summary": "既存の公共交通だけでは移動が難しい地域を対象に、地域特性に応じた移動手段を整える考え方を一般質問で取り上げました。", "source_excerpt": "「交通不便地域における新しい地域交通モデルの構築について」", "question_type": "一般質問", "avatar_color": "sky" }
+          ]
+        },
+        {
+          "discussion_id": "machida-employment-2024-06-07",
+          "meeting_date": "2024-06-07",
+          "meeting_name": "令和6年6月定例会（第2回）本会議 第12号",
+          "source_url": "https://www.gikai-machida.jp/voices2/minutes.html?FINO=3474",
+          "topic": "市内企業の人手不足と雇用支援",
+          "what_changes": "市内事業者と働く人への雇用支援が議論されました。",
+          "target_audience": "町田市内の事業者、求職者、働く市民",
+          "current_stage": "2024年6月7日の本会議で質問・答弁済み",
+          "budget_info": "雇用・労働環境への支援について議論",
+          "original_quote": "「町田市内の雇用・労働環境などについて」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "machida-imamura-2024-06-07-employment", "speaker_name": "今村 るか", "speaker_role": "町田市議会議員", "party_name": "まちだ市民クラブ", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "市内の雇用・労働環境をどう捉え、事業者と働く人をどのように支援するのか質問しました。", "full_summary": "人手不足を踏まえ、市内企業への支援、就労支援、市職員の人材確保を一体的に考えるよう求めました。", "source_excerpt": "「町田市内の雇用・労働環境などについて」", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "machida-karasawa-2024-06-07-employment", "speaker_name": "唐澤 祐一", "speaker_role": "町田市経済観光部長", "party_name": "行政執行部", "committee_name": "本会議・答弁", "stance_label": "推進", "summary_quote": "建設業と福祉職で人手不足が特に顕著であり、関係機関と連携して雇用支援に取り組むと答弁しました。", "full_summary": "ハローワーク町田や町田商工会議所と連携して事業者・求職者を支援する方針を説明しました。", "source_excerpt": "「特に建設業と福祉職の人手不足は顕著」", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        }
+      ]
+    },
+    "shinagawa-ward": {
+      "assembly_name": "品川区議会",
+      "source": { "provider": "dbsr", "index_url": "https://kaigiroku.city.shinagawa.tokyo.jp/" },
+      "records": [
+        {
+          "discussion_id": "shinagawa-inclusive-education-2026-02-19",
+          "meeting_date": "2026-02-19",
+          "meeting_name": "令和8年第1回品川区議会定例会（第2日目）",
+          "source_url": "https://kaigiroku.city.shinagawa.tokyo.jp/100000?QueryType=New&Template=document&VoiceExpand1=r08-0219_002",
+          "topic": "深い学び・多様性の包摂と教員負担軽減",
+          "what_changes": "主体的・対話的で深い学びと多様性の包摂を進めながら、支援人材と教育DXで教員負担を軽減する方針が示されました。",
+          "target_audience": "品川区立学校の児童生徒、保護者、教職員",
+          "current_stage": "2026年2月19日の本会議で質問・答弁済み",
+          "budget_info": "支援人材、教育DX、特別支援教育の体制について議論",
+          "original_quote": "「『主体的・対話的で深い学び』と『多様性の包摂』」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinagawa-seo-2026-02-19-inclusive-education", "speaker_name": "せお 麻里", "speaker_role": "品川区議会議員", "party_name": "品川区議会自民党・無所属の会", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "深い学びと多様性の包摂を進めつつ、教員負担を減らし特別支援教育を充実させる方策を質問しました。", "full_summary": "次期学習指導要領を見据え、授業改善、インクルーシブ教育、教員の働き方、特別支援の連携を一体で進めるよう求めました。", "source_excerpt": "「『主体的・対話的で深い学び』と『多様性の包摂』」", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinagawa-yoneda-2026-02-19-inclusive-education", "speaker_name": "米田 教育次長", "speaker_role": "品川区教育次長", "party_name": "行政執行部", "committee_name": "本会議・答弁", "stance_label": "推進", "summary_quote": "学校支援人材と教育DXを活用して教員負担を軽減し、対話を重ねて特別支援を進めると答弁しました。", "full_summary": "スクール・サポート・スタッフや副校長補佐を充実し、教育データの可視化と情報共有で支援体制を強化する方針を示しました。", "source_excerpt": "「スクール・サポート・スタッフ、副校長補佐といった教員以外の人材を充実」", "question_type": "教育次長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinagawa-shelter-2024-06-27",
+          "meeting_date": "2024-06-27",
+          "meeting_name": "令和6年第2回品川区議会定例会（第1日）",
+          "source_url": "https://kaigiroku.city.shinagawa.tokyo.jp/index.php/275892?Template=document&Id=6737",
+          "topic": "避難所環境と災害関連死対策",
+          "what_changes": "避難所のトイレ・食事・寝床などの生活環境改善が議論されました。",
+          "target_audience": "品川区の住民と避難所利用者",
+          "current_stage": "2024年6月27日の本会議で質問・答弁済み",
+          "budget_info": "防災備蓄・避難所環境について議論",
+          "original_quote": "「災害関連死を出さない避難所環境の改善を」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinagawa-nodate-2024-06-27-shelter", "speaker_name": "のだて 稔史", "speaker_role": "品川区議会議員", "party_name": "日本共産党", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "災害関連死を防ぐため避難所のトイレ・食事・寝床を改善するよう求めました。", "full_summary": "携帯トイレ、温かい食事、間仕切り、ベッドなどの備えを強化する必要性を質問しました。", "source_excerpt": "「災害関連死を出さない避難所環境の改善を」", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinagawa-takizawa-2024-06-27-shelter", "speaker_name": "滝澤 災害対策担当部長", "speaker_role": "品川区災害対策担当部長", "party_name": "行政執行部", "committee_name": "本会議・答弁", "stance_label": "推進", "summary_quote": "携帯トイレの全区民への配布や避難所備蓄、段ボールベッドの供給協定などを進めていると答弁しました。", "full_summary": "温かい食事、間仕切り、エアマットを備蓄し、段ボールベッドを調達できる協定を説明しました。", "source_excerpt": "「携帯トイレの全区民への配布」", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        }
+      ]
+    },
+    "shibuya-ward": {
+      "assembly_name": "渋谷区議会",
+      "source": { "provider": "ssp", "tenant": "shibuya", "tenant_id": 394, "index_url": "https://ssp.kaigiroku.net/tenant/shibuya/" },
+      "records": [
+        {
+          "discussion_id": "shibuya-inflation-support-2026-01-16",
+          "meeting_date": "2026-01-16",
+          "meeting_name": "令和8年1月臨時会（第1回）",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shibuya/SpMinuteView.html?council_id=2494&schedule_id=2",
+          "topic": "物価高騰緊急支援給付金と子育て応援手当",
+          "what_changes": "全区民への1人5,000円給付と、子ども1人当たり2万円の応援手当を含む補正予算が可決されました。",
+          "target_audience": "渋谷区民と子育て世帯",
+          "current_stage": "2026年1月16日の臨時会で全会一致により可決",
+          "budget_info": "一般会計補正額20億825万6,000円",
+          "original_quote": "「全区民を対象に、1人当たり5,000円」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shibuya-matsumoto-2026-01-16-inflation-support", "speaker_name": "松本 翔", "speaker_role": "渋谷区議会議員", "committee_name": "総務委員会・委員長報告", "stance_label": "条件付き賛成", "summary_quote": "全区民5,000円と子ども2万円の給付を確認し、分かりやすい案内と事務経費の抑制を求めました。", "full_summary": "給付内容を評価しつつ、申請・支給方法の丁寧な周知、コスト削減、支援額の拡充検討を委員会意見として報告しました。", "source_excerpt": "「全区民を対象に、1人当たり5,000円」", "question_type": "委員長報告", "avatar_color": "sky" },
+            { "statement_id": "shibuya-hasebe-2026-01-16-inflation-support", "speaker_name": "長谷部 健", "speaker_role": "渋谷区長", "party_name": "行政執行部", "committee_name": "本会議・提案説明", "stance_label": "推進", "summary_quote": "物価高騰への緊急支援と子育て応援手当を実施する補正予算を提案しました。", "full_summary": "補正予算額20億825万6,000円を追加し、区民と子育て世帯への給付事業を実施する内容を説明しました。", "source_excerpt": "「物価高騰緊急支援給付金及び物価高対応子育て応援手当」", "question_type": "区長提案説明", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shibuya-street-drinking-2024-06-03",
+          "meeting_date": "2024-06-03",
+          "meeting_name": "令和6年第2回渋谷区議会定例会（第1日）",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shibuya/SpMinuteView.html?council_id=2344&schedule_id=2",
+          "topic": "渋谷駅周辺の迷惑路上飲酒対策",
+          "what_changes": "条例、周知、パトロールを組み合わせた路上飲酒対策が議論されました。",
+          "target_audience": "渋谷駅周辺の住民、来街者、事業者",
+          "current_stage": "2024年6月3日の本会議で質問・答弁済み",
+          "budget_info": "路上飲酒対策について議論",
+          "original_quote": "「渋谷駅周辺の迷惑路上飲酒対策について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shibuya-matsumoto-2024-06-03-street-drinking", "speaker_name": "松本 翔", "speaker_role": "渋谷区議会議員", "party_name": "渋谷区議会自由民主党議員団", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "迷惑路上飲酒がごみや騒音、区民の安全・安心に与える影響と対策を質問しました。", "full_summary": "ごみ、騒音、マナー違反を抑え、駅周辺の安全を守る具体策を求めました。", "source_excerpt": "「渋谷駅周辺の迷惑路上飲酒対策について」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shibuya-hasebe-2024-06-03-street-drinking", "speaker_name": "長谷部 健", "speaker_role": "渋谷区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "推進", "summary_quote": "条例改正に加え、施行前の周知と施行後のパトロールを組み合わせて対策すると答弁しました。", "full_summary": "条例による規制、広報、パトロールを通じて駅周辺環境を改善する方針を示しました。", "source_excerpt": "「条例施行前の広報及び条例施行後のパトロール」", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        }
+      ]
+    },
+    "hachioji-city": {
+      "assembly_name": "八王子市議会",
+      "source": { "provider": "dbsr", "index_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/" },
+      "records": [
+        {
+          "discussion_id": "hachioji-rag-ai-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年第2回八王子市議会定例会（第4日目）",
+          "source_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/611167?Template=document&Id=6213",
+          "topic": "検索拡張生成AIの行政利用",
+          "what_changes": "庁内文書を参照する検索拡張生成AIを導入し、情報検索・文書作成の効率化と市民サービス向上を目指します。",
+          "target_audience": "八王子市民、市職員、市役所の行政サービス利用者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "2026年度に導入し、利用職員割合50％を目標",
+          "original_quote": "「生成ＡＩを業務で利用している職員の割合を指標」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "hachioji-kusakabe-2026-06-11-rag-ai", "speaker_name": "日下部 広志", "speaker_role": "八王子市議会議員", "committee_name": "本会議", "stance_label": "拡大提案", "summary_quote": "検索拡張生成AIの導入目的、数値目標、参照資料、庁内への定着策を質問しました。", "full_summary": "先行自治体の利用実績を踏まえ、職員が日常業務で使えるデータ範囲、研修、更新運用を具体化するよう求めました。", "source_excerpt": "「本市において、今年度導入する検索拡張生成ＡＩについて、目指す姿や導入の目的を伺います。」", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "hachioji-kobayashi-2026-06-11-rag-ai", "speaker_name": "小林中 経営改革担当部長", "speaker_role": "八王子市経営改革担当部長", "party_name": "行政執行部", "committee_name": "本会議・答弁", "stance_label": "推進", "summary_quote": "業務の生産性と市民サービスの質を高め、2026年度は利用職員50％、2027年度は60％を目指すと答弁しました。", "full_summary": "庁内共通業務から構築し、大学等と連携した研修や部署別資料の段階的な取込みでAI活用を定着させる方針を示しました。", "source_excerpt": "「令和８年度は50％、令和９年度は60％を目指す」", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "hachioji-population-2024-06-11",
+          "meeting_date": "2024-06-11",
+          "meeting_name": "令和6年第2回八王子市議会定例会（第2日目）",
+          "source_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/549802?Id=5826&Template=document",
+          "topic": "人口減少と持続可能性分析",
+          "what_changes": "人口減少対策に自治体の持続可能性分析を生かす考え方が議論されました。",
+          "target_audience": "八王子市民と人口政策を担う行政部門",
+          "current_stage": "2024年6月11日の本会議で質問・答弁済み",
+          "budget_info": "人口減少と自然減対策について議論",
+          "original_quote": "「地方自治体『持続可能性』分析レポートについて」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "hachioji-muramatsu-2024-06-11-population", "speaker_name": "村松 徹", "speaker_role": "八王子市議会議員", "party_name": "市議会公明党", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "持続可能性分析レポートを市がどう評価し、人口減少対策に生かすのか質問しました。", "full_summary": "若年女性人口の変化などを用いた自治体分類について、市の受け止めと今後の対応を求めました。", "source_excerpt": "「地方自治体『持続可能性』分析レポートについて」", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "hachioji-imagawa-2024-06-11-population", "speaker_name": "今川 邦洋", "speaker_role": "八王子市都市戦略部長", "party_name": "行政執行部", "committee_name": "本会議・答弁", "stance_label": "課題提起", "summary_quote": "八王子市は自然減対策が必要な自治体に分類され、出生数の減少が課題だと答弁しました。", "full_summary": "人口流出より自然減への対策が重要だと説明しました。", "source_excerpt": "「人口特性別の9分類では自然減対策が必要な自治体」", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        }
+      ]
+    }
+  }
+}
