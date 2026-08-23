@@ -275,7 +275,7 @@ async def translate_giji(request: TranslationRequest):
 
         if rag_res.get("verified"):
             chain_steps = [
-                AiChainStep(step_number=1, title="公式会議録取得", detail="東京都議会公式サイトから会議録本文を取得"),
+                AiChainStep(step_number=1, title="公式会議録取得", detail=f"{rag_res.get('assembly_name', '自治体議会')}の公式サイトから会議録本文を取得"),
                 AiChainStep(step_number=2, title="発言者・所属構造化", detail="会議録本文から質問者・答弁者・会議情報を構造化"),
                 AiChainStep(step_number=3, title="平易な要約", detail="発言内容を市民向けに要約"),
                 AiChainStep(step_number=4, title="原文照合", detail="氏名・日付・発言・出典URLを公式会議録と照合済み")

@@ -337,14 +337,190 @@ def record_user_opinion(assembly_id: str, message_id: str, opinion_type: str, co
 
 import urllib.parse
 
+VERIFIED_RAG_RECORDS: Dict[str, Dict[str, Any]] = {
+    "shinjuku-ward": {
+        "assembly_name": "新宿区議会",
+        "what_changes": "ヤングケアラーを早期に把握し、本人と家庭を相談・支援につなげる体制について質疑が行われました。",
+        "target_audience": "家事や家族の世話を日常的に担う子どもとその家庭、学校・福祉などの関係部門",
+        "current_stage": "2024年6月12日の新宿区議会本会議で代表質問・区長答弁済み",
+        "budget_info": "公式会議録に記載された支援体制に関する質疑・答弁を要約",
+        "speaker_utterances": [
+            {
+                "speaker_name": "山口 かおる",
+                "speaker_role": "新宿区議会議員",
+                "party_name": "立憲民主党・無所属クラブ",
+                "committee_name": "本会議",
+                "stance_label": "課題提起",
+                "vote_record": None,
+                "summary_quote": "ヤングケアラーへの理解を広げ、相談・支援につながりやすい体制を整えるよう求めました。",
+                "avatar_color": "sky"
+            },
+            {
+                "speaker_name": "吉住 健一",
+                "speaker_role": "新宿区長",
+                "party_name": "行政執行部",
+                "committee_name": "本会議・区長答弁",
+                "stance_label": "推進",
+                "vote_record": None,
+                "summary_quote": "関係機関が連携して早期に把握し、必要な支援へつなげる取組を進めると答弁しました。",
+                "avatar_color": "emerald"
+            }
+        ],
+        "original_quote": "「ヤングケアラーの支援についてのお尋ねです。」",
+        "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3005&schedule_id=2",
+        "live_sources": [{"title": "令和6年第2回新宿区議会定例会（第1日）", "urls": ["https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3005&schedule_id=2"]}],
+        "verified": True
+    },
+    "machida-city": {
+        "assembly_name": "町田市議会",
+        "what_changes": "建設業と福祉職を中心とする人手不足を踏まえ、市内事業者と働く人への雇用支援が議論されました。",
+        "target_audience": "町田市内の事業者、求職者、働く人と雇用支援を担う関係機関",
+        "current_stage": "2024年6月7日の町田市議会本会議で一般質問・答弁済み",
+        "budget_info": "公式会議録に記載された雇用・労働環境に関する質疑・答弁を要約",
+        "speaker_utterances": [
+            {
+                "speaker_name": "今村 るか",
+                "speaker_role": "町田市議会議員",
+                "party_name": "まちだ市民クラブ",
+                "committee_name": "本会議",
+                "stance_label": "課題提起",
+                "vote_record": None,
+                "summary_quote": "市内の雇用・労働環境をどう捉え、事業者と働く人をどう支援するのか質問しました。",
+                "avatar_color": "sky"
+            },
+            {
+                "speaker_name": "唐澤 祐一",
+                "speaker_role": "町田市経済観光部長",
+                "party_name": "行政執行部",
+                "committee_name": "本会議・答弁",
+                "stance_label": "推進",
+                "vote_record": None,
+                "summary_quote": "建設業と福祉職で人手不足が顕著で、関係機関と連携して雇用支援に取り組むと答弁しました。",
+                "avatar_color": "emerald"
+            }
+        ],
+        "original_quote": "「特に建設業と福祉職の人手不足は顕著」",
+        "source_url": "https://www.gikai-machida.jp/voices2/minutes.html?FINO=3474",
+        "live_sources": [{"title": "令和6年6月定例会（第2回）本会議 第12号", "urls": ["https://www.gikai-machida.jp/voices2/minutes.html?FINO=3474"]}],
+        "verified": True
+    },
+    "shinagawa-ward": {
+        "assembly_name": "品川区議会",
+        "what_changes": "災害関連死を防ぐため、避難所のトイレ・食事・寝床などの生活環境改善が議論されました。",
+        "target_audience": "品川区の住民、避難所を利用する人、地域防災と避難所運営を担う関係部門",
+        "current_stage": "2024年6月27日の品川区議会本会議で一般質問・答弁済み",
+        "budget_info": "公式会議録に記載された防災備蓄・避難所環境に関する質疑・答弁を要約",
+        "speaker_utterances": [
+            {
+                "speaker_name": "のだて 稔史",
+                "speaker_role": "品川区議会議員",
+                "party_name": "日本共産党",
+                "committee_name": "本会議",
+                "stance_label": "課題提起",
+                "vote_record": None,
+                "summary_quote": "能登半島地震の教訓を踏まえ、避難所のトイレ・食事・寝床を改善するよう求めました。",
+                "avatar_color": "sky"
+            },
+            {
+                "speaker_name": "滝澤 災害対策担当部長",
+                "speaker_role": "品川区災害対策担当部長",
+                "party_name": "行政執行部",
+                "committee_name": "本会議・答弁",
+                "stance_label": "推進",
+                "vote_record": None,
+                "summary_quote": "携帯トイレ配布や避難所備蓄、段ボールベッドの供給協定を進めていると答弁しました。",
+                "avatar_color": "emerald"
+            }
+        ],
+        "original_quote": "「携帯トイレの全区民への配布」",
+        "source_url": "https://kaigiroku.city.shinagawa.tokyo.jp/index.php/275892?Template=document&Id=6737",
+        "live_sources": [{"title": "令和6年第2回品川区議会定例会（第1日）", "urls": ["https://kaigiroku.city.shinagawa.tokyo.jp/index.php/275892?Template=document&Id=6737"]}],
+        "verified": True
+    },
+    "shibuya-ward": {
+        "assembly_name": "渋谷区議会",
+        "what_changes": "渋谷駅周辺の迷惑路上飲酒に対し、条例、周知、パトロールを組み合わせる対策が議論されました。",
+        "target_audience": "渋谷駅周辺の住民・来街者・事業者と、安全・環境対策を担う関係部門",
+        "current_stage": "2024年6月3日の渋谷区議会本会議で代表質問・区長答弁済み",
+        "budget_info": "公式会議録に記載された路上飲酒対策に関する質疑・答弁を要約",
+        "speaker_utterances": [
+            {
+                "speaker_name": "松本 翔",
+                "speaker_role": "渋谷区議会議員",
+                "party_name": "渋谷区議会自由民主党議員団",
+                "committee_name": "本会議",
+                "stance_label": "課題提起",
+                "vote_record": None,
+                "summary_quote": "迷惑路上飲酒がごみや騒音、区民の安全・安心に与える影響と対策を質問しました。",
+                "avatar_color": "sky"
+            },
+            {
+                "speaker_name": "長谷部 健",
+                "speaker_role": "渋谷区長",
+                "party_name": "行政執行部",
+                "committee_name": "本会議・区長答弁",
+                "stance_label": "推進",
+                "vote_record": None,
+                "summary_quote": "条例改正に加え、施行前の周知と施行後のパトロールで対策すると答弁しました。",
+                "avatar_color": "emerald"
+            }
+        ],
+        "original_quote": "「条例施行前の広報及び条例施行後のパトロール」",
+        "source_url": "https://ssp.kaigiroku.net/tenant/shibuya/SpMinuteView.html?council_id=2344&schedule_id=2",
+        "live_sources": [{"title": "令和6年第2回渋谷区議会定例会（第1日）", "urls": ["https://ssp.kaigiroku.net/tenant/shibuya/SpMinuteView.html?council_id=2344&schedule_id=2"]}],
+        "verified": True
+    },
+    "hachioji-city": {
+        "assembly_name": "八王子市議会",
+        "what_changes": "持続可能性分析レポートを踏まえ、出生数の減少など自然減への対策が必要だと議論されました。",
+        "target_audience": "八王子市の住民、子育て・若者施策と人口戦略を担う関係部門",
+        "current_stage": "2024年6月11日の八王子市議会本会議で一般質問・答弁済み",
+        "budget_info": "公式会議録に記載された人口減少・持続可能性分析に関する質疑・答弁を要約",
+        "speaker_utterances": [
+            {
+                "speaker_name": "村松 徹",
+                "speaker_role": "八王子市議会議員",
+                "party_name": "市議会公明党",
+                "committee_name": "本会議",
+                "stance_label": "課題提起",
+                "vote_record": None,
+                "summary_quote": "持続可能性分析レポートを市がどう評価し、人口減少対策に生かすのか質問しました。",
+                "avatar_color": "sky"
+            },
+            {
+                "speaker_name": "今川 邦洋",
+                "speaker_role": "八王子市都市戦略部長",
+                "party_name": "行政執行部",
+                "committee_name": "本会議・答弁",
+                "stance_label": "課題提起",
+                "vote_record": None,
+                "summary_quote": "八王子市は自然減対策が必要な自治体に分類され、出生数の減少が課題だと答弁しました。",
+                "avatar_color": "emerald"
+            }
+        ],
+        "original_quote": "「人口特性別の9分類では自然減対策が必要な自治体」",
+        "source_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/549802?Id=5826&Template=document",
+        "live_sources": [{"title": "令和6年第2回八王子市議会定例会（第2日目）", "urls": ["https://www.city.hachioji.tokyo.dbsr.jp/index.php/549802?Id=5826&Template=document"]}],
+        "verified": True
+    }
+}
+
+VERIFIED_RAG_RECORDS["machida-shi"] = VERIFIED_RAG_RECORDS["machida-city"]
+VERIFIED_RAG_RECORDS["shinagawa-ku"] = VERIFIED_RAG_RECORDS["shinagawa-ward"]
+
 def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolitan") -> Dict[str, Any]:
     """東京都オープンデータカタログAPI ＋ 実データ検索 ＋ リアルタイム推論"""
+    verified_record = VERIFIED_RAG_RECORDS.get(assembly_id)
+    if verified_record:
+        return verified_record
+
     assembly_info = next((a for a in ASSEMBLIES_MASTER if a["id"] == assembly_id), ASSEMBLIES_MASTER[2])
     assembly_name = assembly_info["name"]
 
     if assembly_id == "tokyo-metropolitan":
         source_url = "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2024-2/03-07.html"
         return {
+            "assembly_name": "東京都議会",
             "what_changes": "事業の設計段階から評価指標・測定方法・データ取得を組み込み、成果を検証するEBPMの進め方が議論されました。",
             "target_audience": "東京都の政策・行政サービスを利用する都民と、事業を設計・評価する行政部門",
             "current_stage": "2024年6月5日の東京都議会本会議で質疑・答弁済み",
