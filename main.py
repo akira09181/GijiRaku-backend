@@ -45,6 +45,7 @@ class TranslationResponse(BaseModel):
     original_quote: Optional[str] = None
     timestamp: str = "12:00"
     source_url: Optional[str] = "https://catalog.data.metro.tokyo.lg.jp/"
+    source_verified: bool = False
     ai_chain_steps: List[AiChainStep] = []
 
 # ---------------------------------------------------------
@@ -123,88 +124,80 @@ class TopicDetailResponse(BaseModel):
     updated_at: str = "2026-08-20T05:00:00+09:00"
 
 SAMPLE_TOPIC_DATA = TopicDetailResponse(
-    topic_id="shinagawa-childcare-2026-001",
-    municipality=MunicipalityInfo(name="品川区", assembly="品川区議会"),
-    title="第2子以降の保育料完全無償化・給食費無償化",
+    topic_id="tokyo-ebpm-2024-06-05",
+    municipality=MunicipalityInfo(name="東京都", assembly="東京都議会"),
+    title="事業評価へのEBPM導入と成果重視の評価",
     summary=TopicSummary(
-        what_changes="第2子以降の保育料を無料にする案が進んでいます。おむつ代を定額支援する制度も検討されています。",
-        who_is_affected="品川区にお住まいの子育て世帯（特に小中学生や乳幼児のいるご家庭）",
-        current_status="2026年第1回定例会で審議中",
-        budget="令和8年度当初予算案に重点計上",
-        next_step="予算案が可決された場合、2026年度中の制度開始に向け準備進行予定"
+        what_changes="事業の設計段階から評価指標・測定方法・データ取得を組み込み、成果を検証する考え方が議論されました。",
+        who_is_affected="東京都の政策・行政サービスを利用する都民と、事業を設計・評価する行政部門",
+        current_status="2024年6月5日の東京都議会本会議で質疑・答弁済み",
+        budget="事業評価による財源確保と成果重視の評価制度について議論",
+        next_step="評価制度を継続的に見直し、都民サービス向上と財源確保につなげる方針"
     ),
     timeline=[
-        TimelineEvent(date="2026-02-20", event="令和8年度当初予算案 提出", status="completed"),
-        TimelineEvent(date="2026-03-05", event="予算特別委員会で詳細審議", status="active"),
-        TimelineEvent(date="2026-03-25", event="本会議で採決予定（可決後に準備開始）", status="upcoming")
+        TimelineEvent(date="2024-06-05", event="福島りえこ議員が事業評価へのEBPM導入を質問", status="completed"),
+        TimelineEvent(date="2024-06-05", event="小池知事が成果重視の評価制度について答弁", status="completed")
     ],
     arguments=PolicyArguments(
         supporting=[
-            "子育て世帯の経済的負担を抜本的に軽減できる",
-            "若年世代の定住促進と地域活性化につながる"
+            "政策目的に対応した成果指標を事前に設計できる",
+            "データ分析を事業改善と財源確保につなげられる"
         ],
         concerns=[
-            "継続的な年間財源の確保に関する検証が必要",
-            "受入枠（保育士・施設容量）の確保が課題"
+            "複合要因を扱うため、統計的な分析設計が必要",
+            "事業実施前から継続的にデータを取得する必要がある"
         ]
     ),
     speaker_utterances=[
         SpeakerUtterance(
-            speaker_name="吉野 区長",
-            speaker_role="区長",
-            party_name="無所属",
-            committee_name="本会議・首長答弁",
-            stance_label="推進",
-            summary_quote="子育て世帯の負担を軽くするため、所得制限のない支援を前に進めたい",
-            avatar_color="emerald",
-            meeting_name="令和8年第1回定例会 本会議",
-            meeting_date="2026-02-20",
-            question_type="区長方針表明"
-        ),
-        SpeakerUtterance(
-            speaker_name="山田 太郎",
-            speaker_role="区議会議員",
+            speaker_name="福島 りえこ",
+            speaker_role="東京都議会議員",
             party_name="都民ファーストの会",
-            committee_name="予算特別委員会",
-            stance_label="慎重",
-            summary_quote="制度を長く続けるために、毎年の予算・財源をどう確保するか慎重に確認が必要です",
-            avatar_color="amber",
-            meeting_name="予算特別委員会",
-            meeting_date="2026-03-05",
-            question_type="総括質疑"
+            committee_name="本会議",
+            stance_label="課題提起",
+            vote_record=None,
+            summary_quote="事業の成果を正しく測るため、設計段階から評価指標と測定方法を組み込む必要があると提案しました。",
+            source_excerpt="「あらかじめ事業に評価を組み込む必要があります。」",
+            avatar_color="sky",
+            meeting_name="令和6年第2回定例会 東京都議会会議録第9号",
+            meeting_date="2024-06-05",
+            question_type="一般質問"
         ),
         SpeakerUtterance(
-            speaker_name="佐藤 花子",
-            speaker_role="区議会議員",
-            party_name="日本共産党",
-            committee_name="文教子育て委員会",
-            stance_label="拡大提案",
-            summary_quote="第2子以降だけでなく、病児保育の受け入れ枠拡充もあわせて検討すべきです",
-            avatar_color="sky",
-            meeting_name="文教子育て委員会",
-            meeting_date="2026-03-10",
-            question_type="一般質問"
+            speaker_name="小池 百合子",
+            speaker_role="東京都知事",
+            party_name="行政執行部",
+            committee_name="本会議・知事答弁",
+            stance_label="推進",
+            vote_record=None,
+            summary_quote="成果重視の評価やデータ分析を活用し、都民サービス向上と財源確保につなげると答弁しました。",
+            source_excerpt="「評価制度の不断の見直しで、都民のQOL向上と着実な財源確保につなげてまいります。」",
+            avatar_color="emerald",
+            meeting_name="令和6年第2回定例会 東京都議会会議録第9号",
+            meeting_date="2024-06-05",
+            question_type="知事答弁"
         )
     ],
     source=TopicSource(
-        meeting_name="令和8年第1回定例会 本会議",
-        meeting_date="2026-02-20",
-        speaker="吉野 区長",
-        excerpt="「次代を担う子どもたちの健やかな育成を社会全体で後押しすべく、所得制限のない幼児教育・保育の負担軽減策を拡充し、切れ目のない子育て支援を推進してまいります。」",
-        source_url="https://catalog.data.metro.tokyo.lg.jp/dataset/t000021d0000000010",
-        open_data_url="https://catalog.data.metro.tokyo.lg.jp/"
+        meeting_name="令和6年第2回定例会 東京都議会会議録第9号",
+        meeting_date="2024-06-05",
+        speaker="福島 りえこ",
+        excerpt="「あらかじめ事業に評価を組み込む必要があります。」",
+        source_url="https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2024-2/03-07.html",
+        open_data_url="https://www.gikai.metro.tokyo.lg.jp/record/"
     ),
     verification=TopicVerification(
         status="verified",
         checked_against_source=True,
-        confidence=0.96,
+        confidence=1.0,
         claims=[
-            ClaimVerification(claim="第2子以降の保育料完全無償化を検討", verified=True, source_excerpt_id="excerpt-001"),
-            ClaimVerification(claim="所得制限撤廃の方向で審議中", verified=True, source_excerpt_id="excerpt-002")
+            ClaimVerification(claim="事業設計段階から評価を組み込む必要性を質問", verified=True, source_excerpt_id="excerpt-001"),
+            ClaimVerification(claim="成果重視の評価とデータ分析の活用を知事が答弁", verified=True, source_excerpt_id="excerpt-002")
         ]
     ),
-    citizen_reactions=CitizenReactions(support=42, concern=3, comments=1),
-    tags=["子育て", "保育", "予算"]
+    citizen_reactions=CitizenReactions(support=0, concern=0, comments=0),
+    tags=["EBPM", "事業評価", "オープンデータ"],
+    updated_at="2026-08-24T00:00:00+09:00"
 )
 
 # ---------------------------------------------------------
@@ -280,12 +273,20 @@ async def translate_giji(request: TranslationRequest):
         assembly_id = request.assembly_id or "tokyo-metropolitan"
         rag_res = perform_real_rag_inference(q, assembly_id=assembly_id)
 
-        chain_steps = [
-            AiChainStep(step_number=1, title="リアルタイムカタログRetrieval", detail=f"東京都オープンデータカタログAPI ({len(rag_res.get('live_sources', []))}件ヒット) から最新会議録データをリアルタイム抽出"),
-            AiChainStep(step_number=2, title="発言者・所属構造化", detail="議事録テキストより首長・各会派委員（氏名・所属会派・役職）を自動識別構造化"),
-            AiChainStep(step_number=3, title="LLM超翻訳", detail="行政条文・対立軸を市民目線のLINE風会話＆発言要旨吹き出し形式に要約"),
-            AiChainStep(step_number=4, title="ファクト検証Agent (Verification)", detail="原典オープンデータURLおよび会議録原文との整合性を照合済み")
-        ]
+        if rag_res.get("verified"):
+            chain_steps = [
+                AiChainStep(step_number=1, title="公式会議録取得", detail="東京都議会公式サイトから会議録本文を取得"),
+                AiChainStep(step_number=2, title="発言者・所属構造化", detail="会議録本文から質問者・答弁者・会議情報を構造化"),
+                AiChainStep(step_number=3, title="平易な要約", detail="発言内容を市民向けに要約"),
+                AiChainStep(step_number=4, title="原文照合", detail="氏名・日付・発言・出典URLを公式会議録と照合済み")
+            ]
+        else:
+            chain_steps = [
+                AiChainStep(step_number=1, title="公開情報の対象確認", detail=f"東京都オープンデータカタログAPIで関連候補を{len(rag_res.get('live_sources', []))}件取得"),
+                AiChainStep(step_number=2, title="デモ回答生成", detail="画面体験用の回答を生成"),
+                AiChainStep(step_number=3, title="平易な要約", detail="行政テーマを市民向けに整理"),
+                AiChainStep(step_number=4, title="個別原文照合", detail="この回答は公式会議録との個別照合対象外")
+            ]
 
         answer_text = (
             f"💡 何が変わる？\n{rag_res['what_changes']}\n\n"
@@ -301,6 +302,7 @@ async def translate_giji(request: TranslationRequest):
             original_quote=rag_res['original_quote'],
             timestamp="12:00",
             source_url=rag_res['source_url'],
+            source_verified=bool(rag_res.get("verified")),
             ai_chain_steps=chain_steps
         )
     except Exception as e:

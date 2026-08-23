@@ -341,6 +341,41 @@ def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolita
     """東京都オープンデータカタログAPI ＋ 実データ検索 ＋ リアルタイム推論"""
     assembly_info = next((a for a in ASSEMBLIES_MASTER if a["id"] == assembly_id), ASSEMBLIES_MASTER[2])
     assembly_name = assembly_info["name"]
+
+    if assembly_id == "tokyo-metropolitan":
+        source_url = "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2024-2/03-07.html"
+        return {
+            "what_changes": "事業の設計段階から評価指標・測定方法・データ取得を組み込み、成果を検証するEBPMの進め方が議論されました。",
+            "target_audience": "東京都の政策・行政サービスを利用する都民と、事業を設計・評価する行政部門",
+            "current_stage": "2024年6月5日の東京都議会本会議で質疑・答弁済み",
+            "budget_info": "事業評価による財源確保と成果重視の評価制度について議論",
+            "speaker_utterances": [
+                {
+                    "speaker_name": "福島 りえこ",
+                    "speaker_role": "東京都議会議員",
+                    "party_name": "都民ファーストの会",
+                    "committee_name": "本会議",
+                    "stance_label": "課題提起",
+                    "vote_record": None,
+                    "summary_quote": "事業の成果を正しく測るため、設計段階から評価指標と測定方法を組み込む必要があると提案しました。",
+                    "avatar_color": "sky"
+                },
+                {
+                    "speaker_name": "小池 百合子",
+                    "speaker_role": "東京都知事",
+                    "party_name": "行政執行部",
+                    "committee_name": "本会議・知事答弁",
+                    "stance_label": "推進",
+                    "vote_record": None,
+                    "summary_quote": "成果重視の評価やデータ分析を活用し、都民サービス向上と財源確保につなげると答弁しました。",
+                    "avatar_color": "emerald"
+                }
+            ],
+            "original_quote": "「あらかじめ事業に評価を組み込む必要があります。」",
+            "source_url": source_url,
+            "live_sources": [{"title": "令和六年東京都議会会議録第九号（福島りえこ）", "urls": [source_url]}],
+            "verified": True
+        }
     
     encoded_q = urllib.parse.quote(query)
     catalog_url = f"https://catalog.data.metro.tokyo.lg.jp/api/3/action/package_search?q={encoded_q}&rows=3"
@@ -361,10 +396,10 @@ def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolita
     first_url = live_sources[0]["urls"][0] if live_sources and live_sources[0]["urls"] else "https://catalog.data.metro.tokyo.lg.jp/"
     
     return {
-        "what_changes": f"「{query}」に関して、実オープンデータおよび議会定例会での議論に基づき支援拡充および制度改善案が進んでいます。",
+        "what_changes": f"「{query}」に関する画面体験用のデモ回答です。公式会議録との個別照合は行っていません。",
         "target_audience": f"{assembly_name}にお住まいのご家庭・関係住民の皆様",
-        "current_stage": "令和8年第1回定例会にて当初予算案を詳細審議中",
-        "budget_info": "重点事業として令和8年度予算案へ計上",
+        "current_stage": "デモデータ（実データ接続・個別照合前）",
+        "budget_info": "デモ値（公式な予算情報ではありません）",
         "speaker_utterances": [
             {
                 "speaker_name": "小池 百合子" if "東京" in assembly_name else "吉野 区長",
@@ -397,7 +432,8 @@ def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolita
                 "avatar_color": "sky"
             }
         ],
-        "original_quote": f"「ご質問の『{query}』に関しまして、{assembly_name}本会議および各種委員会にて活発な質疑が行われております。」",
+        "original_quote": None,
         "source_url": first_url,
-        "live_sources": live_sources
+        "live_sources": live_sources,
+        "verified": False
     }
