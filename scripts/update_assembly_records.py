@@ -51,13 +51,29 @@ def normalize_digits(value: str) -> str:
     return value.translate(str.maketrans("０１２３４５６７８９", "0123456789"))
 
 
-def parse_meeting_date(council_name: str, schedule_name: str, minutes: List[Dict[str, Any]]) -> Optional[str]:
-    transcript = " ".join(clean_html(item.get("body", "")) for item in minutes[:3])
+def parse_meeting_date(
+    council_name: str,
+    schedule_name: str,
+    minutes: List[Dict[str, Any]],
+    schedule_metadata: str = "",
+) -> Optional[str]:
+    transcript = " ".join(
+        [clean_html(schedule_metadata)]
+        + [clean_html(item.get("body", "")) for item in minutes[:3]]
+    )
     normalized = normalize_digits(transcript)
     gregorian = re.search(r"(20\d{2})年\s*(\d{1,2})月\s*(\d{1,2})日", normalized)
     if gregorian:
         year, month, day = map(int, gregorian.groups())
         return f"{year:04d}-{month:02d}-{day:02d}"
+
+    japanese_date = re.search(
+        r"令和\s*(\d+)年\s*(\d{1,2})月\s*(\d{1,2})日",
+        normalized,
+    )
+    if japanese_date:
+        japanese_year, month, day = map(int, japanese_date.groups())
+        return f"{2018 + japanese_year:04d}-{month:02d}-{day:02d}"
 
     council = normalize_digits(council_name)
     schedule = normalize_digits(schedule_name)
@@ -238,6 +254,9 @@ def discover_ssp(
                     "schedule_id": schedule_id,
                     "meeting_name": council["name"],
                     "schedule_name": schedule["name"],
+                    "schedule_metadata": clean_html(
+                        schedule.get("member_list", "")
+                    )[:1000],
                     "source_url": source_url,
                     "publication_status": "pending_review",
                 }
@@ -275,6 +294,7 @@ def build_ssp_records(
         candidate["meeting_name"],
         candidate["schedule_name"],
         minutes,
+        candidate.get("schedule_metadata", ""),
     )
     if not meeting_date:
         candidate["review_reason"] = "meeting_date_not_found"
@@ -380,10 +400,16 @@ def auto_publish(
     candidates: List[Dict[str, Any]],
     max_records_per_assembly: int,
 ) -> int:
-    added = 0
+    changed = 0
     added_by_assembly: Dict[str, int] = {}
     existing_import_ids = {
         record.get("source_import_id")
+        for assembly in dataset["assemblies"].values()
+        for record in assembly.get("records", [])
+        if record.get("source_import_id")
+    }
+    existing_by_import_id = {
+        record["source_import_id"]: record
         for assembly in dataset["assemblies"].values()
         for record in assembly.get("records", [])
         if record.get("source_import_id")
@@ -405,6 +431,14 @@ def auto_publish(
             continue
         records: List[Dict[str, Any]] = []
         for record in build_ssp_records(dataset, candidate, 1000):
+            import_id = record.get("source_import_id")
+            existing = existing_by_import_id.get(import_id)
+            if existing is not None:
+                if existing != record:
+                    existing.clear()
+                    existing.update(record)
+                    changed += 1
+                continue
             source_topic = (
                 record.get("source_url", ""),
                 re.sub(r"\s+", "", record.get("topic", "")),
@@ -424,14 +458,20 @@ def auto_publish(
         )
         for record in records:
             existing_import_ids.add(record["source_import_id"])
-        added += len(records)
+            existing_by_import_id[record["source_import_id"]] = record
+        changed += len(records)
         added_by_assembly[assembly_id] = added_by_assembly.get(assembly_id, 0) + len(records)
         candidate["publication_status"] = "published"
         candidate["auto_published_records"] = len(records)
 
-    if added:
+    if changed:
+        for assembly in dataset["assemblies"].values():
+            assembly.get("records", []).sort(
+                key=lambda record: record.get("meeting_date", ""),
+                reverse=True,
+            )
         dataset["updated_at"] = datetime.now(JST).replace(microsecond=0).isoformat()
-    return added
+    return changed
 
 
 def update_inbox(candidates: List[Dict[str, Any]]) -> bool:
@@ -472,17 +512,17 @@ def main() -> None:
         return
 
     candidates = discover(dataset)
-    added = 0
+    changed_records = 0
     if args.auto_publish:
         if args.max_records_per_assembly < 1:
             raise ValueError("--max-records-per-assembly must be at least 1")
-        added = auto_publish(dataset, candidates, args.max_records_per_assembly)
+        changed_records = auto_publish(dataset, candidates, args.max_records_per_assembly)
         validate_dataset(dataset)
-        if added:
+        if changed_records:
             write_json(RECORDS_PATH, dataset)
 
     changed = update_inbox(candidates)
-    print(f"assembly_records.json: {added} auto-published record(s)")
+    print(f"assembly_records.json: {changed_records} added/refreshed record(s)")
     print("assembly_records_inbox.json: updated" if changed else "assembly_records_inbox.json: unchanged")
 
 

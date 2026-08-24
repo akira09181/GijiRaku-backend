@@ -18,6 +18,17 @@ class UpdateAssemblyRecordsTest(unittest.TestCase):
             "2026-06-10",
         )
 
+    def test_schedule_date_wins_over_fiscal_year_name(self):
+        self.assertEqual(
+            parse_meeting_date(
+                "令和7年度定例会・2月会議",
+                "03月17日－05号",
+                [],
+                "令和8年3月17日（火曜日） 午前10時開議",
+            ),
+            "2026-03-17",
+        )
+
     def test_extract_topic_from_question(self):
         self.assertEqual(
             extract_topic(
@@ -215,6 +226,37 @@ class UpdateAssemblyRecordsTest(unittest.TestCase):
                 for record in dataset["assemblies"]["shinjuku-ward"]["records"]
             ],
             ["ssp:shinjuku:3193:2:10", "ssp:shinjuku:3193:2:12"],
+        )
+
+    @patch("scripts.update_assembly_records.build_ssp_records")
+    def test_auto_publish_refreshes_an_existing_import(self, build_records):
+        existing = {
+            "discussion_id": "arakawa-ward-auto-2025-03-17-685-6-10",
+            "meeting_date": "2025-03-17",
+            "source_import_id": "ssp:arakawa:685:6:10",
+        }
+        refreshed = {
+            "discussion_id": "arakawa-ward-auto-2026-03-17-685-6-10",
+            "meeting_date": "2026-03-17",
+            "source_import_id": "ssp:arakawa:685:6:10",
+        }
+        build_records.return_value = [refreshed]
+        dataset = {
+            "assemblies": {
+                "arakawa-ward": {
+                    "records": [existing],
+                }
+            }
+        }
+        candidate = {
+            "provider": "ssp",
+            "assembly_id": "arakawa-ward",
+        }
+
+        self.assertEqual(auto_publish(dataset, [candidate], 20), 1)
+        self.assertEqual(
+            dataset["assemblies"]["arakawa-ward"]["records"],
+            [refreshed],
         )
 
 
