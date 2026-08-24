@@ -138,6 +138,96 @@
       },
       "records": [
         {
+          "discussion_id": "shinjuku-mynumber-renewal-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "マイナンバーカード更新と学校でのマイナ保険証の取扱い",
+          "what_changes": "電子証明書の更新増加に備えた窓口体制と周知、学校行事での保険資格確認方法が整理されます。",
+          "target_audience": "マイナンバーカードを利用する区民と区立学校の児童・生徒、保護者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "具体額は答弁で提示されず、窓口の会計年度任用職員を増員して対応",
+          "original_quote": "「マイナンバーカードの更新対策及び学校現場におけるマイナ保険証の取扱いについて」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-suzuki-2026-06-11-mynumber-renewal", "speaker_name": "鈴木 ひろみ", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "電子証明書の更新忘れを防ぐ周知と窓口混雑への対応、学校行事でのマイナ保険証の運用を質問しました。", "full_summary": "カードの取得促進から継続利用へ政策の重点が移る中、更新機会の確保と学校現場での統一的な取扱いを求めました。", "source_excerpt": "「マイナンバーカードの更新対策及び学校現場におけるマイナ保険証の取扱いについて伺います。」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-11-mynumber-renewal", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "対応", "summary_quote": "今後3年間で延べ約13万2,000人の電子証明書更新を想定し、窓口職員を増員して対応していると答弁しました。", "full_summary": "更新件数の増加を見込み、戸籍住民課と6特別出張所で会計年度任用職員を増員し、混雑緩和と待ち時間短縮を図る方針を示しました。", "source_excerpt": "「今後３年間で延べ約13万2,000人の電子証明書の更新があるものと想定しています。」", "question_type": "区長答弁", "avatar_color": "emerald" },
+            { "statement_id": "shinjuku-hariya-2026-06-11-mynumber-insurance", "speaker_name": "針谷 弘志", "speaker_role": "新宿区教育長", "party_name": "行政執行部", "committee_name": "本会議・教育長答弁", "stance_label": "運用", "summary_quote": "移動教室ではマイナ保険証原本、資格情報の印刷物、資格確認書の写しで資格確認できると周知していると答弁しました。", "full_summary": "国の事務連絡を受け、学校行事における被保険者資格の確認方法を毎年度、全小・中学校へ周知していると説明しました。", "source_excerpt": "「学校現場におけるマイナ保険証の取扱いに関する統一的な運用方針についてのお尋ねです。」", "question_type": "教育長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-bullying-response-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "いじめへの組織的対応と子どもの権利擁護",
+          "what_changes": "いじめの初期対応と情報共有、子どもの声を受け止めて支援につなげる仕組みが検証されます。",
+          "target_audience": "新宿区の子ども、保護者、区立学校関係者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "具体額は答弁で提示されず、既存相談機関と学校の連携体制について議論",
+          "original_quote": "「さいしょが大事」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-yamaguchi-2026-06-11-bullying-response", "speaker_name": "山口 かおる", "speaker_role": "新宿区議会議員", "party_name": "立憲民主党・無所属クラブ", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "初期対応の遅れや情報共有不足を踏まえ、子どもの声を起点とする組織的ないじめ対応を求めました。", "full_summary": "被害を受けた児童の手紙を紹介し、学校・教育委員会の初動と、独立性を含む子どもの権利擁護の仕組みを質問しました。", "source_excerpt": "「もし、これからぼくのようないじめがあったら」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-11-child-rights", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "継続対応", "summary_quote": "既存の子ども総合センター等で声を受け止め、困難に応じた相談・支援を行うと答弁しました。", "full_summary": "新たな独立機関は設置しない一方、子どもの声を受け止める環境を継続的に検討すると説明しました。", "source_excerpt": "「困難を持つ子どもの声を受け止め、必要な支援につなげることは重要なことと考えています。」", "question_type": "区長答弁", "avatar_color": "emerald" },
+            { "statement_id": "shinjuku-hariya-2026-06-11-bullying-response", "speaker_name": "針谷 弘志", "speaker_role": "新宿区教育長", "party_name": "行政執行部", "committee_name": "本会議・教育長答弁", "stance_label": "改善", "summary_quote": "アンケートや面談で小さなサインを把握し、情報共有と迅速な対応を徹底すると答弁しました。", "full_summary": "教職員の見取りに加え、ふれあい月間、WEBQU、スクールカウンセラー面談を通じた組織的把握を続ける方針を示しました。", "source_excerpt": "「引き続き情報共有や迅速な対応に努めてまいります。」", "question_type": "教育長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-youth-clinic-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "子ども・若者の相談支援とユースクリニック",
+          "what_changes": "若者が性を含む心身の悩みを安心して相談し、専門支援につながる方法が検討されます。",
+          "target_audience": "新宿区の子ども・若者とその保護者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "具体額は答弁で提示されず、既存保健相談と外部専門家による教育を活用",
+          "original_quote": "「子どもや若い世代への相談支援とユースクリニックについて」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-yamaguchi-2026-06-11-youth-clinic", "speaker_name": "山口 かおる", "speaker_role": "新宿区議会議員", "party_name": "立憲民主党・無所属クラブ", "committee_name": "本会議", "stance_label": "提案", "summary_quote": "若者が心身や性の悩みを安心して相談できるユースクリニックと外部専門家との連携を求めました。", "full_summary": "若年女性の自殺率などを課題として挙げ、正しい知識と早期相談、孤立を防ぐ仕組みの整備を質問しました。", "source_excerpt": "「子どもや若い世代の心と体の健康を守るための相談支援について伺います。」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-11-youth-clinic", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "継続対応", "summary_quote": "女性の健康支援センターや保健センターで相談を受け、必要な専門支援につなげると答弁しました。", "full_summary": "ユースクリニックの定義は明確でないとしつつ、若者が安心して相談できるよう既存窓口の周知を進める方針を示しました。", "source_excerpt": "「子どもや若い世代が性を含む心身の健康課題や悩みについて安心して相談し、専門的なサポートにつながることは重要」", "question_type": "区長答弁", "avatar_color": "emerald" },
+            { "statement_id": "shinjuku-hariya-2026-06-11-sex-education", "speaker_name": "針谷 弘志", "speaker_role": "新宿区教育長", "party_name": "行政執行部", "committee_name": "本会議・教育長答弁", "stance_label": "推進", "summary_quote": "産婦人科医等と連携した性教育の授業を全中学校に周知していると答弁しました。", "full_summary": "発達段階に応じた指導に加え、外部専門家と連携し、現代的な課題を踏まえた学びの機会を設けていると説明しました。", "source_excerpt": "外部専門家と連携した学びとしては、東京都教育委員会が実施している産婦人科医等と連携した「性教育の授業」があります。", "question_type": "教育長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-minpaku-security-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "集合住宅の民泊とオートロックの安全管理",
+          "what_changes": "民泊宿泊者への暗証番号共有など、集合住宅の既存居住者が抱える安全上の不安への対応が議論されます。",
+          "target_audience": "民泊が入る集合住宅の居住者、所有者、住宅宿泊事業者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "具体額は答弁で提示されず、管理規約と既存の新宿区ルールによる対応を説明",
+          "original_quote": "「民泊事業における集合住宅のセキュリティと既存居住者の安心について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-tanae-2026-06-11-minpaku-security", "speaker_name": "たなえ ひさし", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "民泊利用者へのオートロック暗証番号共有が既存居住者に与える不安を示し、ルール整備を求めました。", "full_summary": "全国最多規模の民泊届出を抱える区として、集合住宅の安全管理と新しいサービスへの行政対応を質問しました。", "source_excerpt": "「民泊事業における集合住宅のセキュリティと既存居住者の安心について伺います。」", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-ishihara-2026-06-11-minpaku-security", "speaker_name": "石原 美千代", "speaker_role": "新宿区健康部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "対応", "summary_quote": "暗証番号の管理は集合住宅ごとの管理規約等で定めるものとし、区ルール違反には是正指導を行うと答弁しました。", "full_summary": "住民の不安を把握しているとした上で、管理規約と住宅宿泊事業法、新宿区ルールに基づく対応を説明しました。", "source_excerpt": "「住民の方が不安を感じていることは把握しています。」", "question_type": "部長答弁", "avatar_color": "emerald" },
+            { "statement_id": "shinjuku-kikushima-2026-06-11-new-services", "speaker_name": "菊島 茂雄", "speaker_role": "新宿区総合政策部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "継続対応", "summary_quote": "新サービスが区民生活へ与える影響を把握し、実務上の着眼点を庁内で共有して対応すると答弁しました。", "full_summary": "安全管理、緊急時対応、既存利用者への影響を踏まえ、現場重視で新しい利用形態に対応する方針を示しました。", "source_excerpt": "「新しいサービスや利用形態が始まる際には、的確に情報収集を行う」", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-heatstroke-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "高齢者を中心とする熱中症対策",
+          "what_changes": "エアコン購入費助成の周知と、暑さ指数を用いた区民・イベント主催者向け行動指針が強化されます。",
+          "target_audience": "熱中症リスクの高い高齢者、生活保護世帯、区民、イベント主催者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "エアコン購入費助成制度と既存の広報・相談網を活用",
+          "original_quote": "「一人ひとりが安心して暮らせる新宿を目指し、命を守る熱中症対策について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-kanakubo-2026-06-11-heatstroke", "speaker_name": "かなくぼ なな子", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "提案", "summary_quote": "屋内での死亡例と高齢者のリスクを示し、エアコン助成の周知と分かりやすい行動指針を求めました。", "full_summary": "救急搬送と死亡統計を踏まえ、支援が必要な人へ制度を届ける方法と、暑さ指数に基づく予防行動を質問しました。", "source_excerpt": "「命を守る熱中症対策について質問いたします。」", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-murakami-2026-06-11-air-conditioner", "speaker_name": "村上 喜孝", "speaker_role": "新宿区福祉部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "推進", "summary_quote": "高齢者施設やケアマネジャー、民生委員、ケースワーカーを通じ、エアコン助成を必要な人へ周知すると答弁しました。", "full_summary": "広報・ウェブ・施設配架に加え、支援者による声かけや申請支援を行う周知体制を説明しました。", "source_excerpt": "「本事業の実施においては支援を必要とする方への周知が重要であると認識しています。」", "question_type": "部長答弁", "avatar_color": "emerald" },
+            { "statement_id": "shinjuku-ishihara-2026-06-11-heatstroke-guidance", "speaker_name": "石原 美千代", "speaker_role": "新宿区健康部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "推進", "summary_quote": "暑さ指数の理解を広げ、区民や主催者がリスクに応じて行動できるよう情報発信すると答弁しました。", "full_summary": "冷房や水分補給の啓発に加え、広報新宿と区ホームページでWBGTを含む予防情報を発信する方針を示しました。", "source_excerpt": "「区民や主催者が熱中症のリスクを踏まえた適切な行動を取れるよう、情報発信に努めてまいります。」", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
           "discussion_id": "shinjuku-sick-child-care-2026-06-10",
           "meeting_date": "2026-06-10",
           "meeting_name": "令和8年6月定例会（第2回）第5号",
@@ -152,6 +242,91 @@
           "statements": [
             { "statement_id": "shinjuku-watanabe-2026-06-10-sick-child-care", "speaker_name": "渡辺 やすし", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "定員に余裕がある一方で利用を断られる実態を示し、受入体制の見直しと空き状況・予約のリアルタイム化を求めました。", "full_summary": "2025年度は846人が利用し225人が断られたとして、供給体制、リアルタイムの空き情報、予約方法、制度周知を質問しました。", "source_excerpt": "「数字上は足りているのに、実際は使えないことが多い病児保育事業について」", "question_type": "一般質問", "avatar_color": "sky" },
             { "statement_id": "shinjuku-yoshizumi-2026-06-10-sick-child-care", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "推進", "summary_quote": "受入体制を総合的に検討し、空き状況や予約に使えるICTツールの研究を進めると答弁しました。", "full_summary": "感染症や症状により受入れできない実態を課題と認識し、人員・医療・設備を含む体制とICT活用を検討する方針を示しました。", "source_excerpt": "「ＩＣＴツールの活用について研究を進めてまいります。」", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-bicycle-first-grade-2026-06-10",
+          "meeting_date": "2026-06-10",
+          "meeting_name": "令和8年6月定例会（第2回）第5号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2",
+          "topic": "自転車交通ルールにおける小1の壁",
+          "what_changes": "小学校入学後に子乗せ自転車を使えなくなる家庭の移動課題について、実態把握と国・都の動向確認が進められます。",
+          "target_audience": "小学校低学年の子どもを送迎する新宿区の子育て世帯",
+          "current_stage": "2026年6月10日の本会議で質問・答弁済み",
+          "budget_info": "具体額は答弁で提示されず、国・東京都・近隣区の状況を注視",
+          "original_quote": "「自転車交通ルールにおける小1の壁について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-watanabe-2026-06-10-bicycle-first-grade", "speaker_name": "渡辺 やすし", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "小学校入学を境に子乗せ送迎が制約される制度と都市部の子育て実態のずれを指摘しました。", "full_summary": "自転車の青切符制度開始を踏まえ、小学校低学年の安全な移動が難しい家庭について、実態把握と対応を求めました。", "source_excerpt": "「自転車交通ルールにおける小１の壁について質問します。」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-10-bicycle-first-grade", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "調査", "summary_quote": "区では低学年児童の自転車送迎実態を把握しておらず、国や都、近隣区の状況を注視すると答弁しました。", "full_summary": "既存アンケートの自転車利用実績と青切符の件数を示しつつ、低学年送迎に限定した調査は未実施と説明しました。", "source_excerpt": "区では、小学校低学年児童を対象とした自転車による送迎の実態についての調査を行っていないため、現状を把握しておりません", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-babysitter-support-2026-06-10",
+          "meeting_date": "2026-06-10",
+          "meeting_name": "令和8年6月定例会（第2回）第5号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2",
+          "topic": "ベビーシッター利用支援のひとり親・障害児家庭への拡大",
+          "what_changes": "利用者が増えるベビーシッター支援について、障害児家庭・ひとり親家庭の利用時間拡大が検討されます。",
+          "target_audience": "ベビーシッター支援を利用する子育て世帯、障害児家庭、ひとり親家庭",
+          "current_stage": "2026年6月10日の本会議で質問・答弁済み",
+          "budget_info": "既存の障害福祉サービス、ひとり親家庭家事援助者雇用費助成との併用を前提に検討",
+          "original_quote": "「ベビーシッター利用支援事業のひとり親・障害児家庭への拡大について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-watanabe-2026-06-10-babysitter-support", "speaker_name": "渡辺 やすし", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "拡大提案", "summary_quote": "利用者が2年間で約8割増えた実績を示し、ひとり親・障害児家庭の利用時間拡大を求めました。", "full_summary": "制度が子育てインフラとして定着しているとして、利用実績の評価、対象家庭の把握、支援上限の拡大を質問しました。", "source_excerpt": "「ベビーシッター利用支援事業のひとり親・障害児家庭への拡大について質問します。」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-10-babysitter-support", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "継続検討", "summary_quote": "現時点で利用時間拡大の予定はないものの、利用者アンケート等を踏まえて今後の対応を検討すると答弁しました。", "full_summary": "利用増を制度周知の成果と評価し、対象家庭は既存サービスも利用できるため、現段階では時間拡大を予定していないと説明しました。", "source_excerpt": "「利用者アンケート等を踏まえ、今後の対応について検討していきます。」", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-minpaku-resident-registration-2026-06-10",
+          "meeting_date": "2026-06-10",
+          "meeting_name": "令和8年6月定例会（第2回）第5号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2",
+          "topic": "民泊住所への住民票の不正登録リスク",
+          "what_changes": "一時宿泊者が民泊住所へ住民登録するリスクについて、窓口確認と居住実態の調査方法が検討されます。",
+          "target_audience": "民泊物件の所有者・居住者、住宅宿泊事業者、住民登録窓口",
+          "current_stage": "2026年6月10日の本会議で質問・答弁済み",
+          "budget_info": "具体額は答弁で提示されず、既存の窓口確認と実態調査を運用",
+          "original_quote": "「民泊における住民票の不正登録リスクについて」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-watanabe-2026-06-10-minpaku-registration", "speaker_name": "渡辺 やすし", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "民泊利用者が家主の許可なく住民票を異動した事例を示し、不正登録の予防と早期把握を求めました。", "full_summary": "全国最多規模の民泊を抱える区で、居住実態がない登録の発見が申出や郵便不達に依存する構造を質問しました。", "source_excerpt": "「民泊における住民票の不正登録リスクについて質問します。」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-10-minpaku-registration", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "調査", "summary_quote": "一時的な宿泊施設への住民登録は原則認められないとし、窓口確認とよりよい調査手法を研究すると答弁しました。", "full_summary": "届出住宅に実際に居住する場合もあるため一律除外はできず、居住状況を詳細に確認して正確な登録を行うと説明しました。", "source_excerpt": "「一時的な宿泊施設等への住民登録は原則認められないものと認識しています。」", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-wellbeing-index-2026-06-10",
+          "meeting_date": "2026-06-10",
+          "meeting_name": "令和8年6月定例会（第2回）第5号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2",
+          "topic": "地域幸福度指標の政策活用",
+          "what_changes": "客観指標と区民の主観指標を組み合わせた地域幸福度指標を、次期総合計画と政策立案へ活用する方法が検証されます。",
+          "target_audience": "新宿区民と次期総合計画・政策評価に関わる行政部門",
+          "current_stage": "2026年6月10日の本会議で質問・答弁済み",
+          "budget_info": "新宿自治創造研究所の2年間の調査研究成果を活用",
+          "original_quote": "「地域幸福度指標の政策活用について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-shimomura-2026-06-10-wellbeing-index", "speaker_name": "下村 治生", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "活用提案", "summary_quote": "客観・主観の両指標で区民の暮らしやすさを可視化し、次期総合計画へ反映するよう求めました。", "full_summary": "研究所レポート2025を踏まえ、地域幸福度指標を政策立案・施策検証の基礎資料として使う考えを質問しました。", "source_excerpt": "「地域幸福度指標の政策活用について質問いたします。」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-10-wellbeing-index", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "活用検証", "summary_quote": "他自治体との比較で区の特徴や課題を把握できるとして、政策立案への活用可能性を検証すると答弁しました。", "full_summary": "客観指標と主観指標を組み合わせた研究成果を、次期総合計画を含む政策検討の基礎資料として扱う方針を示しました。", "source_excerpt": "「地域幸福度指標は、客観指標と主観指標を組み合わせて区民の生活意識等を数値化、可視化するものです。」", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-household-waste-fee-2026-06-10",
+          "meeting_date": "2026-06-10",
+          "meeting_name": "令和8年6月定例会（第2回）第5号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2",
+          "topic": "家庭ごみ有料化とごみ減量",
+          "what_changes": "家庭ごみ有料化の効果と負担、戸別収集のコストを踏まえ、23区での検討と別の減量策が進められます。",
+          "target_audience": "新宿区の全世帯、廃棄物収集事業者、区内事業者",
+          "current_stage": "2026年6月10日の本会議で質問・答弁済み",
+          "budget_info": "具体額は答弁で提示されず、有料化と収集体制のコストを23区で検討",
+          "original_quote": "「家庭ごみの有料化について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-sugiyama-2026-06-10-household-waste-fee", "speaker_name": "杉山 直子", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "慎重論", "summary_quote": "有料化の減量効果が一時的で、戸別収集の人員・車両・費用も増えるとして、区民負担を伴う施策を問い直しました。", "full_summary": "23区の有料化提言と区長発言を踏まえ、持続的なごみ減量策として妥当か、再開発由来の廃棄物も含めて質問しました。", "source_excerpt": "「家庭ごみの有料化について質問します。」", "question_type": "代表質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-10-household-waste-fee", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "検討", "summary_quote": "有料化は減量手段の一つだが課題が多く、直ちに実施できる状況ではないとして23区で議論すると答弁しました。", "full_summary": "事業系古紙の清掃工場への搬入規制や事業系ごみ手数料の増額など、有料化以外の減量策も検討すると説明しました。", "source_excerpt": "「現時点で直ちに実施できる状況ではないことから、23区で議論を進めているところです。」", "question_type": "区長答弁", "avatar_color": "emerald" }
           ]
         },
         {
