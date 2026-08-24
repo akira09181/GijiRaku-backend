@@ -4,8 +4,61 @@
   "assemblies": {
     "tokyo-metropolitan": {
       "assembly_name": "東京都議会",
-      "source": { "provider": "tokyo", "index_url": "https://www.gikai.metro.tokyo.lg.jp/record/" },
+      "source": {
+        "provider": "tokyo",
+        "index_url": "https://www.gikai.metro.tokyo.lg.jp/record/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t000028d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/gikai/130001_tokyoto_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
       "records": [
+        {
+          "discussion_id": "tokyo-app-2026-06-16",
+          "meeting_date": "2026-06-16",
+          "meeting_name": "令和8年第2回定例会 東京都議会会議録第8号（速報版）",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2026-2/02-01.html",
+          "topic": "東京アプリの機能強化",
+          "what_changes": "子育て・介護などの情報配信、行政サービスへのログイン簡素化、東京ポイント交換先の追加、デジタル都民証と生成AI案内機能の開発が進められます。",
+          "target_audience": "東京アプリを利用する都民と、行政手続や支援情報を必要とする人",
+          "current_stage": "2026年6月16日の本会議で代表質問・答弁済み",
+          "budget_info": "東京アプリ生活応援事業と機能拡張について議論",
+          "original_quote": "「必要な情報や手続、支援が確実に届く体験」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tokyo-araki-2026-06-16-tokyo-app",
+              "speaker_name": "荒木 ちはる",
+              "speaker_role": "東京都議会議員",
+              "party_name": "都民ファーストの会東京都議団",
+              "committee_name": "本会議",
+              "stance_label": "拡大提案",
+              "summary_quote": "東京アプリを、必要な支援や行政サービスが迅速かつワンストップで届く仕組みへ発展させるよう求めました。",
+              "full_summary": "生活応援事業の利用支援を充実させ、行政手続のオンライン化や東京ポイント交換先の追加など、都民が利便性を実感できる機能強化を提案しました。",
+              "source_excerpt": "「都民ニーズに寄り添った行政サービスを迅速かつワンストップで提供」",
+              "question_type": "代表質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "tokyo-miyasaka-2026-06-16-tokyo-app",
+              "speaker_name": "宮坂 学",
+              "speaker_role": "東京都副知事",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・副知事答弁",
+              "stance_label": "推進",
+              "summary_quote": "ライフステージ別の情報配信、ログイン簡素化、決済事業者の追加、デジタル都民証と生成AI案内機能の開発を進めると答弁しました。",
+              "full_summary": "東京アプリを都民と行政をつなぐ基盤として育て、個々の状況に応じた情報・手続・支援が届く体験を広げる方針を示しました。",
+              "source_excerpt": "「個々の状況に応じた支援情報等を生成AIが検索、整理して案内」",
+              "question_type": "副知事答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
         {
           "discussion_id": "tokyo-ebpm-2026-02-26",
           "meeting_date": "2026-02-26",
@@ -68,7 +121,21 @@
     },
     "shinjuku-ward": {
       "assembly_name": "新宿区議会",
-      "source": { "provider": "ssp", "tenant": "shinjuku", "tenant_id": 211, "index_url": "https://ssp.kaigiroku.net/tenant/shinjuku/" },
+      "source": {
+        "provider": "ssp",
+        "tenant": "shinjuku",
+        "tenant_id": 211,
+        "index_url": "https://ssp.kaigiroku.net/tenant/shinjuku/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131041d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/shinjyuku/131041_shinjyukuku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
       "records": [
         {
           "discussion_id": "shinjuku-sick-child-care-2026-06-10",
@@ -108,7 +175,19 @@
     },
     "machida-city": {
       "assembly_name": "町田市議会",
-      "source": { "provider": "machida", "index_url": "https://www.gikai-machida.jp/g07_Shitsumon_s.asp" },
+      "source": {
+        "provider": "machida",
+        "index_url": "https://www.gikai-machida.jp/g07_Shitsumon_s.asp",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132098d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/machida/132098_machidashi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
       "records": [
         {
           "discussion_id": "machida-regional-transport-2026-03-26",
@@ -147,7 +226,19 @@
     },
     "shinagawa-ward": {
       "assembly_name": "品川区議会",
-      "source": { "provider": "dbsr", "index_url": "https://kaigiroku.city.shinagawa.tokyo.jp/" },
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://kaigiroku.city.shinagawa.tokyo.jp/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131091d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/shinagawa/131091_shinagawaku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
       "records": [
         {
           "discussion_id": "shinagawa-inclusive-education-2026-02-19",
@@ -187,7 +278,21 @@
     },
     "shibuya-ward": {
       "assembly_name": "渋谷区議会",
-      "source": { "provider": "ssp", "tenant": "shibuya", "tenant_id": 394, "index_url": "https://ssp.kaigiroku.net/tenant/shibuya/" },
+      "source": {
+        "provider": "ssp",
+        "tenant": "shibuya",
+        "tenant_id": 394,
+        "index_url": "https://ssp.kaigiroku.net/tenant/shibuya/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131130d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/shibuya/131130_shibuyaku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
       "records": [
         {
           "discussion_id": "shibuya-inflation-support-2026-01-16",
@@ -227,7 +332,19 @@
     },
     "hachioji-city": {
       "assembly_name": "八王子市議会",
-      "source": { "provider": "dbsr", "index_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/" },
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132012d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/hachioji/132012_hachiojishi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
       "records": [
         {
           "discussion_id": "hachioji-rag-ai-2026-06-11",

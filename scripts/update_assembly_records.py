@@ -37,6 +37,15 @@ def validate_dataset(dataset: Dict[str, Any]) -> None:
     discussion_ids: Set[str] = set()
     statement_ids: Set[str] = set()
     for assembly_id, assembly in dataset.get("assemblies", {}).items():
+        open_data = assembly.get("source", {}).get("open_data")
+        if not isinstance(open_data, dict):
+            raise ValueError(f"{assembly_id}: open_data source is required")
+        for key in ("catalog_url", "resource_url", "format", "license_id", "license_url", "usage"):
+            if not open_data.get(key):
+                raise ValueError(f"{assembly_id}: open_data.{key} is required")
+        if open_data["license_id"] != "CC-BY-4.0":
+            raise ValueError(f"{assembly_id}: unsupported open data license")
+
         records = assembly.get("records", [])
         dates = [record.get("meeting_date", "") for record in records]
         if dates != sorted(dates, reverse=True):

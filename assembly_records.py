@@ -53,6 +53,7 @@ def get_assembly_records(assembly_id: str, limit: Optional[int] = None) -> Dict[
         "assembly_id": normalized_id,
         "assembly_name": assembly["assembly_name"],
         "updated_at": dataset.get("updated_at"),
+        "open_data_source": deepcopy(assembly.get("source", {}).get("open_data")),
         "records": records,
     }
 
