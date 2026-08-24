@@ -2,6 +2,19 @@
   "schema_version": 1,
   "candidates": [
     {
+      "external_id": "ssp:shibuya:2494:2",
+      "provider": "ssp",
+      "assembly_id": "shibuya-ward",
+      "council_id": 2494,
+      "schedule_id": 2,
+      "meeting_name": "令和　８年　　１月　臨時会（第１回）",
+      "schedule_name": "01月16日－01号",
+      "source_url": "https://ssp.kaigiroku.net/tenant/shibuya/SpMinuteView.html?council_id=2494&schedule_id=2",
+      "publication_status": "pending_review",
+      "review_reason": "verified_question_answer_pair_not_found",
+      "first_seen_at": "2026-08-24T05:36:57.259097+00:00"
+    },
+    {
       "external_id": "ssp:shinjuku:3163:2",
       "provider": "ssp",
       "assembly_id": "shinjuku-ward",
@@ -23,8 +36,7 @@
       "meeting_name": "令和　８年　　２月　定例会（第１回）",
       "schedule_name": "02月24日－02号",
       "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3163&schedule_id=3",
-      "publication_status": "published",
-      "auto_published_records": 24,
+      "publication_status": "pending_review",
       "first_seen_at": "2026-08-24T04:57:32.824764+00:00"
     },
     {
@@ -36,8 +48,7 @@
       "meeting_name": "令和　８年　　２月　定例会（第１回）",
       "schedule_name": "02月25日－03号",
       "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3163&schedule_id=4",
-      "publication_status": "published",
-      "auto_published_records": 24,
+      "publication_status": "pending_review",
       "first_seen_at": "2026-08-24T04:57:32.824764+00:00"
     },
     {
@@ -50,8 +61,34 @@
       "schedule_name": "03月24日－04号",
       "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3163&schedule_id=5",
       "publication_status": "published",
-      "auto_published_records": 2,
+      "auto_published_records": 8,
       "first_seen_at": "2026-08-24T04:57:32.824764+00:00"
+    },
+    {
+      "external_id": "ssp:shinjuku:3193:2",
+      "provider": "ssp",
+      "assembly_id": "shinjuku-ward",
+      "council_id": 3193,
+      "schedule_id": 2,
+      "meeting_name": "令和　８年　　６月　定例会（第２回）",
+      "schedule_name": "06月10日－05号",
+      "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2",
+      "publication_status": "published",
+      "auto_published_records": 23,
+      "first_seen_at": "2026-08-24T05:36:57.259097+00:00"
+    },
+    {
+      "external_id": "ssp:shinjuku:3193:3",
+      "provider": "ssp",
+      "assembly_id": "shinjuku-ward",
+      "council_id": 3193,
+      "schedule_id": 3,
+      "meeting_name": "令和　８年　　６月　定例会（第２回）",
+      "schedule_name": "06月11日－06号",
+      "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+      "publication_status": "published",
+      "auto_published_records": 31,
+      "first_seen_at": "2026-08-24T05:36:57.259097+00:00"
     },
     {
       "external_id": "ssp:shinjuku:3193:4",
@@ -62,7 +99,8 @@
       "meeting_name": "令和　８年　　６月　定例会（第２回）",
       "schedule_name": "06月19日－07号",
       "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=4",
-      "publication_status": "pending_review",
+      "publication_status": "published",
+      "auto_published_records": 3,
       "first_seen_at": "2026-08-24T04:57:32.824764+00:00"
     }
   ]
