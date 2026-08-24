@@ -24,6 +24,7 @@ RECORDS_PATH = ROOT / "data" / "assembly_records.json"
 INBOX_PATH = ROOT / "data" / "assembly_records_inbox.json"
 SSP_API_ROOT = "https://ssp.kaigiroku.net/dnp/search"
 JST = timezone(timedelta(hours=9))
+KANJI_DIGITS = {"〇": 0, "零": 0, "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
 
 
 def load_json(path: Path, default: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -51,6 +52,18 @@ def normalize_digits(value: str) -> str:
     return value.translate(str.maketrans("０１２３４５６７８９", "0123456789"))
 
 
+def parse_kanji_number(value: str) -> int:
+    if value == "元":
+        return 1
+    if "十" in value:
+        tens, ones = value.split("十", 1)
+        return (KANJI_DIGITS[tens] if tens else 1) * 10 + (
+            KANJI_DIGITS[ones] if ones else 0
+        )
+    digits = [KANJI_DIGITS[character] for character in value]
+    return int("".join(str(digit) for digit in digits))
+
+
 def parse_meeting_date(
     council_name: str,
     schedule_name: str,
@@ -73,6 +86,18 @@ def parse_meeting_date(
     )
     if japanese_date:
         japanese_year, month, day = map(int, japanese_date.groups())
+        return f"{2018 + japanese_year:04d}-{month:02d}-{day:02d}"
+
+    kanji_date = re.search(
+        r"令和\s*([元〇零一二三四五六七八九十]+)年\s*"
+        r"([〇零一二三四五六七八九十]+)月\s*"
+        r"([〇零一二三四五六七八九十]+)日",
+        normalized,
+    )
+    if kanji_date:
+        japanese_year, month, day = (
+            parse_kanji_number(value) for value in kanji_date.groups()
+        )
         return f"{2018 + japanese_year:04d}-{month:02d}-{day:02d}"
 
     council = normalize_digits(council_name)
