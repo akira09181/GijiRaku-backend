@@ -129,13 +129,13 @@ CHAT_SAMPLE_DATABASE = {
             "date": "2026年8月12日 (第2回定例会)",
             "timestamp": "10:10",
             "category": "👶 おむつ代補助・子育て支援",
-            "speaker": "高橋りえ 議員",
+            "speaker": "デモ議員A",
             "role": "町田市民の会",
             "avatar_type": "politician_female",
             "plain_text": "【赤ちゃんのおむつ代補助】物価高で子育て世帯の家計が苦しい！乳幼児のおむつ定額クーポンや現物支給助成を町田市でも導入できない？",
             "original_quote": "「乳幼児を養育する世帯への物価高騰対策として、紙おむつ購入費助成券の発行並びに配送事業の早期導入を求める。」",
-            "agree_count": 189,
-            "disagree_count": 8,
+            "agree_count": 0,
+            "disagree_count": 0,
             "comments": [
                 {"user": "町田在住20代ママ", "text": "毎月のおむつ代で1万円近く飛ぶので絶対実現してほしい！"},
                 {"user": "鶴川のパパさん", "text": "紙のクーポンじゃなくてスマホアプリ決済で配付してほしいです！"}
@@ -146,13 +146,13 @@ CHAT_SAMPLE_DATABASE = {
             "date": "2026年8月12日 (第2回定例会)",
             "timestamp": "10:15",
             "category": "👶 おむつ代補助・子育て支援",
-            "speaker": "町田市長",
+            "speaker": "デモ市長",
             "role": "答弁者 (町田市長)",
             "avatar_type": "mayor_male",
             "plain_text": "【要するに：来年度から0歳〜2歳児へ『年間最大3万円相当のおむつ電子クーポン』を即時スタートします！】\nスマホで受け取れるデジタル決済を導入し、子育て世帯へ直接届く支援を実施します！",
             "original_quote": "「次年度当初予算におきまして、電子ポイントを活用した紙おむつ等購入費助成事業を計上し、子育て世帯の経済的負担軽減を強力に推進してまいります。」",
-            "agree_count": 210,
-            "disagree_count": 11,
+            "agree_count": 0,
+            "disagree_count": 0,
             "comments": []
         },
         {
@@ -160,13 +160,13 @@ CHAT_SAMPLE_DATABASE = {
             "date": "2026年8月12日 (第2回定例会)",
             "timestamp": "10:45",
             "category": "🏗️ 多摩モノレール延伸・交通",
-            "speaker": "小林けんじ 議員",
+            "speaker": "デモ議員B",
             "role": "自由民主党町田市議団",
             "avatar_type": "politician_male",
             "plain_text": "【多摩モノレール町田延伸】多摩センターから町田駅までのルート整備・ペデストリアンデッキ着工の具体的スケジュールは？",
             "original_quote": "「多摩都市モノレール町田方面延伸事業における都市計画決定の手続きおよび沿線まちづくり基本構想の進捗を問う。」",
-            "agree_count": 145,
-            "disagree_count": 22,
+            "agree_count": 0,
+            "disagree_count": 0,
             "comments": [
                 {"user": "町田駅利用の学生", "text": "朝のバス混雑がひどいのでモノレール早くできてほしい！"}
             ]
@@ -178,13 +178,13 @@ CHAT_SAMPLE_DATABASE = {
             "date": "2026年8月11日 (第2回定例会)",
             "timestamp": "13:00",
             "category": "👶 給食費全額無償化・教育",
-            "speaker": "伊藤まさこ 議員",
+            "speaker": "デモ議員A",
             "role": "品川区議会公明党",
             "avatar_type": "politician_female",
             "plain_text": "【小中学校の給食費ゼロ】品川区内の小中学校給食費全額無償化、所得制限なしで完全にゼロに維持できる？",
             "original_quote": "「品川区立義務教育学校および小中学校における学校給食費全額公費負担化の継続方針並びに財源確保策について伺う。」",
-            "agree_count": 195,
-            "disagree_count": 6,
+            "agree_count": 0,
+            "disagree_count": 0,
             "comments": [
                 {"user": "大井町在住ママ", "text": "給食費タダは本当にありがたい。これからも続けてください！"}
             ]
@@ -194,13 +194,13 @@ CHAT_SAMPLE_DATABASE = {
             "date": "2026年8月11日 (第2回定例会)",
             "timestamp": "13:05",
             "category": "👶 給食費全額無償化・教育",
-            "speaker": "品川区長",
+            "speaker": "デモ区長",
             "role": "答弁者 (品川区長)",
             "avatar_type": "governor_female",
             "plain_text": "【要するに：全児童・生徒の給食費ゼロを恒久的に継続します！】\n東京都の補助金も活用し、子育て世帯の完全無償化を永久にバックアップします！",
             "original_quote": "「学校給食費の無償化につきましては、区の重点施策として今後も継続的に全額公費負担を実施してまいります。」",
-            "agree_count": 230,
-            "disagree_count": 9,
+            "agree_count": 0,
+            "disagree_count": 0,
             "comments": []
         }
     ],
@@ -210,13 +210,13 @@ CHAT_SAMPLE_DATABASE = {
             "date": "2026年8月10日 (第2回定例会)",
             "timestamp": "10:15",
             "category": "💻 スマホ行政手続95%化",
-            "speaker": "佐藤たかし 議員",
+            "speaker": "デモ議員A",
             "role": "都民ファーストの会",
             "avatar_type": "politician_male",
             "plain_text": "【デジタル改革について】都庁の行政手続き、スマホで完結できるように進んでる？ペーパーレス化の進捗を教えて！",
             "original_quote": "「本都における行政手続のデジタル化およびペーパーレス化推進の取り組み状況、並びに都民の利便性向上に向けた今後のロードマップについて伺う。」",
-            "agree_count": 84,
-            "disagree_count": 12,
+            "agree_count": 0,
+            "disagree_count": 0,
             "comments": [
                 {"user": "都民Aさん", "text": "役所に行かずにスマホで手続きできるのは本当に助かります！"}
             ]
@@ -226,13 +226,13 @@ CHAT_SAMPLE_DATABASE = {
             "date": "2026年8月10日 (第2回定例会)",
             "timestamp": "10:18",
             "category": "💻 スマホ行政手続95%化",
-            "speaker": "小池百合子 知事",
+            "speaker": "デモ知事",
             "role": "答弁者 (東京都知事)",
             "avatar_type": "governor_female",
             "plain_text": "【要するに：今年度中に主要手続きの95%をオンライン化完了します！】\n都庁のパスポート申請や各種給付金の手続きはスマホ対応を急ピッチで完了させます！紙を無くして『待ち時間ゼロ』を実現します！",
             "original_quote": "「都民の皆様が役所に来ずとも完結する『デジタル都庁』の実現に向け、本年度末までに主要行政手続の95%以上をキャッシュレスおよびオンライン対応へ移行すべく全力で取り組んでおります。」",
-            "agree_count": 142,
-            "disagree_count": 18,
+            "agree_count": 0,
+            "disagree_count": 0,
             "comments": []
         }
     ]
@@ -247,13 +247,13 @@ PAST_HISTORICAL_SESSIONS = [
                 "date": "2025年12月15日 (令和7年第4回定例会)",
                 "timestamp": "11:00",
                 "category": "🛝 病児保育・スマホ即時予約",
-                "speaker": "野口まゆみ 議員",
+                "speaker": "デモ議員A",
                 "role": "無所属",
                 "avatar_type": "politician_female",
                 "plain_text": "【病児保育の拡充】共働き世帯からの切実な声！急な発熱時の病児・病後児保育の受け入れ枠は拡大できる？",
                 "original_quote": "「病児・病後児保育事業における広域利用協定の促進並びに予約システムのオンライン化について伺う。」",
-                "agree_count": 78,
-                "disagree_count": 4,
+                "agree_count": 0,
+                "disagree_count": 0,
                 "comments": []
             }
         ]
@@ -296,22 +296,33 @@ def get_assembly_chat_dialogue(assembly_id: str, page: int = 1) -> List[Dict[str
                 "date": "2026年8月8日 (第2回定例会)",
                 "timestamp": "10:00",
                 "category": "👶 給食費無償化・子育て",
-                "speaker": "山田たろう 議員",
+                "speaker": "デモ議員A",
                 "role": "市民の会",
                 "avatar_type": "politician_male",
                 "plain_text": f"【{name}質問】学校給食の全額無償化と、学童保育の待機児童ゼロに向けた進捗を教えてください！",
                 "original_quote": f"「{name}における小中学校給食費の無償化推進並びに放課後児童健全育成事業の待機児童解消策について伺う。」",
-                "agree_count": 65,
-                "disagree_count": 3,
+                "agree_count": 0,
+                "disagree_count": 0,
                 "comments": []
             }
         ]
     
-    result = list(base_messages)
+    result = [
+        {
+            **message,
+            "data_status": "demo",
+            "agree_count": 0,
+            "disagree_count": 0,
+        }
+        for message in base_messages
+    ]
     if page >= 2:
         for idx in range(min(page - 1, len(PAST_HISTORICAL_SESSIONS))):
             past_session = PAST_HISTORICAL_SESSIONS[idx]
-            result = past_session["items"] + result
+            result = [
+                {**message, "data_status": "demo", "agree_count": 0, "disagree_count": 0}
+                for message in past_session["items"]
+            ] + result
 
     return result
 
@@ -332,7 +343,7 @@ def record_user_opinion(assembly_id: str, message_id: str, opinion_type: str, co
                 "user": "市民ユーザー",
                 "text": comment_text.strip()
             })
-        return {"status": "success", "message": target_msg}
+        return {"status": "success", "data_status": "legacy_demo", "message": target_msg}
     
     return {"status": "error", "reason": "Message not found"}
 
@@ -587,9 +598,9 @@ def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolita
         "budget_info": "デモ値（公式な予算情報ではありません）",
         "speaker_utterances": [
             {
-                "speaker_name": "小池 百合子" if "東京" in assembly_name else "吉野 区長",
-                "speaker_role": "東京都知事" if "東京" in assembly_name else "首長",
-                "party_name": "無所属",
+                "speaker_name": "デモ首長",
+                "speaker_role": "画面体験用デモ役職",
+                "party_name": "デモデータ",
                 "committee_name": "本会議・首長答弁",
                 "stance_label": "推進",
                 "vote_record": "賛成",
@@ -597,9 +608,9 @@ def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolita
                 "avatar_color": "emerald"
             },
             {
-                "speaker_name": "山田 太郎",
-                "speaker_role": "議会委員",
-                "party_name": "都民ファーストの会" if "東京" in assembly_name else "市民の会",
+                "speaker_name": "デモ議員A",
+                "speaker_role": "画面体験用デモ役職",
+                "party_name": "デモ会派",
                 "committee_name": "予算特別委員会",
                 "stance_label": "条件付き賛成",
                 "vote_record": "賛成",
@@ -607,9 +618,9 @@ def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolita
                 "avatar_color": "amber"
             },
             {
-                "speaker_name": "佐藤 花子",
-                "speaker_role": "議会委員",
-                "party_name": "日本共産党" if "東京" in assembly_name else "無所属会派",
+                "speaker_name": "デモ議員B",
+                "speaker_role": "画面体験用デモ役職",
+                "party_name": "デモ会派",
                 "committee_name": "文教・子育て委員会",
                 "stance_label": "拡大提案",
                 "vote_record": "未採決",

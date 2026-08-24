@@ -106,9 +106,9 @@ class TopicVerification(BaseModel):
     claims: List[ClaimVerification] = []
 
 class CitizenReactions(BaseModel):
-    support: int = 42
-    concern: int = 3
-    comments: int = 1
+    support: int = 0
+    concern: int = 0
+    comments: int = 0
 
 class TopicDetailResponse(BaseModel):
     topic_id: str
@@ -228,7 +228,13 @@ def get_topic_detail(topic_id: str):
 def get_assembly_chat(assembly_id: str, page: int = 1):
     """特定の議会のLINE風対話メッセージ一覧を取得（pageパラメータで過去ログ追加）"""
     dialogues = get_assembly_chat_dialogue(assembly_id, page=page)
-    return {"status": "success", "assembly_id": assembly_id, "page": page, "messages": dialogues}
+    return {
+        "status": "success",
+        "data_status": "legacy_demo",
+        "assembly_id": assembly_id,
+        "page": page,
+        "messages": dialogues,
+    }
 
 from opendata_service import record_user_opinion
 
@@ -609,13 +615,10 @@ def get_or_create_utterance_data(utt_id: str) -> Dict[str, Any]:
     if utt_id not in UTTERANCE_REACTIONS_DB:
         UTTERANCE_REACTIONS_DB[utt_id] = {
             "utt_id": utt_id,
-            "agree_count": 42,
-            "concern_count": 8,
-            "helpful_count": 15,
-            "comments": [
-                {"user": "品川区民 (30代)", "text": "財源の持続性についての検証をしっかり行ってほしいです。"},
-                {"user": "世田谷区在住パパ", "text": "病児保育予約のLINE化は本当に助かります。全区で進めてください！"}
-            ]
+            "agree_count": 0,
+            "concern_count": 0,
+            "helpful_count": 0,
+            "comments": []
         }
     return UTTERANCE_REACTIONS_DB[utt_id]
 
