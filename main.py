@@ -413,6 +413,31 @@ def get_reaction_counts(
         'helpful': row['helpful_count'],
     }
 
+
+def get_live_reaction_counts(
+    connection: sqlite3.Connection,
+    discussion_id: str,
+    statement_id: str,
+) -> Dict[str, int]:
+    """デモ初期値を除き、住民がAPI経由で送信した件数だけを返す。"""
+    row = connection.execute(
+        """
+        SELECT
+            COUNT(CASE WHEN reaction_type = 'agree' THEN 1 END) AS agree_count,
+            COUNT(CASE WHEN reaction_type = 'concern' THEN 1 END) AS concern_count,
+            COUNT(CASE WHEN reaction_type = 'helpful' THEN 1 END) AS helpful_count
+        FROM reactions
+        WHERE discussion_id = ? AND statement_id = ?
+        """,
+        (discussion_id, statement_id),
+    ).fetchone()
+    return {
+        'agree': row['agree_count'],
+        'concern': row['concern_count'],
+        'helpful': row['helpful_count'],
+    }
+
+
 initialize_reactions_db()
 
 @app.put('/api/reactions')
@@ -509,6 +534,11 @@ def put_reaction(request: ReactionStateRequest):
             request.discussion_id,
             request.statement_id,
         )
+        live_counts = get_live_reaction_counts(
+            connection,
+            request.discussion_id,
+            request.statement_id,
+        )
 
     return {
         'status': 'success',
@@ -518,6 +548,7 @@ def put_reaction(request: ReactionStateRequest):
         'reaction_type': request.reaction_type,
         'changed': changed,
         'counts': counts,
+        'live_counts': live_counts,
     }
 
 @app.get('/api/reactions')
@@ -553,6 +584,7 @@ def get_reactions(discussion_id: str, anonymous_user_id: str):
                 'statement_id': statement_id,
                 'reaction_type': user_reaction['reaction_type'] if user_reaction else None,
                 'counts': get_reaction_counts(connection, discussion_id, statement_id),
+                'live_counts': get_live_reaction_counts(connection, discussion_id, statement_id),
             })
 
     return {
