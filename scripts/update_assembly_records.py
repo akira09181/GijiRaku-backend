@@ -93,7 +93,7 @@ def extract_topic(question: str) -> Optional[str]:
             continue
         topic = sentence.split("について", 1)[0]
         topic = re.sub(
-            r"^.*?(?:まずは|まず|初めに|次に|続いて|それでは次に)[、，]?\s*",
+            r"^.*?(?:まず初めは|まずは|まず|初めに|次に|続いて|それでは次に)[、，]?\s*",
             "",
             topic,
         ).strip(" 、，『』「」")
@@ -111,7 +111,7 @@ def speaker_from_title(title: str, assembly_name: str, is_answer: bool) -> Dict[
     title = clean_html(title).lstrip("◆◎○△")
     match = re.search(r"（([^）]+)）", title)
     if match:
-        speaker_name = match.group(1).strip()
+        speaker_name = re.sub(r"(?:君|議員)$", "", match.group(1).strip())
         office = title[:match.start()].strip()
     else:
         bracketed = re.search(r"【([^】]+)】", title)

@@ -44,6 +44,10 @@ class UpdateAssemblyRecordsTest(unittest.TestCase):
             speaker_from_title("区長（吉住健一）", "新宿区議会", True),
             {"speaker_name": "吉住健一", "speaker_role": "新宿区長"},
         )
+        self.assertEqual(
+            speaker_from_title("十三番（西川浩平君）", "荒川区議会", False),
+            {"speaker_name": "西川浩平", "speaker_role": "荒川区議会議員"},
+        )
 
     @patch("scripts.update_assembly_records.ssp_post")
     def test_auto_record_contains_only_extractive_statements(self, ssp_post):

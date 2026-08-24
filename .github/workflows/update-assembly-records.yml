@@ -8,6 +8,7 @@ on:
       - '.github/workflows/update-assembly-records.yml'
       - 'scripts/update_assembly_records.py'
       - 'tests/test_update_assembly_records.py'
+      - 'data/assembly_records.json'
   schedule:
     - cron: '17 18 * * 0'
   workflow_dispatch:
@@ -21,6 +22,7 @@ concurrency:
 
 jobs:
   discover:
+    if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6

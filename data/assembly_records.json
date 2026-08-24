@@ -6334,6 +6334,25 @@
         }
       ]
     },
+    "arakawa-ward": {
+      "assembly_name": "荒川区議会",
+      "source": {
+        "provider": "ssp",
+        "tenant": "arakawa",
+        "tenant_id": 577,
+        "index_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpTop.html",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131181d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/arakawa/131181_arakawaku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": []
+    },
     "hachioji-city": {
       "assembly_name": "八王子市議会",
       "source": {
