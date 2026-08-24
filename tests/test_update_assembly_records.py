@@ -175,6 +175,44 @@ class UpdateAssemblyRecordsTest(unittest.TestCase):
         self.assertEqual(auto_publish(dataset, [candidate], 20), 0)
         self.assertEqual(len(dataset["assemblies"]["shinjuku-ward"]["records"]), 1)
 
+    @patch("scripts.update_assembly_records.build_ssp_records")
+    def test_auto_publish_can_backfill_after_an_existing_import(self, build_records):
+        existing = {
+            "discussion_id": "shinjuku-existing",
+            "meeting_date": "2026-06-10",
+            "source_url": "https://example.test/minutes/2",
+            "source_import_id": "ssp:shinjuku:3193:2:10",
+            "topic": "病児保育事業",
+        }
+        new_record = {
+            "discussion_id": "shinjuku-new",
+            "meeting_date": "2026-06-10",
+            "source_url": "https://example.test/minutes/2",
+            "source_import_id": "ssp:shinjuku:3193:2:12",
+            "topic": "ベビーシッター利用支援事業",
+        }
+        build_records.return_value = [existing, new_record]
+        dataset = {
+            "assemblies": {
+                "shinjuku-ward": {
+                    "records": [existing],
+                }
+            }
+        }
+        candidate = {
+            "provider": "ssp",
+            "assembly_id": "shinjuku-ward",
+        }
+
+        self.assertEqual(auto_publish(dataset, [candidate], 1), 1)
+        self.assertEqual(
+            [
+                record["source_import_id"]
+                for record in dataset["assemblies"]["shinjuku-ward"]["records"]
+            ],
+            ["ssp:shinjuku:3193:2:10", "ssp:shinjuku:3193:2:12"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

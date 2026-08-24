@@ -212,7 +212,6 @@ def iter_latest_ssp_councils(payload: Dict[str, Any]) -> Iterable[Dict[str, Any]
 def discover_ssp(
     assembly_id: str,
     source: Dict[str, Any],
-    imported_urls: Set[str],
 ) -> List[Dict[str, Any]]:
     tenant_id = source["tenant_id"]
     tenant = source["tenant"]
@@ -230,8 +229,6 @@ def discover_ssp(
                 f"https://ssp.kaigiroku.net/tenant/{tenant}/SpMinuteView.html"
                 f"?council_id={council_id}&schedule_id={schedule_id}"
             )
-            if source_url in imported_urls:
-                continue
             candidates.append(
                 {
                     "external_id": f"ssp:{tenant}:{council_id}:{schedule_id}",
@@ -253,12 +250,7 @@ def discover(dataset: Dict[str, Any]) -> List[Dict[str, Any]]:
     for assembly_id, assembly in dataset["assemblies"].items():
         source = assembly.get("source", {})
         if source.get("provider") == "ssp":
-            imported_urls = {
-                record.get("source_url", "")
-                for record in assembly.get("records", [])
-                if record.get("source_url")
-            }
-            candidates.extend(discover_ssp(assembly_id, source, imported_urls))
+            candidates.extend(discover_ssp(assembly_id, source))
     return sorted(candidates, key=lambda item: item["external_id"])
 
 
@@ -396,16 +388,34 @@ def auto_publish(
         for record in assembly.get("records", [])
         if record.get("source_import_id")
     }
+    curated_source_topics = {
+        (record.get("source_url", ""), re.sub(r"\s+", "", record.get("topic", "")))
+        for assembly in dataset["assemblies"].values()
+        for record in assembly.get("records", [])
+        if (
+            record.get("source_url")
+            and record.get("topic")
+            and not record.get("source_import_id")
+        )
+    }
     for candidate in candidates:
         assembly_id = candidate["assembly_id"]
         remaining = max_records_per_assembly - added_by_assembly.get(assembly_id, 0)
         if remaining <= 0 or candidate.get("provider") != "ssp":
             continue
-        records = [
-            record
-            for record in build_ssp_records(dataset, candidate, remaining)
-            if record.get("source_import_id") not in existing_import_ids
-        ]
+        records: List[Dict[str, Any]] = []
+        for record in build_ssp_records(dataset, candidate, 1000):
+            source_topic = (
+                record.get("source_url", ""),
+                re.sub(r"\s+", "", record.get("topic", "")),
+            )
+            if record.get("source_import_id") in existing_import_ids:
+                continue
+            if source_topic in curated_source_topics:
+                continue
+            records.append(record)
+            if len(records) >= remaining:
+                break
         if not records:
             continue
         dataset["assemblies"][assembly_id].setdefault("records", []).extend(records)

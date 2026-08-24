@@ -1,6 +1,13 @@
 name: Update official assembly records
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/update-assembly-records.yml'
+      - 'scripts/update_assembly_records.py'
+      - 'tests/test_update_assembly_records.py'
   schedule:
     - cron: '17 18 * * 0'
   workflow_dispatch:
@@ -24,7 +31,7 @@ jobs:
       - run: pip install requests
       - run: python -m unittest discover -s tests
       - run: python scripts/update_assembly_records.py --check-only
-      - run: python scripts/update_assembly_records.py --auto-publish --max-records-per-assembly 50
+      - run: python scripts/update_assembly_records.py --auto-publish --max-records-per-assembly 100
       - name: Commit verified official records
         id: commit_records
         run: |
