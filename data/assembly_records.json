@@ -2352,13 +2352,13 @@
           "discussion_id": "shinjuku-sick-child-care-2026-06-10",
           "meeting_date": "2026-06-10",
           "meeting_name": "令和8年6月定例会（第2回）第5号",
-          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2&minute_id=12",
           "topic": "病児保育の利用拒否と予約・空き状況の改善",
           "what_changes": "病児保育の定員が数字上は足りていても利用できないケースを減らすため、受入体制と予約・空き状況案内の改善が検討されます。",
           "target_audience": "病気の子どもを預ける必要がある新宿区の子育て世帯",
           "current_stage": "2026年6月10日の本会議で質問・答弁済み",
           "budget_info": "人員・医療機関連携・専用スペースとICT予約の運用を含めて検討",
-          "original_quote": "「令和７年度は846件利用された一方で、225件断りが発生をしており、単純計算すると５人に１人以上が利用できなかった計算になります。」",
+          "original_quote": "「保育指導課への聞き取りで、令和５年度410件、令和６年度185件、令和７年度225件の利用希望者を断っていることが判明しました。令和７年度は846件利用された一方で、225件断りが発生をしており、単純計算すると５人に１人以上が利用できなかった計算になります。」",
           "publication_status": "published",
           "statements": [
             {
@@ -2368,8 +2368,8 @@
               "committee_name": "本会議",
               "stance_label": "課題提起",
               "summary_quote": "定員に余裕がある一方で利用を断られる実態を示し、受入体制の見直しと空き状況・予約のリアルタイム化を求めました。",
-              "full_summary": "2025年度は846人が利用し225人が断られたとして、供給体制、リアルタイムの空き情報、予約方法、制度周知を質問しました。",
-              "source_excerpt": "「令和７年度は846件利用された一方で、225件断りが発生をしており、単純計算すると５人に１人以上が利用できなかった計算になります。」",
+              "full_summary": "令和７年度は846件利用された一方で225件の利用断りが発生したとして、供給体制、リアルタイムの空き情報、予約方法、制度周知を質問しました。",
+              "source_excerpt": "「保育指導課への聞き取りで、令和５年度410件、令和６年度185件、令和７年度225件の利用希望者を断っていることが判明しました。令和７年度は846件利用された一方で、225件断りが発生をしており、単純計算すると５人に１人以上が利用できなかった計算になります。」",
               "question_type": "一般質問",
               "avatar_color": "sky"
             },
