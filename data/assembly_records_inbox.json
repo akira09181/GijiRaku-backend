@@ -2,6 +2,84 @@
   "schema_version": 1,
   "candidates": [
     {
+      "external_id": "ssp:arakawa:685:2",
+      "provider": "ssp",
+      "assembly_id": "arakawa-ward",
+      "council_id": 685,
+      "schedule_id": 2,
+      "meeting_name": "令和７年度定例会・２月会議",
+      "schedule_name": "02月16日－01号",
+      "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=2",
+      "publication_status": "published",
+      "auto_published_records": 5,
+      "first_seen_at": "2026-08-24T05:56:22.373106+00:00"
+    },
+    {
+      "external_id": "ssp:arakawa:685:3",
+      "provider": "ssp",
+      "assembly_id": "arakawa-ward",
+      "council_id": 685,
+      "schedule_id": 3,
+      "meeting_name": "令和７年度定例会・２月会議",
+      "schedule_name": "02月17日－02号",
+      "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=3",
+      "publication_status": "published",
+      "auto_published_records": 3,
+      "first_seen_at": "2026-08-24T05:56:22.373106+00:00"
+    },
+    {
+      "external_id": "ssp:arakawa:685:4",
+      "provider": "ssp",
+      "assembly_id": "arakawa-ward",
+      "council_id": 685,
+      "schedule_id": 4,
+      "meeting_name": "令和７年度定例会・２月会議",
+      "schedule_name": "02月27日－03号",
+      "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=4",
+      "publication_status": "published",
+      "auto_published_records": 1,
+      "first_seen_at": "2026-08-24T05:56:22.373106+00:00"
+    },
+    {
+      "external_id": "ssp:arakawa:685:5",
+      "provider": "ssp",
+      "assembly_id": "arakawa-ward",
+      "council_id": 685,
+      "schedule_id": 5,
+      "meeting_name": "令和７年度定例会・２月会議",
+      "schedule_name": "03月10日－04号",
+      "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=5",
+      "publication_status": "pending_review",
+      "review_reason": "verified_question_answer_pair_not_found",
+      "first_seen_at": "2026-08-24T05:56:22.373106+00:00"
+    },
+    {
+      "external_id": "ssp:arakawa:685:6",
+      "provider": "ssp",
+      "assembly_id": "arakawa-ward",
+      "council_id": 685,
+      "schedule_id": 6,
+      "meeting_name": "令和７年度定例会・２月会議",
+      "schedule_name": "03月17日－05号",
+      "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=6",
+      "publication_status": "published",
+      "auto_published_records": 8,
+      "first_seen_at": "2026-08-24T05:56:22.373106+00:00"
+    },
+    {
+      "external_id": "ssp:arakawa:686:2",
+      "provider": "ssp",
+      "assembly_id": "arakawa-ward",
+      "council_id": 686,
+      "schedule_id": 2,
+      "meeting_name": "令和７年度定例会・４月緊急会議",
+      "schedule_name": "04月03日－01号",
+      "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=686&schedule_id=2",
+      "publication_status": "pending_review",
+      "review_reason": "verified_question_answer_pair_not_found",
+      "first_seen_at": "2026-08-24T05:56:22.373106+00:00"
+    },
+    {
       "external_id": "ssp:shibuya:2494:2",
       "provider": "ssp",
       "assembly_id": "shibuya-ward",
@@ -60,8 +138,7 @@
       "meeting_name": "令和　８年　　２月　定例会（第１回）",
       "schedule_name": "03月24日－04号",
       "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3163&schedule_id=5",
-      "publication_status": "published",
-      "auto_published_records": 8,
+      "publication_status": "pending_review",
       "first_seen_at": "2026-08-24T04:57:32.824764+00:00"
     },
     {
@@ -73,8 +150,7 @@
       "meeting_name": "令和　８年　　６月　定例会（第２回）",
       "schedule_name": "06月10日－05号",
       "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=2",
-      "publication_status": "published",
-      "auto_published_records": 23,
+      "publication_status": "pending_review",
       "first_seen_at": "2026-08-24T05:36:57.259097+00:00"
     },
     {
@@ -86,8 +162,7 @@
       "meeting_name": "令和　８年　　６月　定例会（第２回）",
       "schedule_name": "06月11日－06号",
       "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
-      "publication_status": "published",
-      "auto_published_records": 31,
+      "publication_status": "pending_review",
       "first_seen_at": "2026-08-24T05:36:57.259097+00:00"
     },
     {
@@ -99,8 +174,7 @@
       "meeting_name": "令和　８年　　６月　定例会（第２回）",
       "schedule_name": "06月19日－07号",
       "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=4",
-      "publication_status": "published",
-      "auto_published_records": 3,
+      "publication_status": "pending_review",
       "first_seen_at": "2026-08-24T04:57:32.824764+00:00"
     }
   ]
