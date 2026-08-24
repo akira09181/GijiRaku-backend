@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-24T14:56:22+09:00",
+  "updated_at": "2026-08-24T15:03:35+09:00",
   "assemblies": {
     "tokyo-metropolitan": {
       "assembly_name": "東京都議会",
@@ -6353,8 +6353,8 @@
       },
       "records": [
         {
-          "discussion_id": "arakawa-ward-auto-2025-03-17-685-6-171",
-          "meeting_date": "2025-03-17",
+          "discussion_id": "arakawa-ward-auto-2026-03-17-685-6-171",
+          "meeting_date": "2026-03-17",
           "meeting_name": "令和７年度定例会・２月会議 03月17日－05号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=6",
           "source_import_id": "ssp:arakawa:685:6:171",
@@ -6362,13 +6362,13 @@
           "topic": "その後、討論に入り、組織の名称は区民に分かりやすく、組織の実態にふさわしい名称とするべきである、また、学童クラブ",
           "what_changes": "「その後、討論に入り、組織の名称は区民に分かりやすく、組織の実態にふさわしい名称とするべきである、また、学童クラブ」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-03-17の本会議で議員発言済み",
+          "current_stage": "2026-03-17の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「付託を受けました議案三件につきまして、委員会の審査経過並びに結果の御報告をいたします。 本委員会は、付託を受けた議案について、理事者より説明を受けた後、順次審査に入りました。 初めに、議案第五十九号、荒川区組織条例の一部を改正する条例につき」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-03-17-685-6-171-q",
+              "statement_id": "arakawa-ward-auto-2026-03-17-685-6-171-q",
               "speaker_name": "竹内明浩",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6382,8 +6382,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-03-17-685-6-174",
-          "meeting_date": "2025-03-17",
+          "discussion_id": "arakawa-ward-auto-2026-03-17-685-6-174",
+          "meeting_date": "2026-03-17",
           "meeting_name": "令和７年度定例会・２月会議 03月17日－05号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=6",
           "source_import_id": "ssp:arakawa:685:6:174",
@@ -6391,13 +6391,13 @@
           "topic": "私は、日本共産党荒川区議会議員団を代表して、議案第五十七号、荒川区公契約条例",
           "what_changes": "「私は、日本共産党荒川区議会議員団を代表して、議案第五十七号、荒川区公契約条例」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-03-17の本会議で議員発言済み",
+          "current_stage": "2026-03-17の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「私は、日本共産党荒川区議会議員団を代表して、議案第五十七号、荒川区公契約条例について賛成の討論を行います。 本条例は、区が行う公契約において、労働者の適正な賃金、労働条件確保、労働環境の改善、そして契約の品質確保を目的とするものであります。」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-03-17-685-6-174-q",
+              "statement_id": "arakawa-ward-auto-2026-03-17-685-6-174-q",
               "speaker_name": "横山幸次",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6411,8 +6411,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-03-17-685-6-191",
-          "meeting_date": "2025-03-17",
+          "discussion_id": "arakawa-ward-auto-2026-03-17-685-6-191",
+          "meeting_date": "2026-03-17",
           "meeting_name": "令和７年度定例会・２月会議 03月17日－05号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=6",
           "source_import_id": "ssp:arakawa:685:6:191",
@@ -6420,13 +6420,13 @@
           "topic": "その後、討論に入り、議案第五十八号",
           "what_changes": "「その後、討論に入り、議案第五十八号」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-03-17の本会議で議員発言済み",
+          "current_stage": "2026-03-17の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「付託を受けました議案七件につきまして、委員会の審査経過並びに結果の御報告をいたします。 本委員会は、付託を受けた議案について、理事者より説明を受けた後、順次審査に入りました。 初めに、議案第五十八号、荒川区特定乳児等通園支援事業の運営の基準」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-03-17-685-6-191-q",
+              "statement_id": "arakawa-ward-auto-2026-03-17-685-6-191-q",
               "speaker_name": "明戸真弓美",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6440,8 +6440,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-03-17-685-6-194",
-          "meeting_date": "2025-03-17",
+          "discussion_id": "arakawa-ward-auto-2026-03-17-685-6-194",
+          "meeting_date": "2026-03-17",
           "meeting_name": "令和７年度定例会・２月会議 03月17日－05号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=6",
           "source_import_id": "ssp:arakawa:685:6:194",
@@ -6449,13 +6449,13 @@
           "topic": "議案第五十八号、荒川区特定乳児等通園事業の運営の基準に関する条例",
           "what_changes": "「議案第五十八号、荒川区特定乳児等通園事業の運営の基準に関する条例」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-03-17の本会議で議員発言済み",
+          "current_stage": "2026-03-17の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「議案第五十八号、荒川区特定乳児等通園事業の運営の基準に関する条例について、反対の討論を行います。 子ども・子育て支援法の一部が改正され、二〇二六年四月から新たに乳児等のための支援給付が創設されます。国が示した特定乳児通園支援事業の運営に関す」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-03-17-685-6-194-q",
+              "statement_id": "arakawa-ward-auto-2026-03-17-685-6-194-q",
               "speaker_name": "斉藤邦子",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6469,8 +6469,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-03-17-685-6-262",
-          "meeting_date": "2025-03-17",
+          "discussion_id": "arakawa-ward-auto-2026-03-17-685-6-262",
+          "meeting_date": "2026-03-17",
           "meeting_name": "令和７年度定例会・２月会議 03月17日－05号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=6",
           "source_import_id": "ssp:arakawa:685:6:262",
@@ -6478,13 +6478,13 @@
           "topic": "その後、相馬委員外四名から提出された予算の組替えを求める動議",
           "what_changes": "「その後、相馬委員外四名から提出された予算の組替えを求める動議」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-03-17の本会議で議員発言済み",
+          "current_stage": "2026-03-17の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「予算に関する特別委員会の審査経過並びに結果の御報告を申し上げます。 本委員会は、初めに、付託を受けました議案第七十四号、令和八年度荒川区一般会計予算について審査を行いました。 総括質疑では、六名の委員より質疑がありました。その後、各款ごとに」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-03-17-685-6-262-q",
+              "statement_id": "arakawa-ward-auto-2026-03-17-685-6-262-q",
               "speaker_name": "並木一元",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6498,8 +6498,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-03-17-685-6-267",
-          "meeting_date": "2025-03-17",
+          "discussion_id": "arakawa-ward-auto-2026-03-17-685-6-267",
+          "meeting_date": "2026-03-17",
           "meeting_name": "令和７年度定例会・２月会議 03月17日－05号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=6",
           "source_import_id": "ssp:arakawa:685:6:267",
@@ -6507,13 +6507,13 @@
           "topic": "当初予算の内容や我が党の予算に関する特別委員会等で要望した事項",
           "what_changes": "「当初予算の内容や我が党の予算に関する特別委員会等で要望した事項」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-03-17の本会議で議員発言済み",
+          "current_stage": "2026-03-17の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「自由民主党荒川区議会議員団を代表いたしまして、議案第七十四号、令和八年度荒川区一般会計予算案に賛成の立場で討論をいたします。 令和八年度予算は、滝口区長が区長就任後、予算編成に一から携わった予算であり、地域や現場に積極的に足を運び、区民の様」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-03-17-685-6-267-q",
+              "statement_id": "arakawa-ward-auto-2026-03-17-685-6-267-q",
               "speaker_name": "鎌田理光",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6527,8 +6527,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-03-17-685-6-269",
-          "meeting_date": "2025-03-17",
+          "discussion_id": "arakawa-ward-auto-2026-03-17-685-6-269",
+          "meeting_date": "2026-03-17",
           "meeting_name": "令和７年度定例会・２月会議 03月17日－05号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=6",
           "source_import_id": "ssp:arakawa:685:6:269",
@@ -6536,13 +6536,13 @@
           "topic": "私は、公明党荒川区議会議員団を代表いたしまして、議案第七十四号、令和八年度荒川区一般会計予算案",
           "what_changes": "「私は、公明党荒川区議会議員団を代表いたしまして、議案第七十四号、令和八年度荒川区一般会計予算案」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-03-17の本会議で議員発言済み",
+          "current_stage": "2026-03-17の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「私は、公明党荒川区議会議員団を代表いたしまして、議案第七十四号、令和八年度荒川区一般会計予算案に賛成の立場で討論を行います。 私たち公明党は、結党以来徹底した現場第一主義の精神で、各議員が地域に飛び込み、常日頃より区民お一人お一人の悩みに寄」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-03-17-685-6-269-q",
+              "statement_id": "arakawa-ward-auto-2026-03-17-685-6-269-q",
               "speaker_name": "松田智子",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6556,8 +6556,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-03-17-685-6-271",
-          "meeting_date": "2025-03-17",
+          "discussion_id": "arakawa-ward-auto-2026-03-17-685-6-271",
+          "meeting_date": "2026-03-17",
           "meeting_name": "令和７年度定例会・２月会議 03月17日－05号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=6",
           "source_import_id": "ssp:arakawa:685:6:271",
@@ -6565,13 +6565,13 @@
           "topic": "ゆいの会を代表いたしまして、議案第七十四号、令和八年度荒川区一般会計予算",
           "what_changes": "「ゆいの会を代表いたしまして、議案第七十四号、令和八年度荒川区一般会計予算」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-03-17の本会議で議員発言済み",
+          "current_stage": "2026-03-17の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「ゆいの会を代表いたしまして、議案第七十四号、令和八年度荒川区一般会計予算について、賛成の立場から討論をいたします。 来年度予算は、歳入は増加しているものの、国際状況によるエネルギー高騰に伴い、国内でもより物価高騰にある中、歳出も膨らむ傾向に」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-03-17-685-6-271-q",
+              "statement_id": "arakawa-ward-auto-2026-03-17-685-6-271-q",
               "speaker_name": "大月健弘",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6585,8 +6585,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-02-27-685-4-18",
-          "meeting_date": "2025-02-27",
+          "discussion_id": "arakawa-ward-auto-2026-02-27-685-4-18",
+          "meeting_date": "2026-02-27",
           "meeting_name": "令和７年度定例会・２月会議 02月27日－03号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=4",
           "source_import_id": "ssp:arakawa:685:4:18",
@@ -6594,13 +6594,13 @@
           "topic": "その後、討論に入り、保育所等運営費",
           "what_changes": "「その後、討論に入り、保育所等運営費」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-02-27の本会議で議員発言済み",
+          "current_stage": "2026-02-27の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「おはようございます。付託を受けました議案一件につきまして、委員会の審査経過並びに結果の御報告をいたします。 本委員会は、付託を受けた議案について、理事者より説明を受けた後、順次審査に入りました。 議案第七十三号、令和七年度荒川区一般会計補正」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-02-27-685-4-18-q",
+              "statement_id": "arakawa-ward-auto-2026-02-27-685-4-18-q",
               "speaker_name": "竹内明浩",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6614,8 +6614,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-02-17-685-3-111",
-          "meeting_date": "2025-02-17",
+          "discussion_id": "arakawa-ward-auto-2026-02-17-685-3-111",
+          "meeting_date": "2026-02-17",
           "meeting_name": "令和７年度定例会・２月会議 02月17日－02号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=3",
           "source_import_id": "ssp:arakawa:685:3:111",
@@ -6623,13 +6623,13 @@
           "topic": "最初に、荒川区における町会・自治会の現状と今後の区との関係性",
           "what_changes": "「最初に、荒川区における町会・自治会の現状と今後の区との関係性」について、本会議で質問と答弁が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-02-17の本会議で質問と答弁済み",
+          "current_stage": "2026-02-17の本会議で質問と答弁済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「おはようございます。ゆいの会・都民ファーストの竹内明浩です。 初めに、滝口区長におかれましては、厳しい社会情勢の中にあっても、常に区民の暮らしに寄り添った区政運営を続けてこられたことに深く敬意を表します。 令和八年度を見据え、荒川区がさらに」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-111-q",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-111-q",
               "speaker_name": "竹内明浩",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6641,7 +6641,7 @@
               "avatar_color": "sky"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-112-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-112-a",
               "speaker_name": "上田望",
               "speaker_role": "荒川区民生活部長",
               "party_name": "行政執行部",
@@ -6654,7 +6654,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-113-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-113-a",
               "speaker_name": "本木理恵子",
               "speaker_role": "荒川区子ども家庭部長",
               "party_name": "行政執行部",
@@ -6669,8 +6669,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-02-17-685-3-115",
-          "meeting_date": "2025-02-17",
+          "discussion_id": "arakawa-ward-auto-2026-02-17-685-3-115",
+          "meeting_date": "2026-02-17",
           "meeting_name": "令和７年度定例会・２月会議 02月17日－02号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=3",
           "source_import_id": "ssp:arakawa:685:3:115",
@@ -6678,13 +6678,13 @@
           "topic": "私からは大きく三項目",
           "what_changes": "「私からは大きく三項目」について、本会議で質問と答弁が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-02-17の本会議で質問と答弁済み",
+          "current_stage": "2026-02-17の本会議で質問と答弁済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「公明党荒川区議会議員団の山口幸一郎です。私からは大きく三項目について質問します。 第一項目として、電子地域通貨活用の基盤整備によるデジタル化の推進について質問します。 近年、行政手続のデジタル化が進められる中で、区民一人一人が日常生活の中で」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-115-q",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-115-q",
               "speaker_name": "山口幸一郎",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6696,7 +6696,7 @@
               "avatar_color": "sky"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-116-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-116-a",
               "speaker_name": "小林弘幸",
               "speaker_role": "荒川区産業経済部長",
               "party_name": "行政執行部",
@@ -6709,7 +6709,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-117-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-117-a",
               "speaker_name": "松崎保昌",
               "speaker_role": "荒川区防災都市づくり部長",
               "party_name": "行政執行部",
@@ -6722,7 +6722,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-118-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-118-a",
               "speaker_name": "小堀明美",
               "speaker_role": "荒川区総務企画部長",
               "party_name": "行政執行部",
@@ -6735,7 +6735,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-119-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-119-a",
               "speaker_name": "古瀬秀幸",
               "speaker_role": "荒川区管理部長",
               "party_name": "行政執行部",
@@ -6750,8 +6750,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-02-17-685-3-121",
-          "meeting_date": "2025-02-17",
+          "discussion_id": "arakawa-ward-auto-2026-02-17-685-3-121",
+          "meeting_date": "2026-02-17",
           "meeting_name": "令和７年度定例会・２月会議 02月17日－02号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=3",
           "source_import_id": "ssp:arakawa:685:3:121",
@@ -6759,13 +6759,13 @@
           "topic": "今回は大きく三項目",
           "what_changes": "「今回は大きく三項目」について、本会議で質問と答弁が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-02-17の本会議で質問と答弁済み",
+          "current_stage": "2026-02-17の本会議で質問と答弁済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「日本共産党荒川区議会議員団の北村綾子です。今回は大きく三項目について質問をいたします。 昨年、二〇二五年二月の本会議で、私は、戦後・被爆八十年、荒川区平和都市宣言から三十年目の節目における荒川区平和行政について質問を行い、核兵器禁止条約に参」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-121-q",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-121-q",
               "speaker_name": "北村綾子",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6777,7 +6777,7 @@
               "avatar_color": "sky"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-122-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-122-a",
               "speaker_name": "小堀明美",
               "speaker_role": "荒川区総務企画部長",
               "party_name": "行政執行部",
@@ -6790,7 +6790,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-123-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-123-a",
               "speaker_name": "菊池秀幸",
               "speaker_role": "荒川区教育委員会事務局教育部長",
               "party_name": "行政執行部",
@@ -6803,7 +6803,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-124-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-124-a",
               "speaker_name": "本木理恵子",
               "speaker_role": "荒川区子ども家庭部長",
               "party_name": "行政執行部",
@@ -6816,7 +6816,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-17-685-3-125-a",
+              "statement_id": "arakawa-ward-auto-2026-02-17-685-3-125-a",
               "speaker_name": "堀裕美子",
               "speaker_role": "荒川区福祉部長",
               "party_name": "行政執行部",
@@ -6831,8 +6831,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-02-16-685-2-62",
-          "meeting_date": "2025-02-16",
+          "discussion_id": "arakawa-ward-auto-2026-02-16-685-2-62",
+          "meeting_date": "2026-02-16",
           "meeting_name": "令和７年度定例会・２月会議 02月16日－01号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=2",
           "source_import_id": "ssp:arakawa:685:2:62",
@@ -6840,13 +6840,13 @@
           "topic": "令和八年度の予算案",
           "what_changes": "「令和八年度の予算案」について、本会議で質問と答弁が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-02-16の本会議で質問と答弁済み",
+          "current_stage": "2026-02-16の本会議で質問と答弁済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「自由民主党荒川区議会議員団の西川浩平でございます。 本日は、令和八年度の予算編成をはじめとし、小中一貫教育や荒川区基本構想など、大きく六つの質問をさせていただきます。どうぞ理事者の皆様におかれましては、前向きな御答弁を賜りますようお願い申し」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-62-q",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-62-q",
               "speaker_name": "西川浩平",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6858,7 +6858,7 @@
               "avatar_color": "sky"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-63-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-63-a",
               "speaker_name": "滝口学",
               "speaker_role": "荒川区長",
               "party_name": "行政執行部",
@@ -6871,7 +6871,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-64-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-64-a",
               "speaker_name": "阿部忠資",
               "speaker_role": "荒川区教育長",
               "party_name": "行政執行部",
@@ -6884,7 +6884,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-65-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-65-a",
               "speaker_name": "小林弘幸",
               "speaker_role": "荒川区産業経済部長",
               "party_name": "行政執行部",
@@ -6897,7 +6897,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-66-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-66-a",
               "speaker_name": "松崎保昌",
               "speaker_role": "荒川区防災都市づくり部長",
               "party_name": "行政執行部",
@@ -6912,8 +6912,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-02-16-685-2-69",
-          "meeting_date": "2025-02-16",
+          "discussion_id": "arakawa-ward-auto-2026-02-16-685-2-69",
+          "meeting_date": "2026-02-16",
           "meeting_name": "令和７年度定例会・２月会議 02月16日－01号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=2",
           "source_import_id": "ssp:arakawa:685:2:69",
@@ -6921,13 +6921,13 @@
           "topic": "いずれの質問に関しましても、今後の区政運営に対しまして大変重要な視点であると思っておりますので、今後もどうぞ引き続きまして実行の可能性",
           "what_changes": "「いずれの質問に関しましても、今後の区政運営に対しまして大変重要な視点であると思っておりますので、今後もどうぞ引き続きまして実行の可能性」について、本会議で議員発言が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-02-16の本会議で議員発言済み",
+          "current_stage": "2026-02-16の本会議で議員発言済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「自席から、また、着座にて失礼いたします。 本日の私の質問に関しましては、滝口区長をはじめ、区の関係理事者の皆様より前向きな御答弁をいただけたものと理解させていただきました。いずれの質問に関しましても、今後の区政運営に対しまして大変重要な視点」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-69-q",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-69-q",
               "speaker_name": "西川浩平",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6941,8 +6941,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-02-16-685-2-71",
-          "meeting_date": "2025-02-16",
+          "discussion_id": "arakawa-ward-auto-2026-02-16-685-2-71",
+          "meeting_date": "2026-02-16",
           "meeting_name": "令和７年度定例会・２月会議 02月16日－01号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=2",
           "source_import_id": "ssp:arakawa:685:2:71",
@@ -6950,13 +6950,13 @@
           "topic": "そこで、政策企画部と総務部へ再編し、危機管理部を新たに設置すること",
           "what_changes": "「そこで、政策企画部と総務部へ再編し、危機管理部を新たに設置すること」について、本会議で質問と答弁が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-02-16の本会議で質問と答弁済み",
+          "current_stage": "2026-02-16の本会議で質問と答弁済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「ゆいの会の清水啓史です。 先月、読書のまち荒川区に大変うれしいニュースが飛び込んできました。第百七十四回直木賞に嶋津輝さんの「カフェーの帰り道」が選ばれました。荒川区の出身である嶋津輝さんの御受賞に心よりお祝いを申し上げます。 それでは、令」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-71-q",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-71-q",
               "speaker_name": "清水啓史",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -6968,7 +6968,7 @@
               "avatar_color": "sky"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-72-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-72-a",
               "speaker_name": "滝口学",
               "speaker_role": "荒川区長",
               "party_name": "行政執行部",
@@ -6981,7 +6981,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-73-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-73-a",
               "speaker_name": "阿部忠資",
               "speaker_role": "荒川区教育長",
               "party_name": "行政執行部",
@@ -6994,7 +6994,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-74-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-74-a",
               "speaker_name": "小林弘幸",
               "speaker_role": "荒川区産業経済部長",
               "party_name": "行政執行部",
@@ -7007,7 +7007,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-75-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-75-a",
               "speaker_name": "小堀明美",
               "speaker_role": "荒川区総務企画部長",
               "party_name": "行政執行部",
@@ -7022,8 +7022,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-02-16-685-2-78",
-          "meeting_date": "2025-02-16",
+          "discussion_id": "arakawa-ward-auto-2026-02-16-685-2-78",
+          "meeting_date": "2026-02-16",
           "meeting_name": "令和７年度定例会・２月会議 02月16日－01号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=2",
           "source_import_id": "ssp:arakawa:685:2:78",
@@ -7031,13 +7031,13 @@
           "topic": "令和八年度予算案",
           "what_changes": "「令和八年度予算案」について、本会議で質問と答弁が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-02-16の本会議で質問と答弁済み",
+          "current_stage": "2026-02-16の本会議で質問と答弁済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「私は、公明党荒川区議会議員団を代表し、以下三点にわたり質問させていただきます。滝口区長をはじめ、理事者の皆様の積極的な御答弁をよろしくお願いいたします。 初めに、令和八年度予算案について伺います。 令和八年度予算案は、一昨年、滝口区長が誕生」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-78-q",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-78-q",
               "speaker_name": "保坂正仁",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -7049,7 +7049,7 @@
               "avatar_color": "sky"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-79-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-79-a",
               "speaker_name": "滝口学",
               "speaker_role": "荒川区長",
               "party_name": "行政執行部",
@@ -7062,7 +7062,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-80-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-80-a",
               "speaker_name": "平野興一",
               "speaker_role": "荒川区会計管理部長",
               "party_name": "行政執行部",
@@ -7075,7 +7075,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-81-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-81-a",
               "speaker_name": "小堀明美",
               "speaker_role": "荒川区政広報部長",
               "party_name": "行政執行部",
@@ -7088,7 +7088,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-82-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-82-a",
               "speaker_name": "本木理恵子",
               "speaker_role": "荒川区子ども家庭部長",
               "party_name": "行政執行部",
@@ -7103,8 +7103,8 @@
           ]
         },
         {
-          "discussion_id": "arakawa-ward-auto-2025-02-16-685-2-99",
-          "meeting_date": "2025-02-16",
+          "discussion_id": "arakawa-ward-auto-2026-02-16-685-2-99",
+          "meeting_date": "2026-02-16",
           "meeting_name": "令和７年度定例会・２月会議 02月16日－01号",
           "source_url": "https://ssp.kaigiroku.net/tenant/arakawa/SpMinuteView.html?council_id=685&schedule_id=2",
           "source_import_id": "ssp:arakawa:685:2:99",
@@ -7112,13 +7112,13 @@
           "topic": "初めに、子どもに寄り添う施策の拡充",
           "what_changes": "「初めに、子どもに寄り添う施策の拡充」について、本会議で質問と答弁が行われました。",
           "target_audience": "この議題に関心のある荒川区の住民",
-          "current_stage": "2025-02-16の本会議で質問と答弁済み",
+          "current_stage": "2026-02-16の本会議で質問と答弁済み",
           "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
           "original_quote": "「自由民主党荒川区議会議員団の明戸真弓美です。質問の機会をお与えくださいました同僚議員の皆様に大きく感謝申し上げます。また、令和八年度の予算案に数多く予算要望を盛り込んでいただき、自由民主党荒川区議会議員団の政務調査会長として感謝しております」",
           "publication_status": "published",
           "statements": [
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-99-q",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-99-q",
               "speaker_name": "明戸真弓美",
               "speaker_role": "荒川区議会議員",
               "committee_name": "本会議",
@@ -7130,7 +7130,7 @@
               "avatar_color": "sky"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-100-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-100-a",
               "speaker_name": "大森重紀",
               "speaker_role": "荒川区健康推進担当部長",
               "party_name": "行政執行部",
@@ -7143,7 +7143,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-101-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-101-a",
               "speaker_name": "堀裕美子",
               "speaker_role": "荒川区福祉部長",
               "party_name": "行政執行部",
@@ -7156,7 +7156,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-102-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-102-a",
               "speaker_name": "菊池秀幸",
               "speaker_role": "荒川区教育委員会事務局教育部長",
               "party_name": "行政執行部",
@@ -7169,7 +7169,7 @@
               "avatar_color": "emerald"
             },
             {
-              "statement_id": "arakawa-ward-auto-2025-02-16-685-2-103-a",
+              "statement_id": "arakawa-ward-auto-2026-02-16-685-2-103-a",
               "speaker_name": "小林弘幸",
               "speaker_role": "荒川区産業経済部長",
               "party_name": "行政執行部",
