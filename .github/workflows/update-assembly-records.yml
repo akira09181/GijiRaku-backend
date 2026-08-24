@@ -16,8 +16,8 @@ jobs:
   discover:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: pip
@@ -26,8 +26,10 @@ jobs:
       - run: python scripts/update_assembly_records.py --check-only
       - run: python scripts/update_assembly_records.py --auto-publish --max-records-per-assembly 50
       - name: Commit verified official records
+        id: commit_records
         run: |
           if git diff --quiet -- data/assembly_records.json data/assembly_records_inbox.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
@@ -35,3 +37,14 @@ jobs:
           git add data/assembly_records.json data/assembly_records_inbox.json
           git commit -m "data: update official assembly records"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Trigger Render deploy
+        if: steps.commit_records.outputs.changed == 'true'
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -n "$RENDER_DEPLOY_HOOK_URL" ]; then
+            curl --fail --silent --show-error --request POST "$RENDER_DEPLOY_HOOK_URL"
+          else
+            echo "RENDER_DEPLOY_HOOK_URL is not configured; skipping Render deploy."
+          fi

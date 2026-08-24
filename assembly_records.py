@@ -58,6 +58,31 @@ def get_assembly_records(assembly_id: str, limit: Optional[int] = None) -> Dict[
     }
 
 
+def get_assembly_record_stats() -> Dict[str, Any]:
+    """Return published dataset totals for the public evidence counters."""
+    dataset = load_dataset()
+    assemblies = dataset["assemblies"]
+    published_records = [
+        record
+        for assembly in assemblies.values()
+        for record in assembly.get("records", [])
+        if record.get("publication_status") == "published"
+    ]
+    return {
+        "updated_at": dataset.get("updated_at"),
+        "open_data_source_count": sum(
+            1
+            for assembly in assemblies.values()
+            if assembly.get("source", {}).get("open_data")
+        ),
+        "assembly_count": len(assemblies),
+        "record_count": len(published_records),
+        "statement_count": sum(
+            len(record.get("statements", [])) for record in published_records
+        ),
+    }
+
+
 def get_latest_record(assembly_id: str) -> Optional[Dict[str, Any]]:
     result = get_assembly_records(assembly_id, limit=1)
     return result["records"][0] if result["records"] else None

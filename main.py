@@ -13,7 +13,7 @@ from opendata_service import (
     get_assembly_chat_dialogue,
     fetch_tokyo_catalog_datasets
 )
-from assembly_records import get_assembly_records
+from assembly_records import get_assembly_record_stats, get_assembly_records
 
 app = FastAPI(title="MachiVoice API (マチボイス)", description="東京都オープンデータ活用 ・ 地域・生活テーマ議会情報インフラ API")
 
@@ -277,6 +277,12 @@ def list_assembly_records(assembly_id: str, limit: int = 20):
     except KeyError:
         raise HTTPException(status_code=404, detail="Assembly records not found")
     return {"status": "success", **data}
+
+
+@app.get("/api/assembly-records/stats")
+def assembly_record_stats():
+    """公開中の公式会議録・構造化発言の実数を返す。"""
+    return {"status": "success", **get_assembly_record_stats()}
 
 from opendata_service import perform_real_rag_inference
 
