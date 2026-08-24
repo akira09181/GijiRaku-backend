@@ -138,6 +138,143 @@
       },
       "records": [
         {
+          "discussion_id": "shinjuku-measles-vaccination-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "麻しんワクチン接種率と感染対策",
+          "what_changes": "95％に届いていない麻しん風しん混合ワクチン接種率について、個別勧奨と正確な情報提供が強化されます。",
+          "target_audience": "乳幼児と保護者、転入世帯、区内大学・日本語学校の関係者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "緊急対策ワクチン接種事業は接種後に区が費用を支払う償還払い方式",
+          "original_quote": "「接種率の目標は、第1期、第2期ともに95％」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-furuhata-2026-06-11-measles", "speaker_name": "古畑 まさのり", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "対策強化", "summary_quote": "接種率が95％に届かない状況を示し、未接種者への勧奨、夜間・休日の接種情報、リスク周知の強化を求めました。", "full_summary": "接種状況の把握、目標達成時期、緊急接種、誤情報への対応、大学等での接種歴確認について質問しました。", "source_excerpt": "麻しん対策についてお伺いします。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-11-measles", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "推進", "summary_quote": "未接種者への個別通知と啓発を続け、接種率95％の早期達成に取り組むと答弁しました。", "full_summary": "健診や医療機関報告で接種状況を把握し、ワクチン供給再開後の周知、緊急接種、合併症リスクの情報提供を進める方針です。", "source_excerpt": "接種率の目標は、第１期、第２期ともに95％としており", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-community-cats-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "地域猫の譲渡支援と公園での動物福祉",
+          "what_changes": "地域猫の譲渡機会、公園での給水容器、無秩序な餌やりと地域猫活動の違いが整理されます。",
+          "target_audience": "地域猫対策サポーター、近隣住民、猫の譲渡に関わる団体",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "登録ボランティア団体には保護・譲渡費用を1頭7万円まで助成",
+          "original_quote": "「公園管理と動物福祉の両立」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-furuhata-2026-06-11-community-cats", "speaker_name": "古畑 まさのり", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "拡充提案", "summary_quote": "地域猫の譲渡支援対象を広げ、公園での給水と分かりやすい看板表示を整えるよう求めました。", "full_summary": "不妊去勢だけでなく飼い主探しも進める観点から、譲渡会、助成対象、公園占用、餌やり表示を質問しました。", "source_excerpt": "地域猫活動において、不妊去勢手術だけではなく、飼い主を見つけることで地域猫そのものを減らすことも重要と考えます。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoshizumi-2026-06-11-community-cats", "speaker_name": "吉住 健一", "speaker_role": "新宿区長", "party_name": "行政執行部", "committee_name": "本会議・区長答弁", "stance_label": "継続対応", "summary_quote": "譲渡支援の対象拡大は行わず、他自治体も参考に地域猫対策を続けると答弁しました。", "full_summary": "専門性と運営体制を理由に登録団体を支援対象とし、地域理解と管理上の条件を満たす場合は公園での給水を認めると説明しました。", "source_excerpt": "今後も、他自治体の取組も参考にしつつ、地域猫対策に取り組んでまいります。", "question_type": "区長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-rent-increase-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "賃貸マンションの急な家賃値上げ",
+          "what_changes": "管理会社から急な値上げを求められた区民に対する初期助言と、法律・住宅専門窓口への連携が強化されます。",
+          "target_audience": "新宿区内の民間賃貸住宅に暮らす借主",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "新宿消費生活センター、法律相談、東京都賃貸ホットラインの既存相談体制を活用",
+          "original_quote": "「更新時の家賃値上げ」に関する相談は増加傾向",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-tanaka-2026-06-11-rent-increase", "speaker_name": "田中 ゆきえ", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "根拠が不明な急な家賃値上げ事例を示し、相談のワンストップ化と借主の権利周知を求めました。", "full_summary": "百人町での相談事例を基に、相談件数、事業者傾向、初期助言、法律専門家との連携について質問しました。", "source_excerpt": "新宿区における賃貸マンションの管理会社による強引な家賃値上げについて一般質問をさせていただきます。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-murakami-2026-06-11-rent-increase", "speaker_name": "村上 京子", "speaker_role": "新宿区文化観光産業部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "相談支援", "summary_quote": "相談件数は2025年度23件、2026年度は5月までに16件と増加し、状況に応じ専門窓口へつなぐと答弁しました。", "full_summary": "双方の合意なしに値上げできないことや従前家賃を支払う対応を助言し、法律相談・東京都窓口と連携すると説明しました。", "source_excerpt": "令和７年度は23件、令和８年度においては５月までに16件と、増加傾向になっています。", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-ai-agents-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "行政業務でのAIエージェント活用とセキュリティ",
+          "what_changes": "自治体業務へのAIエージェント適用をテスト環境で検証し、AI時代のサイバー攻撃や耐量子暗号へ備えます。",
+          "target_audience": "新宿区の行政サービス利用者と区職員、情報システム担当者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "既存の仮想化基盤、東京都提供の生成AIアプリ構築基盤、ICT専門職採用を活用",
+          "original_quote": "「AIエージェントを業務に活用する場合には、実証と評価を行いながら検証」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-ito-2026-06-11-ai-agents", "speaker_name": "伊藤 陽平", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "導入提案", "summary_quote": "AIエージェントを安全に試すテスト環境と、AI攻撃・量子コンピュータを見据えた管理体制を提案しました。", "full_summary": "行政業務の自動化、Computer Use、3ラインモデル、CISO、情報セキュリティ人材の採用・育成を質問しました。", "source_excerpt": "新宿区におけるＡＩ導入の現状と今後のＡＩエージェント活用についてのお考えをお聞かせください。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-kikushima-2026-06-11-ai-agents", "speaker_name": "菊島 茂雄", "speaker_role": "新宿区総合政策部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "検証", "summary_quote": "自治体業務への適合性を研究し、重要情報を扱う場合はテスト環境で実証・評価すると答弁しました。", "full_summary": "文章生成AI等は導入済みで、AIエージェント、AI攻撃対策、耐量子暗号、3ライン型リスク管理を段階的に検討すると説明しました。", "source_excerpt": "ＡＩエージェントの自治体業務への適用の可否や業務との適合性について研究を進めてまいります。", "question_type": "部長答弁", "avatar_color": "emerald" },
+            { "statement_id": "shinjuku-kujirai-2026-06-11-security-talent", "speaker_name": "鯨井 庸司", "speaker_role": "新宿区総務部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "人材育成", "summary_quote": "ICT採用枠と外部研修を活用し、有資格者に準じた知識を持つ専門人材を育成すると答弁しました。", "full_summary": "専門資格を必須とする採用はしていない一方、2025年度からICT職を採用し、専門部署への配置と研修を行っています。", "source_excerpt": "実践的な対応力を備え、かつ有資格者に準じた知識を有する専門人材を育成しています。", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-teacher-leave-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "教員の離職・休職と保護者対応の負担",
+          "what_changes": "学校だけでは難しい保護者対応を専門部署・弁護士が支援し、精神疾患からの復職支援も継続されます。",
+          "target_audience": "新宿区立学校の教員、児童・生徒、保護者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "学校問題支援室、東京都教育支援機構、産業医2名・保健師1名の体制を活用",
+          "original_quote": "「教員の離職・休職対策について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-ono-2026-06-11-teacher-leave", "speaker_name": "小野 裕次郎", "speaker_role": "新宿区議会議員", "party_name": "立憲民主党・無所属クラブ", "committee_name": "本会議", "stance_label": "対策強化", "summary_quote": "過剰な苦情への第三者支援と、精神疾患で休職した教員の復職後まで続く支援を求めました。", "full_summary": "全国の休職・離職統計と他自治体の事例を示し、学校外の相談体制、弁護士等の専門家、復職支援を質問しました。", "source_excerpt": "教員の離職・休職対策について伺います。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-toyama-2026-06-11-teacher-leave", "speaker_name": "遠山 竜多", "speaker_role": "新宿区教育委員会事務局次長", "party_name": "行政執行部", "committee_name": "本会議・教育委員会答弁", "stance_label": "支援", "summary_quote": "学校問題支援室と弁護士相談で難しい事案を支え、産業医・保健師による復職支援を行うと答弁しました。", "full_summary": "東京都教育支援機構との協定、職場復帰訓練、復職後プログラム、健康相談を組み合わせる体制を説明しました。", "source_excerpt": "教員の離職・休職対策についてのお尋ねです。", "question_type": "教育委員会答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-middle-aged-singles-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "ミドル期シングルの孤立予防と地域での役割",
+          "what_changes": "単身の中年層が地域活動やボランティアへ参加し、自分に合う役割を見つける導線が検討されます。",
+          "target_audience": "新宿区で単身生活を送る中年層と地域活動団体",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "町会・自治会支援、ボランティアガイド、社会福祉協議会の既存8窓口を活用",
+          "original_quote": "「ミドル期シングルの役割創出について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-oyamada-2026-06-11-middle-aged-singles", "speaker_name": "おやまだ 静香", "speaker_role": "新宿区議会議員", "party_name": "日本維新の会・新宿区議団", "committee_name": "本会議", "stance_label": "孤立予防", "summary_quote": "居場所や相談だけでなく、地域で必要とされる役割と活動の出番をつくるよう提案しました。", "full_summary": "単身世帯が約7割を占める区で、地域参加の成果検証、担い手不足、活動と人を結ぶ仕組みを質問しました。", "source_excerpt": "ミドル期シングルの役割創出について、一般質問いたします。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-oyanagi-2026-06-11-middle-aged-singles", "speaker_name": "大柳 雄志", "speaker_role": "新宿区地域振興部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "参加支援", "summary_quote": "ボランティアガイドと区内8窓口で活動情報を提供し、希望に合う受入先へつなぐと答弁しました。", "full_summary": "ミドル期シングルに限定した効果検証は未実施ですが、町会支援や担い手講座から継続活動につながる事例を説明しました。", "source_excerpt": "ミドル期シングルの社会参加促進という観点からの検証は行っていません", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-urban-redevelopment-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "市街地再開発の公費負担と住環境への影響",
+          "what_changes": "超高層化を伴う再開発について、従前居住者の継続居住、公費、環境負荷、住民合意の妥当性が検証されます。",
+          "target_audience": "再開発区域の住民・地権者と新宿区民",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "質問では17事業への公費約650億円、うち区経由補助約522億円を提示",
+          "original_quote": "「新宿区の市街地再開発事業のあり方について」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-kondo-2026-06-11-urban-redevelopment", "speaker_name": "近藤 なつ子", "speaker_role": "新宿区議会議員", "party_name": "日本共産党新宿区議会議員団", "committee_name": "本会議", "stance_label": "検証要求", "summary_quote": "巨額の公費と超高層化を伴う再開発が、居住継続や環境、住民合意に本当に有効か検証を求めました。", "full_summary": "従前地権者の定住率、環境負荷、公費支出、区域から外してほしい住民への対応などを質問しました。", "source_excerpt": "新宿区の市街地再開発事業のあり方について一般質問します。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-nozawa-2026-06-11-urban-redevelopment", "speaker_name": "野澤 義男", "speaker_role": "新宿区都市計画部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "継続推進", "summary_quote": "直近2地区では従前権利者の約8割が建物を取得し、防災上必要な再開発を地域特性に応じて進めると答弁しました。", "full_summary": "環境法令に基づく影響対策を前提に、住民の不安は準備組合へ伝えつつ、耐震化や木密解消を進める方針を説明しました。", "source_excerpt": "引き続き再開発事業を含め地域特性に応じた手法を活用しながら、災害に強い安全安心のまちづくりを進めてまいります。", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "shinjuku-downtown-litter-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年6月定例会（第2回）第6号",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shinjuku/SpMinuteView.html?council_id=3193&schedule_id=3",
+          "topic": "繁華街のごみ箱・ポイ捨て・路上喫煙対策",
+          "what_changes": "来街者が増える繁華街で、持続的に管理できるごみ箱と清掃、ポイ捨て・路上喫煙への対応が検討されます。",
+          "target_audience": "新宿駅・高田馬場駅周辺などの住民、来街者、商店会、事業者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "地域・事業者との共同管理、既存の清掃・啓発・パトロール体制を活用",
+          "original_quote": "「特に夜間のごみのポイ捨てが常態化」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "shinjuku-enoki-2026-06-11-downtown-litter", "speaker_name": "えのき 秀隆", "speaker_role": "新宿区議会議員", "committee_name": "本会議", "stance_label": "対策提案", "summary_quote": "繁華街へのごみ箱設置、定期清掃、ポイ捨て・路上喫煙への実効的な対応を提案しました。", "full_summary": "区民・企業・観光客が協力する環境づくりとして、IoTごみ箱を含む設置策、清掃活動、条例運用を質問しました。", "source_excerpt": "今回は、ポイ捨て防止や路上喫煙禁止を推進するために、新宿区が取り組むべき具体的な施策について", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "shinjuku-yoda-2026-06-11-downtown-litter", "speaker_name": "依田 治朗", "speaker_role": "新宿区環境清掃部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "連携検討", "summary_quote": "ごみ箱は地域・事業者が維持管理する仕組みを検討し、清掃・啓発・パトロールを強化すると答弁しました。", "full_summary": "臭気や不適正排出を課題に挙げ、年間延べ1万人超の清掃活動と、夜間のポイ捨て増加への対応を説明しました。", "source_excerpt": "特に夜間のごみのポイ捨てが常態化しており、さらなる対策が必要であると認識しています。", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
           "discussion_id": "shinjuku-mynumber-renewal-2026-06-11",
           "meeting_date": "2026-06-11",
           "meeting_name": "令和8年6月定例会（第2回）第6号",
@@ -521,6 +658,110 @@
         }
       },
       "records": [
+        {
+          "discussion_id": "hachioji-solitary-death-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年第2回八王子市議会定例会（第4日目）",
+          "source_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/611167?Template=document&Id=6213",
+          "topic": "孤独死への備えと身寄りのない人の終活支援",
+          "what_changes": "独居高齢者の増加を見据え、見守り、死後手続の相談、引取手のない遺体への対応が検討されます。",
+          "target_audience": "八王子市の単身世帯、高齢者、家族・親族、見守りに関わる地域団体",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "引取手のない遺体への2025年度支出額は1,239万円と答弁",
+          "original_quote": "「安心して最期を託せるのか、自分の希望がかない、尊厳が守られる」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "hachioji-yamamoto-2026-06-11-solitary-death", "speaker_name": "山本 貴士", "speaker_role": "八王子市議会議員", "committee_name": "本会議", "stance_label": "課題提起", "summary_quote": "孤独死を防ぐだけでなく、本人の希望と尊厳を守る死後手続や終活支援の仕組みを求めました。", "full_summary": "無縁遺体、独居高齢者の見守り、遺品、行政職員の負担、相談窓口、終活登録について質問しました。", "source_excerpt": "孤独死にどう向き合い備えるか、安心して年を重ねられるまちづくりのために", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "hachioji-sakurada-2026-06-11-unclaimed-remains", "speaker_name": "櫻田 ひかり", "speaker_role": "八王子市生活福祉担当部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "対応", "summary_quote": "引取手のない遺体への対応件数は2022年度50件から2025年度69件へ増加したと答弁しました。", "full_summary": "関係法令に基づき市が遺体を引き取り火葬し、戸籍調査による親族確認と費用求償を進めると説明しました。", "source_excerpt": "令和４年度は50件、令和５年度は58件、令和６年度は65件、令和７年度は69件となっており、件数は増加傾向", "question_type": "部長答弁", "avatar_color": "emerald" },
+            { "statement_id": "hachioji-kanno-2026-06-11-solitary-death", "speaker_name": "菅野 匡彦", "speaker_role": "八王子市福祉部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "見守り", "summary_quote": "見守り協定だけでは届かない人へ、地域のつながりと相談窓口の周知で接点をつくると答弁しました。", "full_summary": "75歳以上の独居高齢者は2022年9,786人から2050年に1万4,527人へ増える推計を示し、対策の重要性を説明しました。", "source_excerpt": "75歳以上の独居の高齢者は令和４年の時点では9,786人でしたが、推計では令和12年に１万2,501人、令和32年に１万4,527人", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "hachioji-digital-currency-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年第2回八王子市議会定例会（第4日目）",
+          "source_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/611167?Template=document&Id=6213",
+          "topic": "デジタル地域通貨「桑都ペイ」の継続活用",
+          "what_changes": "給付時だけでなく、チャージ、地域活動、イベント参加にも桑都ペイを活用する効果が検証されます。",
+          "target_audience": "八王子市民、市内加盟店、地域団体、イベント参加者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "質問では導入時委託料2億1,600万円、流通規模約58億円、登録者27万人超を提示",
+          "original_quote": "「デジタル地域通貨を活用し人とまちを元気に」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "hachioji-furusato-2026-06-11-digital-currency", "speaker_name": "古里 幸太郎", "speaker_role": "八王子市議会議員", "party_name": "八王子市議会公明党", "committee_name": "本会議", "stance_label": "活用拡大", "summary_quote": "桑都ペイを地域経済だけでなく、地域活動への参加やシビックプライドにもつなげるよう提案しました。", "full_summary": "チャージ機能、給付、地域ポイント、大学・企業・団体による活用と事業効果の検証を質問しました。", "source_excerpt": "初めに、１つ目のテーマ、デジタル地域通貨を活用し人とまちを元気に、について質問を行います。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "hachioji-furukawa-2026-06-11-digital-currency", "speaker_name": "古川 由美子", "speaker_role": "八王子市総合経営部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "実証", "summary_quote": "チャージ機能を試行し、継続利用と地域経済への効果を検証すると答弁しました。", "full_summary": "給付とイベントで市内消費や行動変容に効果があり、地域団体等の活用も参加促進につながると説明しました。", "source_excerpt": "チャージ機能を試行的に実施することで、アプリの継続的な利用状況及び地域経済の活性化への効果を検証", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "hachioji-vacant-houses-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年第2回八王子市議会定例会（第4日目）",
+          "source_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/611167?Template=document&Id=6213",
+          "topic": "管理不全な空き家への対応",
+          "what_changes": "草木の繁茂や所有者不明など、管理不全な空き家の相談・管理・地域活用が検討されます。",
+          "target_audience": "空き家の所有者、相続人、近隣住民、地域活用団体",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "2024年度実態調査では空き家3,036棟、うち管理不全180棟",
+          "original_quote": "「安心・安全なまちを目指した空き家等の管理・対策の促進」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "hachioji-furusato-2026-06-11-vacant-houses", "speaker_name": "古里 幸太郎", "speaker_role": "八王子市議会議員", "party_name": "八王子市議会公明党", "committee_name": "本会議", "stance_label": "対策促進", "summary_quote": "管理不全空き家の相談、所有者不明物件、越境枝、地域活用を含む対策の促進を求めました。", "full_summary": "実態調査の3,036棟を踏まえ、管理制度、相続放棄、獣害、活用希望物件のマッチングを質問しました。", "source_excerpt": "次に、２つ目のテーマ、安心・安全なまちを目指した空き家等の管理・対策の促進について質問を行います。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "hachioji-mizukami-2026-06-11-vacant-houses", "speaker_name": "水上 太一", "speaker_role": "八王子市まちなみ整備部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "対応", "summary_quote": "2025年度は管理不全空き家231棟の相談があり、約4分の3が草木の繁茂だったと答弁しました。", "full_summary": "相談内容を把握し、所有者への働きかけや制度活用を通じて管理不全状態の改善を進める考えを示しました。", "source_excerpt": "令和７年度は231棟の相談がございました。相談内容といたしましては、草木の繁茂に関することが最も多く、全体の約４分の３", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "hachioji-reasonable-accommodation-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年第2回八王子市議会定例会（第4日目）",
+          "source_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/611167?Template=document&Id=6213",
+          "topic": "公共施設の合理的配慮と補助犬受入れ",
+          "what_changes": "公共施設で補助犬同伴を拒まない運用と、障害のある人との建設的対話、職員教育が強化されます。",
+          "target_audience": "障害のある市民、補助犬使用者、公共施設・指定管理施設の職員",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "既存の合理的配慮ガイド、サポーター養成講座、職員教育を活用",
+          "original_quote": "「障害者への合理的配慮及び情報アクセシビリティの向上」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "hachioji-tominaga-2026-06-11-reasonable-accommodation", "speaker_name": "冨永 純子", "speaker_role": "八王子市議会議員", "party_name": "八王子市議会公明党", "committee_name": "本会議", "stance_label": "改善要求", "summary_quote": "スポーツ施設での補助犬受入れ事例を基に、合理的配慮と情報アクセシビリティの実効性を求めました。", "full_summary": "補助犬同伴、職員の理解、バリアフリー設備情報、地図での情報提供について質問しました。", "source_excerpt": "公共施設における障害者への合理的配慮及び情報アクセシビリティの向上について質問をいたします。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "hachioji-yoshimori-2026-06-11-guide-dog", "speaker_name": "吉森 研吾", "speaker_role": "八王子市生涯学習スポーツ部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "改善", "summary_quote": "補助犬を受け入れなかった施設対応には課題があり、手順整理と職員教育で再発防止に努めると答弁しました。", "full_summary": "安全への配慮を理由にした現場判断を検証し、利用者の立場に立った運用と指定管理者を含む教育を進めると説明しました。", "source_excerpt": "今回の対応につきましては課題があったものと受け止めてございます。", "question_type": "部長答弁", "avatar_color": "emerald" },
+            { "statement_id": "hachioji-kanno-2026-06-11-reasonable-accommodation", "speaker_name": "菅野 匡彦", "speaker_role": "八王子市福祉部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "推進", "summary_quote": "施設管理者は建設的な対話を重ね、社会的障壁の除去に努める必要があると答弁しました。", "full_summary": "合理的配慮は共生社会に不可欠として、ガイドブック、授業、講座、障害当事者参加による普及を進める方針を示しました。", "source_excerpt": "施設管理者は建設的な対話を重ねながら障害の除去に努める必要がある", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "hachioji-programming-education-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年第2回八王子市議会定例会（第4日目）",
+          "source_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/611167?Template=document&Id=6213",
+          "topic": "学校のプログラミング教育と端末活用",
+          "what_changes": "調べ学習やドリル中心の端末利用から、探究・協働・表現に使う主体的な学びへの転換が進められます。",
+          "target_audience": "八王子市立学校の児童・生徒、教員、保護者",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "1人1台端末、情報教育推進委員会、教育DX推進校、教員研修を活用",
+          "original_quote": "「端末を使わせる授業から、子どもたちが使いたいと感じて自ら学びに向かう授業へ」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "hachioji-kusakabe-2026-06-11-programming-education", "speaker_name": "日下部 広志", "speaker_role": "八王子市議会議員", "party_name": "八王子市議会公明党", "committee_name": "本会議", "stance_label": "充実提案", "summary_quote": "端末を調べ物やドリルだけでなく、子どもが自ら使って探究するプログラミング教育へ広げるよう求めました。", "full_summary": "GIGA端末の活用実態、教員の指導力、共同・探究的な学び、地域課題を扱うプログラミングを質問しました。", "source_excerpt": "まずは、学校教育におけるプログラミング教育の充実について質問します。", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "hachioji-ueno-2026-06-11-programming-education", "speaker_name": "上野 和広", "speaker_role": "八王子市指導担当部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "推進", "summary_quote": "研究成果と教員研修を活用し、個別最適・協働・探究的な授業改善を進めると答弁しました。", "full_summary": "情報モラルとICT活用力をバランスよく育て、デジタルとアナログ双方を生かす学びを確立すると説明しました。", "source_excerpt": "個別最適な学び、共同的な学び、探究的な学びの実現に向けた授業改善を進めております。", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
+        {
+          "discussion_id": "hachioji-gamification-2026-06-11",
+          "meeting_date": "2026-06-11",
+          "meeting_name": "令和8年第2回八王子市議会定例会（第4日目）",
+          "source_url": "https://www.city.hachioji.tokyo.dbsr.jp/index.php/611167?Template=document&Id=6213",
+          "topic": "ゲームの力を生かす学習環境",
+          "what_changes": "子どもの集中や試行錯誤を引き出すゲーム的要素を、学習目的と教育水準を保ちながら活用する方法が検討されます。",
+          "target_audience": "八王子市立学校の児童・生徒と教員",
+          "current_stage": "2026年6月11日の本会議で質問・答弁済み",
+          "budget_info": "既存の教育ツールと情報教育推進委員会による実践事例を活用",
+          "original_quote": "「この人を夢中にさせる力を学びの場に生かす」",
+          "publication_status": "published",
+          "statements": [
+            { "statement_id": "hachioji-kusakabe-2026-06-11-gamification", "speaker_name": "日下部 広志", "speaker_role": "八王子市議会議員", "party_name": "八王子市議会公明党", "committee_name": "本会議", "stance_label": "活用提案", "summary_quote": "ゲームが生む集中、再挑戦、達成意欲を、プログラミングや地域課題を学ぶ環境へ生かすよう提案しました。", "full_summary": "3年間の検討を踏まえ、タイピング練習にとどまらず、教育効果が見込める場面でゲーミフィケーションを試すよう求めました。", "source_excerpt": "ゲームには、もう一回やりたい、次のステージに進みたい、クリアしたいという気持ちを自然に引き出す仕組み", "question_type": "一般質問", "avatar_color": "sky" },
+            { "statement_id": "hachioji-ueno-2026-06-11-gamification", "speaker_name": "上野 和広", "speaker_role": "八王子市指導担当部長", "party_name": "行政執行部", "committee_name": "本会議・部長答弁", "stance_label": "慎重検討", "summary_quote": "興味を引く効果がある一方、学習目的や思考の深まり、教科書との位置づけに課題があると答弁しました。", "full_summary": "全校共通導入には至っていませんが、教育的効果と課題を見極め、探究的な学びに生かす考えを示しました。", "source_excerpt": "ゲーム的要素を含む教育ツールについては、児童・生徒の興味、関心に働きかける側面がある一方", "question_type": "部長答弁", "avatar_color": "emerald" }
+          ]
+        },
         {
           "discussion_id": "hachioji-rag-ai-2026-06-11",
           "meeting_date": "2026-06-11",
