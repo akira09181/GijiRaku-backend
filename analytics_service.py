@@ -2,52 +2,22 @@
 
 from __future__ import annotations
 
-import os
-import sqlite3
 from collections import Counter, defaultdict
-from pathlib import Path
 from typing import Any, Dict
 
 from assembly_records import get_assembly_records
+from reaction_store import get_reaction_totals
 
 
-REACTIONS_DB_PATH = Path(
-    os.getenv(
-        "GIJIRAKU_REACTIONS_DB_PATH",
-        str(Path(__file__).resolve().parent / "data" / "reactions.sqlite3"),
-    )
-)
 TOPIC_COLORS = ("#06C755", "#3B82F6", "#F59E0B", "#EF4444", "#EC4899")
 
 
 def _reaction_totals(assembly_id: str) -> Dict[str, int]:
-    totals = {"agree": 0, "concern": 0, "helpful": 0}
-    if not REACTIONS_DB_PATH.exists():
-        return totals
-
-    try:
-        with sqlite3.connect(REACTIONS_DB_PATH, timeout=5) as connection:
-            row = connection.execute(
-                """
-                SELECT
-                    COUNT(CASE WHEN reaction_type = 'agree' THEN 1 END),
-                    COUNT(CASE WHEN reaction_type = 'concern' THEN 1 END),
-                    COUNT(CASE WHEN reaction_type = 'helpful' THEN 1 END)
-                FROM reactions
-                WHERE discussion_id = ?
-                """,
-                (assembly_id,),
-            ).fetchone()
-    except (sqlite3.Error, OSError):
-        return totals
-
-    if row:
-        totals["agree"], totals["concern"], totals["helpful"] = row
-    return totals
+    return get_reaction_totals(assembly_id)
 
 
 def get_assembly_analytics(assembly_id: str) -> Dict[str, Any]:
-    """Return analytics derived from official records and live SQLite rows."""
+    """Return analytics derived from official records and live Firestore rows."""
     records_data = get_assembly_records(assembly_id, limit=100)
     records = records_data["records"]
     statements = [
@@ -140,7 +110,7 @@ def get_assembly_analytics(assembly_id: str) -> Dict[str, Any]:
         "open_data_source": records_data.get("open_data_source"),
         "topic_distribution": topic_distribution,
         "ebpm_citizen_data": {
-            "data_status": "live_sqlite_aggregate",
+            "data_status": "live_firestore_aggregate",
             "info_access_time_reduction_rate": None,
             "total_votes_recorded": reaction_total,
             "reaction_totals": reaction_totals,

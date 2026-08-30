@@ -1,8 +1,5 @@
 # main.py - GijiRaku FastAPI Server
-import os
 import json
-import sqlite3
-from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -14,6 +11,11 @@ from opendata_service import (
     fetch_tokyo_catalog_datasets
 )
 from assembly_records import get_assembly_record_stats, get_assembly_records
+from reaction_store import (
+    ReactionStoreError,
+    list_reaction_states,
+    put_reaction_state,
+)
 
 app = FastAPI(title="MachiVoice API (マチボイス)", description="東京都オープンデータ活用 ・ 地域・生活テーマ議会情報インフラ API")
 
@@ -258,7 +260,10 @@ from analytics_service import get_assembly_analytics
 @app.get("/api/assemblies/{assembly_id}/analytics")
 def get_analytics(assembly_id: str):
     """特定議会の政党別注力テーマおよび議員向けEBPM分析を取得"""
-    data = get_assembly_analytics(assembly_id)
+    try:
+        data = get_assembly_analytics(assembly_id)
+    except ReactionStoreError as exc:
+        raise HTTPException(status_code=503, detail="Reaction store unavailable") from exc
     return {"status": "success", "data": data}
 
 @app.get("/api/opendata/catalog")
@@ -349,255 +354,38 @@ class ReactionStateRequest(BaseModel):
     anonymous_user_id: str = Field(min_length=1)
     base_counts: ReactionCounts = Field(default_factory=ReactionCounts)
 
-REACTIONS_DB_PATH = Path(
-    os.getenv(
-        'GIJIRAKU_REACTIONS_DB_PATH',
-        str(Path(__file__).resolve().parent / 'data' / 'reactions.sqlite3')
-    )
-)
-
-def get_reactions_connection() -> sqlite3.Connection:
-    REACTIONS_DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    connection = sqlite3.connect(REACTIONS_DB_PATH, timeout=5)
-    connection.row_factory = sqlite3.Row
-    connection.execute('PRAGMA foreign_keys = ON')
-    connection.execute('PRAGMA busy_timeout = 5000')
-    return connection
-
-def initialize_reactions_db() -> None:
-    with get_reactions_connection() as connection:
-        connection.execute('PRAGMA journal_mode = WAL')
-        connection.executescript(
-            """
-            CREATE TABLE IF NOT EXISTS reaction_targets (
-                discussion_id TEXT NOT NULL,
-                statement_id TEXT NOT NULL,
-                agree_base INTEGER NOT NULL DEFAULT 0 CHECK (agree_base >= 0),
-                concern_base INTEGER NOT NULL DEFAULT 0 CHECK (concern_base >= 0),
-                helpful_base INTEGER NOT NULL DEFAULT 0 CHECK (helpful_base >= 0),
-                PRIMARY KEY (discussion_id, statement_id)
-            );
-
-            CREATE TABLE IF NOT EXISTS reactions (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                discussion_id TEXT NOT NULL,
-                statement_id TEXT NOT NULL,
-                reaction_type TEXT NOT NULL
-                    CHECK (reaction_type IN ('agree', 'concern', 'helpful')),
-                anonymous_user_id TEXT NOT NULL,
-                created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
-                UNIQUE (discussion_id, statement_id, anonymous_user_id),
-                FOREIGN KEY (discussion_id, statement_id)
-                    REFERENCES reaction_targets (discussion_id, statement_id)
-                    ON DELETE CASCADE
-            );
-
-            CREATE INDEX IF NOT EXISTS idx_reactions_target_type
-                ON reactions (discussion_id, statement_id, reaction_type);
-            """
-        )
-
-def get_reaction_counts(
-    connection: sqlite3.Connection,
-    discussion_id: str,
-    statement_id: str,
-) -> Dict[str, int]:
-    row = connection.execute(
-        """
-        SELECT
-            targets.agree_base + COUNT(CASE WHEN reactions.reaction_type = 'agree' THEN 1 END) AS agree_count,
-            targets.concern_base + COUNT(CASE WHEN reactions.reaction_type = 'concern' THEN 1 END) AS concern_count,
-            targets.helpful_base + COUNT(CASE WHEN reactions.reaction_type = 'helpful' THEN 1 END) AS helpful_count
-        FROM reaction_targets AS targets
-        LEFT JOIN reactions
-          ON reactions.discussion_id = targets.discussion_id
-         AND reactions.statement_id = targets.statement_id
-        WHERE targets.discussion_id = ? AND targets.statement_id = ?
-        GROUP BY targets.discussion_id, targets.statement_id
-        """,
-        (discussion_id, statement_id),
-    ).fetchone()
-    if row is None:
-        return {'agree': 0, 'concern': 0, 'helpful': 0}
-    return {
-        'agree': row['agree_count'],
-        'concern': row['concern_count'],
-        'helpful': row['helpful_count'],
-    }
-
-
-def get_live_reaction_counts(
-    connection: sqlite3.Connection,
-    discussion_id: str,
-    statement_id: str,
-) -> Dict[str, int]:
-    """デモ初期値を除き、住民がAPI経由で送信した件数だけを返す。"""
-    row = connection.execute(
-        """
-        SELECT
-            COUNT(CASE WHEN reaction_type = 'agree' THEN 1 END) AS agree_count,
-            COUNT(CASE WHEN reaction_type = 'concern' THEN 1 END) AS concern_count,
-            COUNT(CASE WHEN reaction_type = 'helpful' THEN 1 END) AS helpful_count
-        FROM reactions
-        WHERE discussion_id = ? AND statement_id = ?
-        """,
-        (discussion_id, statement_id),
-    ).fetchone()
-    return {
-        'agree': row['agree_count'],
-        'concern': row['concern_count'],
-        'helpful': row['helpful_count'],
-    }
-
-
-initialize_reactions_db()
-
 @app.put('/api/reactions')
 def put_reaction(request: ReactionStateRequest):
     """匿名ユーザーの対象別リアクション状態を冪等に設定する。"""
-    with get_reactions_connection() as connection:
-        connection.execute(
-            """
-            INSERT OR IGNORE INTO reaction_targets (
-                discussion_id,
-                statement_id,
-                agree_base,
-                concern_base,
-                helpful_base
-            ) VALUES (?, ?, ?, ?, ?)
-            """,
-            (
-                request.discussion_id,
-                request.statement_id,
-                request.base_counts.agree,
-                request.base_counts.concern,
-                request.base_counts.helpful,
-            ),
+    try:
+        return put_reaction_state(
+            discussion_id=request.discussion_id,
+            statement_id=request.statement_id,
+            reaction_type=request.reaction_type,
+            anonymous_user_id=request.anonymous_user_id,
+            base_counts=request.base_counts.model_dump(),
         )
-        existing = connection.execute(
-            """
-            SELECT reaction_type
-            FROM reactions
-            WHERE discussion_id = ?
-              AND statement_id = ?
-              AND anonymous_user_id = ?
-            """,
-            (
-                request.discussion_id,
-                request.statement_id,
-                request.anonymous_user_id,
-            ),
-        ).fetchone()
-        previous_reaction_type = existing['reaction_type'] if existing else None
-        changed = previous_reaction_type != request.reaction_type
-
-        if request.reaction_type is None:
-            if existing:
-                connection.execute(
-                    """
-                    DELETE FROM reactions
-                    WHERE discussion_id = ?
-                      AND statement_id = ?
-                      AND anonymous_user_id = ?
-                    """,
-                    (
-                        request.discussion_id,
-                        request.statement_id,
-                        request.anonymous_user_id,
-                    ),
-                )
-        elif existing:
-            if changed:
-                connection.execute(
-                    """
-                    UPDATE reactions
-                    SET reaction_type = ?
-                    WHERE discussion_id = ?
-                      AND statement_id = ?
-                      AND anonymous_user_id = ?
-                    """,
-                    (
-                        request.reaction_type,
-                        request.discussion_id,
-                        request.statement_id,
-                        request.anonymous_user_id,
-                    ),
-                )
-        else:
-            connection.execute(
-                """
-                INSERT INTO reactions (
-                    discussion_id,
-                    statement_id,
-                    reaction_type,
-                    anonymous_user_id
-                ) VALUES (?, ?, ?, ?)
-                """,
-                (
-                    request.discussion_id,
-                    request.statement_id,
-                    request.reaction_type,
-                    request.anonymous_user_id,
-                ),
-            )
-
-        counts = get_reaction_counts(
-            connection,
-            request.discussion_id,
-            request.statement_id,
-        )
-        live_counts = get_live_reaction_counts(
-            connection,
-            request.discussion_id,
-            request.statement_id,
-        )
-
-    return {
-        'status': 'success',
-        'discussion_id': request.discussion_id,
-        'statement_id': request.statement_id,
-        'previous_reaction_type': previous_reaction_type,
-        'reaction_type': request.reaction_type,
-        'changed': changed,
-        'counts': counts,
-        'live_counts': live_counts,
-    }
+    except ReactionStoreError as exc:
+        raise HTTPException(status_code=503, detail="Reaction store unavailable") from exc
 
 @app.get('/api/reactions')
-def get_reactions(discussion_id: str, anonymous_user_id: str):
+def get_reactions(
+    discussion_id: str,
+    anonymous_user_id: str,
+    include_user_state: bool = True,
+):
     """議論内の最新件数と匿名ユーザー自身の選択状態を取得する。"""
     if not discussion_id.strip() or not anonymous_user_id.strip():
         raise HTTPException(status_code=400, detail='discussion_id and anonymous_user_id are required')
 
-    with get_reactions_connection() as connection:
-        targets = connection.execute(
-            """
-            SELECT statement_id
-            FROM reaction_targets
-            WHERE discussion_id = ?
-            ORDER BY statement_id
-            """,
-            (discussion_id,),
-        ).fetchall()
-        data = []
-        for target in targets:
-            statement_id = target['statement_id']
-            user_reaction = connection.execute(
-                """
-                SELECT reaction_type
-                FROM reactions
-                WHERE discussion_id = ?
-                  AND statement_id = ?
-                  AND anonymous_user_id = ?
-                """,
-                (discussion_id, statement_id, anonymous_user_id),
-            ).fetchone()
-            data.append({
-                'statement_id': statement_id,
-                'reaction_type': user_reaction['reaction_type'] if user_reaction else None,
-                'counts': get_reaction_counts(connection, discussion_id, statement_id),
-                'live_counts': get_live_reaction_counts(connection, discussion_id, statement_id),
-            })
+    try:
+        data = list_reaction_states(
+            discussion_id=discussion_id,
+            anonymous_user_id=anonymous_user_id,
+            include_user_state=include_user_state,
+        )
+    except ReactionStoreError as exc:
+        raise HTTPException(status_code=503, detail="Reaction store unavailable") from exc
 
     return {
         'status': 'success',
