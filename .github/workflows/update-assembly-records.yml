@@ -10,7 +10,7 @@ on:
       - 'tests/test_update_assembly_records.py'
       - 'data/assembly_records.json'
   schedule:
-    - cron: '17 18 * * 0'
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
