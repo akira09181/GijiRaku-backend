@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import logging
 from datetime import datetime, timezone
-from typing import Any, Dict, Iterable, Optional
+from typing import Any, Dict, Iterable, List, Optional
 
 from citizen_question_store import get_citizen_question_user_response
 from reaction_store import ReactionStoreError, STORAGE_BACKEND, get_firestore_client
@@ -154,30 +154,72 @@ def _is_unread(status_updated_at: str, last_viewed_status_at: Optional[str]) -> 
     return status_updated > last_viewed
 
 
-def _read_issue_status(client: Any, issue_id: str) -> Dict[str, str]:
+def _verified_status_updates(
+    issue: Dict[str, Any], stored_updates: Any = None
+) -> List[Dict[str, str]]:
+    updates = stored_updates if isinstance(stored_updates, list) else []
+    verified = []
+    for update in updates:
+        if not isinstance(update, dict) or update.get("verified") is not True:
+            continue
+        updated_at = _isoformat(update.get("updated_at"))
+        summary = str(update.get("summary") or "").strip()
+        if not updated_at or not summary:
+            continue
+        verified.append(
+            {
+                "updated_at": updated_at,
+                "status": str(update.get("status") or issue["current_status"]),
+                "summary": summary,
+                "source_url": str(update.get("source_url") or issue["source_url"]),
+            }
+        )
+    if not verified:
+        verified.append(
+            {
+                "updated_at": str(issue["status_updated_at"]),
+                "status": str(issue["current_status"]),
+                "summary": str(issue["status_summary"]),
+                "source_url": str(issue["source_url"]),
+            }
+        )
+    verified.sort(key=lambda item: item["updated_at"])
+    return verified
+
+
+def _read_issue_status(client: Any, issue_id: str) -> Dict[str, Any]:
     fallback = ISSUE_STATUSES[issue_id]
     snapshot = client.collection(ISSUES_COLLECTION).document(issue_id).get()
     if not snapshot.exists:
-        return fallback
+        return {**fallback, "status_updates": _verified_status_updates(fallback)}
     stored = snapshot.to_dict() or {}
-    return {
+    issue = {
         key: str(stored.get(key) or fallback[key])
         for key in fallback
     }
+    issue["status_updates"] = _verified_status_updates(
+        issue, stored.get("status_updates")
+    )
+    return issue
 
 
-def _ensure_issue_status(client: Any, issue_id: str) -> Dict[str, str]:
+def _ensure_issue_status(client: Any, issue_id: str) -> Dict[str, Any]:
     reference = client.collection(ISSUES_COLLECTION).document(issue_id)
     snapshot = reference.get()
     if snapshot.exists:
         return _read_issue_status(client, issue_id)
     issue = ISSUE_STATUSES[issue_id]
-    reference.set({"issue_id": issue_id, **issue})
-    return issue
+    status_updates = _verified_status_updates(issue)
+    reference.set({
+        "issue_id": issue_id,
+        **issue,
+        "status_updates": [{**update, "verified": True} for update in status_updates],
+    })
+    return {**issue, "status_updates": status_updates}
 
 
 def _public_follow(
-    data: Dict[str, Any], issue: Optional[Dict[str, str]] = None
+    data: Dict[str, Any], issue: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
     issue_id = str(data.get("issue_id") or "")
     issue = issue or ISSUE_STATUSES[issue_id]
@@ -196,6 +238,7 @@ def _public_follow(
         "share_summary": issue["share_summary"],
         "source_url": issue["source_url"],
         "question_id": issue["question_id"],
+        "status_updates": issue.get("status_updates") or _verified_status_updates(issue),
         "created_at": _isoformat(data.get("created_at")),
         "last_viewed_status_at": last_viewed_status_at,
         "notification_enabled": bool(data.get("notification_enabled", False)),
@@ -219,7 +262,10 @@ def put_issue_follow(*, issue_id: str, anonymous_user_id: str) -> Dict[str, Any]
             "issue_id": issue_id,
             "anonymous_user_id": anonymous_user_id,
             "created_at": previous.get("created_at") or now,
-            "last_viewed_status_at": previous.get("last_viewed_status_at") or now,
+            "last_viewed_status_at": (
+                previous.get("last_viewed_status_at")
+                or issue["status_updated_at"]
+            ),
             "notification_enabled": bool(previous.get("notification_enabled", False)),
             "updated_at": now,
         }

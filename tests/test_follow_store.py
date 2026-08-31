@@ -99,6 +99,10 @@ class FollowStoreTest(unittest.TestCase):
         self.assertTrue(first["created"])
         self.assertFalse(second["created"])
         self.assertEqual(first["follow"]["created_at"], second["follow"]["created_at"])
+        self.assertEqual(
+            first["follow"]["last_viewed_status_at"],
+            first["follow"]["status_updated_at"],
+        )
         self.assertNotIn("anonymous_user_id", second["follow"])
         issue_documents = [
             data
@@ -142,6 +146,22 @@ class FollowStoreTest(unittest.TestCase):
         document["last_viewed_status_at"] = "2026-01-01T00:00:00+00:00"
         issue_document = self.firestore[(ISSUES_COLLECTION, self.ISSUE_ID)]
         issue_document["status_updated_at"] = "2026-08-01T00:00:00+09:00"
+        issue_document["current_status"] = "公式ページを更新"
+        issue_document["status_summary"] = "受入状況の公式ページが更新されました。"
+        issue_document["status_updates"] = [
+            {
+                "updated_at": "2026-08-01T00:00:00+09:00",
+                "status": "公式ページを更新",
+                "summary": "受入状況の公式ページが更新されました。",
+                "source_url": "https://example.test/verified",
+                "verified": True,
+            },
+            {
+                "updated_at": "2026-08-02T00:00:00+09:00",
+                "summary": "未確認の更新",
+                "verified": False,
+            },
+        ]
         with (
             patch.object(
                 follow_store,
@@ -156,11 +176,34 @@ class FollowStoreTest(unittest.TestCase):
         ):
             before_open = list_issue_follows(anonymous_user_id=self.USER_ID)
         self.assertEqual(before_open["unread_total"], 1)
+        self.assertEqual(len(before_open["follows"][0]["status_updates"]), 1)
+        self.assertEqual(
+            before_open["follows"][0]["status_updates"][0]["summary"],
+            "受入状況の公式ページが更新されました。",
+        )
 
         viewed = mark_issue_follow_viewed(
             issue_id=self.ISSUE_ID, anonymous_user_id=self.USER_ID
         )
         self.assertFalse(viewed["follow"]["has_new_status"])
+
+    def test_list_never_returns_another_users_follow(self):
+        put_issue_follow(issue_id=self.ISSUE_ID, anonymous_user_id=self.USER_ID)
+        put_issue_follow(issue_id=self.ISSUE_ID, anonymous_user_id="anonymous-browser-b")
+        with (
+            patch.object(
+                follow_store, "_follow_query", return_value=self._snapshots_for_user()
+            ),
+            patch.object(
+                follow_store,
+                "get_citizen_question_user_response",
+                return_value=None,
+            ),
+        ):
+            result = list_issue_follows(anonymous_user_id=self.USER_ID)
+
+        self.assertEqual(result["total"], 1)
+        self.assertNotIn("anonymous_user_id", result["follows"][0])
 
     def test_delete_removes_follow_without_touching_other_data(self):
         put_issue_follow(issue_id=self.ISSUE_ID, anonymous_user_id=self.USER_ID)
