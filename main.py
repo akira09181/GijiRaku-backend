@@ -1,5 +1,7 @@
 # main.py - GijiRaku FastAPI Server
+from contextlib import asynccontextmanager
 import json
+import logging
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -13,11 +15,37 @@ from opendata_service import (
 from assembly_records import get_assembly_record_stats, get_assembly_records
 from reaction_store import (
     ReactionStoreError,
+    STORAGE_BACKEND,
     list_reaction_states,
     put_reaction_state,
+    verify_reaction_store_connection,
 )
 
-app = FastAPI(title="MachiVoice API (マチボイス)", description="東京都オープンデータ活用 ・ 地域・生活テーマ議会情報インフラ API")
+logger = logging.getLogger("gijiraku.reactions")
+
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    try:
+        storage = verify_reaction_store_connection()
+        logger.info(
+            "Reaction store ready (backend=%s, project_id=%s, database_id=%s)",
+            storage["storage_backend"],
+            storage["project_id"],
+            storage["database_id"],
+        )
+    except ReactionStoreError:
+        logger.exception(
+            "Reaction store startup verification failed; reaction APIs will return HTTP 500"
+        )
+    yield
+
+
+app = FastAPI(
+    title="MachiVoice API (マチボイス)",
+    description="東京都オープンデータ活用 ・ 地域・生活テーマ議会情報インフラ API",
+    lifespan=lifespan,
+)
 
 # Next.js (フロントエンド) からのアクセスを許可するCORS設定
 app.add_middleware(
@@ -263,7 +291,12 @@ def get_analytics(assembly_id: str):
     try:
         data = get_assembly_analytics(assembly_id)
     except ReactionStoreError as exc:
-        raise HTTPException(status_code=503, detail="Reaction store unavailable") from exc
+        logger.exception(
+            "Firestore analytics aggregation failed (assembly_id=%s)", assembly_id
+        )
+        raise HTTPException(
+            status_code=500, detail="Firestore reaction store unavailable"
+        ) from exc
     return {"status": "success", "data": data}
 
 @app.get("/api/opendata/catalog")
@@ -366,7 +399,14 @@ def put_reaction(request: ReactionStateRequest):
             base_counts=request.base_counts.model_dump(),
         )
     except ReactionStoreError as exc:
-        raise HTTPException(status_code=503, detail="Reaction store unavailable") from exc
+        logger.exception(
+            "Firestore reaction PUT failed (discussion_id=%s, statement_id=%s)",
+            request.discussion_id,
+            request.statement_id,
+        )
+        raise HTTPException(
+            status_code=500, detail="Firestore reaction store unavailable"
+        ) from exc
 
 @app.get('/api/reactions')
 def get_reactions(
@@ -385,10 +425,16 @@ def get_reactions(
             include_user_state=include_user_state,
         )
     except ReactionStoreError as exc:
-        raise HTTPException(status_code=503, detail="Reaction store unavailable") from exc
+        logger.exception(
+            "Firestore reaction GET failed (discussion_id=%s)", discussion_id
+        )
+        raise HTTPException(
+            status_code=500, detail="Firestore reaction store unavailable"
+        ) from exc
 
     return {
         'status': 'success',
+        'storage_backend': STORAGE_BACKEND,
         'discussion_id': discussion_id,
         'data': data,
     }
@@ -402,47 +448,24 @@ class UtteranceCommentRequest(BaseModel):
     comment_text: str
     speaker_name: Optional[str] = None
 
-# 発言別リアクション・コメント用インメモリ/簡易永続化データ
-UTTERANCE_REACTIONS_DB: Dict[str, Dict[str, Any]] = {}
+# コメントは現行リアクション集計とは分離する。リアクションはFirestore以外へ保存しない。
+UTTERANCE_COMMENTS_DB: Dict[str, Dict[str, Any]] = {}
 
 def get_or_create_utterance_data(utt_id: str) -> Dict[str, Any]:
-    if utt_id not in UTTERANCE_REACTIONS_DB:
-        UTTERANCE_REACTIONS_DB[utt_id] = {
+    if utt_id not in UTTERANCE_COMMENTS_DB:
+        UTTERANCE_COMMENTS_DB[utt_id] = {
             "utt_id": utt_id,
-            "agree_count": 0,
-            "concern_count": 0,
-            "helpful_count": 0,
             "comments": []
         }
-    return UTTERANCE_REACTIONS_DB[utt_id]
+    return UTTERANCE_COMMENTS_DB[utt_id]
 
 @app.post("/api/statements/{statement_id}/reaction")
 def post_statement_reaction(statement_id: str, req: UtteranceReactionRequest):
-    """個々の議員・首長の発言単位での市民リアクション（👍 賛成 / ⚠️ 気になる / 💡 参考）を記録"""
-    utt_data = get_or_create_utterance_data(statement_id)
-    r_type = req.reaction_type.lower()
-    if r_type == 'agree':
-        utt_data["agree_count"] += 1
-    elif r_type in ['concern', 'disagree']:
-        utt_data["concern_count"] += 1
-    elif r_type == 'helpful':
-        utt_data["helpful_count"] += 1
-    else:
-        raise HTTPException(status_code=400, detail="無効なリアクションタイプです")
-
-    total = utt_data["agree_count"] + utt_data["concern_count"] + utt_data["helpful_count"]
-    return {
-        "status": "success",
-        "statement_id": statement_id,
-        "reaction_type": r_type,
-        "agree_count": utt_data["agree_count"],
-        "concern_count": utt_data["concern_count"],
-        "helpful_count": utt_data["helpful_count"],
-        "total_reactions": total,
-        "agree_percentage": round((utt_data["agree_count"] / total) * 100) if total > 0 else 0,
-        "concern_percentage": round((utt_data["concern_count"] / total) * 100) if total > 0 else 0,
-        "helpful_percentage": round((utt_data["helpful_count"] / total) * 100) if total > 0 else 0
-    }
+    """廃止済み。リアクションはPUT /api/reactionsでFirestoreへ保存する。"""
+    raise HTTPException(
+        status_code=410,
+        detail="Use PUT /api/reactions; in-memory reaction storage is disabled",
+    )
 
 @app.post("/api/statements/{statement_id}/comment")
 def post_statement_comment(statement_id: str, req: UtteranceCommentRequest):
@@ -464,10 +487,8 @@ def post_statement_comment(statement_id: str, req: UtteranceCommentRequest):
 
 @app.get("/api/statements/{statement_id}/reactions")
 def get_statement_reactions(statement_id: str):
-    """議員ダッシュボード・EBPM分析用 発言別集計リアクション・コメント取得"""
-    utt_data = get_or_create_utterance_data(statement_id)
-    return {
-        "status": "success",
-        "statement_id": statement_id,
-        "data": utt_data
-    }
+    """廃止済み。リアクションはGET /api/reactionsから取得する。"""
+    raise HTTPException(
+        status_code=410,
+        detail="Use GET /api/reactions; in-memory reaction storage is disabled",
+    )

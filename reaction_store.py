@@ -7,6 +7,8 @@ provides durable, transactional storage across Render restarts.
 from __future__ import annotations
 
 import hashlib
+import json
+import logging
 import os
 import threading
 from datetime import datetime, timezone
@@ -20,9 +22,14 @@ EMPTY_COUNTS: Dict[str, int] = {reaction_type: 0 for reaction_type in REACTION_T
 
 TARGETS_COLLECTION = "reaction_targets"
 USERS_COLLECTION = "reaction_users"
+STORAGE_BACKEND = "firestore"
 DEFAULT_RENDER_CREDENTIALS_PATH = Path(
     "/etc/secrets/firebase-service-account.json"
 )
+INLINE_CREDENTIALS_ENV = "FIREBASE_SERVICE_ACCOUNT_JSON"
+FIREBASE_APP_NAME = "gijiraku-reactions"
+
+logger = logging.getLogger(__name__)
 
 _client: Any = None
 _client_lock = threading.Lock()
@@ -90,6 +97,10 @@ def _user_document_id(
     return _document_id(discussion_id, statement_id, anonymous_user_id)
 
 
+def _is_render_runtime() -> bool:
+    return os.getenv("RENDER", "").strip().lower() == "true"
+
+
 def _credential_path() -> Optional[Path]:
     configured_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "").strip()
     if configured_path:
@@ -104,31 +115,128 @@ def _credential_path() -> Optional[Path]:
     return None
 
 
+def _load_inline_credentials() -> Optional[Dict[str, Any]]:
+    raw_credentials = os.getenv(INLINE_CREDENTIALS_ENV, "").strip()
+    if not raw_credentials:
+        return None
+    try:
+        parsed = json.loads(raw_credentials)
+    except json.JSONDecodeError as exc:
+        raise ReactionStoreError(
+            f"{INLINE_CREDENTIALS_ENV} is not valid JSON"
+        ) from exc
+    if not isinstance(parsed, dict):
+        raise ReactionStoreError(
+            f"{INLINE_CREDENTIALS_ENV} must contain a JSON object"
+        )
+    return parsed
+
+
+def _configured_project_id(credential_data: Optional[Dict[str, Any]]) -> str:
+    environment_project_id = os.getenv("FIREBASE_PROJECT_ID", "").strip()
+    credential_project_id = str((credential_data or {}).get("project_id", "")).strip()
+    if (
+        environment_project_id
+        and credential_project_id
+        and environment_project_id != credential_project_id
+    ):
+        raise ReactionStoreError(
+            "FIREBASE_PROJECT_ID does not match the Firebase credential project_id"
+        )
+    return environment_project_id or credential_project_id
+
+
+def _credential_configuration() -> tuple[Optional[Path], Optional[Dict[str, Any]], str]:
+    credential_path = _credential_path()
+    inline_credentials = _load_inline_credentials()
+    if credential_path is not None and inline_credentials is not None:
+        raise ReactionStoreError(
+            "Configure either GOOGLE_APPLICATION_CREDENTIALS/Render Secret File "
+            f"or {INLINE_CREDENTIALS_ENV}, not both"
+        )
+    if credential_path is not None:
+        return credential_path, None, "service_account_file"
+    if inline_credentials is not None:
+        return None, inline_credentials, "service_account_json_env"
+    if _is_render_runtime():
+        raise ReactionStoreError(
+            "Firebase credentials are required on Render; expected "
+            "GOOGLE_APPLICATION_CREDENTIALS, /etc/secrets/firebase-service-account.json, "
+            f"or {INLINE_CREDENTIALS_ENV}"
+        )
+    return None, None, "application_default_credentials"
+
+
 def _initialize_firebase_app() -> Any:
-    import firebase_admin
-    from firebase_admin import credentials
+    try:
+        import firebase_admin
+        from firebase_admin import credentials
+    except Exception as exc:
+        logger.exception("Firebase Admin SDK import failed")
+        raise ReactionStoreError("Firebase Admin SDK import failed") from exc
 
     try:
-        return firebase_admin.get_app()
+        return firebase_admin.get_app(name=FIREBASE_APP_NAME)
     except ValueError:
         pass
 
-    credential_path = _credential_path()
-    project_id = os.getenv("FIREBASE_PROJECT_ID", "").strip()
+    credential_path, inline_credentials, credential_source = (
+        _credential_configuration()
+    )
+    credential_data: Optional[Dict[str, Any]] = inline_credentials
+    if credential_path is not None:
+        try:
+            loaded = json.loads(credential_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise ReactionStoreError(
+                "Firebase service account file could not be parsed"
+            ) from exc
+        if not isinstance(loaded, dict):
+            raise ReactionStoreError(
+                "Firebase service account file must contain a JSON object"
+            )
+        credential_data = loaded
+
+    project_id = _configured_project_id(credential_data)
     options = {"projectId": project_id} if project_id else None
 
     try:
         if credential_path is not None:
             credential = credentials.Certificate(str(credential_path))
-            return firebase_admin.initialize_app(credential, options=options)
-        return firebase_admin.initialize_app(options=options)
+            app = firebase_admin.initialize_app(
+                credential, options=options, name=FIREBASE_APP_NAME
+            )
+        elif inline_credentials is not None:
+            credential = credentials.Certificate(inline_credentials)
+            app = firebase_admin.initialize_app(
+                credential, options=options, name=FIREBASE_APP_NAME
+            )
+        else:
+            app = firebase_admin.initialize_app(
+                options=options, name=FIREBASE_APP_NAME
+            )
     except Exception as exc:  # Firebase exposes multiple credential exceptions.
+        logger.exception(
+            "Firebase Admin SDK initialization failed (credential_source=%s)",
+            credential_source,
+        )
         raise ReactionStoreError("Firebase Admin SDK initialization failed") from exc
+    logger.info(
+        "Firebase Admin SDK initialized (backend=%s, credential_source=%s, project_id=%s)",
+        STORAGE_BACKEND,
+        credential_source,
+        project_id or "resolved-by-credentials",
+    )
+    return app
 
 
 def get_firestore_client() -> Any:
     """Return one lazily initialized Firestore client per process."""
-    from firebase_admin import firestore as admin_firestore
+    try:
+        from firebase_admin import firestore as admin_firestore
+    except Exception as exc:
+        logger.exception("Firestore client import failed")
+        raise ReactionStoreError("Firestore client import failed") from exc
 
     global _client
     if _client is not None:
@@ -145,8 +253,28 @@ def get_firestore_client() -> Any:
             else:
                 _client = admin_firestore.client(app=app)
         except Exception as exc:
+            logger.exception("Firestore client initialization failed")
             raise ReactionStoreError("Firestore client initialization failed") from exc
     return _client
+
+
+def verify_reaction_store_connection() -> Dict[str, str]:
+    """Perform a real Firestore read and return non-secret runtime metadata."""
+    client = get_firestore_client()
+    try:
+        list(client.collection(TARGETS_COLLECTION).limit(1).stream())
+    except Exception as exc:
+        logger.exception("Firestore reaction store connectivity check failed")
+        raise ReactionStoreError(
+            "Firestore reaction store connectivity check failed"
+        ) from exc
+    database_id = os.getenv("FIREBASE_DATABASE_ID", "").strip() or "(default)"
+    project_id = str(getattr(client, "project", "") or "unknown")
+    return {
+        "storage_backend": STORAGE_BACKEND,
+        "project_id": project_id,
+        "database_id": database_id,
+    }
 
 
 def _target_query(client: Any, discussion_id: str) -> Iterable[Any]:
@@ -159,6 +287,12 @@ def _target_query(client: Any, discussion_id: str) -> Iterable[Any]:
     )
 
 
+def _execute_transaction(transaction: Any, callback: Any) -> Dict[str, Any]:
+    from google.cloud import firestore as google_firestore
+
+    return google_firestore.transactional(callback)(transaction)
+
+
 def put_reaction_state(
     *,
     discussion_id: str,
@@ -168,8 +302,6 @@ def put_reaction_state(
     base_counts: Dict[str, int],
 ) -> Dict[str, Any]:
     """Set one user's reaction and update aggregate counts atomically."""
-    from google.cloud import firestore as google_firestore
-
     if reaction_type is not None and reaction_type not in REACTION_TYPES:
         raise ValueError("Unsupported reaction type")
 
@@ -182,7 +314,6 @@ def put_reaction_state(
 
     transaction = client.transaction()
 
-    @google_firestore.transactional
     def apply_reaction(transaction: Any) -> Dict[str, Any]:
         target_snapshot = target_ref.get(transaction=transaction)
         user_snapshot = user_ref.get(transaction=transaction)
@@ -246,14 +377,20 @@ def put_reaction_state(
         }
 
     try:
-        state = apply_reaction(transaction)
+        state = _execute_transaction(transaction, apply_reaction)
     except ReactionStoreError:
         raise
     except Exception as exc:
+        logger.exception(
+            "Firestore reaction transaction failed (discussion_id=%s, statement_id=%s)",
+            discussion_id,
+            statement_id,
+        )
         raise ReactionStoreError("Firestore reaction transaction failed") from exc
 
     return {
         "status": "success",
+        "storage_backend": STORAGE_BACKEND,
         "discussion_id": discussion_id,
         "statement_id": statement_id,
         **state,
@@ -286,6 +423,9 @@ def list_reaction_states(
         )
         user_snapshots = list(client.get_all(user_refs)) if user_refs else []
     except Exception as exc:
+        logger.exception(
+            "Firestore reaction query failed (discussion_id=%s)", discussion_id
+        )
         raise ReactionStoreError("Firestore reaction query failed") from exc
 
     user_reactions = {
@@ -331,5 +471,8 @@ def get_reaction_totals(discussion_id: str) -> Dict[str, int]:
             for reaction_type in REACTION_TYPES:
                 totals[reaction_type] += live_counts[reaction_type]
     except Exception as exc:
+        logger.exception(
+            "Firestore reaction aggregation failed (discussion_id=%s)", discussion_id
+        )
         raise ReactionStoreError("Firestore reaction aggregation failed") from exc
     return totals
