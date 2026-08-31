@@ -152,15 +152,21 @@ def _flat_aggregate_fields(
     question_id: str, aggregate: Dict[str, Any]
 ) -> Dict[str, Any]:
     """Expose the stable, compact aggregate shape used by public clients."""
+    if aggregate["total_responses"] == 0:
+        answer_counts: Dict[str, int] = {}
+        reason_counts: Dict[str, int] = {}
+    else:
+        answer_counts = {
+            answer["id"]: answer["count"] for answer in aggregate["answers"]
+        }
+        reason_counts = {
+            reason["id"]: reason["count"] for reason in aggregate["reasons"]
+        }
     return {
         "question_id": question_id,
         "total": aggregate["total_responses"],
-        "answers": {
-            answer["id"]: answer["count"] for answer in aggregate["answers"]
-        },
-        "reasons": {
-            reason["id"]: reason["count"] for reason in aggregate["reasons"]
-        },
+        "answers": answer_counts,
+        "reasons": reason_counts,
     }
 
 
