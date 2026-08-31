@@ -148,6 +148,22 @@ def _aggregate_payload(
     }
 
 
+def _flat_aggregate_fields(
+    question_id: str, aggregate: Dict[str, Any]
+) -> Dict[str, Any]:
+    """Expose the stable, compact aggregate shape used by public clients."""
+    return {
+        "question_id": question_id,
+        "total": aggregate["total_responses"],
+        "answers": {
+            answer["id"]: answer["count"] for answer in aggregate["answers"]
+        },
+        "reasons": {
+            reason["id"]: reason["count"] for reason in aggregate["reasons"]
+        },
+    }
+
+
 def put_citizen_question_response(
     *,
     issue_id: str,
@@ -260,10 +276,12 @@ def put_citizen_question_response(
             "Firestore citizen response transaction failed"
         ) from exc
 
+    aggregate = result["aggregate"]
     return {
         "status": "success",
         "storage_backend": STORAGE_BACKEND,
         "question": definition,
+        **_flat_aggregate_fields(question_id, aggregate),
         **result,
     }
 
@@ -303,12 +321,14 @@ def get_citizen_question_snapshot(
         if response_snapshot is not None and response_snapshot.exists
         else None
     )
+    aggregate = _aggregate_payload(definition, aggregate_data)
     return {
         "status": "success",
         "storage_backend": STORAGE_BACKEND,
         "question": definition,
         "my_response": _public_response(response_data) if response_data else None,
-        "aggregate": _aggregate_payload(definition, aggregate_data),
+        "aggregate": aggregate,
+        **_flat_aggregate_fields(question_id, aggregate),
     }
 
 

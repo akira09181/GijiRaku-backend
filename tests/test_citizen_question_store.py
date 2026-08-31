@@ -177,6 +177,35 @@ class CitizenQuestionStoreTest(unittest.TestCase):
         result = _answer(free_text="")
         self.assertEqual(result["my_response"]["free_text"], "")
 
+    def test_zero_responses_return_a_successful_flat_empty_aggregate(self):
+        snapshot = get_citizen_question_snapshot(
+            issue_id=SHINJUKU_ISSUE_ID,
+            question_id=SHINJUKU_QUESTION_ID,
+            anonymous_user_id="new-browser",
+        )
+
+        self.assertEqual(snapshot["question_id"], SHINJUKU_QUESTION_ID)
+        self.assertEqual(snapshot["total"], 0)
+        self.assertEqual(
+            snapshot["answers"],
+            {
+                "needed": 0,
+                "current_is_enough": 0,
+                "need_more_information": 0,
+            },
+        )
+        self.assertEqual(
+            snapshot["reasons"],
+            {
+                "availability_unknown": 0,
+                "same_day_booking_unknown": 0,
+                "capacity_shortage": 0,
+                "criteria_unclear": 0,
+                "never_used": 0,
+                "other": 0,
+            },
+        )
+
     def test_free_text_over_500_characters_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "at most 500"):
             _answer(free_text="あ" * 501)
