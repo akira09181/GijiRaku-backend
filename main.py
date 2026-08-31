@@ -307,14 +307,24 @@ def get_catalog():
     return {"status": "success", "datasets": datasets}
 
 @app.get("/api/assembly-records")
-def list_assembly_records(assembly_id: str, limit: int = 20):
+def list_assembly_records(
+    assembly_id: str,
+    limit: int = 20,
+    discussion_id: Optional[str] = None,
+):
     """構造化・原文照合済み会議録を会議日の新しい順で返す。"""
     if limit < 1 or limit > 100:
         raise HTTPException(status_code=400, detail="limit must be between 1 and 100")
     try:
-        data = get_assembly_records(assembly_id, limit=limit)
+        data = get_assembly_records(
+            assembly_id,
+            limit=limit,
+            discussion_id=discussion_id,
+        )
     except KeyError:
         raise HTTPException(status_code=404, detail="Assembly records not found")
+    if discussion_id is not None and not data["records"]:
+        raise HTTPException(status_code=404, detail="Discussion record not found")
     return {"status": "success", **data}
 
 

@@ -33,7 +33,11 @@ def normalize_assembly_id(assembly_id: str) -> str:
     return ASSEMBLY_ALIASES.get(assembly_id, assembly_id)
 
 
-def get_assembly_records(assembly_id: str, limit: Optional[int] = None) -> Dict[str, Any]:
+def get_assembly_records(
+    assembly_id: str,
+    limit: Optional[int] = None,
+    discussion_id: Optional[str] = None,
+) -> Dict[str, Any]:
     normalized_id = normalize_assembly_id(assembly_id)
     dataset = load_dataset()
     assembly = dataset["assemblies"].get(normalized_id)
@@ -44,6 +48,10 @@ def get_assembly_records(assembly_id: str, limit: Optional[int] = None) -> Dict[
         deepcopy(record)
         for record in assembly.get("records", [])
         if record.get("publication_status") == "published"
+        and (
+            discussion_id is None
+            or record.get("discussion_id") == discussion_id
+        )
     ]
     records.sort(key=lambda record: record.get("meeting_date", ""), reverse=True)
     if limit is not None:
