@@ -6,6 +6,7 @@ import citizen_question_store
 from citizen_question_store import (
     AGGREGATES_COLLECTION,
     RESPONSES_COLLECTION,
+    SHINJUKU_E2E_QUESTION_ID,
     SHINJUKU_ISSUE_ID,
     SHINJUKU_QUESTION_ID,
     get_citizen_question_admin_results,
@@ -188,6 +189,17 @@ class CitizenQuestionStoreTest(unittest.TestCase):
         self.assertEqual(snapshot["total"], 0)
         self.assertEqual(snapshot["answers"], {})
         self.assertEqual(snapshot["reasons"], {})
+
+    def test_public_e2e_question_uses_an_isolated_aggregate(self):
+        _answer()
+        test_snapshot = get_citizen_question_snapshot(
+            issue_id=SHINJUKU_ISSUE_ID,
+            question_id=SHINJUKU_E2E_QUESTION_ID,
+            anonymous_user_id="public-e2e-browser-a",
+        )
+
+        self.assertEqual(test_snapshot["total"], 0)
+        self.assertTrue(test_snapshot["question"]["test_only"])
 
     def test_free_text_over_500_characters_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "at most 500"):

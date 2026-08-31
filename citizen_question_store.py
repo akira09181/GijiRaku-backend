@@ -20,6 +20,7 @@ AGGREGATES_COLLECTION = "citizen_question_aggregates"
 
 SHINJUKU_ISSUE_ID = "shinjuku-sick-child-care-2026-06-10"
 SHINJUKU_QUESTION_ID = "shinjuku-sick-child-care-realtime-booking-v1"
+SHINJUKU_E2E_QUESTION_ID = "shinjuku-sick-child-care-realtime-booking-public-e2e-v1"
 
 QUESTION_DEFINITIONS: Dict[str, Dict[str, Any]] = {
     SHINJUKU_QUESTION_ID: {
@@ -41,6 +42,10 @@ QUESTION_DEFINITIONS: Dict[str, Dict[str, Any]] = {
         "municipality": "新宿区",
         "theme": "病児保育の利用拒否と予約・空き状況の改善",
     }
+}
+QUESTION_DEFINITIONS[SHINJUKU_E2E_QUESTION_ID] = {
+    **QUESTION_DEFINITIONS[SHINJUKU_QUESTION_ID],
+    "test_only": True,
 }
 
 logger = logging.getLogger(__name__)
