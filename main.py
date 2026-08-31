@@ -21,6 +21,11 @@ from reaction_store import (
     put_reaction_state,
     verify_reaction_store_connection,
 )
+from citizen_question_store import (
+    get_citizen_question_admin_results,
+    get_citizen_question_snapshot,
+    put_citizen_question_response,
+)
 
 logger = logging.getLogger("gijiraku.reactions")
 
@@ -398,6 +403,15 @@ class ReactionStateRequest(BaseModel):
     anonymous_user_id: str = Field(min_length=1)
     base_counts: ReactionCounts = Field(default_factory=ReactionCounts)
 
+
+class CitizenQuestionResponseRequest(BaseModel):
+    issue_id: str = Field(min_length=1)
+    question_id: str = Field(min_length=1)
+    anonymous_user_id: str = Field(min_length=1)
+    selected_answer: str = Field(min_length=1)
+    selected_reasons: List[str] = Field(min_length=1)
+    free_text: str = Field(default="", max_length=500)
+
 @app.put('/api/reactions')
 def put_reaction(request: ReactionStateRequest):
     """匿名ユーザーの対象別リアクション状態を冪等に設定する。"""
@@ -476,6 +490,84 @@ def get_reactions(
         # Kept temporarily for clients deployed before the separated response shape.
         'data': legacy_data,
     }
+
+
+@app.put('/api/citizen-question-responses')
+def put_citizen_question_answer(request: CitizenQuestionResponseRequest):
+    """Save one issue-specific response per anonymous user in Firestore."""
+    try:
+        return put_citizen_question_response(**request.model_dump())
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except ReactionStoreError as exc:
+        logger.exception(
+            "Firestore citizen question PUT failed (issue_id=%s, question_id=%s)",
+            request.issue_id,
+            request.question_id,
+        )
+        raise HTTPException(
+            status_code=500,
+            detail="Firestore citizen response store unavailable",
+        ) from exc
+
+
+@app.get('/api/citizen-question-responses')
+def get_citizen_question_answer(
+    issue_id: str,
+    question_id: str,
+    anonymous_user_id: Optional[str] = None,
+    include_my_response: bool = True,
+):
+    """Return the Firestore aggregate separately from the current user's answer."""
+    normalized_user_id = (anonymous_user_id or "").strip()
+    if include_my_response and not normalized_user_id:
+        raise HTTPException(
+            status_code=400,
+            detail="anonymous_user_id is required when include_my_response is true",
+        )
+    try:
+        return get_citizen_question_snapshot(
+            issue_id=issue_id,
+            question_id=question_id,
+            anonymous_user_id=(normalized_user_id if include_my_response else None),
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except ReactionStoreError as exc:
+        logger.exception(
+            "Firestore citizen question GET failed (issue_id=%s, question_id=%s)",
+            issue_id,
+            question_id,
+        )
+        raise HTTPException(
+            status_code=500,
+            detail="Firestore citizen response store unavailable",
+        ) from exc
+
+
+@app.get('/api/admin/citizen-question-results')
+def get_citizen_question_admin(
+    issue_id: str,
+    question_id: str,
+):
+    """Return issue-level aggregates and anonymized response details."""
+    try:
+        return get_citizen_question_admin_results(
+            issue_id=issue_id,
+            question_id=question_id,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except ReactionStoreError as exc:
+        logger.exception(
+            "Firestore citizen question admin GET failed (issue_id=%s, question_id=%s)",
+            issue_id,
+            question_id,
+        )
+        raise HTTPException(
+            status_code=500,
+            detail="Firestore citizen response store unavailable",
+        ) from exc
 
 class UtteranceReactionRequest(BaseModel):
     reaction_type: str # 'agree' | 'concern' | 'helpful'

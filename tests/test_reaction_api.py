@@ -87,6 +87,44 @@ class ReactionApiTest(unittest.TestCase):
         self.assertEqual(post_error.exception.status_code, 410)
         self.assertEqual(get_error.exception.status_code, 410)
 
+    def test_citizen_question_get_keeps_my_response_separate_from_aggregate(self):
+        expected = {
+            "status": "success",
+            "storage_backend": "firestore",
+            "my_response": {"selected_answer": "needed"},
+            "aggregate": {"total_responses": 3},
+        }
+        with patch.object(
+            main, "get_citizen_question_snapshot", return_value=expected
+        ) as store_get:
+            response = main.get_citizen_question_answer(
+                "issue", "question", "anonymous-user"
+            )
+
+        self.assertEqual(response, expected)
+        store_get.assert_called_once_with(
+            issue_id="issue",
+            question_id="question",
+            anonymous_user_id="anonymous-user",
+        )
+
+    def test_citizen_question_get_returns_500_instead_of_zero_on_store_failure(self):
+        with patch.object(
+            main,
+            "get_citizen_question_snapshot",
+            side_effect=ReactionStoreError("initialization failed"),
+        ):
+            with self.assertRaises(HTTPException) as raised:
+                main.get_citizen_question_answer(
+                    "issue", "question", "anonymous-user"
+                )
+
+        self.assertEqual(raised.exception.status_code, 500)
+        self.assertEqual(
+            raised.exception.detail,
+            "Firestore citizen response store unavailable",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
