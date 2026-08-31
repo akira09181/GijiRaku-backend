@@ -397,43 +397,22 @@ def put_reaction_state(
     }
 
 
-def list_reaction_states(
+def list_reaction_aggregates(
     *,
     discussion_id: str,
-    anonymous_user_id: str,
-    include_user_state: bool = True,
 ) -> list[Dict[str, Any]]:
-    """Return aggregate counts and the requesting user's state for a discussion."""
+    """Return Firestore aggregate counts without reading any user identity."""
     client = get_firestore_client()
     try:
         target_snapshots = list(_target_query(client, discussion_id))
-        user_refs = (
-            [
-                client.collection(USERS_COLLECTION).document(
-                    _user_document_id(
-                        discussion_id,
-                        (snapshot.to_dict() or {}).get("statement_id", ""),
-                        anonymous_user_id,
-                    )
-                )
-                for snapshot in target_snapshots
-            ]
-            if include_user_state
-            else []
-        )
-        user_snapshots = list(client.get_all(user_refs)) if user_refs else []
     except Exception as exc:
         logger.exception(
-            "Firestore reaction query failed (discussion_id=%s)", discussion_id
+            "Firestore reaction aggregate query failed (discussion_id=%s)",
+            discussion_id,
         )
-        raise ReactionStoreError("Firestore reaction query failed") from exc
+        raise ReactionStoreError("Firestore reaction aggregate query failed") from exc
 
-    user_reactions = {
-        snapshot.reference.id: (snapshot.to_dict() or {}).get("reaction_type")
-        for snapshot in user_snapshots
-        if snapshot.exists
-    }
-    data: list[Dict[str, Any]] = []
+    aggregates: list[Dict[str, Any]] = []
     for target_snapshot in target_snapshots:
         target_data = target_snapshot.to_dict() or {}
         statement_id = str(target_data.get("statement_id", ""))
@@ -441,21 +420,88 @@ def list_reaction_states(
             continue
         base_counts = _nonnegative_counts(target_data.get("base_counts"))
         live_counts = _nonnegative_counts(target_data.get("live_counts"))
-        user_document_id = _user_document_id(
-            discussion_id, statement_id, anonymous_user_id
-        )
-        user_reaction = user_reactions.get(user_document_id)
-        data.append(
+        aggregates.append(
             {
                 "statement_id": statement_id,
-                "reaction_type": (
-                    user_reaction if user_reaction in REACTION_TYPES else None
-                ),
                 "counts": _combined_counts(base_counts, live_counts),
                 "live_counts": live_counts,
             }
         )
-    return sorted(data, key=lambda item: item["statement_id"])
+    return sorted(aggregates, key=lambda item: item["statement_id"])
+
+
+def list_user_reaction_states(
+    *,
+    discussion_id: str,
+    anonymous_user_id: str,
+    statement_ids: Iterable[str],
+) -> list[Dict[str, Any]]:
+    """Return only one anonymous user's selected reactions."""
+    client = get_firestore_client()
+    unique_statement_ids = sorted(set(statement_ids))
+    try:
+        user_refs = [
+            client.collection(USERS_COLLECTION).document(
+                _user_document_id(
+                    discussion_id,
+                    statement_id,
+                    anonymous_user_id,
+                )
+            )
+            for statement_id in unique_statement_ids
+        ]
+        user_snapshots = list(client.get_all(user_refs)) if user_refs else []
+    except Exception as exc:
+        logger.exception(
+            "Firestore user reaction query failed (discussion_id=%s)", discussion_id
+        )
+        raise ReactionStoreError("Firestore user reaction query failed") from exc
+
+    states: list[Dict[str, Any]] = []
+    for snapshot in user_snapshots:
+        if not snapshot.exists:
+            continue
+        user_data = snapshot.to_dict() or {}
+        statement_id = str(user_data.get("statement_id", ""))
+        reaction_type = user_data.get("reaction_type")
+        if not statement_id or reaction_type not in REACTION_TYPES:
+            continue
+        states.append(
+            {
+                "statement_id": statement_id,
+                "reaction_type": reaction_type,
+            }
+        )
+    return states
+
+
+def list_reaction_states(
+    *,
+    discussion_id: str,
+    anonymous_user_id: str,
+    include_user_state: bool = True,
+) -> list[Dict[str, Any]]:
+    """Backward-compatible combined view built from separated Firestore reads."""
+    aggregates = list_reaction_aggregates(discussion_id=discussion_id)
+    user_states = (
+        list_user_reaction_states(
+            discussion_id=discussion_id,
+            anonymous_user_id=anonymous_user_id,
+            statement_ids=(item["statement_id"] for item in aggregates),
+        )
+        if include_user_state
+        else []
+    )
+    user_reactions = {
+        item["statement_id"]: item["reaction_type"] for item in user_states
+    }
+    return [
+        {
+            **aggregate,
+            "reaction_type": user_reactions.get(aggregate["statement_id"]),
+        }
+        for aggregate in aggregates
+    ]
 
 
 def get_reaction_totals(discussion_id: str) -> Dict[str, int]:

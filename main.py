@@ -16,7 +16,8 @@ from assembly_records import get_assembly_record_stats, get_assembly_records
 from reaction_store import (
     ReactionStoreError,
     STORAGE_BACKEND,
-    list_reaction_states,
+    list_reaction_aggregates,
+    list_user_reaction_states,
     put_reaction_state,
     verify_reaction_store_connection,
 )
@@ -411,18 +412,29 @@ def put_reaction(request: ReactionStateRequest):
 @app.get('/api/reactions')
 def get_reactions(
     discussion_id: str,
-    anonymous_user_id: str,
+    anonymous_user_id: Optional[str] = None,
     include_user_state: bool = True,
 ):
-    """議論内の最新件数と匿名ユーザー自身の選択状態を取得する。"""
-    if not discussion_id.strip() or not anonymous_user_id.strip():
-        raise HTTPException(status_code=400, detail='discussion_id and anonymous_user_id are required')
+    """全体集計と、任意の匿名ユーザー自身の選択状態を分離して返す。"""
+    if not discussion_id.strip():
+        raise HTTPException(status_code=400, detail='discussion_id is required')
+    normalized_user_id = (anonymous_user_id or "").strip()
+    if include_user_state and not normalized_user_id:
+        raise HTTPException(
+            status_code=400,
+            detail='anonymous_user_id is required when include_user_state is true',
+        )
 
     try:
-        data = list_reaction_states(
-            discussion_id=discussion_id,
-            anonymous_user_id=anonymous_user_id,
-            include_user_state=include_user_state,
+        aggregates = list_reaction_aggregates(discussion_id=discussion_id)
+        user_reactions = (
+            list_user_reaction_states(
+                discussion_id=discussion_id,
+                anonymous_user_id=normalized_user_id,
+                statement_ids=(item['statement_id'] for item in aggregates),
+            )
+            if include_user_state
+            else []
         )
     except ReactionStoreError as exc:
         logger.exception(
@@ -432,11 +444,27 @@ def get_reactions(
             status_code=500, detail="Firestore reaction store unavailable"
         ) from exc
 
+    user_reaction_by_statement = {
+        item['statement_id']: item['reaction_type'] for item in user_reactions
+    }
+    legacy_data = [
+        {
+            **aggregate,
+            'reaction_type': user_reaction_by_statement.get(
+                aggregate['statement_id']
+            ),
+        }
+        for aggregate in aggregates
+    ]
+
     return {
         'status': 'success',
         'storage_backend': STORAGE_BACKEND,
         'discussion_id': discussion_id,
-        'data': data,
+        'aggregates': aggregates,
+        'user_reactions': user_reactions,
+        # Kept temporarily for clients deployed before the separated response shape.
+        'data': legacy_data,
     }
 
 class UtteranceReactionRequest(BaseModel):

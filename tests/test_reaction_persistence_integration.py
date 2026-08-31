@@ -86,7 +86,8 @@ class FirestoreApiRestartPersistenceTest(unittest.TestCase):
             _get_from_fresh_api_process, discussion_id, user_id
         )
         self.assertEqual(initial["storage_backend"], "firestore")
-        self.assertEqual(initial["data"], [])
+        self.assertEqual(initial["aggregates"], [])
+        self.assertEqual(initial["user_reactions"], [])
 
         written = self._run_process(
             _put_from_fresh_api_process,
@@ -102,11 +103,18 @@ class FirestoreApiRestartPersistenceTest(unittest.TestCase):
             _get_from_fresh_api_process, discussion_id, user_id
         )
         persisted = next(
-            item for item in reloaded["data"] if item["statement_id"] == statement_id
+            item
+            for item in reloaded["aggregates"]
+            if item["statement_id"] == statement_id
+        )
+        user_reaction = next(
+            item
+            for item in reloaded["user_reactions"]
+            if item["statement_id"] == statement_id
         )
         self.assertEqual(reloaded["storage_backend"], "firestore")
-        self.assertEqual(persisted["reaction_type"], "agree")
         self.assertEqual(persisted["live_counts"]["agree"], 1)
+        self.assertEqual(user_reaction["reaction_type"], "agree")
 
 if __name__ == "__main__":
     unittest.main()

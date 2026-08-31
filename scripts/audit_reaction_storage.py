@@ -88,9 +88,10 @@ def audit(discussion_id: str, api_base: str) -> Dict[str, Any]:
             user_counts[statement_id][reaction_type] += 1
 
     api_payload = _api_reactions(api_base, discussion_id)
+    api_records = api_payload.get("aggregates", api_payload.get("data", []))
     api_counts = {
         item["statement_id"]: _nonnegative_counts(item.get("live_counts"))
-        for item in api_payload.get("data", [])
+        for item in api_records
         if item.get("statement_id")
     }
     all_statement_ids = sorted(

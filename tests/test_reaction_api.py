@@ -9,17 +9,47 @@ from reaction_store import ReactionStoreError
 
 class ReactionApiTest(unittest.TestCase):
     def test_get_identifies_firestore_backend(self):
-        with patch.object(main, "list_reaction_states", return_value=[]):
+        aggregates = [
+            {
+                "statement_id": "statement",
+                "counts": {"agree": 4, "concern": 2, "helpful": 1},
+                "live_counts": {"agree": 4, "concern": 2, "helpful": 1},
+            }
+        ]
+        user_reactions = [
+            {"statement_id": "statement", "reaction_type": "agree"}
+        ]
+        with (
+            patch.object(main, "list_reaction_aggregates", return_value=aggregates),
+            patch.object(
+                main, "list_user_reaction_states", return_value=user_reactions
+            ),
+        ):
             response = main.get_reactions("discussion", "anonymous-user")
 
         self.assertEqual(response["status"], "success")
         self.assertEqual(response["storage_backend"], "firestore")
-        self.assertEqual(response["data"], [])
+        self.assertEqual(response["aggregates"], aggregates)
+        self.assertEqual(response["user_reactions"], user_reactions)
+        self.assertEqual(response["data"][0]["reaction_type"], "agree")
+
+    def test_aggregate_only_get_does_not_require_or_query_user_id(self):
+        with (
+            patch.object(main, "list_reaction_aggregates", return_value=[]),
+            patch.object(main, "list_user_reaction_states") as user_query,
+        ):
+            response = main.get_reactions(
+                "discussion", anonymous_user_id=None, include_user_state=False
+            )
+
+        self.assertEqual(response["aggregates"], [])
+        self.assertEqual(response["user_reactions"], [])
+        user_query.assert_not_called()
 
     def test_get_returns_500_when_firestore_is_unavailable(self):
         with patch.object(
             main,
-            "list_reaction_states",
+            "list_reaction_aggregates",
             side_effect=ReactionStoreError("initialization failed"),
         ):
             with self.assertRaises(HTTPException) as raised:
