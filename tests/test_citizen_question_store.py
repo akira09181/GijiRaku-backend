@@ -5,6 +5,7 @@ from unittest.mock import patch
 import citizen_question_store
 from citizen_question_store import (
     AGGREGATES_COLLECTION,
+    QUESTION_DEFINITIONS,
     RESPONSES_COLLECTION,
     SHINJUKU_E2E_QUESTION_ID,
     SHINJUKU_ISSUE_ID,
@@ -118,6 +119,53 @@ class CitizenQuestionStoreTest(unittest.TestCase):
         self.assertEqual(result["aggregate"]["total_responses"], 1)
         self.assertTrue(result["created"])
         self.assertEqual(result["storage_backend"], "firestore")
+
+    def test_all_seven_issue_definitions_are_actionable_and_persist_separately(self):
+        production_definitions = {
+            question_id: definition
+            for question_id, definition in QUESTION_DEFINITIONS.items()
+            if not definition.get("test_only")
+        }
+
+        self.assertEqual(len(production_definitions), 7)
+        for question_id, definition in production_definitions.items():
+            with self.subTest(question_id=question_id):
+                self.assertEqual(len(definition["answers"]), 3)
+                self.assertGreaterEqual(len(definition["reasons"]), 5)
+                self.assertLessEqual(len(definition["reasons"]), 6)
+                self.assertIn(
+                    "need_more_information",
+                    {answer["id"] for answer in definition["answers"]},
+                )
+                self.assertTrue(
+                    any("never" in reason["id"] for reason in definition["reasons"])
+                )
+                result = put_citizen_question_response(
+                    issue_id=definition["issue_id"],
+                    question_id=question_id,
+                    anonymous_user_id="definition-test-browser",
+                    selected_answer=definition["answers"][0]["id"],
+                    selected_reasons=[
+                        definition["reasons"][0]["id"],
+                        definition["reasons"][1]["id"],
+                    ],
+                    free_text="議題別の保存確認",
+                )
+                self.assertEqual(result["aggregate"]["total_responses"], 1)
+                self.assertEqual(result["question"]["issue_id"], definition["issue_id"])
+
+        response_documents = [
+            data
+            for (collection, _), data in self.firestore.items()
+            if collection == RESPONSES_COLLECTION
+        ]
+        aggregate_documents = [
+            data
+            for (collection, _), data in self.firestore.items()
+            if collection == AGGREGATES_COLLECTION
+        ]
+        self.assertEqual(len(response_documents), 7)
+        self.assertEqual(len(aggregate_documents), 7)
 
     def test_reanswer_updates_one_record_and_moves_aggregate(self):
         _answer()
