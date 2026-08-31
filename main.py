@@ -26,6 +26,12 @@ from citizen_question_store import (
     get_citizen_question_snapshot,
     put_citizen_question_response,
 )
+from follow_store import (
+    delete_issue_follow,
+    list_issue_follows,
+    mark_issue_follow_viewed,
+    put_issue_follow,
+)
 
 logger = logging.getLogger("gijiraku.reactions")
 
@@ -412,6 +418,11 @@ class CitizenQuestionResponseRequest(BaseModel):
     selected_reasons: List[str] = Field(min_length=1)
     free_text: str = Field(default="", max_length=500)
 
+
+class IssueFollowRequest(BaseModel):
+    issue_id: str = Field(min_length=1)
+    anonymous_user_id: str = Field(min_length=1)
+
 @app.put('/api/reactions')
 def put_reaction(request: ReactionStateRequest):
     """匿名ユーザーの対象別リアクション状態を冪等に設定する。"""
@@ -568,6 +579,59 @@ def get_citizen_question_admin(
             status_code=500,
             detail="Firestore citizen response store unavailable",
         ) from exc
+
+
+@app.put('/api/follows')
+def put_follow(request: IssueFollowRequest):
+    """Create one idempotent Firestore follow per anonymous user and issue."""
+    try:
+        return put_issue_follow(**request.model_dump())
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except ReactionStoreError as exc:
+        logger.exception("Firestore follow PUT failed (issue_id=%s)", request.issue_id)
+        raise HTTPException(status_code=500, detail="Firestore follow store unavailable") from exc
+
+
+@app.get('/api/follows')
+def get_follows(anonymous_user_id: str):
+    """List one anonymous user's follows enriched with current issue status."""
+    if not anonymous_user_id.strip():
+        raise HTTPException(status_code=400, detail="anonymous_user_id is required")
+    try:
+        return list_issue_follows(anonymous_user_id=anonymous_user_id)
+    except ReactionStoreError as exc:
+        logger.exception("Firestore follow GET failed")
+        raise HTTPException(status_code=500, detail="Firestore follow store unavailable") from exc
+
+
+@app.patch('/api/follows/viewed')
+def mark_follow_viewed(request: IssueFollowRequest):
+    """Mark status as read only when the followed issue detail is opened."""
+    try:
+        return mark_issue_follow_viewed(**request.model_dump())
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except ReactionStoreError as exc:
+        logger.exception("Firestore follow viewed update failed (issue_id=%s)", request.issue_id)
+        raise HTTPException(status_code=500, detail="Firestore follow store unavailable") from exc
+
+
+@app.delete('/api/follows')
+def delete_follow(issue_id: str, anonymous_user_id: str):
+    """Remove one anonymous user's follow without touching response data."""
+    if not issue_id.strip() or not anonymous_user_id.strip():
+        raise HTTPException(status_code=400, detail="issue_id and anonymous_user_id are required")
+    try:
+        return delete_issue_follow(
+            issue_id=issue_id,
+            anonymous_user_id=anonymous_user_id,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except ReactionStoreError as exc:
+        logger.exception("Firestore follow DELETE failed (issue_id=%s)", issue_id)
+        raise HTTPException(status_code=500, detail="Firestore follow store unavailable") from exc
 
 class UtteranceReactionRequest(BaseModel):
     reaction_type: str # 'agree' | 'concern' | 'helpful'

@@ -457,6 +457,31 @@ def get_citizen_question_snapshot(
     }
 
 
+def get_citizen_question_user_response(
+    *,
+    issue_id: str,
+    question_id: str,
+    anonymous_user_id: str,
+    client: Any = None,
+) -> Optional[Dict[str, Any]]:
+    """Read one user's structured response without loading the global aggregate."""
+    _definition(issue_id, question_id)
+    firestore_client = client or get_firestore_client()
+    reference = firestore_client.collection(RESPONSES_COLLECTION).document(
+        _response_document_id(question_id, anonymous_user_id)
+    )
+    try:
+        snapshot = reference.get()
+    except Exception as exc:
+        logger.exception(
+            "Firestore citizen user response GET failed (issue_id=%s, question_id=%s)",
+            issue_id,
+            question_id,
+        )
+        raise ReactionStoreError("Firestore citizen user response GET failed") from exc
+    return _public_response(snapshot.to_dict() or {}) if snapshot.exists else None
+
+
 def _response_query(client: Any, question_id: str) -> Iterable[Any]:
     from google.cloud.firestore_v1.base_query import FieldFilter
 
