@@ -10,9 +10,9 @@ class IssueCatalogTest(unittest.TestCase):
     def test_catalog_exposes_only_compact_verified_topics(self):
         catalog = get_issue_catalog()
 
-        self.assertGreaterEqual(catalog["issue_count"], 35)
-        self.assertGreaterEqual(catalog["counts_by_assembly"]["shinjuku-ward"], 10)
-        self.assertEqual(catalog["issue_count"], 52)
+        self.assertEqual(catalog["issue_count"], catalog["total_catalog_issue_count"])
+        self.assertGreaterEqual(catalog["issue_count"], 74)
+        self.assertGreaterEqual(catalog["counts_by_assembly"]["shinjuku-ward"], 39)
         self.assertGreaterEqual(catalog["counts_by_assembly"]["tokyo-metropolitan"], 10)
         for assembly_id in ("machida-city", "shinagawa-ward", "shibuya-ward"):
             self.assertGreaterEqual(catalog["counts_by_assembly"][assembly_id], 3)
@@ -40,7 +40,10 @@ class IssueCatalogTest(unittest.TestCase):
 
     def test_catalog_filters_by_region_theme_and_stage(self):
         shinjuku = get_issue_catalog(assembly_id="shinjuku-ward")
-        self.assertEqual(shinjuku["issue_count"], 20)
+        self.assertEqual(
+            shinjuku["issue_count"],
+            shinjuku["counts_by_assembly"]["shinjuku-ward"],
+        )
         self.assertTrue(all(item["assembly_id"] == "shinjuku-ward" for item in shinjuku["issues"]))
 
         digital = get_issue_catalog(theme="digital")

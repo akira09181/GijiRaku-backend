@@ -214,6 +214,12 @@ class UpdateAssemblyRecordsTest(unittest.TestCase):
         self.assertEqual(len(records), 2)
         self.assertTrue(all(len(record["statements"]) == 2 for record in records))
         self.assertTrue(all("答弁済み" in record["current_stage"] for record in records))
+        statement_ids = [
+            statement["statement_id"]
+            for record in records
+            for statement in record["statements"]
+        ]
+        self.assertEqual(len(statement_ids), len(set(statement_ids)))
 
     @patch("scripts.update_assembly_records.ssp_post")
     def test_official_speech_without_answer_is_published(self, ssp_post):
@@ -282,8 +288,30 @@ class UpdateAssemblyRecordsTest(unittest.TestCase):
         }
 
         self.assertEqual(auto_publish(dataset, [candidate], 20), 1)
+        self.assertEqual(candidate["publication_status"], "published")
+        self.assertEqual(candidate["auto_published_records"], 1)
         self.assertEqual(auto_publish(dataset, [candidate], 20), 0)
+        self.assertEqual(candidate["publication_status"], "published")
+        self.assertEqual(candidate["auto_published_records"], 1)
         self.assertEqual(len(dataset["assemblies"]["shinjuku-ward"]["records"]), 1)
+
+    @patch("scripts.update_assembly_records.build_ssp_records")
+    def test_auto_publish_keeps_partially_imported_candidate_pending(self, build_records):
+        build_records.return_value = [
+            {
+                "discussion_id": f"shinjuku-auto-{minute_id}",
+                "meeting_date": "2026-06-10",
+                "source_import_id": f"ssp:shinjuku:3193:2:{minute_id}",
+            }
+            for minute_id in (10, 20)
+        ]
+        dataset = {"assemblies": {"shinjuku-ward": {"records": []}}}
+        candidate = {"provider": "ssp", "assembly_id": "shinjuku-ward"}
+
+        self.assertEqual(auto_publish(dataset, [candidate], 1), 1)
+        self.assertEqual(candidate["publication_status"], "pending_review")
+        self.assertEqual(candidate["auto_published_records"], 1)
+        self.assertEqual(candidate["review_reason"], "auto_publish_limit_pending")
 
     @patch("scripts.update_assembly_records.build_ssp_records")
     def test_auto_publish_can_backfill_after_an_existing_import(self, build_records):

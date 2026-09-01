@@ -330,6 +330,21 @@ def build_ssp_records(
         return []
 
     transcript = " ".join(clean_html(item.get("body", "")) for item in minutes)
+    used_statement_ids = {
+        statement["statement_id"]
+        for current_assembly in dataset["assemblies"].values()
+        for record in current_assembly.get("records", [])
+        for statement in record.get("statements", [])
+    }
+    existing_statement_ids_by_import = {
+        record["source_import_id"]: {
+            statement["statement_id"]
+            for statement in record.get("statements", [])
+        }
+        for current_assembly in dataset["assemblies"].values()
+        for record in current_assembly.get("records", [])
+        if record.get("source_import_id")
+    }
     records: List[Dict[str, Any]] = []
     for index, minute in enumerate(minutes):
         if minute.get("minute_type_code") != 5:
@@ -371,15 +386,21 @@ def build_ssp_records(
             f"ssp:{source['tenant']}:{candidate['council_id']}:"
             f"{candidate['schedule_id']}:{minute['minute_id']}"
         )
+        existing_statement_ids = existing_statement_ids_by_import.get(import_id, set())
         question_excerpt = excerpt(minute.get("body", ""), 180)
         if question_excerpt not in transcript:
             continue
         question_speaker = speaker_from_title(
             minute.get("title", ""), assembly["assembly_name"], False
         )
+        question_statement_id = (
+            f"{assembly_id}-auto-{meeting_date}-{candidate['council_id']}-"
+            f"{candidate['schedule_id']}-{minute['minute_id']}-q"
+        )
+        used_statement_ids.add(question_statement_id)
         statements: List[Dict[str, Any]] = [
             {
-                "statement_id": f"{assembly_id}-auto-{meeting_date}-{candidate['council_id']}-{candidate['schedule_id']}-{minute['minute_id']}-q",
+                "statement_id": question_statement_id,
                 **question_speaker,
                 "committee_name": "本会議",
                 "stance_label": "質問" if answers else "議員発言",
@@ -400,9 +421,23 @@ def build_ssp_records(
             answer_speaker = speaker_from_title(
                 answer.get("title", ""), assembly["assembly_name"], True
             )
+            answer_statement_id = (
+                f"{assembly_id}-auto-{meeting_date}-{candidate['council_id']}-"
+                f"{candidate['schedule_id']}-{answer['minute_id']}-a"
+            )
+            if (
+                answer_statement_id in used_statement_ids
+                and answer_statement_id not in existing_statement_ids
+            ):
+                answer_statement_id = (
+                    f"{assembly_id}-auto-{meeting_date}-{candidate['council_id']}-"
+                    f"{candidate['schedule_id']}-{minute['minute_id']}-"
+                    f"{answer['minute_id']}-a"
+                )
+            used_statement_ids.add(answer_statement_id)
             statements.append(
                 {
-                    "statement_id": f"{assembly_id}-auto-{meeting_date}-{candidate['council_id']}-{candidate['schedule_id']}-{answer['minute_id']}-a",
+                    "statement_id": answer_statement_id,
                     **answer_speaker,
                     "party_name": "行政執行部",
                     "committee_name": "本会議・答弁",
@@ -478,8 +513,10 @@ def auto_publish(
         remaining = max_records_per_assembly - added_by_assembly.get(assembly_id, 0)
         if remaining <= 0 or candidate.get("provider") != "ssp":
             continue
+        generated_records = build_ssp_records(dataset, candidate, 1000)
         records: List[Dict[str, Any]] = []
-        for record in build_ssp_records(dataset, candidate, 1000):
+        imported_count = 0
+        for record in generated_records:
             import_id = record.get("source_import_id")
             existing = existing_by_import_id.get(import_id)
             if existing is not None:
@@ -487,31 +524,39 @@ def auto_publish(
                     existing.clear()
                     existing.update(record)
                     changed += 1
+                imported_count += 1
                 continue
             source_topic = (
                 record.get("source_url", ""),
                 re.sub(r"\s+", "", record.get("topic", "")),
             )
             if record.get("source_import_id") in existing_import_ids:
+                imported_count += 1
                 continue
             if source_topic in curated_source_topics:
                 continue
-            records.append(record)
-            if len(records) >= remaining:
-                break
-        if not records:
-            continue
-        dataset["assemblies"][assembly_id].setdefault("records", []).extend(records)
-        dataset["assemblies"][assembly_id]["records"].sort(
-            key=lambda record: record.get("meeting_date", ""), reverse=True
-        )
-        for record in records:
-            existing_import_ids.add(record["source_import_id"])
-            existing_by_import_id[record["source_import_id"]] = record
-        changed += len(records)
-        added_by_assembly[assembly_id] = added_by_assembly.get(assembly_id, 0) + len(records)
-        candidate["publication_status"] = "published"
-        candidate["auto_published_records"] = len(records)
+            if len(records) < remaining:
+                records.append(record)
+                imported_count += 1
+        if records:
+            dataset["assemblies"][assembly_id].setdefault("records", []).extend(records)
+            dataset["assemblies"][assembly_id]["records"].sort(
+                key=lambda record: record.get("meeting_date", ""), reverse=True
+            )
+            for record in records:
+                existing_import_ids.add(record["source_import_id"])
+                existing_by_import_id[record["source_import_id"]] = record
+            changed += len(records)
+            added_by_assembly[assembly_id] = added_by_assembly.get(assembly_id, 0) + len(records)
+
+        if generated_records:
+            candidate["auto_published_records"] = imported_count
+            if imported_count == len(generated_records):
+                candidate["publication_status"] = "published"
+                candidate.pop("review_reason", None)
+            else:
+                candidate["publication_status"] = "pending_review"
+                candidate["review_reason"] = "auto_publish_limit_pending"
 
     if changed:
         for assembly in dataset["assemblies"].values():

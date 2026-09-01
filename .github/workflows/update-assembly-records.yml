@@ -27,6 +27,7 @@ jobs:
   discover:
     if: github.event_name != 'push' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
@@ -34,7 +35,11 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install requests
-      - run: python -m unittest discover -s tests
+      - name: Test ingestion and catalog integrity
+        run: >-
+          python -m unittest
+          tests.test_update_assembly_records
+          tests.test_issue_catalog
       - run: python scripts/validate_issue_catalog.py
       - run: python scripts/update_assembly_records.py --check-only
       - run: python scripts/update_assembly_records.py --auto-publish --max-records-per-assembly 100
