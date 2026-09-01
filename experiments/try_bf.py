@@ -24,7 +24,7 @@ print(f"■ スクレイピング対象URL: {page_url}")
 # 3. リンク先のHTMLからテキストをスクレイピング
 req_page = urllib.request.Request(
     page_url, 
-    headers={'User-Agent': 'Mozilla/5.0'} # ブロック回避のUser-Agent AIzaSyAjGODJcazqYeVjVgUnxhNAXBtrSB6nnQc
+    headers={'User-Agent': 'Mozilla/5.0'}  # ブロック回避のUser-Agent
 )
 
 try:

@@ -1,9 +1,10 @@
 import json
+import os
 from google import genai
 from google.genai import types
 
 # APIキーの設定（環境変数 GEMINI_API_KEY に設定している場合は api_key= の指定は不要です）
-client = genai.Client(api_key="AIzaSyAjGODJcazqYeVjVgUnxhNAXBtrSB6nnQc")
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
 print("PDFをアップロード中...")
 # 新SDKでのファイルアップロード

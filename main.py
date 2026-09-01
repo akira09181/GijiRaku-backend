@@ -2,7 +2,7 @@
 from contextlib import asynccontextmanager
 import json
 import logging
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any, Literal
@@ -27,11 +27,23 @@ from citizen_question_store import (
     get_citizen_question_snapshot,
     put_citizen_question_response,
 )
+from etl_worker import (
+    EtlAuthorizationError,
+    EtlConfigurationError,
+    authorize_etl_request,
+    extract_assembly_record,
+    save_extracted_record,
+)
 from follow_store import (
     delete_issue_follow,
     list_issue_follows,
     mark_issue_follow_viewed,
     put_issue_follow,
+)
+from notification_store import (
+    get_user_preferences,
+    match_issue_notifications,
+    save_user_preferences,
 )
 
 logger = logging.getLogger("gijiraku.reactions")
@@ -93,6 +105,19 @@ class TranslationResponse(BaseModel):
     source_url: Optional[str] = "https://catalog.data.metro.tokyo.lg.jp/"
     source_verified: bool = False
     ai_chain_steps: List[AiChainStep] = []
+
+
+class AssemblyRecordExtractionRequest(BaseModel):
+    raw_text: str = Field(min_length=1, max_length=100_000)
+    persist_to_firestore: bool = False
+    model: Optional[str] = Field(default=None, max_length=100)
+
+
+class AssemblyRecordExtractionResponse(BaseModel):
+    ok: bool
+    record: Dict[str, Any]
+    stored: bool = False
+    document_id: Optional[str] = None
 
 # ---------------------------------------------------------
 # 政策トラッカー 構造化 Topic Schema (ハッカソンデータ設計)
@@ -320,6 +345,40 @@ def get_catalog():
     datasets = fetch_tokyo_catalog_datasets()
     return {"status": "success", "datasets": datasets}
 
+
+@app.post("/api/etl/extract", response_model=AssemblyRecordExtractionResponse)
+def extract_assembly_record_api(
+    request: AssemblyRecordExtractionRequest,
+    x_etl_api_key: Optional[str] = Header(default=None),
+):
+    """Convert raw council transcript text into a structured JSON record and persist it."""
+    try:
+        authorize_etl_request(x_etl_api_key)
+        record = extract_assembly_record(request.raw_text, model_name=request.model)
+        stored = False
+        document_id = None
+        if request.persist_to_firestore:
+            result = save_extracted_record(record)
+            stored = result.get("ok", False)
+            document_id = result.get("document_id")
+        return {
+            "ok": True,
+            "record": record,
+            "stored": stored,
+            "document_id": document_id,
+        }
+    except EtlConfigurationError as exc:
+        logger.error("ETL endpoint is disabled because ETL_API_KEY is not configured")
+        raise HTTPException(status_code=503, detail="ETL endpoint is not configured") from exc
+    except EtlAuthorizationError as exc:
+        raise HTTPException(status_code=401, detail="Invalid ETL API key") from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("ETL extraction API failed")
+        raise HTTPException(status_code=500, detail="ETL extraction failed") from exc
+
+
 @app.get("/api/assembly-records")
 def list_assembly_records(
     assembly_id: str,
@@ -445,6 +504,13 @@ class CitizenQuestionResponseRequest(BaseModel):
 class IssueFollowRequest(BaseModel):
     issue_id: str = Field(min_length=1)
     anonymous_user_id: str = Field(min_length=1)
+
+
+class UserNotificationPreferencesRequest(BaseModel):
+    interest_themes: List[str] = Field(default_factory=list, max_length=20)
+    municipalities: List[str] = Field(default_factory=list, max_length=20)
+    keywords: List[str] = Field(default_factory=list, max_length=20)
+
 
 @app.put('/api/reactions')
 def put_reaction(request: ReactionStateRequest):
@@ -655,6 +721,46 @@ def delete_follow(issue_id: str, anonymous_user_id: str):
     except ReactionStoreError as exc:
         logger.exception("Firestore follow DELETE failed (issue_id=%s)", issue_id)
         raise HTTPException(status_code=500, detail="Firestore follow store unavailable") from exc
+
+
+@app.put('/api/notifications/preferences')
+def put_notification_preferences(
+    request: UserNotificationPreferencesRequest,
+    anonymous_user_id: str,
+):
+    """Save issue-interest preferences for a user so matching can be done later."""
+    if not anonymous_user_id.strip():
+        raise HTTPException(status_code=400, detail="anonymous_user_id is required")
+    try:
+        return save_user_preferences(anonymous_user_id=anonymous_user_id, preferences=request.model_dump())
+    except ReactionStoreError as exc:
+        logger.exception("User notification preferences save failed")
+        raise HTTPException(status_code=500, detail="Notification preference store unavailable") from exc
+
+
+@app.get('/api/notifications/preferences')
+def get_notification_preferences(anonymous_user_id: str):
+    """Return preference metadata for matching and follow-up notifications."""
+    if not anonymous_user_id.strip():
+        raise HTTPException(status_code=400, detail="anonymous_user_id is required")
+    try:
+        return get_user_preferences(anonymous_user_id=anonymous_user_id)
+    except ReactionStoreError as exc:
+        logger.exception("User notification preferences get failed")
+        raise HTTPException(status_code=500, detail="Notification preference store unavailable") from exc
+
+
+@app.get('/api/notifications/matches')
+def get_notification_matches(anonymous_user_id: str):
+    """Find issue records relevant to a user's configured interests and keywords."""
+    if not anonymous_user_id.strip():
+        raise HTTPException(status_code=400, detail="anonymous_user_id is required")
+    try:
+        return match_issue_notifications(anonymous_user_id=anonymous_user_id)
+    except ReactionStoreError as exc:
+        logger.exception("User notification match failed")
+        raise HTTPException(status_code=500, detail="Notification matching store unavailable") from exc
+
 
 class UtteranceReactionRequest(BaseModel):
     reaction_type: str # 'agree' | 'concern' | 'helpful'

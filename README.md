@@ -58,4 +58,19 @@ RUN_FIRESTORE_INTEGRATION_TEST=1 \
 python -m unittest tests.test_reaction_persistence_integration -v
 ```
 
+## 議事録ETL API
+
+`POST /api/etl/extract` は外部公開用ではなく、管理ジョブ専用です。Render と呼び出し元の両方に十分長い同一の `ETL_API_KEY` を設定し、リクエストの `X-ETL-API-Key` ヘッダーで送信してください。キー未設定時は 503、不一致時は 401 を返します。
+
+Gemini を利用する場合は `GEMINI_API_KEY` を設定します。モデルは `GEMINI_MODEL` で変更でき、未設定時は既定モデルを使用します。`persist: true` の抽出結果は公開議題へ直接混入させず、レビュー用の Firestore コレクション `assembly_record_extractions` に保存されます。
+
+```bash
+curl -X POST http://localhost:8000/api/etl/extract \
+  -H "Content-Type: application/json" \
+  -H "X-ETL-API-Key: ${ETL_API_KEY}" \
+  -d '{"raw_text":"議事録本文","persist":false}'
+```
+
+通知設定 API は匿名ユーザーIDをハッシュ化して保存します。設定の取得・更新は `/api/notifications/preferences/{anonymous_user_id}`、一致件数の取得は `/api/notifications/matches/{anonymous_user_id}` です。
+
 サービスアカウントJSONはGitへコミットしないでください。
