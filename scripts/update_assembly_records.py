@@ -238,10 +238,14 @@ def iter_latest_ssp_councils(payload: Dict[str, Any]) -> Iterable[Dict[str, Any]
     if not years:
         return []
     latest_year = max(int(year["view_year"]) for year in years)
+    # A new calendar year can begin with only an extraordinary session. Keep
+    # the previous year's regular sessions discoverable until their records
+    # have been imported as well.
+    earliest_year = latest_year - 1
 
     councils: List[Dict[str, Any]] = []
     for year in years:
-        if int(year["view_year"]) != latest_year:
+        if int(year["view_year"]) < earliest_year:
             continue
         for council_type in year.get("council_type", []):
             if council_type.get("council_type_name2") != "本会議":
@@ -336,9 +340,22 @@ def build_ssp_records(
             continue
 
         answers: List[Dict[str, Any]] = []
+        question_title = minute.get("title", "")
+        answer_started = False
         for following in minutes[index + 1:]:
-            if following.get("minute_type_code") != 6:
+            minute_type = following.get("minute_type_code")
+            if minute_type == 4:
+                # Chair calls commonly separate a question from its answer.
+                continue
+            if minute_type == 5 and not answer_started:
+                # SSP can split one member's question into several consecutive
+                # minute entries before the executive answers the whole group.
+                if following.get("title", "") == question_title:
+                    continue
                 break
+            if minute_type != 6:
+                break
+            answer_started = True
             answer_text = clean_html(following.get("body", ""))
             if len(answer_text) >= 20:
                 answers.append(following)

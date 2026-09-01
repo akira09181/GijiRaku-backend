@@ -7,6 +7,9 @@ on:
     paths:
       - '.github/workflows/update-assembly-records.yml'
       - 'scripts/update_assembly_records.py'
+      - 'scripts/validate_issue_catalog.py'
+      - 'issue_catalog.py'
+      - 'catalog_metadata.py'
       - 'tests/test_update_assembly_records.py'
       - 'data/assembly_records.json'
   schedule:
@@ -32,6 +35,7 @@ jobs:
           cache: pip
       - run: pip install requests
       - run: python -m unittest discover -s tests
+      - run: python scripts/validate_issue_catalog.py
       - run: python scripts/update_assembly_records.py --check-only
       - run: python scripts/update_assembly_records.py --auto-publish --max-records-per-assembly 100
       - name: Commit verified official records

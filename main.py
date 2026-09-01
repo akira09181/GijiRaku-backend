@@ -13,6 +13,7 @@ from opendata_service import (
     fetch_tokyo_catalog_datasets
 )
 from assembly_records import get_assembly_record_stats, get_assembly_records
+from issue_catalog import get_issue_catalog
 from reaction_store import (
     ReactionStoreError,
     STORAGE_BACKEND,
@@ -342,7 +343,22 @@ def list_assembly_records(
 @app.get("/api/assembly-records/stats")
 def assembly_record_stats():
     """公開中の公式会議録・構造化発言の実数を返す。"""
-    return {"status": "success", **get_assembly_record_stats()}
+    stats = get_assembly_record_stats()
+    stats["catalog_issue_count"] = get_issue_catalog()["total_catalog_issue_count"]
+    return {"status": "success", **stats}
+
+
+@app.get("/api/issues")
+def list_public_issues(
+    assembly_id: Optional[str] = None,
+    theme: Optional[str] = None,
+    stage: Optional[str] = None,
+):
+    """Return compact list metadata without sending full statement text."""
+    return {
+        "status": "success",
+        **get_issue_catalog(assembly_id=assembly_id, theme=theme, stage=stage),
+    }
 
 from opendata_service import perform_real_rag_inference
 

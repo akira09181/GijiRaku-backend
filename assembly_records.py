@@ -8,6 +8,8 @@ from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from catalog_metadata import public_title
+
 
 DEFAULT_DATA_PATH = Path(__file__).resolve().parent / "data" / "assembly_records.json"
 ASSEMBLY_ALIASES = {
@@ -54,6 +56,8 @@ def get_assembly_records(
         )
     ]
     records.sort(key=lambda record: record.get("meeting_date", ""), reverse=True)
+    for record in records:
+        record["topic"] = public_title(record)
     if limit is not None:
         records = records[:limit]
 

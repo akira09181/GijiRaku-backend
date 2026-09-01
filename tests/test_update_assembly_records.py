@@ -5,12 +5,47 @@ from scripts.update_assembly_records import (
     auto_publish,
     build_ssp_records,
     extract_topic,
+    iter_latest_ssp_councils,
     parse_meeting_date,
     speaker_from_title,
 )
 
 
 class UpdateAssemblyRecordsTest(unittest.TestCase):
+    def test_discovery_keeps_previous_year_when_latest_has_only_special_session(self):
+        payload = {
+            "councils": [{
+                "view_years": [
+                    {
+                        "view_year": "2026",
+                        "council_type": [{
+                            "council_type_name2": "本会議",
+                            "councils": [{"council_id": 2494}],
+                        }],
+                    },
+                    {
+                        "view_year": "2025",
+                        "council_type": [{
+                            "council_type_name2": "本会議",
+                            "councils": [{"council_id": 2493}],
+                        }],
+                    },
+                    {
+                        "view_year": "2024",
+                        "council_type": [{
+                            "council_type_name2": "本会議",
+                            "councils": [{"council_id": 2344}],
+                        }],
+                    },
+                ]
+            }]
+        }
+
+        self.assertEqual(
+            [item["council_id"] for item in iter_latest_ssp_councils(payload)],
+            [2494, 2493],
+        )
+
     def test_parse_meeting_date_from_official_transcript(self):
         minutes = [{"body": "<pre>令和8年6月10日（水曜日）</pre>"}]
         self.assertEqual(
@@ -119,6 +154,66 @@ class UpdateAssemblyRecordsTest(unittest.TestCase):
             )
             self.assertIn(statement["source_excerpt"], transcript)
             self.assertIn("AIによる要約ではありません", statement["full_summary"])
+
+    @patch("scripts.update_assembly_records.ssp_post")
+    def test_answer_can_follow_continuation_and_chair_call(self, ssp_post):
+        ssp_post.return_value = {
+            "tenant_minutes": [
+                {
+                    "minute_id": 1,
+                    "title": "（名簿）",
+                    "minute_type_code": 2,
+                    "body": "<pre>令和7年11月26日（水曜日）</pre>",
+                },
+                {
+                    "minute_id": 30,
+                    "title": "６番（増田洋紀）",
+                    "minute_type_code": 5,
+                    "body": "<pre>デジタル政策について質問します。全ての区民が利用できる仕組みが必要です。</pre>",
+                },
+                {
+                    "minute_id": 35,
+                    "title": "６番（増田洋紀）",
+                    "minute_type_code": 5,
+                    "body": "<pre>ハチペイのＱＲコードカード方式について、導入可能性を伺います。</pre>",
+                },
+                {
+                    "minute_id": 36,
+                    "title": "副議長（小田浩美）",
+                    "minute_type_code": 4,
+                    "body": "<pre>長谷部区長。</pre>",
+                },
+                {
+                    "minute_id": 37,
+                    "title": "区長（長谷部健）",
+                    "minute_type_code": 6,
+                    "body": "<pre>デジタル政策についてお答えします。導入可能性を研究しました。</pre>",
+                },
+            ]
+        }
+        dataset = {
+            "assemblies": {
+                "shibuya-ward": {
+                    "assembly_name": "渋谷区議会",
+                    "source": {"tenant": "shibuya", "tenant_id": 394},
+                    "records": [],
+                }
+            }
+        }
+        candidate = {
+            "assembly_id": "shibuya-ward",
+            "council_id": 2493,
+            "schedule_id": 2,
+            "meeting_name": "令和7年11月定例会",
+            "schedule_name": "11月26日－17号",
+            "source_url": "https://ssp.kaigiroku.net/tenant/shibuya/SpMinuteView.html?council_id=2493&schedule_id=2",
+        }
+
+        records = build_ssp_records(dataset, candidate, 20)
+
+        self.assertEqual(len(records), 2)
+        self.assertTrue(all(len(record["statements"]) == 2 for record in records))
+        self.assertTrue(all("答弁済み" in record["current_stage"] for record in records))
 
     @patch("scripts.update_assembly_records.ssp_post")
     def test_official_speech_without_answer_is_published(self, ssp_post):

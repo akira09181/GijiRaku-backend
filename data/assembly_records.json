@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-08-24T15:03:35+09:00",
+  "updated_at": "2026-09-01T18:00:00+09:00",
   "assemblies": {
     "tokyo-metropolitan": {
       "assembly_name": "東京都議会",
@@ -137,6 +137,286 @@
               "full_summary": "評価制度を見直し、データに基づく事業改善を進める方針を示しました。",
               "source_excerpt": "「評価制度の不断の見直し」",
               "question_type": "知事答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "tokyo-teacher-generative-ai-2026-06-17",
+          "meeting_date": "2026-06-17",
+          "meeting_name": "令和8年第2回定例会 東京都議会会議録第9号（速報版）",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2026-2/03-02.html",
+          "topic": "教員の事務負担軽減と生成AI活用",
+          "what_changes": "外部人材、学校管理職のマネジメント、生成AIを組み合わせ、教員が教育活動に専念できる環境を整える方針が示されました。",
+          "target_audience": "東京都内の公立学校に通う児童生徒、保護者、教職員",
+          "current_stage": "2026年6月17日の本会議で質問・答弁済み",
+          "budget_info": "学校の働き方改革とデジタル活用について議論",
+          "original_quote": "「生成AI等のデジタルの活用に力を入れます」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tokyo-hoshi-2026-06-17-teacher-generative-ai",
+              "speaker_name": "星 大輔",
+              "speaker_role": "東京都議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "教員の事務負担を減らし、教育活動に集中できる働き方改革の推進を質問しました。",
+              "full_summary": "外部人材やデジタル技術を活用し、教員が授業や生徒指導に力を注げる環境を整えるよう求めました。",
+              "source_excerpt": "「公立学校の働き方改革の推進」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "tokyo-sakamoto-2026-06-17-teacher-generative-ai",
+              "speaker_name": "坂本 雅彦",
+              "speaker_role": "東京都教育長",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・教育長答弁",
+              "stance_label": "推進",
+              "summary_quote": "書類作成で生成AIを使う取組を開始し、管理職のマネジメントやデジタル活用を進めると答弁しました。",
+              "full_summary": "外部人材の活用に加え、保護者向け書類の作成などで生成AIを利用し、教員が教育活動に専念できる環境を整える方針を示しました。",
+              "source_excerpt": "「生成AIを利用する取組を開始」",
+              "question_type": "教育長答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "tokyo-machida-monorail-extension-2026-06-17",
+          "meeting_date": "2026-06-17",
+          "meeting_name": "令和8年第2回定例会 東京都議会会議録第9号（速報版）",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2026-2/03-02.html",
+          "topic": "多摩都市モノレール町田延伸の具体化",
+          "what_changes": "複数のルート案や駅候補地を検討し、採算性と沿線まちづくりの課題を解きながら具体化を進める方針が示されました。",
+          "target_audience": "多摩地域と町田方面で公共交通を利用する都民",
+          "current_stage": "2026年6月17日の本会議で質問・答弁済み",
+          "budget_info": "事業費縮減、需要創出、沿線まちづくりについて議論",
+          "original_quote": "「本路線の具体化に向けて取り組んでまいります」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tokyo-hoshi-2026-06-17-machida-monorail",
+              "speaker_name": "星 大輔",
+              "speaker_role": "東京都議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "多摩都市モノレール町田延伸の検討状況と具体化に向けた取組を質問しました。",
+              "full_summary": "町田方面への延伸を実現するため、ルート、駅、採算性、沿線まちづくりの検討状況を確認しました。",
+              "source_excerpt": "「多摩都市モノレール町田延伸」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "tokyo-tanizaki-2026-06-17-machida-monorail",
+              "speaker_name": "谷崎 馨",
+              "speaker_role": "東京都技監",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・都技監答弁",
+              "stance_label": "検討中",
+              "summary_quote": "複数ルートや駅候補地を検討し、採算性などの課題解決を図りながら具体化すると答弁しました。",
+              "full_summary": "道路条件、トンネル・橋梁、駅施設の候補地を検討し、事業費縮減と沿線の需要創出を進める方針を説明しました。",
+              "source_excerpt": "「複数のルート案」",
+              "question_type": "都技監答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "tokyo-comprehensive-sex-education-2026-06-17",
+          "meeting_date": "2026-06-17",
+          "meeting_name": "令和8年第2回定例会 東京都議会会議録第9号（速報版）",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2026-2/03-03.html",
+          "topic": "性教育の充実と外部専門家の活用",
+          "what_changes": "学習指導要領に基づく性教育に加え、都立高校で専門家による健康教育をモデル実施する取組が示されました。",
+          "target_audience": "東京都内の児童生徒、保護者、学校関係者",
+          "current_stage": "2026年6月17日の本会議で質問・答弁済み",
+          "budget_info": "性教育、外部講師、特別支援学校での個別対応について議論",
+          "original_quote": "「専門的な知識を持つ外部人材」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tokyo-higashi-2026-06-17-sex-education",
+              "speaker_name": "東 友美",
+              "speaker_role": "東京都議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子どもを守る性教育の充実、外部講師、特別支援学校での個別対応を質問しました。",
+              "full_summary": "正しい知識と適切な行動を学ぶ機会を充実させ、専門家の活用と児童生徒の特性に応じた教育を進めるよう求めました。",
+              "source_excerpt": "「外部講師の活用の取組について」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "tokyo-sakamoto-2026-06-17-sex-education",
+              "speaker_name": "坂本 雅彦",
+              "speaker_role": "東京都教育長",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・教育長答弁",
+              "stance_label": "推進",
+              "summary_quote": "都立高校で外部専門家による性と健康の授業をモデル実施していると答弁しました。",
+              "full_summary": "学習指導要領に基づく指導、外部人材のモデル活用、特別支援学校での個別・グループ授業を進める方針を示しました。",
+              "source_excerpt": "「外部人材により、性を含む健康に係る授業」",
+              "question_type": "教育長答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "tokyo-school-manhole-toilets-2026-06-17",
+          "meeting_date": "2026-06-17",
+          "meeting_name": "令和8年第2回定例会 東京都議会会議録第9号（速報版）",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2026-2/03-03.html",
+          "topic": "避難所となる都立学校のマンホールトイレ整備",
+          "what_changes": "改築予定のない都立学校についてもマンホールトイレ整備に向けた調査を進める方針が示されました。",
+          "target_audience": "災害時に都立学校を避難所として利用する住民",
+          "current_stage": "2026年6月17日の本会議で質問・答弁済み",
+          "budget_info": "都立学校の防災設備整備について議論",
+          "original_quote": "「現在トイレの整備に向けた調査」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tokyo-higashi-2026-06-17-manhole-toilets",
+              "speaker_name": "東 友美",
+              "speaker_role": "東京都議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "避難所に指定された都立高校へマンホールトイレを速やかに整備するよう求めました。",
+              "full_summary": "町田市内で未設置の避難所が主に都立高校となっている状況を示し、整備の取組を質問しました。",
+              "source_excerpt": "「都立高校におけるマンホールトイレの整備」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "tokyo-sakamoto-2026-06-17-manhole-toilets",
+              "speaker_name": "坂本 雅彦",
+              "speaker_role": "東京都教育長",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・教育長答弁",
+              "stance_label": "調査中",
+              "summary_quote": "改築予定のない都立学校についても、マンホールトイレ整備に向け調査していると答弁しました。",
+              "full_summary": "改築等に合わせて35校で整備し、それ以外の都立学校についても整備可能性を調査していると説明しました。",
+              "source_excerpt": "「三十五の都立学校」",
+              "question_type": "教育長答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "tokyo-animal-business-oversight-2026-06-17",
+          "meeting_date": "2026-06-17",
+          "meeting_name": "令和8年第2回定例会 東京都議会会議録第9号（速報版）",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2026-2/03-03.html",
+          "topic": "動物取扱業者と有償譲渡への指導",
+          "what_changes": "動物取扱業者への研修・立入検査と、無登録販売が疑われる有償譲渡への事実確認・指導方針が示されました。",
+          "target_audience": "動物を飼育・譲渡する事業者、愛護団体、飼い主",
+          "current_stage": "2026年6月17日の本会議で質問・答弁済み",
+          "budget_info": "動物愛護管理法に基づく監督と指導について議論",
+          "original_quote": "「必要に応じて改善指導」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tokyo-higashi-2026-06-17-animal-business",
+              "speaker_name": "東 友美",
+              "speaker_role": "東京都議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "動物の不適正な取扱いと高額な有償譲渡について、都の調査・指導を求めました。",
+              "full_summary": "取扱動物の負傷や炎天下での募金活動、無登録販売が疑われる譲渡事例への対応を質問しました。",
+              "source_excerpt": "「動物の不適正な取扱い」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "tokyo-yamada-2026-06-17-animal-business",
+              "speaker_name": "山田 忠輝",
+              "speaker_role": "東京都保健医療局長",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・局長答弁",
+              "stance_label": "監督",
+              "summary_quote": "研修と立入検査を行い、無登録販売の疑いがあれば事実確認して指導すると答弁しました。",
+              "full_summary": "法令上の遵守事項を周知し、立入検査で適正な取扱いを確認するとともに、有償譲渡の疑義にも対応する方針を示しました。",
+              "source_excerpt": "「立入検査において」",
+              "question_type": "局長答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "tokyo-sme-life-work-balance-2026-06-17",
+          "meeting_date": "2026-06-17",
+          "meeting_name": "令和8年第2回定例会 東京都議会会議録第9号（速報版）",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2026-2/03-05.html",
+          "topic": "中小企業のライフ・ワーク・バランス支援",
+          "what_changes": "相談・専門家派遣、企業間交流、DXによる生産性向上を通じ、長時間労働を減らす伴走支援を強化する方針が示されました。",
+          "target_audience": "東京都内の中小企業とそこで働く人",
+          "current_stage": "2026年6月17日の本会議で質問・答弁済み",
+          "budget_info": "働き方改革と中小企業への伴走支援について議論",
+          "original_quote": "「手取り時間の創出に取り組む企業への伴走支援」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tokyo-teramae-2026-06-17-life-work-balance",
+              "speaker_name": "寺前 ももこ",
+              "speaker_role": "東京都議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "中小企業が生産性向上と働き方改革を両立できる実効性ある支援を求めました。",
+              "full_summary": "人手不足や業務負担の中でも長時間労働を削減し、働く人の生活時間を確保する施策を質問しました。",
+              "source_excerpt": "「生産性向上と働き方改革を両立」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "tokyo-koike-2026-06-17-life-work-balance",
+              "speaker_name": "小池 百合子",
+              "speaker_role": "東京都知事",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・知事答弁",
+              "stance_label": "推進",
+              "summary_quote": "企業間の課題共有とDXを進め、長時間労働削減への伴走支援を強化すると答弁しました。",
+              "full_summary": "相談や専門家派遣に加え、企業同士が業務改善を共有する場を設け、生活と仕事を両立できる環境を支援する方針を示しました。",
+              "source_excerpt": "「企業への伴走支援も強化」",
+              "question_type": "知事答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "tokyo-school-lawyer-support-2026-06-17",
+          "meeting_date": "2026-06-17",
+          "meeting_name": "令和8年第2回定例会 東京都議会会議録第9号（速報版）",
+          "source_url": "https://www.gikai.metro.tokyo.lg.jp/record/proceedings/2026-2/03-05.html",
+          "topic": "学校での弁護士相談と法的支援",
+          "what_changes": "東京都教育支援機構の相談窓口、学校への弁護士派遣、学校に代わる法的支援の成果を共有し、活用を広げる方針が示されました。",
+          "target_audience": "都立学校の児童生徒、保護者、教職員",
+          "current_stage": "2026年6月17日の本会議で質問・答弁済み",
+          "budget_info": "学校への法的助言と相談支援について議論",
+          "original_quote": "「弁護士の一層の活用」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tokyo-teramae-2026-06-17-school-lawyer",
+              "speaker_name": "寺前 ももこ",
+              "speaker_role": "東京都議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "学校が高度で複雑な要望に対応する際、弁護士を効果的に活用する体制を質問しました。",
+              "full_summary": "教員や学校だけで問題を抱え込まず、専門的な法的支援につなげる仕組みの充実を求めました。",
+              "source_excerpt": "「学校での弁護士の効果的な活用」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "tokyo-sakamoto-2026-06-17-school-lawyer",
+              "speaker_name": "坂本 雅彦",
+              "speaker_role": "東京都教育長",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・教育長答弁",
+              "stance_label": "推進",
+              "summary_quote": "相談窓口と弁護士派遣の成果を都立学校に共有し、活用を広げると答弁しました。",
+              "full_summary": "TEPROの相談窓口、学校への弁護士派遣、法律面を学校に代わって支える取組を進める方針を示しました。",
+              "source_excerpt": "「都立高校等に弁護士を派遣」",
+              "question_type": "教育長答弁",
               "avatar_color": "emerald"
             }
           ]
@@ -6130,6 +6410,34 @@
               "avatar_color": "emerald"
             }
           ]
+        },
+        {
+          "discussion_id": "machida-generative-ai-2025-12-05",
+          "meeting_date": "2025-12-05",
+          "meeting_name": "令和7年12月定例会（第4回）",
+          "source_url": "https://www.gikai-machida.jp/g07_Shitsumon.asp?KAIGI=173&Sflg=2",
+          "topic": "町田市の生成AI活用と運用方針",
+          "what_changes": "市役所業務での生成AIの利用状況、効果、安全な運用と今後の展開が一般質問で取り上げられました。",
+          "target_audience": "町田市の行政サービスを利用する市民と市職員",
+          "current_stage": "2025年12月5日の本会議で一般質問済み",
+          "budget_info": "生成AIの導入・運用と行政業務への活用について質問",
+          "original_quote": "「市の生成ＡＩの取組について」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "machida-ishikawa-2025-12-05-generative-ai",
+              "speaker_name": "石川 好忠",
+              "speaker_role": "町田市議会議員",
+              "party_name": "自由民主党",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "町田市における生成AIの取組状況と今後の行政利用について質問しました。",
+              "full_summary": "生成AIを行政業務へどのように導入・運用し、市民サービスや業務改善につなげるのかを一般質問で取り上げました。",
+              "source_excerpt": "「市の生成ＡＩの取組について」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
         }
       ]
     },
@@ -6226,6 +6534,47 @@
               "summary_quote": "携帯トイレの全区民への配布や避難所備蓄、段ボールベッドの供給協定などを進めていると答弁しました。",
               "full_summary": "温かい食事、間仕切り、エアマットを備蓄し、段ボールベッドを調達できる協定を説明しました。",
               "source_excerpt": "「携帯トイレの全区民への配布」",
+              "question_type": "部長答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "shinagawa-stranded-commuters-dx-2026-02-19",
+          "meeting_date": "2026-02-19",
+          "meeting_name": "令和8年第1回品川区議会定例会（第2日目）",
+          "source_url": "https://kaigiroku.city.shinagawa.tokyo.jp/100000?QueryType=New&Template=document&VoiceExpand1=r08-0219_005",
+          "topic": "帰宅困難者の受入れ体制とキタコンDX",
+          "what_changes": "一時滞在施設の受入れ不足を解消し、キタコンDXの運用訓練・マニュアル整備・区民周知を進める方針が示されました。",
+          "target_audience": "災害時に品川区内で帰宅困難となる住民、通勤・通学者、来街者",
+          "current_stage": "2026年2月19日の本会議で質問・答弁済み",
+          "budget_info": "一時滞在施設の確保とデジタル管理について議論",
+          "original_quote": "「現在、区内の一時滞在施設は67施設」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "shinagawa-yukita-2026-02-19-stranded-commuters-dx",
+              "speaker_name": "ゆきた 政春",
+              "speaker_role": "品川区議会議員",
+              "party_name": "品川区議会公明党",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "一時滞在施設の受入れ人数、公表方針、キタコンDXの活用と周知を質問しました。",
+              "full_summary": "帰宅困難者が安全な待機先を判断できるよう、施設確保と情報公開、デジタルによる入館・安否管理を進めるよう求めました。",
+              "source_excerpt": "「キタコンＤＸのさらなる活用と周知」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "shinagawa-nanashima-2026-02-19-stranded-commuters-dx",
+              "speaker_name": "七嶋 災害対策担当部長",
+              "speaker_role": "品川区災害対策担当部長",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・答弁",
+              "stance_label": "推進",
+              "summary_quote": "行き場のない帰宅困難者約7万人に対し受入れが不足しており、施設拡充とDX運用訓練を進めると答弁しました。",
+              "full_summary": "67施設・約1万人分の受入れに加え約3,000人分を増やす予定を示し、キタコンDXの共通マニュアルや連携訓練、周知を検討すると説明しました。",
+              "source_excerpt": "「区内の一時滞在施設は67施設、約１万人」",
               "question_type": "部長答弁",
               "avatar_color": "emerald"
             }
@@ -6327,6 +6676,47 @@
               "summary_quote": "条例改正に加え、施行前の周知と施行後のパトロールを組み合わせて対策すると答弁しました。",
               "full_summary": "条例による規制、広報、パトロールを通じて駅周辺環境を改善する方針を示しました。",
               "source_excerpt": "「条例施行前の広報及び条例施行後のパトロール」",
+              "question_type": "区長答弁",
+              "avatar_color": "emerald"
+            }
+          ]
+        },
+        {
+          "discussion_id": "shibuya-hachipay-accessibility-2025-11-26",
+          "meeting_date": "2025-11-26",
+          "meeting_name": "令和7年第4回渋谷区議会定例会（第1日）",
+          "source_url": "https://ssp.kaigiroku.net/tenant/shibuya/SpMinuteView.html?council_id=2493&schedule_id=2",
+          "topic": "スマートフォンを使わない人のハチペイ利用",
+          "what_changes": "スマートフォンを使わない区民向けにQRコードカード方式が提案されましたが、区は費用と店舗負担を理由に現時点では実施しない考えを示しました。",
+          "target_audience": "スマートフォンを持たない、または操作が難しい渋谷区民",
+          "current_stage": "2025年11月26日の本会議で質問・答弁済み",
+          "budget_info": "カード導入費と加盟店舗の運用負担について議論",
+          "original_quote": "「ハチペイＱＲコードカード方式」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "shibuya-masuda-2025-11-26-hachipay-accessibility",
+              "speaker_name": "増田 洋紀",
+              "speaker_role": "渋谷区議会議員",
+              "party_name": "立憲・国民渋谷議員団",
+              "committee_name": "本会議",
+              "stance_label": "提案",
+              "summary_quote": "スマートフォンがなくてもハチペイを利用できるQRコードカード方式を提案しました。",
+              "full_summary": "区窓口で登録・チャージでき、店舗の既存端末で読み取れるカードを導入して、全区民に利用機会を広げるよう求めました。",
+              "source_excerpt": "「スマホを使わなくても利用できる」",
+              "question_type": "代表質問",
+              "avatar_color": "sky"
+            },
+            {
+              "statement_id": "shibuya-hasebe-2025-11-26-hachipay-accessibility",
+              "speaker_name": "長谷部 健",
+              "speaker_role": "渋谷区長",
+              "party_name": "行政執行部",
+              "committee_name": "本会議・区長答弁",
+              "stance_label": "実施見送り",
+              "summary_quote": "導入可能性を研究したものの、費用と店舗の運用負担から現時点では実施しないと答弁しました。",
+              "full_summary": "QRコードカード方式は事業者と研究したが課題が多いとし、現在のシステムで利用者を増やす方針を示しました。",
+              "source_excerpt": "「実施する考えはありません」",
               "question_type": "区長答弁",
               "avatar_color": "emerald"
             }
