@@ -126,14 +126,18 @@ class FollowStoreTest(unittest.TestCase):
             ),
             patch.object(
                 follow_store,
-                "get_citizen_question_user_response",
-                return_value=my_response,
+                "get_citizen_question_snapshot",
+                return_value={
+                    "my_response": my_response,
+                    "aggregate": {"total_responses": 3},
+                },
             ),
         ):
             result = list_issue_follows(anonymous_user_id=self.USER_ID)
 
         self.assertEqual(result["total"], 1)
         self.assertEqual(result["follows"][0]["my_response"], my_response)
+        self.assertEqual(result["follows"][0]["current_response_count"], 3)
         self.assertNotIn("anonymous_user_id", result["follows"][0])
 
     def test_status_change_is_unread_until_detail_is_opened(self):
@@ -170,8 +174,11 @@ class FollowStoreTest(unittest.TestCase):
             ),
             patch.object(
                 follow_store,
-                "get_citizen_question_user_response",
-                return_value=None,
+                "get_citizen_question_snapshot",
+                return_value={
+                    "my_response": None,
+                    "aggregate": {"total_responses": 0},
+                },
             ),
         ):
             before_open = list_issue_follows(anonymous_user_id=self.USER_ID)
@@ -196,8 +203,11 @@ class FollowStoreTest(unittest.TestCase):
             ),
             patch.object(
                 follow_store,
-                "get_citizen_question_user_response",
-                return_value=None,
+                "get_citizen_question_snapshot",
+                return_value={
+                    "my_response": None,
+                    "aggregate": {"total_responses": 0},
+                },
             ),
         ):
             result = list_issue_follows(anonymous_user_id=self.USER_ID)

@@ -336,7 +336,7 @@ def build_ssp_records(
             continue
         question_text = clean_html(minute.get("body", ""))
         topic = extract_topic(question_text)
-        if not topic or len(question_text) < 40:
+        if not topic:
             continue
 
         answers: List[Dict[str, Any]] = []
@@ -359,6 +359,13 @@ def build_ssp_records(
             answer_text = clean_html(following.get("body", ""))
             if len(answer_text) >= 20:
                 answers.append(following)
+
+        # Concise questions are common in official minutes. Keep the stricter
+        # threshold for standalone speeches, but accept a shorter question when
+        # the transcript itself provides a corresponding executive answer.
+        minimum_question_length = 20 if answers else 40
+        if len(question_text) < minimum_question_length:
+            continue
 
         import_id = (
             f"ssp:{source['tenant']}:{candidate['council_id']}:"

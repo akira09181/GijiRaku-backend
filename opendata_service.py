@@ -1,8 +1,8 @@
 import json
 import requests
 import pandas as pd
-from typing import List, Dict, Any
-from assembly_records import get_latest_record, record_to_rag_response
+from typing import List, Dict, Any, Optional
+from assembly_records import get_assembly_records, get_latest_record, record_to_rag_response
 
 TOKYO_CATALOG_SEARCH_URL = "https://catalog.data.metro.tokyo.lg.jp/api/3/action/package_search?q=%E8%AD%B0%E4%BC%9A&rows=10"
 
@@ -520,13 +520,29 @@ VERIFIED_RAG_RECORDS: Dict[str, Dict[str, Any]] = {
 VERIFIED_RAG_RECORDS["machida-shi"] = VERIFIED_RAG_RECORDS["machida-city"]
 VERIFIED_RAG_RECORDS["shinagawa-ku"] = VERIFIED_RAG_RECORDS["shinagawa-ward"]
 
-def perform_real_rag_inference(query: str, assembly_id: str = "tokyo-metropolitan") -> Dict[str, Any]:
+def perform_real_rag_inference(
+    query: str,
+    assembly_id: str = "tokyo-metropolitan",
+    discussion_id: Optional[str] = None,
+) -> Dict[str, Any]:
     """東京都オープンデータカタログAPI ＋ 実データ検索 ＋ リアルタイム推論"""
     try:
-        latest_record = get_latest_record(assembly_id)
+        if discussion_id:
+            records = get_assembly_records(
+                assembly_id,
+                limit=1,
+                discussion_id=discussion_id,
+            )["records"]
+            if not records:
+                raise ValueError(f"Discussion record not found: {discussion_id}")
+            latest_record = records[0]
+        else:
+            latest_record = get_latest_record(assembly_id)
         if latest_record:
             return record_to_rag_response(assembly_id, latest_record)
     except (KeyError, OSError, ValueError, json.JSONDecodeError):
+        if discussion_id:
+            raise
         # JSONが利用できない場合も既存の検証済みデータ/API挙動を維持する。
         pass
 

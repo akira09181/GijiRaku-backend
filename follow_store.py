@@ -7,7 +7,7 @@ import logging
 from datetime import datetime, timezone
 from typing import Any, Dict, Iterable, List, Optional
 
-from citizen_question_store import get_citizen_question_user_response
+from citizen_question_store import get_citizen_question_snapshot
 from reaction_store import ReactionStoreError, STORAGE_BACKEND, get_firestore_client
 
 
@@ -303,12 +303,15 @@ def list_issue_follows(*, anonymous_user_id: str) -> Dict[str, Any]:
                 continue
             issue = _read_issue_status(client, issue_id)
             follow = _public_follow(data, issue)
-            follow["my_response"] = get_citizen_question_user_response(
+            citizen_response = get_citizen_question_snapshot(
                 issue_id=issue_id,
                 question_id=issue["question_id"],
                 anonymous_user_id=anonymous_user_id,
-                client=client,
             )
+            follow["my_response"] = citizen_response["my_response"]
+            follow["current_response_count"] = citizen_response["aggregate"][
+                "total_responses"
+            ]
             follows.append(follow)
     except ReactionStoreError:
         raise

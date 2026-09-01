@@ -75,6 +75,7 @@ app.add_middleware(
 class TranslationRequest(BaseModel):
     question: str
     assembly_id: Optional[str] = "tokyo-metropolitan"
+    discussion_id: Optional[str] = None
 
 class AiChainStep(BaseModel):
     step_number: int
@@ -84,6 +85,7 @@ class AiChainStep(BaseModel):
 
 class TranslationResponse(BaseModel):
     answer: str
+    issue_id: Optional[str] = None
     speaker: str = "マチボイス AI"
     role: str = "超翻訳ナビゲーター"
     original_quote: Optional[str] = None
@@ -371,7 +373,11 @@ async def translate_giji(request: TranslationRequest):
             raise HTTPException(status_code=400, detail="質問内容を入力してください")
 
         assembly_id = request.assembly_id or "tokyo-metropolitan"
-        rag_res = perform_real_rag_inference(q, assembly_id=assembly_id)
+        rag_res = perform_real_rag_inference(
+            q,
+            assembly_id=assembly_id,
+            discussion_id=request.discussion_id,
+        )
 
         if rag_res.get("verified"):
             chain_steps = [
@@ -397,6 +403,7 @@ async def translate_giji(request: TranslationRequest):
 
         return TranslationResponse(
             answer=answer_text,
+            issue_id=rag_res.get("issue_id"),
             speaker="マチボイス AI",
             role="超翻訳アシスタント",
             original_quote=rag_res['original_quote'],

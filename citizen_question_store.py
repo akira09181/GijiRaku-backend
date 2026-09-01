@@ -405,6 +405,7 @@ def put_citizen_question_response(
     return {
         "status": "success",
         "storage_backend": STORAGE_BACKEND,
+        "issue_id": issue_id,
         "question": definition,
         **_flat_aggregate_fields(question_id, aggregate),
         **result,
@@ -450,6 +451,7 @@ def get_citizen_question_snapshot(
     return {
         "status": "success",
         "storage_backend": STORAGE_BACKEND,
+        "issue_id": issue_id,
         "question": definition,
         "my_response": _public_response(response_data) if response_data else None,
         "aggregate": aggregate,

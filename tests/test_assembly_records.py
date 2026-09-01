@@ -4,6 +4,7 @@ from fastapi import HTTPException
 
 import main
 from assembly_records import get_assembly_records
+from opendata_service import perform_real_rag_inference
 
 
 class AssemblyRecordsTest(unittest.TestCase):
@@ -60,6 +61,26 @@ class AssemblyRecordsTest(unittest.TestCase):
             )
 
         self.assertEqual(raised.exception.status_code, 404)
+
+    def test_faq_translation_uses_the_requested_issue_instead_of_latest_record(self):
+        issue_id = "tokyo-teacher-generative-ai-2026-06-17"
+        result = perform_real_rag_inference(
+            "生成AIをどう活用する？",
+            assembly_id="tokyo-metropolitan",
+            discussion_id=issue_id,
+        )
+
+        self.assertEqual(result["issue_id"], issue_id)
+        self.assertIn("教員", result["what_changes"])
+        self.assertNotIn("東京アプリ", result["what_changes"])
+
+    def test_faq_translation_rejects_issue_from_another_assembly(self):
+        with self.assertRaisesRegex(ValueError, "Discussion record not found"):
+            perform_real_rag_inference(
+                "何が変わる？",
+                assembly_id="shinjuku-ward",
+                discussion_id="tokyo-app-2026-06-16",
+            )
 
 
 if __name__ == "__main__":

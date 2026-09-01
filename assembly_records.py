@@ -124,6 +124,7 @@ def record_to_rag_response(assembly_id: str, record: Dict[str, Any]) -> Dict[str
         for statement in statements
     ]
     return {
+        "issue_id": record["discussion_id"],
         "assembly_name": assembly["assembly_name"],
         "what_changes": record["what_changes"],
         "target_audience": record["target_audience"],

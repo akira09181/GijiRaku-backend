@@ -234,6 +234,7 @@ class CitizenQuestionStoreTest(unittest.TestCase):
         )
 
         self.assertEqual(snapshot["question_id"], SHINJUKU_QUESTION_ID)
+        self.assertEqual(snapshot["issue_id"], SHINJUKU_ISSUE_ID)
         self.assertEqual(snapshot["total"], 0)
         self.assertEqual(snapshot["answers"], {})
         self.assertEqual(snapshot["reasons"], {})
