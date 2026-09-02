@@ -487,6 +487,7 @@ def auto_publish(
     dataset: Dict[str, Any],
     candidates: List[Dict[str, Any]],
     max_records_per_assembly: int,
+    published_candidates: Optional[Dict[str, Dict[str, Any]]] = None,
 ) -> int:
     changed = 0
     added_by_assembly: Dict[str, int] = {}
@@ -513,6 +514,16 @@ def auto_publish(
         )
     }
     for candidate in candidates:
+        previous_candidate = (published_candidates or {}).get(
+            str(candidate.get("external_id", ""))
+        )
+        if previous_candidate is not None:
+            candidate["publication_status"] = "published"
+            if "auto_published_records" in previous_candidate:
+                candidate["auto_published_records"] = previous_candidate[
+                    "auto_published_records"
+                ]
+            continue
         assembly_id = candidate["assembly_id"]
         remaining = max_records_per_assembly - added_by_assembly.get(assembly_id, 0)
         if remaining <= 0 or candidate.get("provider") != "ssp":
@@ -602,6 +613,7 @@ def main() -> None:
     parser.add_argument("--auto-publish", action="store_true")
     parser.add_argument("--max-records-per-assembly", type=int, default=50)
     parser.add_argument("--ssp-years", type=int, default=3)
+    parser.add_argument("--refresh-published", action="store_true")
     args = parser.parse_args()
 
     dataset = load_json(RECORDS_PATH)
@@ -617,7 +629,18 @@ def main() -> None:
     if args.auto_publish:
         if args.max_records_per_assembly < 1:
             raise ValueError("--max-records-per-assembly must be at least 1")
-        changed_records = auto_publish(dataset, candidates, args.max_records_per_assembly)
+        previous_inbox = load_json(INBOX_PATH, {"schema_version": 1, "candidates": []})
+        published_candidates = {
+            item["external_id"]: item
+            for item in previous_inbox.get("candidates", [])
+            if item.get("publication_status") == "published"
+        }
+        changed_records = auto_publish(
+            dataset,
+            candidates,
+            args.max_records_per_assembly,
+            published_candidates={} if args.refresh_published else published_candidates,
+        )
         validate_dataset(dataset)
         if changed_records:
             write_json(RECORDS_PATH, dataset)

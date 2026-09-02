@@ -318,6 +318,28 @@ class UpdateAssemblyRecordsTest(unittest.TestCase):
         self.assertEqual(candidate["review_reason"], "auto_publish_limit_pending")
 
     @patch("scripts.update_assembly_records.build_ssp_records")
+    def test_auto_publish_skips_a_previously_completed_schedule(self, build_records):
+        dataset = {"assemblies": {"shinjuku-ward": {"records": []}}}
+        candidate = {
+            "external_id": "ssp:shinjuku:3193:2",
+            "provider": "ssp",
+            "assembly_id": "shinjuku-ward",
+            "publication_status": "pending_review",
+        }
+        published = {
+            candidate["external_id"]: {
+                "external_id": candidate["external_id"],
+                "publication_status": "published",
+                "auto_published_records": 42,
+            }
+        }
+
+        self.assertEqual(auto_publish(dataset, [candidate], 100, published), 0)
+        build_records.assert_not_called()
+        self.assertEqual(candidate["publication_status"], "published")
+        self.assertEqual(candidate["auto_published_records"], 42)
+
+    @patch("scripts.update_assembly_records.build_ssp_records")
     def test_auto_publish_can_backfill_after_an_existing_import(self, build_records):
         existing = {
             "discussion_id": "shinjuku-existing",
