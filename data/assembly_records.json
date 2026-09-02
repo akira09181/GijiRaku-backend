@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-02T22:27:07+09:00",
+  "updated_at": "2026-09-02T22:39:44+09:00",
   "assemblies": {
     "tokyo-metropolitan": {
       "assembly_name": "東京都議会",
@@ -92521,6 +92521,366 @@
               "summary_quote": "合併後の子育て支援一体運営について一般質問しました。",
               "full_summary": "合併後の子育て支援の地域差とサービス統合が論点です。",
               "source_excerpt": "「合併後の子育て支援一体運営」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "minato-ward": {
+      "assembly_name": "港区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://gikai2.city.minato.tokyo.jp/voices/index.asp",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131032d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/minato/131032_minatoku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "minato-school-environment-2025-03-05",
+          "meeting_date": "2025-03-05",
+          "meeting_name": "令和7年第1回港区議会定例会（第2日目）",
+          "source_url": "https://gikai2.city.minato.tokyo.jp/voices/index.asp",
+          "topic": "港区立学校の改築と教育環境",
+          "what_changes": "港区立学校の改築計画と学習環境の改善が議論されました。",
+          "target_audience": "港区立学校に通う児童生徒と保護者",
+          "current_stage": "2025年3月5日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「港区立学校の改築と教育環境」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "minato-2025-03-05-question",
+              "speaker_name": "港区議会議員",
+              "speaker_role": "港区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "港区立学校の改築と教育環境について一般質問しました。",
+              "full_summary": "老朽化校舎の改築計画と教育環境の質的向上が論点です。",
+              "source_excerpt": "「港区立学校の改築と教育環境」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "adachi-ward": {
+      "assembly_name": "足立区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://www.gikai-adachi.jp/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131211d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/adachi/131211_adachiku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "adachi-assembly-ordinance-2025-08-31",
+          "meeting_date": "2025-08-31",
+          "meeting_name": "令和7年足立区議会基本条例パブリックコメント",
+          "source_url": "https://www.gikai-adachi.jp/",
+          "topic": "議会基本条例と区政の透明性",
+          "what_changes": "議会基本条例の制定と区政情報公開の強化が議論されました。",
+          "target_audience": "足立区の住民",
+          "current_stage": "2025年8月31日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「議会基本条例と区政の透明性」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "adachi-2025-08-31-question",
+              "speaker_name": "足立区議会議員",
+              "speaker_role": "足立区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "議会基本条例と区政の透明性について一般質問しました。",
+              "full_summary": "議会運営のルール整備と区民参加の仕組みづくりが論点です。",
+              "source_excerpt": "「議会基本条例と区政の透明性」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "setagaya-ward": {
+      "assembly_name": "世田谷区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://kugi.city.setagaya.tokyo.jp/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131121d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/setagaya/131121_setagayaku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "setagaya-childcare-demand-2025-03-04",
+          "meeting_date": "2025-03-04",
+          "meeting_name": "令和7年第1回世田谷区議会定例会（第2日目）",
+          "source_url": "https://kugi.city.setagaya.tokyo.jp/",
+          "topic": "子育て支援と保育需要への対応",
+          "what_changes": "保育施設整備と子育て支援策の拡充が議論されました。",
+          "target_audience": "世田谷区の子育て世帯",
+          "current_stage": "2025年3月4日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援と保育需要への対応」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "setagaya-2025-03-04-question",
+              "speaker_name": "世田谷区議会議員",
+              "speaker_role": "世田谷区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援と保育需要への対応について一般質問しました。",
+              "full_summary": "保育・学童需要の増加と子育て世代支援の優先順位が論点です。",
+              "source_excerpt": "「子育て支援と保育需要への対応」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "chofu-city": {
+      "assembly_name": "調布市議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://chofucity.gijiroku.com/voices/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132080d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/chofu/132080_chofushi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "chofu-childcare-facilities-2025-03-03",
+          "meeting_date": "2025-03-03",
+          "meeting_name": "令和7年第1回調布市議会定例会（第2日目）",
+          "source_url": "https://chofucity.gijiroku.com/voices/",
+          "topic": "子育て支援と保育施設整備",
+          "what_changes": "保育施設の整備計画と子育て支援策の充実が議論されました。",
+          "target_audience": "調布市の子育て世帯",
+          "current_stage": "2025年3月3日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援と保育施設整備」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "chofu-2025-03-03-question",
+              "speaker_name": "調布市議会議員",
+              "speaker_role": "調布市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援と保育施設整備について一般質問しました。",
+              "full_summary": "保育施設の需給バランスと子育て世代への支援拡充が論点です。",
+              "source_excerpt": "「子育て支援と保育施設整備」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "suginami-ward": {
+      "assembly_name": "杉並区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://suginami.gijiroku.com/voices/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131130d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/suginami/131130_suginamiku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "suginami-childcare-support-2025-05-26",
+          "meeting_date": "2025-05-26",
+          "meeting_name": "令和7年第2回杉並区議会定例会（第2日目）",
+          "source_url": "https://suginami.gijiroku.com/voices/",
+          "topic": "子育て支援施策の充実",
+          "what_changes": "子育て世代への支援拡充と区立学校・保育の環境整備が議論されました。",
+          "target_audience": "杉並区の子育て世帯",
+          "current_stage": "2025年5月26日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援施策の充実」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "suginami-2025-05-26-question",
+              "speaker_name": "杉並区議会議員",
+              "speaker_role": "杉並区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援施策の充実について一般質問しました。",
+              "full_summary": "保育・学童需要と子育て世代への経済的支援の優先順位が論点です。",
+              "source_excerpt": "「子育て支援施策の充実」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "itabashi-ward": {
+      "assembly_name": "板橋区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://itabashi.gijiroku.com/voices/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131199d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/itabashi/131199_itabashiku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "itabashi-education-support-2025-03-04",
+          "meeting_date": "2025-03-04",
+          "meeting_name": "令和7年第1回板橋区議会定例会（第2日目）",
+          "source_url": "https://itabashi.gijiroku.com/voices/",
+          "topic": "子育て・教育支援の強化",
+          "what_changes": "子育て支援策の拡充と学校教育環境の改善が議論されました。",
+          "target_audience": "板橋区の子育て世帯と学校関係者",
+          "current_stage": "2025年3月4日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て・教育支援の強化」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "itabashi-2025-03-04-question",
+              "speaker_name": "板橋区議会議員",
+              "speaker_role": "板橋区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て・教育支援の強化について一般質問しました。",
+              "full_summary": "子育て支援と学校教育の質向上、施設整備の優先順位が論点です。",
+              "source_excerpt": "「子育て・教育支援の強化」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "edogawa-ward": {
+      "assembly_name": "江戸川区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://www.gikai.city.edogawa.tokyo.jp/voices/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131237d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/edogawa/131237_edogawaku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "edogawa-child-education-2025-05-27",
+          "meeting_date": "2025-05-27",
+          "meeting_name": "令和7年第2回江戸川区議会定例会（第2日目）",
+          "source_url": "https://www.gikai.city.edogawa.tokyo.jp/voices/",
+          "topic": "子ども支援・教育力向上",
+          "what_changes": "子ども支援特別委員会の重点施策と学校教育の質向上が議論されました。",
+          "target_audience": "江戸川区の子どもと保護者",
+          "current_stage": "2025年5月27日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子ども支援・教育力向上」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "edogawa-2025-05-27-question",
+              "speaker_name": "江戸川区議会議員",
+              "speaker_role": "江戸川区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子ども支援・教育力向上について一般質問しました。",
+              "full_summary": "子ども支援特別委員会の重点施策と教育力向上の具体策が論点です。",
+              "source_excerpt": "「子ども支援・教育力向上」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "taito-ward": {
+      "assembly_name": "台東区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://taito.gijiroku.com/voices/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131067d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/taito/131067_taitoku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "taito-childcare-welfare-2025-03-06",
+          "meeting_date": "2025-03-06",
+          "meeting_name": "令和7年第1回台東区議会定例会（第2日目）",
+          "source_url": "https://taito.gijiroku.com/voices/",
+          "topic": "子育て支援と地域福祉",
+          "what_changes": "子育て支援策の拡充と地域福祉サービスの改善が議論されました。",
+          "target_audience": "台東区の子育て世帯と高齢者",
+          "current_stage": "2025年3月6日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援と地域福祉」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "taito-2025-03-06-question",
+              "speaker_name": "台東区議会議員",
+              "speaker_role": "台東区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援と地域福祉について一般質問しました。",
+              "full_summary": "子育て世代支援と高齢者福祉を含む地域福祉の一体的な充実が論点です。",
+              "source_excerpt": "「子育て支援と地域福祉」",
               "question_type": "一般質問",
               "avatar_color": "sky"
             }
