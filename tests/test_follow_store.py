@@ -3,9 +3,11 @@ import unittest
 from unittest.mock import patch
 
 import follow_store
+import notification_store
 from follow_store import (
     FOLLOWS_COLLECTION,
     ISSUES_COLLECTION,
+    append_verified_status_update,
     delete_issue_follow,
     list_issue_follows,
     mark_issue_follow_viewed,
@@ -51,6 +53,16 @@ class _FakeCollection:
     def document(self, document_id):
         return _FakeDocumentReference(self._store, self._name, document_id)
 
+    def stream(self):
+        return [
+            _FakeSnapshot(
+                _FakeDocumentReference(self._store, self._name, document_id),
+                payload,
+            )
+            for (collection_name, document_id), payload in self._store.items()
+            if collection_name == self._name
+        ]
+
 
 class _FakeFirestoreClient:
     def __init__(self, store):
@@ -70,9 +82,14 @@ class FollowStoreTest(unittest.TestCase):
         self.client_patch = patch.object(
             follow_store, "get_firestore_client", return_value=self.client
         )
+        self.notification_client_patch = patch.object(
+            notification_store, "get_firestore_client", return_value=self.client
+        )
         self.client_patch.start()
+        self.notification_client_patch.start()
 
     def tearDown(self):
+        self.notification_client_patch.stop()
         self.client_patch.stop()
 
     def _snapshots_for_user(self):
@@ -229,6 +246,23 @@ class FollowStoreTest(unittest.TestCase):
         )
         self.assertEqual(self.firestore[("other_collection", "record")], {"kept": True})
         self.assertIn((ISSUES_COLLECTION, self.ISSUE_ID), self.firestore)
+
+    def test_status_update_notifies_followers(self):
+        put_issue_follow(issue_id=self.ISSUE_ID, anonymous_user_id=self.USER_ID)
+        put_issue_follow(issue_id=self.ISSUE_ID, anonymous_user_id="anonymous-browser-b")
+        with patch("line_notification_store.notify_line_for_match", return_value={"status": "skipped"}):
+            result = append_verified_status_update(
+                self.ISSUE_ID,
+                status="公式ページを更新",
+                summary="病児保育の空き状況ページが公式に更新されました。",
+                source_url="https://example.test/shinjuku-status-update",
+                updated_at="2026-09-02T00:00:00+09:00",
+            )
+        self.assertEqual(result["delivery"]["follower_count"], 2)
+        self.assertEqual(result["delivery"]["notification_count"], 2)
+        issue = self.firestore[(ISSUES_COLLECTION, self.ISSUE_ID)]
+        self.assertEqual(issue["current_status"], "公式ページを更新")
+        self.assertEqual(len(issue["status_updates"]), 2)
 
 
 if __name__ == "__main__":

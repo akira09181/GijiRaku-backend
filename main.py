@@ -39,6 +39,7 @@ from etl_worker import (
     save_extracted_record,
 )
 from follow_store import (
+    append_verified_status_update,
     delete_issue_follow,
     list_issue_follows,
     mark_issue_follow_viewed,
@@ -626,6 +627,13 @@ class NotificationReadRequest(BaseModel):
     notification_ids: List[str] = Field(default_factory=list, max_length=100)
 
 
+class IssueStatusUpdateRequest(BaseModel):
+    status: str = Field(min_length=1, max_length=120)
+    summary: str = Field(min_length=1, max_length=500)
+    source_url: str = Field(default="", max_length=512)
+    updated_at: str = Field(default="", max_length=40)
+
+
 @app.post('/api/pro/leads', status_code=201)
 def create_pro_lead(request: ProLeadRequest):
     """Persist one idempotent B2B consultation lead in Firestore."""
@@ -671,6 +679,33 @@ def match_deployed_issue_notifications(
     except ReactionStoreError as exc:
         logger.exception("Notification matching batch failed")
         raise HTTPException(status_code=500, detail="Notification matching store unavailable") from exc
+
+
+@app.post('/api/internal/issues/{issue_id}/status-updates')
+def publish_issue_status_update(
+    issue_id: str,
+    request: IssueStatusUpdateRequest,
+    x_internal_api_key: Optional[str] = Header(default=None),
+):
+    """Publish a verified policy-progress update and notify issue followers."""
+    try:
+        authorize_notification_batch(x_internal_api_key)
+        return append_verified_status_update(
+            issue_id=issue_id,
+            status=request.status,
+            summary=request.summary,
+            source_url=request.source_url,
+            updated_at=request.updated_at or None,
+        )
+    except NotificationBatchConfigurationError as exc:
+        raise HTTPException(status_code=503, detail="Notification batch is not configured") from exc
+    except NotificationBatchAuthorizationError as exc:
+        raise HTTPException(status_code=401, detail="Invalid notification batch API key") from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except ReactionStoreError as exc:
+        logger.exception("Issue status update publish failed (issue_id=%s)", issue_id)
+        raise HTTPException(status_code=500, detail="Follow status update store unavailable") from exc
 
 
 @app.put('/api/reactions')

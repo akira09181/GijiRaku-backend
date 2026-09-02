@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from typing import Any, Dict, Iterable, List, Optional
 
 from citizen_question_store import get_citizen_question_snapshot
+from notification_store import create_notification, _user_document_id
 from reaction_store import ReactionStoreError, STORAGE_BACKEND, get_firestore_client
 
 
@@ -372,4 +373,142 @@ def delete_issue_follow(*, issue_id: str, anonymous_user_id: str) -> Dict[str, A
         "storage_backend": STORAGE_BACKEND,
         "issue_id": issue_id,
         "deleted": True,
+    }
+
+
+def _followers_for_issue(client: Any, issue_id: str) -> List[Dict[str, Any]]:
+    followers = []
+    for snapshot in client.collection(FOLLOWS_COLLECTION).stream():
+        data = snapshot.to_dict() or {}
+        if data.get("issue_id") != issue_id:
+            continue
+        anonymous_user_id = str(data.get("anonymous_user_id") or "").strip()
+        if anonymous_user_id:
+            followers.append(data)
+    return followers
+
+
+def notify_followers_of_status_update(issue_id: str, issue: Dict[str, Any]) -> Dict[str, Any]:
+    """Deliver in-app (and optional LINE) alerts when a followed issue status changes."""
+    client = get_firestore_client()
+    try:
+        followers = _followers_for_issue(client, issue_id)
+    except Exception as exc:
+        logger.exception("Failed to list followers for issue_id=%s", issue_id)
+        raise ReactionStoreError("Failed to list issue followers") from exc
+
+    message = (
+        f"フォロー中の議題「{issue['title']}」に新しい動き: "
+        f"{issue['status_summary']}"
+    )
+    notification_ids: List[str] = []
+    line_push_sent = 0
+    line_push_skipped = 0
+    for follower in followers:
+        anonymous_user_id = str(follower["anonymous_user_id"])
+        result = create_notification(
+            anonymous_user_id=anonymous_user_id,
+            issue_id=issue_id,
+            message=message,
+            subscription_id="follow-status",
+        )
+        notification_ids.append(result["notification"]["notification_id"])
+        from line_notification_store import notify_line_for_match
+
+        push_result = notify_line_for_match(
+            _user_document_id(anonymous_user_id),
+            {
+                "issue_id": issue_id,
+                "title": issue["title"],
+                "municipality": issue.get("municipality", ""),
+            },
+        )
+        if push_result.get("status") == "sent":
+            line_push_sent += 1
+        else:
+            line_push_skipped += 1
+
+    return {
+        "status": "success",
+        "storage_backend": STORAGE_BACKEND,
+        "issue_id": issue_id,
+        "follower_count": len(followers),
+        "notification_count": len(notification_ids),
+        "notification_ids": notification_ids,
+        "line_push_sent": line_push_sent,
+        "line_push_skipped": line_push_skipped,
+    }
+
+
+def append_verified_status_update(
+    issue_id: str,
+    *,
+    status: str,
+    summary: str,
+    source_url: Optional[str] = None,
+    updated_at: Optional[str] = None,
+) -> Dict[str, Any]:
+    """Append a verified policy-progress update and notify all followers."""
+    if issue_id not in ISSUE_STATUSES:
+        raise ValueError("Unsupported issue_id")
+    normalized_status = status.strip()
+    normalized_summary = summary.strip()
+    if not normalized_status or not normalized_summary:
+        raise ValueError("status and summary are required")
+    client = get_firestore_client()
+    issue = _ensure_issue_status(client, issue_id)
+    timestamp = updated_at or datetime.now(timezone.utc).isoformat()
+    update = {
+        "updated_at": timestamp,
+        "status": normalized_status,
+        "summary": normalized_summary,
+        "source_url": source_url or issue["source_url"],
+        "verified": True,
+    }
+    existing_updates = [
+        item for item in (issue.get("status_updates") or [])
+        if isinstance(item, dict)
+    ]
+    stored_updates = [
+        {
+            "updated_at": item["updated_at"],
+            "status": item["status"],
+            "summary": item["summary"],
+            "source_url": item["source_url"],
+            "verified": True,
+        }
+        for item in existing_updates
+    ]
+    stored_updates.append(update)
+    stored_updates.sort(key=lambda item: item["updated_at"])
+    reference = client.collection(ISSUES_COLLECTION).document(issue_id)
+    payload = {
+        "issue_id": issue_id,
+        **issue,
+        "current_status": normalized_status,
+        "status_summary": normalized_summary,
+        "status_updated_at": timestamp,
+        "status_checked_at": datetime.now(timezone.utc).isoformat(),
+        "source_url": update["source_url"],
+        "status_updates": stored_updates,
+    }
+    try:
+        reference.set(payload)
+    except Exception as exc:
+        logger.exception("Failed to append verified status update (issue_id=%s)", issue_id)
+        raise ReactionStoreError("Failed to append verified status update") from exc
+
+    refreshed = _read_issue_status(client, issue_id)
+    delivery = notify_followers_of_status_update(issue_id, refreshed)
+    return {
+        "status": "success",
+        "storage_backend": STORAGE_BACKEND,
+        "issue_id": issue_id,
+        "issue": {
+            "current_status": refreshed["current_status"],
+            "status_summary": refreshed["status_summary"],
+            "status_updated_at": refreshed["status_updated_at"],
+            "status_updates": refreshed["status_updates"],
+        },
+        "delivery": delivery,
     }
