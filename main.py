@@ -55,6 +55,10 @@ from notification_store import (
 )
 from trend_service import get_cross_assembly_trends
 from lead_store import save_pro_lead
+from semantic_search_service import (
+    SemanticSearchConfigurationError,
+    semantic_search,
+)
 
 logger = logging.getLogger("gijiraku.reactions")
 
@@ -459,6 +463,32 @@ def list_public_issues(
         "status": "success",
         **get_issue_catalog(assembly_id=assembly_id, theme=theme, stage=stage),
     }
+
+
+@app.get("/api/search/semantic")
+def search_public_statements(
+    q: str,
+    assembly_id: Optional[str] = None,
+    limit: int = 8,
+):
+    """Search published statements by meaning while preserving source IDs."""
+    try:
+        return {"status": "success", **semantic_search(
+            q,
+            assembly_id=assembly_id,
+            limit=limit,
+        )}
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except SemanticSearchConfigurationError as exc:
+        logger.warning("Semantic search is not configured: %s", exc)
+        raise HTTPException(
+            status_code=503,
+            detail="Semantic search is not configured",
+        ) from exc
+    except Exception as exc:
+        logger.exception("Semantic search failed")
+        raise HTTPException(status_code=500, detail="Semantic search unavailable") from exc
 
 from opendata_service import perform_real_rag_inference
 

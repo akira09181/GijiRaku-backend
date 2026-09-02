@@ -7,6 +7,7 @@ FastAPIとLangChain / Gemini AIを使用した議事録超翻訳および東京�
 gijiraku-api/
 ├── main.py                # FastAPI メインアプリケーション
 ├── reaction_store.py      # Firestoreリアクション永続化
+├── semantic_search_service.py # LangChain / Chroma セマンティック検索
 ├── opendata_service.py    # 東京都オープンデータ (CKAN API) 連携モジュール
 ├── requirements.txt       # 依存パッケージ定義
 ├── data/                  # 議事録データフォルダ (PDF, CSV)
@@ -130,5 +131,16 @@ curl -X POST http://localhost:8000/api/internal/notifications/match \
 - `POST /api/pro/leads`: 法人向けLPの導入相談をFirestore `pro_leads` へ冪等保存
 
 トレンド集計はLLMを呼ばず、公開済みの `issue_id`、議会ID、日付、テーマ、議題本文だけを使用します。
+
+## セマンティック検索 API
+
+`GET /api/search/semantic?q=検索文&assembly_id=任意&limit=8` は、公開済みの発言を
+`issue_id` と `statement_id` を保持したLangChain文書へ変換し、Chromaのベクトル検索結果を返します。
+未公開データや出典URLのないデータは索引へ追加しません。
+
+Renderには `GEMINI_API_KEY`（または `GOOGLE_API_KEY`）を設定してください。埋め込みモデルは
+`SEMANTIC_SEARCH_EMBEDDING_MODEL`、Chromaの永続化先は `CHROMA_PERSIST_DIRECTORY` で変更できます。
+APIキー未設定時は文字列検索へ偽装せずHTTP 503を返します。データセット版が変わると、プロセス内の
+ベクトルストアを新しい版へ切り替えます。
 
 サービスアカウントJSONはGitへコミットしないでください。
