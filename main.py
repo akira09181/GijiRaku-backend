@@ -55,6 +55,15 @@ from notification_store import (
 )
 from trend_service import get_cross_assembly_trends
 from lead_store import save_pro_lead
+from region_request_store import save_region_request
+from line_notification_store import (
+    LineNotificationConfigurationError,
+    LineOAuthError,
+    exchange_line_login_code,
+    get_line_link_status,
+    link_line_user,
+    unlink_line_user,
+)
 from semantic_search_service import (
     SemanticSearchConfigurationError,
     semantic_search,
@@ -588,8 +597,26 @@ class ProLeadRequest(BaseModel):
     purpose: str = Field(default="", max_length=1000)
 
 
+class RegionRequestRequest(BaseModel):
+    municipality_id: str = Field(min_length=1, max_length=80)
+    municipality_name: str = Field(min_length=1, max_length=120)
+    email: str = Field(default="", max_length=254)
+    message: str = Field(default="", max_length=500)
+    anonymous_user_id: str = Field(default="", max_length=80)
+
+
 class NotificationBatchRequest(BaseModel):
     issue_ids: List[str] = Field(default_factory=list, max_length=100)
+
+
+class LineLinkRequest(BaseModel):
+    line_user_id: str = Field(min_length=1, max_length=80)
+
+
+class LineOAuthCallbackRequest(BaseModel):
+    code: str = Field(min_length=1, max_length=512)
+    redirect_uri: str = Field(min_length=1, max_length=512)
+    anonymous_user_id: str = Field(min_length=1, max_length=80)
 
 
 @app.post('/api/pro/leads', status_code=201)
@@ -600,6 +627,25 @@ def create_pro_lead(request: ProLeadRequest):
     except ReactionStoreError as exc:
         logger.exception("Pro lead save failed")
         raise HTTPException(status_code=500, detail="Lead store unavailable") from exc
+
+
+@app.post('/api/region-requests', status_code=201)
+def create_region_request(request: RegionRequestRequest):
+    """Persist one idempotent B2C municipality rollout request in Firestore."""
+    normalized_email = request.email.strip().lower()
+    if normalized_email and '@' not in normalized_email:
+        raise HTTPException(status_code=400, detail="Invalid email address")
+    try:
+        return save_region_request(
+            municipality_id=request.municipality_id,
+            municipality_name=request.municipality_name,
+            email=normalized_email,
+            message=request.message,
+            anonymous_user_id=request.anonymous_user_id,
+        )
+    except ReactionStoreError as exc:
+        logger.exception("Region request save failed")
+        raise HTTPException(status_code=500, detail="Region request store unavailable") from exc
 
 
 @app.post('/api/internal/notifications/match')
@@ -868,6 +914,74 @@ def get_notification_matches(anonymous_user_id: str):
     except ReactionStoreError as exc:
         logger.exception("User notification match failed")
         raise HTTPException(status_code=500, detail="Notification matching store unavailable") from exc
+
+
+@app.get('/api/notifications/line/status')
+def get_line_notification_status(anonymous_user_id: str):
+    """Return whether the user has linked LINE for push notifications."""
+    if not anonymous_user_id.strip():
+        raise HTTPException(status_code=400, detail="anonymous_user_id is required")
+    try:
+        return get_line_link_status(anonymous_user_id=anonymous_user_id)
+    except ReactionStoreError as exc:
+        logger.exception("LINE link status get failed")
+        raise HTTPException(status_code=500, detail="LINE link store unavailable") from exc
+
+
+@app.put('/api/notifications/line/link')
+def put_line_notification_link(
+    request: LineLinkRequest,
+    anonymous_user_id: str,
+):
+    """Link a LINE user id to the anonymous browser profile for push delivery."""
+    if not anonymous_user_id.strip():
+        raise HTTPException(status_code=400, detail="anonymous_user_id is required")
+    try:
+        return link_line_user(
+            anonymous_user_id=anonymous_user_id,
+            line_user_id=request.line_user_id,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except ReactionStoreError as exc:
+        logger.exception("LINE link save failed")
+        raise HTTPException(status_code=500, detail="LINE link store unavailable") from exc
+
+
+@app.delete('/api/notifications/line/link')
+def delete_line_notification_link(anonymous_user_id: str):
+    """Remove the LINE link for push notifications."""
+    if not anonymous_user_id.strip():
+        raise HTTPException(status_code=400, detail="anonymous_user_id is required")
+    try:
+        return unlink_line_user(anonymous_user_id=anonymous_user_id)
+    except ReactionStoreError as exc:
+        logger.exception("LINE link delete failed")
+        raise HTTPException(status_code=500, detail="LINE link store unavailable") from exc
+
+
+@app.post('/api/notifications/line/oauth/callback')
+def complete_line_notification_oauth(request: LineOAuthCallbackRequest):
+    """Exchange a LINE Login authorization code and persist the link."""
+    try:
+        profile = exchange_line_login_code(
+            code=request.code,
+            redirect_uri=request.redirect_uri,
+        )
+        return link_line_user(
+            anonymous_user_id=request.anonymous_user_id,
+            line_user_id=profile["line_user_id"],
+            display_name=profile.get("display_name"),
+        )
+    except LineNotificationConfigurationError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except LineOAuthError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except ReactionStoreError as exc:
+        logger.exception("LINE OAuth callback failed")
+        raise HTTPException(status_code=500, detail="LINE link store unavailable") from exc
 
 
 class UtteranceReactionRequest(BaseModel):

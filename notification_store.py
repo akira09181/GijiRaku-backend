@@ -267,6 +267,8 @@ def run_notification_matching(issue_ids: List[str] | None = None) -> Dict[str, A
         raise ReactionStoreError("Failed to list notification subscriptions") from exc
 
     matched_count = 0
+    line_push_sent = 0
+    line_push_skipped = 0
     notification_ids = []
     for fallback_id, subscription in subscriptions_by_id.items():
         pref = {
@@ -288,6 +290,12 @@ def run_notification_matching(issue_ids: List[str] | None = None) -> Dict[str, A
             )
             notification_ids.append(result["notification"]["notification_id"])
             matched_count += 1
+            from line_notification_store import notify_line_for_match
+            push_result = notify_line_for_match(str(subscription["user_key"]), issue)
+            if push_result.get("status") == "sent":
+                line_push_sent += 1
+            else:
+                line_push_skipped += 1
     return {
         "status": "success",
         "storage_backend": STORAGE_BACKEND,
@@ -295,6 +303,8 @@ def run_notification_matching(issue_ids: List[str] | None = None) -> Dict[str, A
         "subscription_count": len(subscriptions_by_id),
         "notification_count": matched_count,
         "notification_ids": notification_ids,
+        "line_push_sent": line_push_sent,
+        "line_push_skipped": line_push_skipped,
     }
 
 

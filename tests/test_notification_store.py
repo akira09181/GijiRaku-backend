@@ -122,6 +122,7 @@ class NotificationStoreTest(unittest.TestCase):
         with (
             patch("notification_store.get_firestore_client", return_value=client),
             patch("notification_store._issue_catalog_rows", return_value=issues),
+            patch("line_notification_store.notify_line_for_match", return_value={"status": "skipped"}),
         ):
             notification_store.save_user_preferences(
                 "user-4",
@@ -169,6 +170,7 @@ class NotificationStoreTest(unittest.TestCase):
         with (
             patch("notification_store.get_firestore_client", return_value=client),
             patch("notification_store._issue_catalog_rows", return_value=issues),
+            patch("line_notification_store.notify_line_for_match", return_value={"status": "skipped"}),
         ):
             result = notification_store.run_notification_matching()
 
