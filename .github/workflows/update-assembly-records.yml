@@ -9,7 +9,11 @@ on:
       - 'scripts/update_assembly_records.py'
       - 'scripts/validate_issue_catalog.py'
       - 'issue_catalog.py'
+      - 'assembly_record_store.py'
+      - 'assembly_records.py'
       - 'catalog_metadata.py'
+      - 'scripts/migrate_assembly_records_to_firestore.py'
+      - 'tests/test_assembly_record_store.py'
       - 'tests/test_update_assembly_records.py'
       - 'data/assembly_records.json'
   schedule:
@@ -38,6 +42,7 @@ jobs:
       - name: Test ingestion and catalog integrity
         run: >-
           python -m unittest
+          tests.test_assembly_record_store
           tests.test_update_assembly_records
           tests.test_issue_catalog
       - run: python scripts/validate_issue_catalog.py
@@ -60,6 +65,19 @@ jobs:
           git commit -m "data: update official assembly records"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Sync versioned records to Firestore
+        if: github.event_name == 'push' || steps.commit_records.outputs.changed == 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_DATABASE_ID: ${{ secrets.FIREBASE_DATABASE_ID }}
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            echo "FIREBASE_SERVICE_ACCOUNT_JSON is not configured; keeping JSON as the active source."
+            exit 0
+          fi
+          pip install firebase-admin==7.5.0
+          python scripts/migrate_assembly_records_to_firestore.py
       - name: Trigger Render deploy
         if: steps.commit_records.outputs.changed == 'true'
         env:

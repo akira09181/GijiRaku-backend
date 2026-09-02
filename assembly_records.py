@@ -1,14 +1,16 @@
-"""Load curated, source-verified assembly records from the backend JSON store."""
+"""Load source-verified records from Firestore with a safe JSON fallback."""
 
 from __future__ import annotations
 
 import json
+import logging
 import os
 from copy import deepcopy
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from catalog_metadata import public_title
+from assembly_record_store import AssemblyRecordStoreError, load_firestore_dataset
 
 
 DEFAULT_DATA_PATH = Path(__file__).resolve().parent / "data" / "assembly_records.json"
@@ -16,19 +18,51 @@ ASSEMBLY_ALIASES = {
     "machida-shi": "machida-city",
     "shinagawa-ku": "shinagawa-ward",
 }
+logger = logging.getLogger(__name__)
+_active_backend = "json"
 
 
 def _data_path() -> Path:
     return Path(os.getenv("GIJIRAKU_ASSEMBLY_RECORDS_PATH", str(DEFAULT_DATA_PATH)))
 
 
-def load_dataset() -> Dict[str, Any]:
+def _load_json_dataset() -> Dict[str, Any]:
     with _data_path().open(encoding="utf-8") as source:
         dataset = json.load(source)
 
     if dataset.get("schema_version") != 1 or not isinstance(dataset.get("assemblies"), dict):
         raise ValueError("Unsupported assembly records schema")
     return dataset
+
+
+def _json_fallback_enabled() -> bool:
+    return os.getenv("ASSEMBLY_RECORDS_JSON_FALLBACK", "1").strip().lower() in {
+        "1", "true", "yes", "on",
+    }
+
+
+def load_dataset() -> Dict[str, Any]:
+    global _active_backend
+    backend = os.getenv("ASSEMBLY_RECORDS_BACKEND", "json").strip().lower()
+    if backend not in {"json", "firestore", "auto"}:
+        raise ValueError("ASSEMBLY_RECORDS_BACKEND must be json, firestore, or auto")
+    if backend in {"firestore", "auto"}:
+        try:
+            dataset = load_firestore_dataset()
+            _active_backend = "firestore"
+            return dataset
+        except AssemblyRecordStoreError:
+            if backend == "firestore" and not _json_fallback_enabled():
+                raise
+            logger.exception("Firestore assembly records unavailable; using JSON fallback")
+            _active_backend = "json-fallback"
+            return _load_json_dataset()
+    _active_backend = "json"
+    return _load_json_dataset()
+
+
+def get_active_storage_backend() -> str:
+    return _active_backend
 
 
 def normalize_assembly_id(assembly_id: str) -> str:
@@ -81,6 +115,7 @@ def get_assembly_record_stats() -> Dict[str, Any]:
         if record.get("publication_status") == "published"
     ]
     return {
+        "storage_backend": get_active_storage_backend(),
         "updated_at": dataset.get("updated_at"),
         "open_data_source_count": sum(
             1
