@@ -393,8 +393,8 @@ def patch_issue_statuses() -> None:
         )
     if blocks:
         text = text.replace(
-            "    issueId: 'koto-disaster-townplan-2025-06-12',",
-            "\n".join(blocks) + "\n    issueId: 'koto-disaster-townplan-2025-06-12',",
+            "  },\n  {\n    issueId: 'koto-disaster-townplan-2025-06-12',",
+            "  },\n" + "\n".join(blocks) + "\n  {\n    issueId: 'koto-disaster-townplan-2025-06-12',",
             1,
         )
         path.write_text(text, encoding="utf-8")
