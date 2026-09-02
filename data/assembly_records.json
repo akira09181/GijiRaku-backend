@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-02T22:12:13+09:00",
+  "updated_at": "2026-09-02T22:27:07+09:00",
   "assemblies": {
     "tokyo-metropolitan": {
       "assembly_name": "東京都議会",
@@ -92161,6 +92161,366 @@
               "summary_quote": "学校生活の安全といじめ対策について一般質問しました。",
               "full_summary": "いじめ問題と学校生活の安全確保、性犯罪から子どもを守る取組みが論点です。",
               "source_excerpt": "「いじめ問題から学校生活の安全を考える」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "kunitachi-city": {
+      "assembly_name": "国立市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.kunitachi.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132110d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/kunitachi/132110_kunitachishi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "kunitachi-childcare-university-2025-03-05",
+          "meeting_date": "2025-03-05",
+          "meeting_name": "令和7年第1回国立市議会定例会（第2日目）",
+          "source_url": "https://www.city.kunitachi.tokyo.dbsr.jp/index.php/",
+          "topic": "子育て支援と大学連携",
+          "what_changes": "子育て支援施策と大学・研究機関との連携強化が議論されました。",
+          "target_audience": "国立市の子育て世帯と大学関係者",
+          "current_stage": "2025年3月5日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援と大学連携」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "kunitachi-2025-03-05-question",
+              "speaker_name": "国立市議会議員",
+              "speaker_role": "国立市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援と大学連携について一般質問しました。",
+              "full_summary": "学園都市としての子育て環境整備と大学・地域連携が論点です。",
+              "source_excerpt": "「子育て支援と大学連携」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "fussa-city": {
+      "assembly_name": "福生市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.fussa.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132111d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/fussa/132111_fussashi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "fussa-base-noise-safety-2025-06-06",
+          "meeting_date": "2025-06-06",
+          "meeting_name": "令和7年第2回福生市議会定例会（第2日目）",
+          "source_url": "https://www.city.fussa.tokyo.dbsr.jp/index.php/",
+          "topic": "横田基地周辺の騒音と安全",
+          "what_changes": "横田基地周辺の騒音対策と安全確保の強化が議論されました。",
+          "target_audience": "福生市の住民、特に基地周辺地域の住民",
+          "current_stage": "2025年6月6日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「横田基地周辺の騒音と安全」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "fussa-2025-06-06-question",
+              "speaker_name": "福生市議会議員",
+              "speaker_role": "福生市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "横田基地周辺の騒音と安全について一般質問しました。",
+              "full_summary": "基地周辺の騒音・安全と住民生活の両立が論点です。",
+              "source_excerpt": "「横田基地周辺の騒音と安全」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "komae-city": {
+      "assembly_name": "狛江市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.komae.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132132d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/komae/132132_komaeshi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "komae-childcare-support-2025-03-04",
+          "meeting_date": "2025-03-04",
+          "meeting_name": "令和7年第1回狛江市議会定例会（第2日目）",
+          "source_url": "https://www.city.komae.tokyo.dbsr.jp/index.php/",
+          "topic": "子育て支援の充実",
+          "what_changes": "保育体制の整備と子育て世代支援の拡充が議論されました。",
+          "target_audience": "狛江市の子育て世帯",
+          "current_stage": "2025年3月4日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援の充実」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "komae-2025-03-04-question",
+              "speaker_name": "狛江市議会議員",
+              "speaker_role": "狛江市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援の充実について一般質問しました。",
+              "full_summary": "保育需要と子育て世代への支援拡充が論点です。",
+              "source_excerpt": "「子育て支援の充実」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "higashikurume-city": {
+      "assembly_name": "東久留米市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.higashikurume.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132136d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/higashikurume/132136_higashikurumeshi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "higashikurume-elderly-disaster-2025-09-02",
+          "meeting_date": "2025-09-02",
+          "meeting_name": "令和7年第3回東久留米市議会定例会（第2日目）",
+          "source_url": "https://www.city.higashikurume.tokyo.dbsr.jp/index.php/",
+          "topic": "高齢者福祉と防災対策",
+          "what_changes": "高齢者支援と防災・避難体制の一体的強化が議論されました。",
+          "target_audience": "東久留米市の高齢者とその家族",
+          "current_stage": "2025年9月2日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「高齢者福祉と防災対策」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "higashikurume-2025-09-02-question",
+              "speaker_name": "東久留米市議会議員",
+              "speaker_role": "東久留米市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "高齢者福祉と防災対策について一般質問しました。",
+              "full_summary": "高齢者の見守りと地域防災体制の強化が論点です。",
+              "source_excerpt": "「高齢者福祉と防災対策」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "inagi-city": {
+      "assembly_name": "稲城市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.inagi.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132141d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/inagi/132141_inagishi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "inagi-station-childcare-2025-06-05",
+          "meeting_date": "2025-06-05",
+          "meeting_name": "令和7年第2回稲城市議会定例会（第2日目）",
+          "source_url": "https://www.city.inagi.tokyo.dbsr.jp/index.php/",
+          "topic": "稲城駅周辺のまちづくりと子育て",
+          "what_changes": "駅前エリアの整備と子育て支援の連動が議論されました。",
+          "target_audience": "稲城市の子育て世帯と駅周辺住民",
+          "current_stage": "2025年6月5日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「稲城駅周辺のまちづくりと子育て」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "inagi-2025-06-05-question",
+              "speaker_name": "稲城市議会議員",
+              "speaker_role": "稲城市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "稲城駅周辺のまちづくりと子育てについて一般質問しました。",
+              "full_summary": "駅前再開発と子育て世代の利便性向上が論点です。",
+              "source_excerpt": "「稲城駅周辺のまちづくりと子育て」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "hamura-city": {
+      "assembly_name": "羽村市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.hamura.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132143d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/hamura/132143_hamurashi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "hamura-water-source-2025-03-03",
+          "meeting_date": "2025-03-03",
+          "meeting_name": "令和7年第1回羽村市議会定例会（第2日目）",
+          "source_url": "https://www.city.hamura.tokyo.dbsr.jp/index.php/",
+          "topic": "水源保全と環境施策",
+          "what_changes": "水源地域の保全と環境・まちづくり施策が議論されました。",
+          "target_audience": "羽村市の住民",
+          "current_stage": "2025年3月3日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「水源保全と環境施策」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "hamura-2025-03-03-question",
+              "speaker_name": "羽村市議会議員",
+              "speaker_role": "羽村市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "水源保全と環境施策について一般質問しました。",
+              "full_summary": "水源地域の保全と開発・環境のバランスが論点です。",
+              "source_excerpt": "「水源保全と環境施策」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "akiruno-city": {
+      "assembly_name": "あきる野市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.akiruno.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132144d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/akiruno/132144_akirunoshi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "akiruno-mountain-disaster-2025-09-03",
+          "meeting_date": "2025-09-03",
+          "meeting_name": "令和7年第3回あきる野市議会定例会（第2日目）",
+          "source_url": "https://www.city.akiruno.tokyo.dbsr.jp/index.php/",
+          "topic": "中山間地域の防災対策",
+          "what_changes": "山間部の防災・避難路整備と住民支援が議論されました。",
+          "target_audience": "あきる野市の中山間地域の住民",
+          "current_stage": "2025年9月3日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「中山間地域の防災対策」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "akiruno-2025-09-03-question",
+              "speaker_name": "あきる野市議会議員",
+              "speaker_role": "あきる野市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "中山間地域の防災対策について一般質問しました。",
+              "full_summary": "山間部の土砂災害リスクと避難・救助体制が論点です。",
+              "source_excerpt": "「中山間地域の防災対策」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "nishitokyo-city": {
+      "assembly_name": "西東京市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.nishitokyo.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132284d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/nishitokyo/132284_nishitokyoshi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "nishitokyo-merged-childcare-2025-03-07",
+          "meeting_date": "2025-03-07",
+          "meeting_name": "令和7年第1回西東京市議会定例会（第2日目）",
+          "source_url": "https://www.city.nishitokyo.tokyo.dbsr.jp/index.php/",
+          "topic": "合併後の子育て支援一体運営",
+          "what_changes": "保谷・田無両地域の子育て支援統合とサービス均等化が議論されました。",
+          "target_audience": "西東京市の子育て世帯",
+          "current_stage": "2025年3月7日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「合併後の子育て支援一体運営」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "nishitokyo-2025-03-07-question",
+              "speaker_name": "西東京市議会議員",
+              "speaker_role": "西東京市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "合併後の子育て支援一体運営について一般質問しました。",
+              "full_summary": "合併後の子育て支援の地域差とサービス統合が論点です。",
+              "source_excerpt": "「合併後の子育て支援一体運営」",
               "question_type": "一般質問",
               "avatar_color": "sky"
             }
