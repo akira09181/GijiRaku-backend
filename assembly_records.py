@@ -10,7 +10,12 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from catalog_metadata import public_title
-from assembly_record_store import AssemblyRecordStoreError, load_firestore_dataset
+from assembly_record_store import (
+    AssemblyRecordStoreError,
+    canonical_dataset_hash,
+    load_firestore_dataset,
+    save_firestore_dataset,
+)
 
 
 DEFAULT_DATA_PATH = Path(__file__).resolve().parent / "data" / "assembly_records.json"
@@ -41,9 +46,16 @@ def _json_fallback_enabled() -> bool:
     }
 
 
+def _configured_backend() -> str:
+    configured = os.getenv("ASSEMBLY_RECORDS_BACKEND", "").strip().lower()
+    if configured:
+        return configured
+    return "auto" if os.getenv("RENDER", "").strip().lower() == "true" else "json"
+
+
 def load_dataset() -> Dict[str, Any]:
     global _active_backend
-    backend = os.getenv("ASSEMBLY_RECORDS_BACKEND", "json").strip().lower()
+    backend = _configured_backend()
     if backend not in {"json", "firestore", "auto"}:
         raise ValueError("ASSEMBLY_RECORDS_BACKEND must be json, firestore, or auto")
     if backend in {"firestore", "auto"}:
@@ -51,7 +63,7 @@ def load_dataset() -> Dict[str, Any]:
             dataset = load_firestore_dataset()
             _active_backend = "firestore"
             return dataset
-        except AssemblyRecordStoreError:
+        except Exception:
             if backend == "firestore" and not _json_fallback_enabled():
                 raise
             logger.exception("Firestore assembly records unavailable; using JSON fallback")
@@ -59,6 +71,43 @@ def load_dataset() -> Dict[str, Any]:
             return _load_json_dataset()
     _active_backend = "json"
     return _load_json_dataset()
+
+
+def sync_json_snapshot_to_firestore() -> Dict[str, Any]:
+    """On Render startup, atomically sync JSON changes through existing credentials."""
+    global _active_backend
+    backend = _configured_backend()
+    if backend == "json":
+        _active_backend = "json"
+        return {"status": "skipped", "storage_backend": "json"}
+
+    source = _load_json_dataset()
+    source_version = canonical_dataset_hash(source)
+    try:
+        current = load_firestore_dataset(use_cache=False)
+        if canonical_dataset_hash(current) == source_version:
+            _active_backend = "firestore"
+            return {
+                "status": "unchanged",
+                "storage_backend": "firestore",
+                "dataset_version": source_version,
+            }
+    except Exception:
+        logger.info("Firestore assembly record snapshot is not initialized yet")
+
+    try:
+        result = save_firestore_dataset(source)
+        verified = load_firestore_dataset(use_cache=False)
+        if canonical_dataset_hash(verified) != source_version:
+            raise AssemblyRecordStoreError("Firestore assembly record verification failed")
+        _active_backend = "firestore"
+        return {"status": "synchronized", "storage_backend": "firestore", **result}
+    except Exception:
+        if backend == "firestore" and not _json_fallback_enabled():
+            raise
+        logger.exception("Firestore assembly record sync failed; keeping JSON fallback")
+        _active_backend = "json-fallback"
+        return {"status": "fallback", "storage_backend": "json-fallback"}
 
 
 def get_active_storage_backend() -> str:

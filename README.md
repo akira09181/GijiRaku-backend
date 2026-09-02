@@ -81,6 +81,11 @@ ASSEMBLY_RECORDS_JSON_FALLBACK=1
 移行期間中にFirestore障害が起きた場合はJSONへフォールバックします。安定稼働確認後に
 `ASSEMBLY_RECORDS_JSON_FALLBACK=0` とすると、DB障害を明示的なエラーとして扱えます。
 
+Renderでは `ASSEMBLY_RECORDS_BACKEND` が未設定の場合も `auto` として動作します。起動時に
+同梱JSONとFirestoreのデータセットハッシュを比較し、差分がある場合だけ既存のRender
+Firestore認証でバージョン同期してからDB読取へ切り替えます。ローカルとテスト環境は従来どおり
+未設定時にJSONを使用します。
+
 実Firestoreを使う再起動テストは明示的に有効化して実行します。GET、PUT、別プロセスからのGETを順に行い、テスト専用ドキュメントだけを最後に削除します。
 
 ```bash

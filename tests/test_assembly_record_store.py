@@ -176,6 +176,29 @@ class AssemblyRecordFirestoreStoreTest(unittest.TestCase):
             self.assertEqual(assembly_records.load_dataset(), dataset)
             self.assertEqual(assembly_records.get_active_storage_backend(), "firestore")
 
+    def test_render_defaults_to_auto_and_synchronizes_a_changed_snapshot(self):
+        source = _dataset()
+        previous = _dataset(1)
+        migrated = {
+            "dataset_version": "version",
+            "document_writes": 3,
+            "dry_run": False,
+        }
+        with (
+            patch.dict("os.environ", {"RENDER": "true"}, clear=True),
+            patch("assembly_records._load_json_dataset", return_value=source),
+            patch(
+                "assembly_records.load_firestore_dataset",
+                side_effect=[previous, source],
+            ),
+            patch("assembly_records.save_firestore_dataset", return_value=migrated) as save,
+        ):
+            result = assembly_records.sync_json_snapshot_to_firestore()
+
+        save.assert_called_once_with(source)
+        self.assertEqual(result["status"], "synchronized")
+        self.assertEqual(result["storage_backend"], "firestore")
+
     def test_firestore_backend_can_fail_closed_after_cutover(self):
         with (
             patch.dict(

@@ -12,7 +12,11 @@ from opendata_service import (
     get_assembly_chat_dialogue,
     fetch_tokyo_catalog_datasets
 )
-from assembly_records import get_assembly_record_stats, get_assembly_records
+from assembly_records import (
+    get_assembly_record_stats,
+    get_assembly_records,
+    sync_json_snapshot_to_firestore,
+)
 from issue_catalog import get_issue_catalog
 from reaction_store import (
     ReactionStoreError,
@@ -51,6 +55,12 @@ logger = logging.getLogger("gijiraku.reactions")
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    assembly_sync = sync_json_snapshot_to_firestore()
+    logger.info(
+        "Assembly record store ready (backend=%s, sync_status=%s)",
+        assembly_sync["storage_backend"],
+        assembly_sync["status"],
+    )
     try:
         storage = verify_reaction_store_connection()
         logger.info(
