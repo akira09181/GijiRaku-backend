@@ -106,6 +106,29 @@ curl -X POST http://localhost:8000/api/etl/extract \
   -d '{"raw_text":"議事録本文","persist":false}'
 ```
 
-通知設定 API は匿名ユーザーIDをハッシュ化して保存します。設定の取得・更新は `/api/notifications/preferences/{anonymous_user_id}`、一致件数の取得は `/api/notifications/matches/{anonymous_user_id}` です。
+通知設定 API は匿名ユーザーIDをハッシュ化して保存します。設定の取得・更新は
+`/api/notifications/preferences?anonymous_user_id=...`、一致件数の取得は
+`/api/notifications/matches?anonymous_user_id=...` です。
+
+新規議題の投入後は、Renderと呼び出し元へ同じ `NOTIFICATION_BATCH_API_KEY` を設定し、
+保護された冪等バッチを呼び出します。`issue_ids` を空にすると公開中の全議題を照合します。
+
+```bash
+curl -X POST http://localhost:8000/api/internal/notifications/match \
+  -H "Content-Type: application/json" \
+  -H "X-Internal-API-Key: ${NOTIFICATION_BATCH_API_KEY}" \
+  -d '{"issue_ids":["tokyo-app-2026-06-16"]}'
+```
+
+通知は `user_key + issue_id + subscription_id` のハッシュをドキュメントIDにするため、
+同じ投入ジョブを再実行しても重複しません。旧 `user_preferences` だけを持つ利用者もバッチ時に
+互換読取されます。
+
+## MachiVoice Pro API
+
+- `GET /api/pro/trends?from_date=YYYY-MM-DD&to_date=YYYY-MM-DD`: 公開議題を複数議会横断で決定論的に集計
+- `POST /api/pro/leads`: 法人向けLPの導入相談をFirestore `pro_leads` へ冪等保存
+
+トレンド集計はLLMを呼ばず、公開済みの `issue_id`、議会ID、日付、テーマ、議題本文だけを使用します。
 
 サービスアカウントJSONはGitへコミットしないでください。

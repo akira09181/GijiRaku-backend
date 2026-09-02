@@ -45,10 +45,16 @@ from follow_store import (
     put_issue_follow,
 )
 from notification_store import (
+    NotificationBatchAuthorizationError,
+    NotificationBatchConfigurationError,
+    authorize_notification_batch,
     get_user_preferences,
     match_issue_notifications,
+    run_notification_matching,
     save_user_preferences,
 )
+from trend_service import get_cross_assembly_trends
+from lead_store import save_pro_lead
 
 logger = logging.getLogger("gijiraku.reactions")
 
@@ -349,6 +355,29 @@ def get_analytics(assembly_id: str):
         ) from exc
     return {"status": "success", "data": data}
 
+
+@app.get("/api/pro/trends")
+def get_pro_trends(
+    from_date: str,
+    to_date: str,
+    assembly_id: Optional[List[str]] = None,
+    keyword_limit: int = 12,
+):
+    """Return deterministic, source-linked trend aggregates across assemblies."""
+    try:
+        data = get_cross_assembly_trends(
+            from_date=from_date,
+            to_date=to_date,
+            assembly_ids=assembly_id,
+            keyword_limit=keyword_limit,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except Exception as exc:
+        logger.exception("Cross-assembly trend aggregation failed")
+        raise HTTPException(status_code=500, detail="Trend aggregation unavailable") from exc
+    return {"status": "success", "data": data}
+
 @app.get("/api/opendata/catalog")
 def get_catalog():
     """東京都オープンデータカタログAPIの最新結果を取得"""
@@ -520,6 +549,45 @@ class UserNotificationPreferencesRequest(BaseModel):
     interest_themes: List[str] = Field(default_factory=list, max_length=20)
     municipalities: List[str] = Field(default_factory=list, max_length=20)
     keywords: List[str] = Field(default_factory=list, max_length=20)
+
+
+class ProLeadRequest(BaseModel):
+    organization: str = Field(min_length=1, max_length=120)
+    name: str = Field(min_length=1, max_length=80)
+    email: str = Field(min_length=3, max_length=254, pattern=r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
+    purpose: str = Field(default="", max_length=1000)
+
+
+class NotificationBatchRequest(BaseModel):
+    issue_ids: List[str] = Field(default_factory=list, max_length=100)
+
+
+@app.post('/api/pro/leads', status_code=201)
+def create_pro_lead(request: ProLeadRequest):
+    """Persist one idempotent B2B consultation lead in Firestore."""
+    try:
+        return save_pro_lead(**request.model_dump())
+    except ReactionStoreError as exc:
+        logger.exception("Pro lead save failed")
+        raise HTTPException(status_code=500, detail="Lead store unavailable") from exc
+
+
+@app.post('/api/internal/notifications/match')
+def match_deployed_issue_notifications(
+    request: NotificationBatchRequest,
+    x_internal_api_key: Optional[str] = Header(default=None),
+):
+    """Protected, idempotent matching batch called after record deployment."""
+    try:
+        authorize_notification_batch(x_internal_api_key)
+        return run_notification_matching(issue_ids=request.issue_ids)
+    except NotificationBatchConfigurationError as exc:
+        raise HTTPException(status_code=503, detail="Notification batch is not configured") from exc
+    except NotificationBatchAuthorizationError as exc:
+        raise HTTPException(status_code=401, detail="Invalid notification batch API key") from exc
+    except ReactionStoreError as exc:
+        logger.exception("Notification matching batch failed")
+        raise HTTPException(status_code=500, detail="Notification matching store unavailable") from exc
 
 
 @app.put('/api/reactions')
