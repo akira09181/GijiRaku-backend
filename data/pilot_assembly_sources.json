@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "assemblies": [
+    {
+      "assembly_id": "nerima-ward",
+      "assembly_name": "練馬区議会",
+      "tenant": "nerima",
+      "tenant_id": 367,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/nerima/131203_nerimaku_gikaidayori.csv",
+      "open_data_code": "131203"
+    },
+    {
+      "assembly_id": "nakano-ward",
+      "assembly_name": "中野区議会",
+      "tenant": "nakano",
+      "tenant_id": 208,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/nakano/131142_nakanoku_gikaidayori.csv",
+      "open_data_code": "131142"
+    },
+    {
+      "assembly_id": "kita-ward",
+      "assembly_name": "北区議会",
+      "tenant": "kita",
+      "tenant_id": 395,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/kita/131172_kitaku_gikaidayori.csv",
+      "open_data_code": "131172"
+    },
+    {
+      "assembly_id": "sumida-ward",
+      "assembly_name": "墨田区議会",
+      "tenant": "sumida",
+      "tenant_id": 396,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/sumida/131092_sumidaku_gikaidayori.csv",
+      "open_data_code": "131092"
+    },
+    {
+      "assembly_id": "tachikawa-city",
+      "assembly_name": "立川市議会",
+      "tenant": "tachikawa",
+      "tenant_id": 368,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/tachikawa/132024_tachikawashi_gikaidayori.csv",
+      "open_data_code": "132024"
+    }
+  ]
+}

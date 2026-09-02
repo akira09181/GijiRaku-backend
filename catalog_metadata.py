@@ -28,6 +28,11 @@ VERIFIED_EXTRACTIVE_ISSUE_IDS = {
     "arakawa-ward-auto-2026-02-17-685-3-111",
     "arakawa-ward-auto-2026-02-16-685-2-62",
     "arakawa-ward-auto-2026-02-16-685-2-99",
+    "nerima-ward-auto-2024-03-15-5227-9-275",
+    "nakano-ward-auto-2024-03-06-197-4-196",
+    "kita-ward-auto-2024-06-07-653-2-8",
+    "sumida-ward-auto-2024-06-12-555-2-150",
+    "tachikawa-city-auto-2024-02-27-2629-4-62",
 }
 
 PUBLIC_TITLE_OVERRIDES = {
@@ -38,6 +43,11 @@ PUBLIC_TITLE_OVERRIDES = {
     "arakawa-ward-auto-2026-02-17-685-3-111": "町会・自治会の担い手確保と区との連携",
     "arakawa-ward-auto-2026-02-16-685-2-62": "令和8年度予算と物価高への生活支援",
     "arakawa-ward-auto-2026-02-16-685-2-99": "子どもに寄り添う支援施策の拡充",
+    "nerima-ward-auto-2024-03-15-5227-9-275": "高齢者対策の強化",
+    "nakano-ward-auto-2024-03-06-197-4-196": "子育て支援",
+    "kita-ward-auto-2024-06-07-653-2-8": "子育て支援策",
+    "sumida-ward-auto-2024-06-12-555-2-150": "職員の人材育成",
+    "tachikawa-city-auto-2024-02-27-2629-4-62": "個別の教育支援計画と個別の指導計画",
 }
 
 
