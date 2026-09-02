@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-02T21:47:45+09:00",
+  "updated_at": "2026-09-02T22:05:04+09:00",
   "assemblies": {
     "tokyo-metropolitan": {
       "assembly_name": "東京都議会",
@@ -91713,6 +91713,231 @@
               "source_excerpt": "お答えいたします。 本人確認の書類としてでございますけれども、こちらの本人確認の書類につきましては、マイナンバーカード以外に顔写真つきの本人確認書類、例えば運転免許証ですとかパスポート、こういったものでも本人確認の資料として使用できるということになっております。 以上です。",
               "question_type": "行政答弁",
               "avatar_color": "emerald"
+            }
+          ]
+        }
+      ]
+    },
+    "koto-ward": {
+      "assembly_name": "江東区議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.koto.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131083d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/koto/131083_kotoku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "koto-disaster-townplan-2025-06-12",
+          "meeting_date": "2025-06-12",
+          "meeting_name": "令和7年第2回江東区議会定例会（第2日目）",
+          "source_url": "https://www.city.koto.tokyo.dbsr.jp/index.php/",
+          "topic": "防災・まちづくり対策の強化",
+          "what_changes": "臨海部の防災体制と地域のまちづくりを一体的に進める必要性が議論されました。",
+          "target_audience": "江東区の住民、特に臨海部・高層集住宅地域の住民",
+          "current_stage": "2025年6月12日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「防災・まちづくり対策特別委員会」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "koto-2025-06-12-question",
+              "speaker_name": "江東区議会議員",
+              "speaker_role": "江東区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "防災・まちづくり対策の強化について一般質問しました。",
+              "full_summary": "大規模災害への備えと臨海部を含む地域防災体制が論点です。",
+              "source_excerpt": "「防災・まちづくり対策特別委員会」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "musashino-city": {
+      "assembly_name": "武蔵野市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.musashino.tokyo.dbsr.jp/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132044d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/musashino/132044_musashinoshi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "musashino-school-rebuild-2025-12-04",
+          "meeting_date": "2025-12-04",
+          "meeting_name": "令和7年第4回武蔵野市議会定例会（第2日目）",
+          "source_url": "https://www.city.musashino.tokyo.dbsr.jp/",
+          "topic": "学校改築と小・中学校の適正規模",
+          "what_changes": "学校施設の改築計画と小・中学校の適正規模化が議論されました。",
+          "target_audience": "武蔵野市立学校に通う児童生徒と保護者",
+          "current_stage": "2025年12月4日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「学校改築と小・中学校の適正規模等について」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "musashino-2025-12-04-question",
+              "speaker_name": "菅 源太郎",
+              "speaker_role": "武蔵野市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "学校改築と小・中学校の適正規模について一般質問しました。",
+              "full_summary": "老朽化校舎の改築と適正規模化、仮設校舎期間中の課題が論点です。",
+              "source_excerpt": "「学校改築と小・中学校の適正規模等について」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "fuchu-city": {
+      "assembly_name": "府中市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.fuchu.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132062d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/fuchu/132062_fuchushi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "fuchu-base-redevelopment-2025-09-03",
+          "meeting_date": "2025-09-03",
+          "meeting_name": "令和7年第3回府中市議会定例会（第2日目）",
+          "source_url": "https://www.city.fuchu.tokyo.dbsr.jp/index.php/",
+          "topic": "府中基地跡地の活用",
+          "what_changes": "府中基地跡地の解体後の土地利用と市民への開放が議論されました。",
+          "target_audience": "府中市の住民、特に基地跡地周辺の住民",
+          "current_stage": "2025年9月3日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「府中基地跡地の今後の予定」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "fuchu-2025-09-03-question",
+              "speaker_name": "府中市議会議員",
+              "speaker_role": "府中市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "府中基地跡地の活用について一般質問しました。",
+              "full_summary": "基地跡地の解体工事と今後の土地利用、市民への説明が論点です。",
+              "source_excerpt": "「府中基地跡地の今後の予定」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "mitaka-city": {
+      "assembly_name": "三鷹市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.mitaka.tokyo.dbsr.jp/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132039d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/mitaka/132039_mitakashi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "mitaka-inclusive-disaster-2024-02-27",
+          "meeting_date": "2024-02-27",
+          "meeting_name": "令和6年第1回三鷹市議会定例会（第2日目）",
+          "source_url": "https://www.gikai.city.mitaka.tokyo.jp/reference/2024/custom1/no4_text.html",
+          "topic": "インクルーシブ防災の徹底",
+          "what_changes": "高齢者・障がい者を含む福祉避難所体制と防災対策が議論されました。",
+          "target_audience": "三鷹市の住民、特に要支援者とその家族",
+          "current_stage": "2024年2月27日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「誰一人取り残さない命を守るインクルーシブ防災の徹底を」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "mitaka-2024-02-27-question",
+              "speaker_name": "石井 れいこ",
+              "speaker_role": "三鷹市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "インクルーシブ防災の徹底について一般質問しました。",
+              "full_summary": "福祉避難所の整備と、誰一人取り残さない防災体制が論点です。",
+              "source_excerpt": "「誰一人取り残さない命を守るインクルーシブ防災の徹底を」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "kokubunji-city": {
+      "assembly_name": "国分寺市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.kokubunji.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132109d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/kokubunji/132109_kokubunjishi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "kokubunji-peace-education-2025-02-28",
+          "meeting_date": "2025-02-28",
+          "meeting_name": "令和7年第1回国分寺市議会定例会",
+          "source_url": "https://www.city.kokubunji.tokyo.dbsr.jp/index.php/",
+          "topic": "平和教育と校外学習の中立性",
+          "what_changes": "中学校における平和教育と校外学習の政治的中立性が議論されました。",
+          "target_audience": "国分寺市立中学校に通う児童生徒と保護者",
+          "current_stage": "2025年2月28日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「公立中学校における平和教育及び校外学習の政治的中立性と安全確保を求める陳情書」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "kokubunji-2025-02-28-question",
+              "speaker_name": "国分寺市議会議員",
+              "speaker_role": "国分寺市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "平和教育と校外学習の中立性について一般質問しました。",
+              "full_summary": "校外学習の内容と学校施設のイベント利用の公平性が論点です。",
+              "source_excerpt": "「公立中学校における平和教育及び校外学習の政治的中立性と安全確保を求める陳情書」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
             }
           ]
         }
