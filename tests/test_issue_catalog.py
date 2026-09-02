@@ -3,7 +3,12 @@ from copy import deepcopy
 
 from assembly_records import load_dataset
 from catalog_metadata import public_title
-from issue_catalog import get_issue_catalog, validate_issue_catalog
+from issue_catalog import (
+    get_issue_catalog,
+    is_catalog_eligible,
+    is_source_matched_extractive,
+    validate_issue_catalog,
+)
 
 
 class IssueCatalogTest(unittest.TestCase):
@@ -37,6 +42,30 @@ class IssueCatalogTest(unittest.TestCase):
             self.assertEqual(issue["meeting_name"], detail["meeting_name"])
             self.assertEqual(issue["meeting_date"], detail["meeting_date"])
             self.assertEqual(issue["source_url"], detail["source_url"])
+
+    def test_exact_question_answer_topic_can_publish_without_manual_id(self):
+        dataset = load_dataset()
+        records = dataset["assemblies"]["shinjuku-ward"]["records"]
+        record = next(
+            item
+            for item in records
+            if item["discussion_id"] == "shinjuku-ward-auto-2026-06-10-3193-2-68"
+        )
+
+        self.assertTrue(is_source_matched_extractive(record))
+        self.assertTrue(is_catalog_eligible(record))
+
+    def test_debate_topic_cannot_bypass_manual_review_gate(self):
+        dataset = load_dataset()
+        records = dataset["assemblies"]["shinjuku-ward"]["records"]
+        record = next(
+            item
+            for item in records
+            if item["discussion_id"] == "shinjuku-ward-auto-2026-06-19-3193-4-19"
+        )
+
+        self.assertFalse(is_source_matched_extractive(record))
+        self.assertFalse(is_catalog_eligible(record))
 
     def test_catalog_filters_by_region_theme_and_stage(self):
         shinjuku = get_issue_catalog(assembly_id="shinjuku-ward")

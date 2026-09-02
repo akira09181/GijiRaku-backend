@@ -42,7 +42,11 @@ jobs:
           tests.test_issue_catalog
       - run: python scripts/validate_issue_catalog.py
       - run: python scripts/update_assembly_records.py --check-only
-      - run: python scripts/update_assembly_records.py --auto-publish --max-records-per-assembly 100
+      - run: >-
+          python scripts/update_assembly_records.py
+          --auto-publish
+          --max-records-per-assembly 100
+          --ssp-years 3
       - name: Commit verified official records
         id: commit_records
         run: |

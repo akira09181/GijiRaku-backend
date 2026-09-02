@@ -231,7 +231,10 @@ def ssp_post(endpoint: str, data: Dict[str, Any]) -> Dict[str, Any]:
     return parse_jsonp(response.text)
 
 
-def iter_latest_ssp_councils(payload: Dict[str, Any]) -> Iterable[Dict[str, Any]]:
+def iter_latest_ssp_councils(
+    payload: Dict[str, Any],
+    years_back: int = 3,
+) -> Iterable[Dict[str, Any]]:
     years: List[Dict[str, Any]] = []
     for group in payload.get("councils", []):
         years.extend(group.get("view_years", []))
@@ -241,7 +244,7 @@ def iter_latest_ssp_councils(payload: Dict[str, Any]) -> Iterable[Dict[str, Any]
     # A new calendar year can begin with only an extraordinary session. Keep
     # the previous year's regular sessions discoverable until their records
     # have been imported as well.
-    earliest_year = latest_year - 1
+    earliest_year = latest_year - years_back + 1
 
     councils: List[Dict[str, Any]] = []
     for year in years:
@@ -257,12 +260,13 @@ def iter_latest_ssp_councils(payload: Dict[str, Any]) -> Iterable[Dict[str, Any]
 def discover_ssp(
     assembly_id: str,
     source: Dict[str, Any],
+    years_back: int,
 ) -> List[Dict[str, Any]]:
     tenant_id = source["tenant_id"]
     tenant = source["tenant"]
     councils_payload = ssp_post("councils/index", {"tenant_id": tenant_id})
     candidates: List[Dict[str, Any]] = []
-    for council in iter_latest_ssp_councils(councils_payload):
+    for council in iter_latest_ssp_councils(councils_payload, years_back):
         council_id = council["council_id"]
         schedules_payload = ssp_post(
             "minutes/get_schedule",
@@ -293,12 +297,12 @@ def discover_ssp(
     return candidates
 
 
-def discover(dataset: Dict[str, Any]) -> List[Dict[str, Any]]:
+def discover(dataset: Dict[str, Any], years_back: int = 3) -> List[Dict[str, Any]]:
     candidates: List[Dict[str, Any]] = []
     for assembly_id, assembly in dataset["assemblies"].items():
         source = assembly.get("source", {})
         if source.get("provider") == "ssp":
-            candidates.extend(discover_ssp(assembly_id, source))
+            candidates.extend(discover_ssp(assembly_id, source, years_back))
     return sorted(candidates, key=lambda item: item["external_id"])
 
 
@@ -597,6 +601,7 @@ def main() -> None:
     parser.add_argument("--check-only", action="store_true")
     parser.add_argument("--auto-publish", action="store_true")
     parser.add_argument("--max-records-per-assembly", type=int, default=50)
+    parser.add_argument("--ssp-years", type=int, default=3)
     args = parser.parse_args()
 
     dataset = load_json(RECORDS_PATH)
@@ -605,7 +610,9 @@ def main() -> None:
         print("assembly_records.json: OK")
         return
 
-    candidates = discover(dataset)
+    if args.ssp_years < 1 or args.ssp_years > 10:
+        raise ValueError("--ssp-years must be between 1 and 10")
+    candidates = discover(dataset, years_back=args.ssp_years)
     changed_records = 0
     if args.auto_publish:
         if args.max_records_per_assembly < 1:

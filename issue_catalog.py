@@ -13,10 +13,14 @@ from catalog_metadata import VERIFIED_EXTRACTIVE_ISSUE_IDS, public_title
 from citizen_question_store import QUESTION_DEFINITIONS
 
 
-# Extractive records are deliberately opt-in until their generated titles have
-# been checked against the source transcript. Human-curated stable IDs remain
-# eligible automatically, so adding a curated record does not require a second
-# catalog copy.
+# Extractive records are public only when manually reviewed or when a strict
+# source-matching gate proves that one compact topic occurs in both the
+# question and its single corresponding administrative answer.
+AUTO_PUBLIC_TOPIC_BOILERPLATE = re.compile(
+    r"議案第|第.{0,3}号議案|議題とな|討論|大きく.{0,5}項目|質問.{0,4}中で|"
+    r"^(?:続きまして|最後に|また[、，]|そこで[、，]|私は[、，]|初めに[、，]|"
+    r"最初に[、，]|今回は|本日|ちょっと|あと[、，])"
+)
 THEMES = (
     ("children", "子育て・教育", ("子ども", "子育て", "保育", "学校", "教育", "教員", "いじめ", "若者", "学習")),
     ("digital", "行政DX・AI", ("DX", "ＡＩ", "AI", "デジタル", "アプリ", "マイナンバー", "EBPM", "エビデンス")),
@@ -69,11 +73,50 @@ def normalize_stage(value: str) -> str:
     return "対応確認中"
 
 
+def _compact_text(value: Any) -> str:
+    return re.sub(r"\s+", "", str(value or ""))
+
+
+def is_source_matched_extractive(record: Dict[str, Any]) -> bool:
+    """Accept only an unambiguous one-question/one-answer official excerpt."""
+    if record.get("ingestion_method") != "official-transcript-extractive-v1":
+        return False
+    if not str(record.get("source_import_id", "")).startswith("ssp:"):
+        return False
+    if urlparse(str(record.get("source_url", ""))).hostname != "ssp.kaigiroku.net":
+        return False
+
+    topic = str(record.get("topic", "")).strip()
+    if not 6 <= len(topic) <= 60 or AUTO_PUBLIC_TOPIC_BOILERPLATE.search(topic):
+        return False
+    statements = record.get("statements", [])
+    if not isinstance(statements, list) or len(statements) != 2:
+        return False
+    question, answer = statements
+    if question.get("stance_label") != "質問" or answer.get("stance_label") != "答弁":
+        return False
+    if not all(
+        str(statement.get("summary_quote", "")).startswith("【公式原文抜粋】")
+        for statement in statements
+    ):
+        return False
+
+    compact_topic = _compact_text(topic)
+    return all(
+        compact_topic in _compact_text(statement.get("source_excerpt"))
+        for statement in statements
+    )
+
+
 def is_catalog_eligible(record: Dict[str, Any]) -> bool:
     issue_id = str(record.get("discussion_id", ""))
     return (
         record.get("publication_status") == "published"
-        and ("-auto-" not in issue_id or issue_id in VERIFIED_EXTRACTIVE_ISSUE_IDS)
+        and (
+            "-auto-" not in issue_id
+            or issue_id in VERIFIED_EXTRACTIVE_ISSUE_IDS
+            or is_source_matched_extractive(record)
+        )
     )
 
 

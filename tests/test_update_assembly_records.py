@@ -42,8 +42,12 @@ class UpdateAssemblyRecordsTest(unittest.TestCase):
         }
 
         self.assertEqual(
-            [item["council_id"] for item in iter_latest_ssp_councils(payload)],
+            [item["council_id"] for item in iter_latest_ssp_councils(payload, 2)],
             [2494, 2493],
+        )
+        self.assertEqual(
+            [item["council_id"] for item in iter_latest_ssp_councils(payload, 3)],
+            [2494, 2493, 2344],
         )
 
     def test_parse_meeting_date_from_official_transcript(self):
