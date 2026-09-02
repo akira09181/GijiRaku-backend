@@ -30,9 +30,9 @@ DEFAULT_RENDER_CREDENTIALS_PATH = Path(
 INLINE_CREDENTIALS_ENV = "FIREBASE_SERVICE_ACCOUNT_JSON"
 FIREBASE_APP_NAME = "gijiraku-reactions"
 
-logger = logging.getLogger(__name__)
+from store_mode import prefer_memory_store
 
-_client: Any = None
+logger = logging.getLogger(__name__)
 _client_lock = threading.Lock()
 _memory_lock = threading.Lock()
 _memory_targets: Dict[str, Dict[str, Any]] = {}
@@ -299,6 +299,8 @@ def _execute_transaction(transaction: Any, callback: Any) -> Dict[str, Any]:
 
 def get_active_reaction_storage_backend() -> str:
     """Return the backend currently serving reaction reads and writes."""
+    if prefer_memory_store():
+        return MEMORY_STORAGE_BACKEND
     try:
         get_firestore_client()
     except ReactionStoreError:
@@ -443,6 +445,15 @@ def put_reaction_state(
     if reaction_type is not None and reaction_type not in REACTION_TYPES:
         raise ValueError("Unsupported reaction type")
 
+    if prefer_memory_store():
+        return _put_reaction_state_memory(
+            discussion_id=discussion_id,
+            statement_id=statement_id,
+            reaction_type=reaction_type,
+            anonymous_user_id=anonymous_user_id,
+            base_counts=base_counts,
+        )
+
     try:
         client = get_firestore_client()
     except ReactionStoreError as exc:
@@ -566,6 +577,9 @@ def list_reaction_aggregates(
     discussion_id: str,
 ) -> list[Dict[str, Any]]:
     """Return aggregate counts without reading any user identity."""
+    if prefer_memory_store():
+        return _list_reaction_aggregates_memory(discussion_id=discussion_id)
+
     try:
         client = get_firestore_client()
     except ReactionStoreError:
@@ -614,6 +628,13 @@ def list_user_reaction_states(
 ) -> list[Dict[str, Any]]:
     """Return only one anonymous user's selected reactions."""
     unique_statement_ids = sorted(set(statement_ids))
+    if prefer_memory_store():
+        return _list_user_reaction_states_memory(
+            discussion_id=discussion_id,
+            anonymous_user_id=anonymous_user_id,
+            statement_ids=unique_statement_ids,
+        )
+
     try:
         client = get_firestore_client()
     except ReactionStoreError:

@@ -253,6 +253,28 @@ class ReactionStoreStateTest(unittest.TestCase):
         self.assertEqual(len(aggregates), 1)
         self.assertEqual(aggregates[0]["reaction_type"], "agree")
 
+    def test_prefer_memory_store_skips_firestore(self):
+        reaction_store._memory_targets.clear()
+        reaction_store._memory_users.clear()
+        with (
+            patch.dict(os.environ, {"GIJIRAKU_PREFER_MEMORY_STORE": "1"}, clear=False),
+            patch.object(
+                reaction_store,
+                "get_firestore_client",
+                side_effect=AssertionError("Firestore should not be contacted"),
+            ),
+        ):
+            write_result = put_reaction_state(
+                discussion_id="prefer-memory-discussion",
+                statement_id="prefer-memory-statement",
+                reaction_type="concern",
+                anonymous_user_id="prefer-memory-user",
+                base_counts={"agree": 0, "concern": 0, "helpful": 0},
+            )
+
+        self.assertEqual(write_result["storage_backend"], reaction_store.MEMORY_STORAGE_BACKEND)
+        self.assertEqual(write_result["counts"]["concern"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()

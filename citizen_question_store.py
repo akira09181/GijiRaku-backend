@@ -4,19 +4,27 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import threading
 from datetime import datetime, timezone
 from typing import Any, Dict, Iterable, Optional
 
 from reaction_store import (
     ReactionStoreError,
+    MEMORY_STORAGE_BACKEND,
     STORAGE_BACKEND,
     _execute_transaction,
     get_firestore_client,
 )
+from store_mode import prefer_memory_store
 
 
 RESPONSES_COLLECTION = "citizen_question_responses"
 AGGREGATES_COLLECTION = "citizen_question_aggregates"
+_memory_lock = threading.Lock()
+_memory_responses: Dict[str, Dict[str, Any]] = {}
+_memory_aggregates: Dict[str, Dict[str, Any]] = {}
+
+logger = logging.getLogger(__name__)
 
 SHINJUKU_ISSUE_ID = "shinjuku-sick-child-care-2026-06-10"
 SHINJUKU_QUESTION_ID = "shinjuku-sick-child-care-realtime-booking-v1"
@@ -1245,8 +1253,6 @@ QUESTION_DEFINITIONS[SHINJUKU_E2E_QUESTION_ID] = {
     "test_only": True,
 }
 
-logger = logging.getLogger(__name__)
-
 
 def _document_id(*parts: str) -> str:
     return hashlib.sha256("\x1f".join(parts).encode("utf-8")).hexdigest()
@@ -1372,6 +1378,112 @@ def _flat_aggregate_fields(
     }
 
 
+def _get_citizen_question_snapshot_memory(
+    *,
+    issue_id: str,
+    question_id: str,
+    anonymous_user_id: Optional[str],
+    definition: Dict[str, Any],
+) -> Dict[str, Any]:
+    aggregate_key = _aggregate_document_id(issue_id, question_id)
+    with _memory_lock:
+        aggregate_data = _memory_aggregates.get(aggregate_key)
+        response_data = None
+        if anonymous_user_id:
+            response_key = _response_document_id(question_id, anonymous_user_id)
+            response_data = _memory_responses.get(response_key)
+    aggregate = _aggregate_payload(definition, aggregate_data)
+    return {
+        "status": "success",
+        "storage_backend": MEMORY_STORAGE_BACKEND,
+        "issue_id": issue_id,
+        "question": definition,
+        "my_response": _public_response(response_data) if response_data else None,
+        "aggregate": aggregate,
+        **_flat_aggregate_fields(question_id, aggregate),
+    }
+
+
+def _put_citizen_question_response_memory(
+    *,
+    issue_id: str,
+    question_id: str,
+    anonymous_user_id: str,
+    selected_answer: str,
+    reasons: list[str],
+    normalized_text: str,
+    definition: Dict[str, Any],
+    allowed_answers: list[str],
+    allowed_reasons: list[str],
+) -> Dict[str, Any]:
+    response_key = _response_document_id(question_id, anonymous_user_id)
+    aggregate_key = _aggregate_document_id(issue_id, question_id)
+    now = datetime.now(timezone.utc)
+
+    with _memory_lock:
+        previous = _memory_responses.get(response_key, {})
+        aggregate_data = _memory_aggregates.get(aggregate_key, {})
+        previous_answer = previous.get("selected_answer")
+        previous_reasons = set(previous.get("selected_reasons") or [])
+        answer_counts = _normalized_counts(
+            aggregate_data.get("answer_counts"), allowed_answers
+        )
+        reason_counts = _normalized_counts(
+            aggregate_data.get("reason_counts"), allowed_reasons
+        )
+        total_responses = max(0, int(aggregate_data.get("total_responses", 0) or 0))
+        if not previous:
+            total_responses += 1
+        elif previous_answer in allowed_answers and previous_answer != selected_answer:
+            answer_counts[previous_answer] = max(0, answer_counts[previous_answer] - 1)
+        if not previous or previous_answer != selected_answer:
+            answer_counts[selected_answer] += 1
+
+        next_reasons = set(reasons)
+        for removed_reason in previous_reasons.difference(next_reasons):
+            if removed_reason in reason_counts:
+                reason_counts[removed_reason] = max(0, reason_counts[removed_reason] - 1)
+        for added_reason in next_reasons.difference(previous_reasons):
+            reason_counts[added_reason] += 1
+
+        response_payload = {
+            "issue_id": issue_id,
+            "question_id": question_id,
+            "anonymous_user_id": anonymous_user_id,
+            "selected_answer": selected_answer,
+            "selected_reasons": reasons,
+            "free_text": normalized_text,
+            "created_at": previous.get("created_at") or now,
+            "updated_at": now,
+        }
+        aggregate_payload = {
+            "issue_id": issue_id,
+            "question_id": question_id,
+            "municipality": definition["municipality"],
+            "theme": definition["theme"],
+            "answer_counts": answer_counts,
+            "reason_counts": reason_counts,
+            "total_responses": total_responses,
+            "created_at": aggregate_data.get("created_at") or now,
+            "updated_at": now,
+        }
+        _memory_responses[response_key] = response_payload
+        _memory_aggregates[aggregate_key] = aggregate_payload
+        created = not previous
+
+    aggregate = _aggregate_payload(definition, aggregate_payload)
+    return {
+        "status": "success",
+        "storage_backend": MEMORY_STORAGE_BACKEND,
+        "issue_id": issue_id,
+        "question": definition,
+        **_flat_aggregate_fields(question_id, aggregate),
+        "my_response": _public_response(response_payload),
+        "aggregate": aggregate,
+        "created": created,
+    }
+
+
 def put_citizen_question_response(
     *,
     issue_id: str,
@@ -1393,6 +1505,19 @@ def put_citizen_question_response(
     normalized_text = free_text.strip()
     if len(normalized_text) > 500:
         raise ValueError("free_text must be at most 500 characters")
+
+    if prefer_memory_store():
+        return _put_citizen_question_response_memory(
+            issue_id=issue_id,
+            question_id=question_id,
+            anonymous_user_id=anonymous_user_id,
+            selected_answer=selected_answer,
+            reasons=reasons,
+            normalized_text=normalized_text,
+            definition=definition,
+            allowed_answers=allowed_answers,
+            allowed_reasons=allowed_reasons,
+        )
 
     client = get_firestore_client()
     response_ref = client.collection(RESPONSES_COLLECTION).document(
@@ -1500,6 +1625,14 @@ def get_citizen_question_snapshot(
 ) -> Dict[str, Any]:
     """Read aggregate and optional current-user response as separate documents."""
     definition = _definition(issue_id, question_id)
+    if prefer_memory_store():
+        return _get_citizen_question_snapshot_memory(
+            issue_id=issue_id,
+            question_id=question_id,
+            anonymous_user_id=anonymous_user_id,
+            definition=definition,
+        )
+
     client = get_firestore_client()
     aggregate_ref = client.collection(AGGREGATES_COLLECTION).document(
         _aggregate_document_id(issue_id, question_id)

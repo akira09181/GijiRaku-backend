@@ -36,7 +36,26 @@ gijiraku-api/
 
 ローカル開発では、FirebaseのサービスアカウントJSONをリポジトリ外へ保存し、`GOOGLE_APPLICATION_CREDENTIALS` に絶対パスを設定します。本番Renderでは、Secret File `firebase-service-account.json` を登録すると `/etc/secrets/firebase-service-account.json` が自動検出されます。代わりにSecret環境変数 `FIREBASE_SERVICE_ACCOUNT_JSON` へJSON全体を登録することもできますが、ファイルと環境変数を同時に設定しないでください。
 
-Renderでは明示的な認証情報が必須です。認証情報がない、JSONが壊れている、または `FIREBASE_PROJECT_ID` と秘密鍵内の `project_id` が異なる場合、リアクションAPIはHTTP 500を返し、空集計へフォールバックしません。`FIREBASE_DATABASE_ID` は初回運用時の値（通常は `(default)`）から変更しないでください。変更すると別のFirestoreデータベースを参照します。
+Renderでは明示的な認証情報が必須です。認証情報がない、JSONが壊れている、または `FIREBASE_PROJECT_ID` と秘密鍵内の `project_id` が異なる場合、リアクションAPIはメモリフォールバックまたはHTTP 500を返します。`FIREBASE_DATABASE_ID` は初回運用時の値（通常は `(default)`）から変更しないでください。変更すると別のFirestoreデータベースを参照します。
+
+## Spark無料枠向けの低コスト運用
+
+Firebase Spark（ホビー）プランは **読取 50,000 / 書込 20,000 / 日** です。超えるとその日はFirestoreが拒否されます。
+課金せず運用する場合は、Render に次を設定して **Firestoreを使わない構成** にしてください。
+
+```text
+GIJIRAKU_PREFER_MEMORY_STORE=1
+ASSEMBLY_RECORDS_BACKEND=json
+```
+
+- 議事録は Git 上の JSON から配信
+- リアクション / フォロー / 市民回答はプロセス内メモリ（Render再起動でリセット）
+- Firestore read/write は **0**
+
+Vercel（フロント）側は追加設定なしで、一覧のリアクション先読みは既定で無効、市民回答件数は表示中カードだけ取得します。
+必要なら `NEXT_PUBLIC_ENABLE_LIST_REACTIONS=1` で一覧リアクションを再有効化できます。
+
+Blaze に上げて永続化したい場合だけ `GIJIRAKU_PREFER_MEMORY_STORE` を外し、Firebase 認証情報を設定してください。
 
 起動ログの次の行で接続先を確認できます（秘密鍵の内容は出力されません）。
 

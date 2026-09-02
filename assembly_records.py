@@ -16,6 +16,7 @@ from assembly_record_store import (
     load_firestore_dataset,
     save_firestore_dataset,
 )
+from store_mode import prefer_memory_store
 
 
 DEFAULT_DATA_PATH = Path(__file__).resolve().parent / "data" / "assembly_records.json"
@@ -56,6 +57,8 @@ def _configured_backend() -> str:
 def load_dataset() -> Dict[str, Any]:
     global _active_backend
     backend = _configured_backend()
+    if prefer_memory_store():
+        backend = "json"
     if backend not in {"json", "firestore", "auto"}:
         raise ValueError("ASSEMBLY_RECORDS_BACKEND must be json, firestore, or auto")
     if backend in {"firestore", "auto"}:

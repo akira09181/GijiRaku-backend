@@ -4,16 +4,23 @@ from __future__ import annotations
 
 import hashlib
 import logging
+import threading
 from datetime import datetime, timezone
 from typing import Any, Dict, Iterable, List, Optional
 
 from citizen_question_store import get_citizen_question_snapshot
 from notification_store import create_notification, _user_document_id
 from reaction_store import ReactionStoreError, STORAGE_BACKEND, get_firestore_client
+from store_mode import prefer_memory_store
+from reaction_store import MEMORY_STORAGE_BACKEND
 
 
 FOLLOWS_COLLECTION = "issue_follows"
 ISSUES_COLLECTION = "issues"
+_memory_follow_lock = threading.Lock()
+_memory_follows: Dict[str, Dict[str, Any]] = {}
+
+logger = logging.getLogger(__name__)
 
 ISSUE_STATUSES: Dict[str, Dict[str, str]] = {
     "diet-medical-cost-burden-2025-03-13": {
@@ -914,8 +921,6 @@ ISSUE_STATUSES: Dict[str, Dict[str, str]] = {
     },
 }
 
-logger = logging.getLogger(__name__)
-
 
 def _document_id(*parts: str) -> str:
     return hashlib.sha256("\x1f".join(parts).encode("utf-8")).hexdigest()
@@ -1045,9 +1050,60 @@ def _public_follow(
     }
 
 
+def _issue_status_from_catalog(issue_id: str) -> Dict[str, Any]:
+    fallback = ISSUE_STATUSES[issue_id]
+    return {**fallback, "status_updates": _verified_status_updates(fallback)}
+
+
+def _attach_citizen_follow_fields(
+    follow: Dict[str, Any],
+    *,
+    issue_id: str,
+    issue: Dict[str, Any],
+    anonymous_user_id: str,
+) -> None:
+    try:
+        citizen_response = get_citizen_question_snapshot(
+            issue_id=issue_id,
+            question_id=issue["question_id"],
+            anonymous_user_id=anonymous_user_id,
+        )
+        follow["my_response"] = citizen_response["my_response"]
+        follow["current_response_count"] = citizen_response["aggregate"]["total_responses"]
+    except Exception:
+        follow["my_response"] = None
+        follow["current_response_count"] = 0
+
+
 def put_issue_follow(*, issue_id: str, anonymous_user_id: str) -> Dict[str, Any]:
     if issue_id not in ISSUE_STATUSES:
         raise ValueError("Unsupported issue_id")
+    if prefer_memory_store():
+        issue = _issue_status_from_catalog(issue_id)
+        doc_id = _follow_document_id(anonymous_user_id, issue_id)
+        now = datetime.now(timezone.utc)
+        with _memory_follow_lock:
+            previous = _memory_follows.get(doc_id, {})
+            payload = {
+                "issue_id": issue_id,
+                "anonymous_user_id": anonymous_user_id,
+                "created_at": previous.get("created_at") or now,
+                "last_viewed_status_at": (
+                    previous.get("last_viewed_status_at")
+                    or issue["status_updated_at"]
+                ),
+                "notification_enabled": bool(previous.get("notification_enabled", False)),
+                "updated_at": now,
+            }
+            created = not previous
+            _memory_follows[doc_id] = payload
+        return {
+            "status": "success",
+            "storage_backend": MEMORY_STORAGE_BACKEND,
+            "created": created,
+            "follow": _public_follow(payload, issue),
+        }
+
     client = get_firestore_client()
     reference = client.collection(FOLLOWS_COLLECTION).document(
         _follow_document_id(anonymous_user_id, issue_id)
@@ -1091,6 +1147,34 @@ def _follow_query(client: Any, anonymous_user_id: str) -> Iterable[Any]:
 
 
 def list_issue_follows(*, anonymous_user_id: str) -> Dict[str, Any]:
+    if prefer_memory_store():
+        follows = []
+        with _memory_follow_lock:
+            snapshots = list(_memory_follows.values())
+        for data in snapshots:
+            if data.get("anonymous_user_id") != anonymous_user_id:
+                continue
+            issue_id = data.get("issue_id")
+            if issue_id not in ISSUE_STATUSES:
+                continue
+            issue = _issue_status_from_catalog(issue_id)
+            follow = _public_follow(data, issue)
+            _attach_citizen_follow_fields(
+                follow,
+                issue_id=issue_id,
+                issue=issue,
+                anonymous_user_id=anonymous_user_id,
+            )
+            follows.append(follow)
+        follows.sort(key=lambda item: item["created_at"] or "", reverse=True)
+        return {
+            "status": "success",
+            "storage_backend": MEMORY_STORAGE_BACKEND,
+            "follows": follows,
+            "total": len(follows),
+            "unread_total": sum(1 for follow in follows if follow["has_new_status"]),
+        }
+
     client = get_firestore_client()
     try:
         snapshots = list(_follow_query(client, anonymous_user_id))
@@ -1102,15 +1186,12 @@ def list_issue_follows(*, anonymous_user_id: str) -> Dict[str, Any]:
                 continue
             issue = _read_issue_status(client, issue_id)
             follow = _public_follow(data, issue)
-            citizen_response = get_citizen_question_snapshot(
+            _attach_citizen_follow_fields(
+                follow,
                 issue_id=issue_id,
-                question_id=issue["question_id"],
+                issue=issue,
                 anonymous_user_id=anonymous_user_id,
             )
-            follow["my_response"] = citizen_response["my_response"]
-            follow["current_response_count"] = citizen_response["aggregate"][
-                "total_responses"
-            ]
             follows.append(follow)
     except ReactionStoreError:
         raise
@@ -1130,6 +1211,24 @@ def list_issue_follows(*, anonymous_user_id: str) -> Dict[str, Any]:
 def mark_issue_follow_viewed(*, issue_id: str, anonymous_user_id: str) -> Dict[str, Any]:
     if issue_id not in ISSUE_STATUSES:
         raise ValueError("Unsupported issue_id")
+    if prefer_memory_store():
+        doc_id = _follow_document_id(anonymous_user_id, issue_id)
+        with _memory_follow_lock:
+            payload = _memory_follows.get(doc_id)
+            if not payload:
+                raise ValueError("Follow not found")
+            payload = {
+                **payload,
+                "last_viewed_status_at": datetime.now(timezone.utc),
+                "updated_at": datetime.now(timezone.utc),
+            }
+            _memory_follows[doc_id] = payload
+        return {
+            "status": "success",
+            "storage_backend": MEMORY_STORAGE_BACKEND,
+            "follow": _public_follow(payload, _issue_status_from_catalog(issue_id)),
+        }
+
     client = get_firestore_client()
     reference = client.collection(FOLLOWS_COLLECTION).document(
         _follow_document_id(anonymous_user_id, issue_id)
@@ -1157,6 +1256,17 @@ def mark_issue_follow_viewed(*, issue_id: str, anonymous_user_id: str) -> Dict[s
 def delete_issue_follow(*, issue_id: str, anonymous_user_id: str) -> Dict[str, Any]:
     if issue_id not in ISSUE_STATUSES:
         raise ValueError("Unsupported issue_id")
+    if prefer_memory_store():
+        doc_id = _follow_document_id(anonymous_user_id, issue_id)
+        with _memory_follow_lock:
+            _memory_follows.pop(doc_id, None)
+        return {
+            "status": "success",
+            "storage_backend": MEMORY_STORAGE_BACKEND,
+            "issue_id": issue_id,
+            "deleted": True,
+        }
+
     client = get_firestore_client()
     reference = client.collection(FOLLOWS_COLLECTION).document(
         _follow_document_id(anonymous_user_id, issue_id)
