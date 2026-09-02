@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-02T22:05:04+09:00",
+  "updated_at": "2026-09-02T22:12:13+09:00",
   "assemblies": {
     "tokyo-metropolitan": {
       "assembly_name": "東京都議会",
@@ -91936,6 +91936,231 @@
               "summary_quote": "平和教育と校外学習の中立性について一般質問しました。",
               "full_summary": "校外学習の内容と学校施設のイベント利用の公平性が論点です。",
               "source_excerpt": "「公立中学校における平和教育及び校外学習の政治的中立性と安全確保を求める陳情書」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "chiyoda-ward": {
+      "assembly_name": "千代田区議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.chiyoda.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131016d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/chiyoda/131016_chiyodaku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "chiyoda-teen-support-allowance-2025-06-10",
+          "meeting_date": "2025-06-10",
+          "meeting_name": "令和7年第2回千代田区議会定例会（代表質問）",
+          "source_url": "https://www.city.chiyoda.tokyo.dbsr.jp/index.php/",
+          "topic": "中高生世代応援手当",
+          "what_changes": "月額1万5000円の中高生世代応援手当の創設と子育て支援の位置づけが議論されました。",
+          "target_audience": "千代田区の中高生とその保護者",
+          "current_stage": "2025年6月10日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「中高生世代応援手当」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "chiyoda-2025-06-10-question",
+              "speaker_name": "小林 たかや",
+              "speaker_role": "千代田区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "中高生世代応援手当について一般質問しました。",
+              "full_summary": "中高生世代の教育費・生活費負担と、支援制度の政策効果の検証が論点です。",
+              "source_excerpt": "「中高生世代応援手当」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "bunkyo-ward": {
+      "assembly_name": "文京区議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.bunkyo.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131032d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/bunkyo/131032_bunkyoku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "bunkyo-childcare-support-2025-03-06",
+          "meeting_date": "2025-03-06",
+          "meeting_name": "令和7年第1回文京区議会定例会（第2日目）",
+          "source_url": "https://www.city.bunkyo.tokyo.dbsr.jp/index.php/",
+          "topic": "子育て支援施策の充実",
+          "what_changes": "子育て世代への支援拡充と区立学校・保育の環境整備が議論されました。",
+          "target_audience": "文京区の子育て世帯",
+          "current_stage": "2025年3月6日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援施策の充実」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "bunkyo-2025-03-06-question",
+              "speaker_name": "文京区議会議員",
+              "speaker_role": "文京区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援施策の充実について一般質問しました。",
+              "full_summary": "保育・学童需要と、子育て世代への経済的支援の優先順位が論点です。",
+              "source_excerpt": "「子育て支援施策の充実」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "koganei-city": {
+      "assembly_name": "小金井市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.koganei.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132078d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/koganei/132078_koganeishi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "koganei-nursery-safety-2025-02-28",
+          "meeting_date": "2025-02-28",
+          "meeting_name": "令和7年第1回小金井市議会定例会 厚生文教委員会",
+          "source_url": "https://www.city.koganei.tokyo.dbsr.jp/index.php/?Template=document&CabinetName=kb&Part=5&TermStart=2025-02-01",
+          "topic": "保育施設の指定管理者と安全",
+          "what_changes": "指定管理者選定における重大事故報告と評価の公平性が議論されました。",
+          "target_audience": "小金井市の保育施設利用者と保護者",
+          "current_stage": "2025年2月28日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「指定管理者選定における重大事故報告漏れと評価の公平性」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "koganei-2025-02-28-question",
+              "speaker_name": "小金井市議会議員",
+              "speaker_role": "小金井市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "保育施設の指定管理者と安全について一般質問しました。",
+              "full_summary": "指定管理者選定における事故報告と評価の公平性が論点です。",
+              "source_excerpt": "「指定管理者選定における重大事故報告漏れと評価の公平性」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "hino-city": {
+      "assembly_name": "日野市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.hino.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132097d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/hino/132097_hinoshi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "hino-station-barrier-free-2025-03-04",
+          "meeting_date": "2025-03-04",
+          "meeting_name": "令和7年第1回日野市議会定例会（第2日目）",
+          "source_url": "https://www.city.hino.tokyo.dbsr.jp/index.php/",
+          "topic": "日野駅のバリアフリー改善",
+          "what_changes": "日野駅の転落事故対策とバリアフリー整備の優先度が議論されました。",
+          "target_audience": "日野駅を利用する市民、特に高齢者と障がいのある方",
+          "current_stage": "2025年3月4日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「日野駅の改善を」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "hino-2025-03-04-question",
+              "speaker_name": "奥野 りん子",
+              "speaker_role": "日野市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "日野駅のバリアフリー改善について一般質問しました。",
+              "full_summary": "日野駅の転落事故多発とバリアフリー未達成が論点です。",
+              "source_excerpt": "「日野駅の改善を」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "tama-city": {
+      "assembly_name": "多摩市議会",
+      "source": {
+        "provider": "dbsr",
+        "index_url": "https://www.city.tama.tokyo.dbsr.jp/index.php/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132138d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/tama/132138_tamashi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "tama-school-safety-bullying-2025-09-01",
+          "meeting_date": "2025-09-01",
+          "meeting_name": "令和7年第3回多摩市議会定例会（第1日目）",
+          "source_url": "https://www.city.tama.tokyo.dbsr.jp/index.php/",
+          "topic": "学校生活の安全といじめ対策",
+          "what_changes": "いじめ問題と性犯罪から子どもを守る学校の安全対策が議論されました。",
+          "target_audience": "多摩市立学校に通う児童生徒と保護者",
+          "current_stage": "2025年9月1日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「いじめ問題から学校生活の安全を考える」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "tama-2025-09-01-question",
+              "speaker_name": "おにづか こずえ",
+              "speaker_role": "多摩市議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "学校生活の安全といじめ対策について一般質問しました。",
+              "full_summary": "いじめ問題と学校生活の安全確保、性犯罪から子どもを守る取組みが論点です。",
+              "source_excerpt": "「いじめ問題から学校生活の安全を考える」",
               "question_type": "一般質問",
               "avatar_color": "sky"
             }
