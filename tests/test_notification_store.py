@@ -177,6 +177,74 @@ class NotificationStoreTest(unittest.TestCase):
         self.assertEqual(result["subscription_count"], 1)
         self.assertEqual(result["notification_count"], 1)
 
+    def test_list_user_notifications_filters_by_user_key(self):
+        store = {}
+        client = _FakeFirestoreClient(store)
+        user_key = notification_store._user_document_id("user-inbox")
+        other_key = notification_store._user_document_id("other-user")
+        store[(notification_store.NOTIFICATIONS_COLLECTION, "n1")] = {
+            "notification_id": "n1",
+            "user_key": user_key,
+            "issue_id": "issue-a",
+            "message": "新しい議題が公開されました",
+            "read": False,
+            "created_at": "2026-09-01T00:00:00+00:00",
+            "updated_at": "2026-09-01T00:00:00+00:00",
+        }
+        store[(notification_store.NOTIFICATIONS_COLLECTION, "n2")] = {
+            "notification_id": "n2",
+            "user_key": other_key,
+            "issue_id": "issue-b",
+            "message": "他人の通知",
+            "read": False,
+            "created_at": "2026-09-01T00:00:00+00:00",
+            "updated_at": "2026-09-01T00:00:00+00:00",
+        }
+        issues = [{
+            "issue_id": "issue-a",
+            "title": "テスト議題A",
+            "municipality": "A市議会",
+            "assembly_id": "city-a",
+            "status_summary": "審議中",
+            "problem_summary": "",
+            "share_summary": "",
+            "government_response_summary": "",
+            "theme": "子育て",
+            "source_url": "https://example.com/a",
+        }]
+        with (
+            patch("notification_store.get_firestore_client", return_value=client),
+            patch("notification_store._issue_catalog_rows", return_value=issues),
+        ):
+            result = notification_store.list_user_notifications("user-inbox")
+
+        self.assertEqual(result["total"], 1)
+        self.assertEqual(result["unread_total"], 1)
+        self.assertEqual(result["notifications"][0]["issue_id"], "issue-a")
+        self.assertEqual(result["notifications"][0]["title"], "テスト議題A")
+
+    def test_mark_notifications_read_updates_unread_total(self):
+        store = {}
+        client = _FakeFirestoreClient(store)
+        user_key = notification_store._user_document_id("user-read")
+        store[(notification_store.NOTIFICATIONS_COLLECTION, "n1")] = {
+            "notification_id": "n1",
+            "user_key": user_key,
+            "issue_id": "issue-a",
+            "message": "未読通知",
+            "read": False,
+            "created_at": "2026-09-01T00:00:00+00:00",
+            "updated_at": "2026-09-01T00:00:00+00:00",
+        }
+        with patch("notification_store.get_firestore_client", return_value=client):
+            marked = notification_store.mark_notifications_read("user-read")
+            inbox = notification_store.list_user_notifications("user-read")
+
+        self.assertEqual(marked["marked_count"], 1)
+        self.assertEqual(marked["unread_total"], 0)
+        self.assertEqual(inbox["unread_total"], 0)
+        self.assertTrue(store[(notification_store.NOTIFICATIONS_COLLECTION, "n1")]["read"])
+
 
 if __name__ == "__main__":
     unittest.main()

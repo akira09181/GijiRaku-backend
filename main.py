@@ -49,6 +49,8 @@ from notification_store import (
     NotificationBatchConfigurationError,
     authorize_notification_batch,
     get_user_preferences,
+    list_user_notifications,
+    mark_notifications_read,
     match_issue_notifications,
     run_notification_matching,
     save_user_preferences,
@@ -619,6 +621,11 @@ class LineOAuthCallbackRequest(BaseModel):
     anonymous_user_id: str = Field(min_length=1, max_length=80)
 
 
+class NotificationReadRequest(BaseModel):
+    anonymous_user_id: str = Field(min_length=1, max_length=80)
+    notification_ids: List[str] = Field(default_factory=list, max_length=100)
+
+
 @app.post('/api/pro/leads', status_code=201)
 def create_pro_lead(request: ProLeadRequest):
     """Persist one idempotent B2B consultation lead in Firestore."""
@@ -914,6 +921,31 @@ def get_notification_matches(anonymous_user_id: str):
     except ReactionStoreError as exc:
         logger.exception("User notification match failed")
         raise HTTPException(status_code=500, detail="Notification matching store unavailable") from exc
+
+
+@app.get('/api/notifications')
+def get_user_notifications(anonymous_user_id: str, limit: int = 50):
+    """Return in-app notifications delivered to the user."""
+    if not anonymous_user_id.strip():
+        raise HTTPException(status_code=400, detail="anonymous_user_id is required")
+    try:
+        return list_user_notifications(anonymous_user_id=anonymous_user_id, limit=limit)
+    except ReactionStoreError as exc:
+        logger.exception("User notification list failed")
+        raise HTTPException(status_code=500, detail="Notification inbox store unavailable") from exc
+
+
+@app.patch('/api/notifications/read')
+def patch_notifications_read(request: NotificationReadRequest):
+    """Mark one or all unread notifications as read."""
+    try:
+        return mark_notifications_read(
+            anonymous_user_id=request.anonymous_user_id,
+            notification_ids=request.notification_ids or None,
+        )
+    except ReactionStoreError as exc:
+        logger.exception("User notification read update failed")
+        raise HTTPException(status_code=500, detail="Notification inbox store unavailable") from exc
 
 
 @app.get('/api/notifications/line/status')

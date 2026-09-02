@@ -212,6 +212,105 @@ def create_notification(
     )
 
 
+def _issue_lookup() -> Dict[str, Dict[str, Any]]:
+    return {row["issue_id"]: row for row in _issue_catalog_rows()}
+
+
+def _serialize_notification(
+    data: Dict[str, Any],
+    *,
+    issue: Dict[str, Any],
+) -> Dict[str, Any]:
+    created_at = data.get("created_at")
+    updated_at = data.get("updated_at")
+    return {
+        "notification_id": str(data.get("notification_id", "")),
+        "issue_id": str(data.get("issue_id", "")),
+        "message": str(data.get("message", "")),
+        "read": bool(data.get("read", False)),
+        "title": issue.get("title") or str(data.get("issue_id", "")),
+        "municipality": issue.get("municipality") or "",
+        "summary": issue.get("status_summary") or "",
+        "source_url": issue.get("source_url"),
+        "created_at": created_at.isoformat() if hasattr(created_at, "isoformat") else created_at,
+        "updated_at": updated_at.isoformat() if hasattr(updated_at, "isoformat") else updated_at,
+    }
+
+
+def list_user_notifications(anonymous_user_id: str, limit: int = 50) -> Dict[str, Any]:
+    user_key = _user_document_id(anonymous_user_id)
+    client = get_firestore_client()
+    issue_lookup = _issue_lookup()
+    try:
+        snapshots = list(client.collection(NOTIFICATIONS_COLLECTION).stream())
+    except Exception as exc:
+        logger.exception("Failed to list user notifications")
+        raise ReactionStoreError("Failed to list user notifications") from exc
+
+    notifications = []
+    for snapshot in snapshots:
+        data = snapshot.to_dict() or {}
+        if data.get("user_key") != user_key:
+            continue
+        issue_id = str(data.get("issue_id", ""))
+        notifications.append(_serialize_notification(data, issue=issue_lookup.get(issue_id, {})))
+
+    notifications.sort(
+        key=lambda item: str(item.get("updated_at") or item.get("created_at") or ""),
+        reverse=True,
+    )
+    limited = notifications[: max(1, min(limit, 100))]
+    unread_total = sum(1 for item in notifications if not item.get("read"))
+    return {
+        "status": "success",
+        "storage_backend": STORAGE_BACKEND,
+        "total": len(notifications),
+        "unread_total": unread_total,
+        "notifications": limited,
+    }
+
+
+def mark_notifications_read(
+    anonymous_user_id: str,
+    notification_ids: List[str] | None = None,
+) -> Dict[str, Any]:
+    user_key = _user_document_id(anonymous_user_id)
+    requested = {item.strip() for item in (notification_ids or []) if item.strip()}
+    client = get_firestore_client()
+    marked = 0
+    now = datetime.now(timezone.utc)
+    try:
+        snapshots = list(client.collection(NOTIFICATIONS_COLLECTION).stream())
+    except Exception as exc:
+        logger.exception("Failed to mark notifications read")
+        raise ReactionStoreError("Failed to mark notifications read") from exc
+
+    for snapshot in snapshots:
+        data = snapshot.to_dict() or {}
+        if data.get("user_key") != user_key or data.get("read"):
+            continue
+        notification_id = str(data.get("notification_id") or snapshot.id)
+        if requested and notification_id not in requested:
+            continue
+        payload = {
+            **data,
+            "read": True,
+            "read_at": now,
+            "updated_at": now,
+        }
+        snapshot.reference.set(payload)
+        marked += 1
+
+    summary = list_user_notifications(anonymous_user_id)
+    return {
+        "status": "success",
+        "storage_backend": STORAGE_BACKEND,
+        "marked_count": marked,
+        "unread_total": summary["unread_total"],
+        "total": summary["total"],
+    }
+
+
 def match_issue_notifications(anonymous_user_id: str) -> Dict[str, Any]:
     preferences = get_user_preferences(anonymous_user_id)
     pref = preferences["preferences"]
