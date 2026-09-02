@@ -77,24 +77,31 @@ logger = logging.getLogger("gijiraku.reactions")
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
+    from store_mode import prefer_memory_store
+
     assembly_sync = sync_json_snapshot_to_firestore()
     logger.info(
         "Assembly record store ready (backend=%s, sync_status=%s)",
         assembly_sync["storage_backend"],
         assembly_sync["status"],
     )
-    try:
-        storage = verify_reaction_store_connection()
+    if prefer_memory_store():
         logger.info(
-            "Reaction store ready (backend=%s, project_id=%s, database_id=%s)",
-            storage["storage_backend"],
-            storage["project_id"],
-            storage["database_id"],
+            "Reaction store ready (backend=memory-fallback, mode=prefer-memory)"
         )
-    except ReactionStoreError:
-        logger.exception(
-            "Reaction store startup verification failed; reaction APIs will return HTTP 500"
-        )
+    else:
+        try:
+            storage = verify_reaction_store_connection()
+            logger.info(
+                "Reaction store ready (backend=%s, project_id=%s, database_id=%s)",
+                storage["storage_backend"],
+                storage["project_id"],
+                storage["database_id"],
+            )
+        except ReactionStoreError:
+            logger.exception(
+                "Reaction store startup verification failed; reaction APIs will use memory fallback"
+            )
     yield
 
 

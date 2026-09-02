@@ -33,6 +33,7 @@ FIREBASE_APP_NAME = "gijiraku-reactions"
 from store_mode import prefer_memory_store
 
 logger = logging.getLogger(__name__)
+_client: Any = None
 _client_lock = threading.Lock()
 _memory_lock = threading.Lock()
 _memory_targets: Dict[str, Dict[str, Any]] = {}
