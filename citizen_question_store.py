@@ -42,6 +42,25 @@ QUESTION_DEFINITIONS: Dict[str, Dict[str, Any]] = {
         "municipality": "新宿区",
         "theme": "病児保育の利用拒否と予約・空き状況の改善",
     },
+    "diet-medical-cost-burden-v1": {
+        "issue_id": "diet-medical-cost-burden-2025-03-13",
+        "question": "物価高の中で、高額療養費制度の見直しを優先して進めてほしいですか？",
+        "answers": [
+            {"id": "prioritize", "label": "優先して進めてほしい"},
+            {"id": "steady_progress", "label": "慎重に段階的に進めてほしい"},
+            {"id": "need_more_information", "label": "判断材料が足りない"},
+        ],
+        "reasons": [
+            {"id": "resident_need", "label": "生活実感として必要"},
+            {"id": "implementation", "label": "具体策や財源が気になる"},
+            {"id": "info_hard_to_find", "label": "情報が分かりにくい"},
+            {"id": "fiscal_priority", "label": "財源や優先順位が気になる"},
+            {"id": "no_direct_experience", "label": "直接の利用経験がない"},
+            {"id": "other", "label": "その他"},
+        ],
+        "municipality": "日本国",
+        "theme": "物価高と医療費負担の見直し",
+    },
     "tokyo-app-one-stop-services-v1": {
         "issue_id": "tokyo-app-2026-06-16",
         "question": "東京アプリで、子育て・介護など自分に必要な支援情報と行政手続をワンストップで確認・利用できる機能を優先して整備してほしいですか？",

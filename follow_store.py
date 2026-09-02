@@ -16,6 +16,20 @@ FOLLOWS_COLLECTION = "issue_follows"
 ISSUES_COLLECTION = "issues"
 
 ISSUE_STATUSES: Dict[str, Dict[str, str]] = {
+    "diet-medical-cost-burden-2025-03-13": {
+        "question_id": "diet-medical-cost-burden-v1",
+        "assembly_id": "national-diet",
+        "municipality": "日本国",
+        "title": "物価高と医療費負担の見直し",
+        "current_status": "国会で質疑済み",
+        "status_summary": "物価高と医療費負担の見直しについて国会で質疑されました。",
+        "status_updated_at": "2025-03-13T00:00:00+09:00",
+        "status_checked_at": "2026-09-02T23:10:00+09:00",
+        "problem_summary": "物価高により医療費負担が増え、高額療養費制度の自己負担上限が実態に追いついていないことが論点です。",
+        "government_response_summary": "国会会議録では、高額療養費制度の見直しと社会保障の持続可能性について質疑が行われました。",
+        "share_summary": "物価高の中での医療費負担をどう見直すか、国民の意見を集めています。",
+        "source_url": "https://kokkai.ndl.go.jp/txt/121705261X02020250313/2",
+    },
     "tokyo-app-2026-06-16": {
         "question_id": "tokyo-app-one-stop-services-v1",
         "assembly_id": "tokyo-metropolitan",

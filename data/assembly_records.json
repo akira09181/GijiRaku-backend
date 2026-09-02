@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-02T23:07:00+09:00",
+  "updated_at": "2026-09-02T23:09:51+09:00",
   "assemblies": {
     "tokyo-metropolitan": {
       "assembly_name": "東京都議会",
@@ -93692,6 +93692,51 @@
               "full_summary": "遠隔離島における医療・教育アクセスと生活基盤の確保が論点です。",
               "source_excerpt": "「離島の医療・教育・生活基盤」",
               "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "national-diet": {
+      "assembly_name": "国会",
+      "source": {
+        "provider": "kokkai-ndl",
+        "index_url": "https://kokkai.ndl.go.jp/",
+        "open_data": {
+          "title": "国会会議録検索システム",
+          "catalog_url": "https://kokkai.ndl.go.jp/",
+          "resource_url": "https://kokkai.ndl.go.jp/api/speech",
+          "format": "JSON",
+          "license_id": "government-work",
+          "license_url": "https://www.digital.go.jp/resources/open_data/public_data_license_v1.0",
+          "usage": "国会会議録の発言単位検索と原文URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "diet-medical-cost-burden-2025-03-13",
+          "meeting_date": "2025-03-13",
+          "meeting_name": "衆議院予算委員会（第20号）",
+          "source_url": "https://kokkai.ndl.go.jp/txt/121705261X02020250313/2",
+          "topic": "物価高と医療費負担の見直し",
+          "what_changes": "高額療養費制度の見直しと社会保障の負担配分が議論されました。",
+          "target_audience": "医療費負担に関心のある国民",
+          "current_stage": "2025年3月13日の衆議院予算委員会で質疑済み",
+          "budget_info": "予算・数値はリンク先の国会会議録原文を参照",
+          "original_quote": "「物価高と医療費負担の見直し」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "diet-2025-03-13-medical-cost-question",
+              "speaker_name": "枝野幸男",
+              "speaker_role": "衆議院議員",
+              "committee_name": "予算委員会",
+              "stance_label": "課題提起",
+              "summary_quote": "物価高と医療費負担の見直しについて質疑しました。",
+              "full_summary": "物価高により医療費負担が増え、高額療養費制度の自己負担上限が実態に追いついていないことが論点です。",
+              "source_excerpt": "「物価高と医療費負担の見直し」",
+              "question_type": "質疑",
               "avatar_color": "sky"
             }
           ]
