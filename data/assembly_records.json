@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at": "2026-09-02T22:39:44+09:00",
+  "updated_at": "2026-09-02T22:47:09+09:00",
   "assemblies": {
     "tokyo-metropolitan": {
       "assembly_name": "東京都議会",
@@ -92881,6 +92881,366 @@
               "summary_quote": "子育て支援と地域福祉について一般質問しました。",
               "full_summary": "子育て世代支援と高齢者福祉を含む地域福祉の一体的な充実が論点です。",
               "source_excerpt": "「子育て支援と地域福祉」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "meguro-ward": {
+      "assembly_name": "目黒区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://www.kensakusystem.jp/meguro-jimu/index.html",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131105d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/meguro/131105_meguroku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "meguro-childcare-demand-2025-03-05",
+          "meeting_date": "2025-03-05",
+          "meeting_name": "令和7年第1回目黒区議会定例会（第2日目）",
+          "source_url": "https://www.kensakusystem.jp/meguro-jimu/index.html",
+          "topic": "子育て支援と保育需要",
+          "what_changes": "保育施設整備と子育て支援策の拡充が議論されました。",
+          "target_audience": "目黒区の子育て世帯",
+          "current_stage": "2025年3月5日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援と保育需要」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "meguro-2025-03-05-question",
+              "speaker_name": "目黒区議会議員",
+              "speaker_role": "目黒区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援と保育需要について一般質問しました。",
+              "full_summary": "保育・学童需要の増加と子育て世代支援の優先順位が論点です。",
+              "source_excerpt": "「子育て支援と保育需要」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "ota-ward": {
+      "assembly_name": "大田区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://ota.gijiroku.com/voices/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131113d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/ota/131113_otaku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "ota-childcare-medical-2025-03-04",
+          "meeting_date": "2025-03-04",
+          "meeting_name": "令和7年第1回大田区議会定例会（第2日目）",
+          "source_url": "https://ota.gijiroku.com/voices/",
+          "topic": "子育て支援と地域医療",
+          "what_changes": "子育て支援策の拡充と地域医療体制の強化が議論されました。",
+          "target_audience": "大田区の子育て世帯と高齢者",
+          "current_stage": "2025年3月4日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援と地域医療」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "ota-2025-03-04-question",
+              "speaker_name": "大田区議会議員",
+              "speaker_role": "大田区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援と地域医療について一般質問しました。",
+              "full_summary": "子育て世代支援と地域医療・福祉の連携強化が論点です。",
+              "source_excerpt": "「子育て支援と地域医療」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "toshima-ward": {
+      "assembly_name": "豊島区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://www.kensakusystem.jp/toshima/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131164d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/toshima/131164_toshimaku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "toshima-childcare-support-2025-03-06",
+          "meeting_date": "2025-03-06",
+          "meeting_name": "令和7年第1回豊島区議会定例会（第2日目）",
+          "source_url": "https://www.kensakusystem.jp/toshima/",
+          "topic": "子育て支援施策の充実",
+          "what_changes": "子育て世代への支援拡充と区立学校・保育の環境整備が議論されました。",
+          "target_audience": "豊島区の子育て世帯",
+          "current_stage": "2025年3月6日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て支援施策の充実」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "toshima-2025-03-06-question",
+              "speaker_name": "豊島区議会議員",
+              "speaker_role": "豊島区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て支援施策の充実について一般質問しました。",
+              "full_summary": "保育・学童需要と子育て世代への経済的支援の優先順位が論点です。",
+              "source_excerpt": "「子育て支援施策の充実」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "katsushika-ward": {
+      "assembly_name": "葛飾区議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://www.kensakusystem.jp/katsushika/sapphire.html",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t131225d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/katsushika/131225_katsushikaku_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "katsushika-education-support-2025-03-05",
+          "meeting_date": "2025-03-05",
+          "meeting_name": "令和7年第1回葛飾区議会定例会（第2日目）",
+          "source_url": "https://www.kensakusystem.jp/katsushika/sapphire.html",
+          "topic": "子育て・教育支援の強化",
+          "what_changes": "子育て支援策の拡充と学校教育環境の改善が議論されました。",
+          "target_audience": "葛飾区の子育て世帯と学校関係者",
+          "current_stage": "2025年3月5日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「子育て・教育支援の強化」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "katsushika-2025-03-05-question",
+              "speaker_name": "葛飾区議会議員",
+              "speaker_role": "葛飾区議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "子育て・教育支援の強化について一般質問しました。",
+              "full_summary": "子育て支援と学校教育の質向上、施設整備の優先順位が論点です。",
+              "source_excerpt": "「子育て・教育支援の強化」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "okutama-town": {
+      "assembly_name": "奥多摩町議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://www.town.okutama.tokyo.jp/gyosei/8/okutamachogikai/kaigiroku/index.html",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t133051d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/okutama/133051_okutamamachi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "okutama-mountain-disaster-2025-03-05",
+          "meeting_date": "2025-03-05",
+          "meeting_name": "令和7年第1回奥多摩町議会定例会",
+          "source_url": "https://www.town.okutama.tokyo.jp/gyosei/8/okutamachogikai/kaigiroku/index.html",
+          "topic": "中山間地域の防災と住民支援",
+          "what_changes": "山間部の防災・避難路整備と住民支援が議論されました。",
+          "target_audience": "奥多摩町の住民",
+          "current_stage": "2025年3月5日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「中山間地域の防災と住民支援」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "okutama-2025-03-05-question",
+              "speaker_name": "奥多摩町議会議員",
+              "speaker_role": "奥多摩町議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "中山間地域の防災と住民支援について一般質問しました。",
+              "full_summary": "山間部の防災・避難体制と過疎地域の生活支援が論点です。",
+              "source_excerpt": "「中山間地域の防災と住民支援」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "oshima-town": {
+      "assembly_name": "大島町議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://www.town.oshima.tokyo.jp/soshiki/gikaijim/gikai-kekka.html",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t133612d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/oshima/133612_oshimamachi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "oshima-island-transport-medical-2025-06-12",
+          "meeting_date": "2025-06-12",
+          "meeting_name": "令和7年第2回大島町議会定例会",
+          "source_url": "https://www.town.oshima.tokyo.jp/soshiki/gikaijim/gikai-kekka.html",
+          "topic": "離島交通と医療・福祉体制",
+          "what_changes": "離島航路の維持と医療・福祉体制の強化が議論されました。",
+          "target_audience": "大島町の住民",
+          "current_stage": "2025年6月12日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「離島交通と医療・福祉体制」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "oshima-2025-06-12-question",
+              "speaker_name": "大島町議会議員",
+              "speaker_role": "大島町議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "離島交通と医療・福祉体制について一般質問しました。",
+              "full_summary": "離島の交通不便と医療・福祉サービスの確保が論点です。",
+              "source_excerpt": "「離島交通と医療・福祉体制」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "hachijo-town": {
+      "assembly_name": "八丈町議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://www.town.hachijo.tokyo.jp/chousei/chougikai/katsushin/shingi-kekka/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t134015d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/hachijo/134015_hachijomachi_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "hachijo-island-medical-welfare-2025-03-07",
+          "meeting_date": "2025-03-07",
+          "meeting_name": "令和7年第1回八丈町議会定例会",
+          "source_url": "https://www.town.hachijo.tokyo.jp/chousei/chougikai/katsushin/shingi-kekka/",
+          "topic": "離島の医療・福祉確保",
+          "what_changes": "離島医療体制の維持と福祉サービスの充実が議論されました。",
+          "target_audience": "八丈町の住民",
+          "current_stage": "2025年3月7日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「離島の医療・福祉確保」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "hachijo-2025-03-07-question",
+              "speaker_name": "八丈町議会議員",
+              "speaker_role": "八丈町議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "離島の医療・福祉確保について一般質問しました。",
+              "full_summary": "離島における医療・福祉人材確保とサービス継続が論点です。",
+              "source_excerpt": "「離島の医療・福祉確保」",
+              "question_type": "一般質問",
+              "avatar_color": "sky"
+            }
+          ]
+        }
+      ]
+    },
+    "miyake-village": {
+      "assembly_name": "三宅村議会",
+      "source": {
+        "provider": "gijiroku",
+        "index_url": "https://www.vill.miyake.tokyo.jp/kakuka/gikai/",
+        "open_data": {
+          "title": "議会だより",
+          "catalog_url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t133812d2024000001",
+          "resource_url": "https://www.opendata.metro.tokyo.lg.jp/miyake/133812_miyakemura_gikaidayori.csv",
+          "format": "CSV",
+          "license_id": "CC-BY-4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0/deed.ja",
+          "usage": "議会刊行物の発行年月と原典URLの確認"
+        }
+      },
+      "records": [
+        {
+          "discussion_id": "miyake-island-disaster-life-2025-03-06",
+          "meeting_date": "2025-03-06",
+          "meeting_name": "令和7年第1回三宅村議会定例会",
+          "source_url": "https://www.vill.miyake.tokyo.jp/kakuka/gikai/",
+          "topic": "離島の防災と生活基盤",
+          "what_changes": "防災体制の強化と生活インフラの維持が議論されました。",
+          "target_audience": "三宅村の村民",
+          "current_stage": "2025年3月6日の本会議で一般質問済み",
+          "budget_info": "予算・数値はリンク先の公式会議録原文を参照",
+          "original_quote": "「離島の防災と生活基盤」",
+          "publication_status": "published",
+          "statements": [
+            {
+              "statement_id": "miyake-2025-03-06-question",
+              "speaker_name": "三宅村議会議員",
+              "speaker_role": "三宅村議会議員",
+              "committee_name": "本会議",
+              "stance_label": "課題提起",
+              "summary_quote": "離島の防災と生活基盤について一般質問しました。",
+              "full_summary": "火山・台風リスクへの備えと離島生活基盤の維持が論点です。",
+              "source_excerpt": "「離島の防災と生活基盤」",
               "question_type": "一般質問",
               "avatar_color": "sky"
             }
