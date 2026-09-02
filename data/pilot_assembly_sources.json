@@ -40,6 +40,62 @@
       "tenant_id": 368,
       "resource_url": "https://www.opendata.metro.tokyo.lg.jp/tachikawa/132024_tachikawashi_gikaidayori.csv",
       "open_data_code": "132024"
+    },
+    {
+      "assembly_id": "chuo-ward",
+      "assembly_name": "中央区議会",
+      "tenant": "chuo",
+      "tenant_id": 137,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/chuo/131024_chuoku_gikaidayori.csv",
+      "open_data_code": "131024"
+    },
+    {
+      "assembly_id": "kodaira-city",
+      "assembly_name": "小平市議会",
+      "tenant": "kodaira",
+      "tenant_id": 165,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/kodaira/132102_kodairashi_gikaidayori.csv",
+      "open_data_code": "132102"
+    },
+    {
+      "assembly_id": "akishima-city",
+      "assembly_name": "昭島市議会",
+      "tenant": "akishima",
+      "tenant_id": 21,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/akishima/132055_akishimashi_gikaidayori.csv",
+      "open_data_code": "132055"
+    },
+    {
+      "assembly_id": "ome-city",
+      "assembly_name": "青梅市議会",
+      "tenant": "ome",
+      "tenant_id": 580,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/ome/132018_omeshi_gikaidayori.csv",
+      "open_data_code": "132018"
+    },
+    {
+      "assembly_id": "higashiyamato-city",
+      "assembly_name": "東大和市議会",
+      "tenant": "higashiyamato",
+      "tenant_id": 624,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/higashiyamato/132134_higashiyamatoshi_gikaidayori.csv",
+      "open_data_code": "132134"
+    },
+    {
+      "assembly_id": "kiyose-city",
+      "assembly_name": "清瀬市議会",
+      "tenant": "kiyose",
+      "tenant_id": 197,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/kiyose/132175_kiyoseshi_gikaidayori.csv",
+      "open_data_code": "132175"
+    },
+    {
+      "assembly_id": "musashimurayama-city",
+      "assembly_name": "武蔵村山市議会",
+      "tenant": "musashimurayama",
+      "tenant_id": 220,
+      "resource_url": "https://www.opendata.metro.tokyo.lg.jp/musashimurayama/132149_musashimurayamashi_gikaidayori.csv",
+      "open_data_code": "132149"
     }
   ]
 }

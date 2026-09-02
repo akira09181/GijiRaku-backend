@@ -33,6 +33,13 @@ VERIFIED_EXTRACTIVE_ISSUE_IDS = {
     "kita-ward-auto-2024-06-07-653-2-8",
     "sumida-ward-auto-2024-06-12-555-2-150",
     "tachikawa-city-auto-2024-02-27-2629-4-62",
+    "chuo-ward-auto-2023-06-19-109-3-64",
+    "kodaira-city-auto-2024-02-26-1458-2-432",
+    "akishima-city-auto-2024-03-05-2203-10-30",
+    "ome-city-auto-2024-03-05-1269-3-117",
+    "higashiyamato-city-auto-2024-02-27-33-4-95",
+    "kiyose-city-auto-2024-03-06-495-5-5",
+    "musashimurayama-city-auto-2024-03-01-1250-4-12",
 }
 
 PUBLIC_TITLE_OVERRIDES = {
@@ -48,6 +55,13 @@ PUBLIC_TITLE_OVERRIDES = {
     "kita-ward-auto-2024-06-07-653-2-8": "子育て支援策",
     "sumida-ward-auto-2024-06-12-555-2-150": "職員の人材育成",
     "tachikawa-city-auto-2024-02-27-2629-4-62": "個別の教育支援計画と個別の指導計画",
+    "chuo-ward-auto-2023-06-19-109-3-64": "学童保育と預かり場所の確保",
+    "kodaira-city-auto-2024-02-26-1458-2-432": "市立保育園の保育士確保",
+    "akishima-city-auto-2024-03-05-2203-10-30": "子育て世代が働きやすいまち",
+    "ome-city-auto-2024-03-05-1269-3-117": "人口減少対策と子育て環境",
+    "higashiyamato-city-auto-2024-02-27-33-4-95": "妊産婦や子育て家庭への支援",
+    "kiyose-city-auto-2024-03-06-495-5-5": "清瀬市の防災対策",
+    "musashimurayama-city-auto-2024-03-01-1250-4-12": "高齢者のうつ病対策",
 }
 
 
