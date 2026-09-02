@@ -228,6 +228,31 @@ class ReactionStoreStateTest(unittest.TestCase):
         self.assertEqual(after_restart[0]["live_counts"]["agree"], 1)
         self.assertEqual(after_restart[0]["counts"]["agree"], 8)
 
+    def test_memory_fallback_when_firestore_is_unavailable(self):
+        reaction_store._memory_targets.clear()
+        reaction_store._memory_users.clear()
+        with patch.object(
+            reaction_store,
+            "get_firestore_client",
+            side_effect=ReactionStoreError("initialization failed"),
+        ):
+            write_result = put_reaction_state(
+                discussion_id="memory-discussion",
+                statement_id="memory-statement",
+                reaction_type="agree",
+                anonymous_user_id="memory-user",
+                base_counts={"agree": 1, "concern": 0, "helpful": 0},
+            )
+            aggregates = list_reaction_states(
+                discussion_id="memory-discussion",
+                anonymous_user_id="memory-user",
+            )
+
+        self.assertEqual(write_result["storage_backend"], reaction_store.MEMORY_STORAGE_BACKEND)
+        self.assertEqual(write_result["counts"]["agree"], 2)
+        self.assertEqual(len(aggregates), 1)
+        self.assertEqual(aggregates[0]["reaction_type"], "agree")
+
 
 if __name__ == "__main__":
     unittest.main()

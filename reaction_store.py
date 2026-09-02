@@ -23,6 +23,7 @@ EMPTY_COUNTS: Dict[str, int] = {reaction_type: 0 for reaction_type in REACTION_T
 TARGETS_COLLECTION = "reaction_targets"
 USERS_COLLECTION = "reaction_users"
 STORAGE_BACKEND = "firestore"
+MEMORY_STORAGE_BACKEND = "memory-fallback"
 DEFAULT_RENDER_CREDENTIALS_PATH = Path(
     "/etc/secrets/firebase-service-account.json"
 )
@@ -33,6 +34,9 @@ logger = logging.getLogger(__name__)
 
 _client: Any = None
 _client_lock = threading.Lock()
+_memory_lock = threading.Lock()
+_memory_targets: Dict[str, Dict[str, Any]] = {}
+_memory_users: Dict[str, Dict[str, Any]] = {}
 
 
 class ReactionStoreError(RuntimeError):
@@ -293,6 +297,140 @@ def _execute_transaction(transaction: Any, callback: Any) -> Dict[str, Any]:
     return google_firestore.transactional(callback)(transaction)
 
 
+def get_active_reaction_storage_backend() -> str:
+    """Return the backend currently serving reaction reads and writes."""
+    try:
+        get_firestore_client()
+    except ReactionStoreError:
+        return MEMORY_STORAGE_BACKEND
+    return STORAGE_BACKEND
+
+
+def _put_reaction_state_memory(
+    *,
+    discussion_id: str,
+    statement_id: str,
+    reaction_type: Optional[ReactionType],
+    anonymous_user_id: str,
+    base_counts: Dict[str, int],
+) -> Dict[str, Any]:
+    target_id = _target_document_id(discussion_id, statement_id)
+    user_id = _user_document_id(discussion_id, statement_id, anonymous_user_id)
+
+    with _memory_lock:
+        target_data = _memory_targets.get(target_id, {})
+        user_data = _memory_users.get(user_id, {})
+
+        stored_previous = user_data.get("reaction_type")
+        previous_reaction_type: Optional[ReactionType] = (
+            stored_previous if stored_previous in REACTION_TYPES else None
+        )
+        changed = previous_reaction_type != reaction_type
+
+        persisted_base_counts = (
+            _nonnegative_counts(target_data.get("base_counts"))
+            if target_id in _memory_targets
+            else _nonnegative_counts(base_counts)
+        )
+        previous_live_counts = _nonnegative_counts(target_data.get("live_counts"))
+        live_counts = _transition_live_counts(
+            previous_live_counts, previous_reaction_type, reaction_type
+        )
+
+        if target_id not in _memory_targets or changed:
+            _memory_targets[target_id] = {
+                "discussion_id": discussion_id,
+                "statement_id": statement_id,
+                "base_counts": persisted_base_counts,
+                "live_counts": live_counts,
+            }
+
+        if changed:
+            if reaction_type is None:
+                _memory_users.pop(user_id, None)
+            else:
+                _memory_users[user_id] = {
+                    "discussion_id": discussion_id,
+                    "statement_id": statement_id,
+                    "reaction_type": reaction_type,
+                }
+
+        state = {
+            "previous_reaction_type": previous_reaction_type,
+            "reaction_type": reaction_type,
+            "changed": changed,
+            "counts": _combined_counts(persisted_base_counts, live_counts),
+            "live_counts": live_counts,
+        }
+
+    return {
+        "status": "success",
+        "storage_backend": MEMORY_STORAGE_BACKEND,
+        "discussion_id": discussion_id,
+        "statement_id": statement_id,
+        **state,
+    }
+
+
+def _list_reaction_aggregates_memory(*, discussion_id: str) -> list[Dict[str, Any]]:
+    with _memory_lock:
+        target_items = list(_memory_targets.items())
+
+    aggregates: list[Dict[str, Any]] = []
+    for _, target_data in target_items:
+        if target_data.get("discussion_id") != discussion_id:
+            continue
+        statement_id = str(target_data.get("statement_id", ""))
+        if not statement_id:
+            continue
+        base_counts = _nonnegative_counts(target_data.get("base_counts"))
+        live_counts = _nonnegative_counts(target_data.get("live_counts"))
+        aggregates.append(
+            {
+                "statement_id": statement_id,
+                "counts": _combined_counts(base_counts, live_counts),
+                "live_counts": live_counts,
+            }
+        )
+    return sorted(aggregates, key=lambda item: item["statement_id"])
+
+
+def _list_user_reaction_states_memory(
+    *,
+    discussion_id: str,
+    anonymous_user_id: str,
+    statement_ids: Iterable[str],
+) -> list[Dict[str, Any]]:
+    unique_statement_ids = sorted(set(statement_ids))
+    with _memory_lock:
+        user_items = list(_memory_users.items())
+
+    states: list[Dict[str, Any]] = []
+    for user_id, user_data in user_items:
+        if user_data.get("discussion_id") != discussion_id:
+            continue
+        statement_id = str(user_data.get("statement_id", ""))
+        if statement_id not in unique_statement_ids:
+            continue
+        reaction_type = user_data.get("reaction_type")
+        if reaction_type not in REACTION_TYPES:
+            continue
+        expected_user_id = _user_document_id(
+            discussion_id,
+            statement_id,
+            anonymous_user_id,
+        )
+        if user_id != expected_user_id:
+            continue
+        states.append(
+            {
+                "statement_id": statement_id,
+                "reaction_type": reaction_type,
+            }
+        )
+    return states
+
+
 def put_reaction_state(
     *,
     discussion_id: str,
@@ -305,7 +443,22 @@ def put_reaction_state(
     if reaction_type is not None and reaction_type not in REACTION_TYPES:
         raise ValueError("Unsupported reaction type")
 
-    client = get_firestore_client()
+    try:
+        client = get_firestore_client()
+    except ReactionStoreError as exc:
+        logger.warning(
+            "Firestore reaction store unavailable; using memory fallback (discussion_id=%s, statement_id=%s)",
+            discussion_id,
+            statement_id,
+        )
+        return _put_reaction_state_memory(
+            discussion_id=discussion_id,
+            statement_id=statement_id,
+            reaction_type=reaction_type,
+            anonymous_user_id=anonymous_user_id,
+            base_counts=base_counts,
+        )
+
     target_id = _target_document_id(discussion_id, statement_id)
     target_ref = client.collection(TARGETS_COLLECTION).document(target_id)
     user_ref = client.collection(USERS_COLLECTION).document(
@@ -386,7 +539,18 @@ def put_reaction_state(
             discussion_id,
             statement_id,
         )
-        raise ReactionStoreError("Firestore reaction transaction failed") from exc
+        logger.warning(
+            "Retrying reaction write via memory fallback (discussion_id=%s, statement_id=%s)",
+            discussion_id,
+            statement_id,
+        )
+        return _put_reaction_state_memory(
+            discussion_id=discussion_id,
+            statement_id=statement_id,
+            reaction_type=reaction_type,
+            anonymous_user_id=anonymous_user_id,
+            base_counts=base_counts,
+        )
 
     return {
         "status": "success",
@@ -401,8 +565,16 @@ def list_reaction_aggregates(
     *,
     discussion_id: str,
 ) -> list[Dict[str, Any]]:
-    """Return Firestore aggregate counts without reading any user identity."""
-    client = get_firestore_client()
+    """Return aggregate counts without reading any user identity."""
+    try:
+        client = get_firestore_client()
+    except ReactionStoreError:
+        logger.warning(
+            "Firestore reaction store unavailable; using memory fallback (discussion_id=%s)",
+            discussion_id,
+        )
+        return _list_reaction_aggregates_memory(discussion_id=discussion_id)
+
     try:
         target_snapshots = list(_target_query(client, discussion_id))
     except Exception as exc:
@@ -410,7 +582,11 @@ def list_reaction_aggregates(
             "Firestore reaction aggregate query failed (discussion_id=%s)",
             discussion_id,
         )
-        raise ReactionStoreError("Firestore reaction aggregate query failed") from exc
+        logger.warning(
+            "Serving reaction aggregates from memory fallback (discussion_id=%s)",
+            discussion_id,
+        )
+        return _list_reaction_aggregates_memory(discussion_id=discussion_id)
 
     aggregates: list[Dict[str, Any]] = []
     for target_snapshot in target_snapshots:
@@ -437,8 +613,20 @@ def list_user_reaction_states(
     statement_ids: Iterable[str],
 ) -> list[Dict[str, Any]]:
     """Return only one anonymous user's selected reactions."""
-    client = get_firestore_client()
     unique_statement_ids = sorted(set(statement_ids))
+    try:
+        client = get_firestore_client()
+    except ReactionStoreError:
+        logger.warning(
+            "Firestore reaction store unavailable; using memory fallback (discussion_id=%s)",
+            discussion_id,
+        )
+        return _list_user_reaction_states_memory(
+            discussion_id=discussion_id,
+            anonymous_user_id=anonymous_user_id,
+            statement_ids=unique_statement_ids,
+        )
+
     try:
         user_refs = [
             client.collection(USERS_COLLECTION).document(
@@ -455,7 +643,15 @@ def list_user_reaction_states(
         logger.exception(
             "Firestore user reaction query failed (discussion_id=%s)", discussion_id
         )
-        raise ReactionStoreError("Firestore user reaction query failed") from exc
+        logger.warning(
+            "Serving user reaction states from memory fallback (discussion_id=%s)",
+            discussion_id,
+        )
+        return _list_user_reaction_states_memory(
+            discussion_id=discussion_id,
+            anonymous_user_id=anonymous_user_id,
+            statement_ids=unique_statement_ids,
+        )
 
     states: list[Dict[str, Any]] = []
     for snapshot in user_snapshots:

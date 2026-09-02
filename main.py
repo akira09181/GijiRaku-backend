@@ -20,7 +20,7 @@ from assembly_records import (
 from issue_catalog import get_issue_catalog
 from reaction_store import (
     ReactionStoreError,
-    STORAGE_BACKEND,
+    get_active_reaction_storage_backend,
     list_reaction_aggregates,
     list_user_reaction_states,
     put_reaction_state,
@@ -779,7 +779,7 @@ def get_reactions(
 
     return {
         'status': 'success',
-        'storage_backend': STORAGE_BACKEND,
+        'storage_backend': get_active_reaction_storage_backend(),
         'discussion_id': discussion_id,
         'aggregates': aggregates,
         'user_reactions': user_reactions,
