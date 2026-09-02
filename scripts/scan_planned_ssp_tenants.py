@@ -26,6 +26,8 @@ READY = {
     "tokyo-metropolitan", "shinjuku-ward", "machida-city", "shinagawa-ward",
     "shibuya-ward", "arakawa-ward", "hachioji-city", "nerima-ward",
     "nakano-ward", "kita-ward", "sumida-ward", "tachikawa-city",
+    "chuo-ward", "kodaira-city", "akishima-city", "ome-city",
+    "higashiyamato-city", "kiyose-city", "musashimurayama-city",
 }
 
 
@@ -38,7 +40,7 @@ def main() -> None:
     existing = set(records["assemblies"])
     found = []
     for assembly_id in PLANNED:
-        if assembly_id in READY or assembly_id in existing:
+        if assembly_id in READY:
             continue
         tenant = tenant_slug(assembly_id)
         response = requests.get(
